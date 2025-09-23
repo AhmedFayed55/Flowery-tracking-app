@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "login": "Login",
   "email": "Email",
   "password": "Password",
@@ -32,7 +33,6 @@
   "error": "Error",
   "login_successfully": "Login successfully",
   "register_successfully": "Register Successfully",
-
   "name_is_required": "Name is required!",
   "name_is_not_valid": "This name is not valid",
   "email_is_required": "Email is required!",
