@@ -9,7 +9,7 @@ import 'package:flowery_tracking_app/features/auth/forget_password/data/models/r
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/reset_password/reset_password_respone.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/domain/repositories/Forget_password_repo.dart';
+import 'package:flowery_tracking_app/features/auth/forget_password/domain/repositories/forget_password_repo.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

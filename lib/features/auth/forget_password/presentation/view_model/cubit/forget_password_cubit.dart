@@ -6,6 +6,7 @@ import 'package:flowery_tracking_app/features/auth/forget_password/data/models/v
 import 'package:flowery_tracking_app/features/auth/forget_password/domain/usecases/forget_password_usecase.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/domain/usecases/reset_password_usecase.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/domain/usecases/verify_code_usecase.dart';
+import 'package:flowery_tracking_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -22,6 +23,20 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     this._verifyCodeUsecase,
   ) : super(const ForgetPasswordState());
 
+  Future<void> doIntent(ForgetPasswordpPageEvent event) async {
+    switch (event) {
+      case ForgetPasswordEvent():
+        forgetPassword(event.email);
+        break;
+      case ResetPasswordEvent():
+        resetPassword(event.password);
+        break;
+      case VerifyCodeEvent():
+        verifyCode(event.code);
+        break;
+    }
+  }
+
   Future<void> forgetPassword(String email) async {
     emit(
       state.copyWith(
@@ -36,7 +51,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     switch (result) {
       case ApiSuccessResult():
         emit(
-          state.copyWith(isvrifyCodeSent: true, isVerifyCodeSentLoading: false),
+          state.copyWith(
+            isvrifyCodeSent: true,
+            isVerifyCodeSentLoading: false,
+            email: email,
+          ),
         );
         break;
       case ApiErrorResult():
@@ -62,6 +81,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       case ApiErrorResult():
         emit(
           state.copyWith(
+            isOtpCorrect: false,
             errorOtp: result.failure.errorMessage,
             isOtpCorrectLoading: false,
           ),
