@@ -32,7 +32,7 @@
   "error": "Error",
   "login_successfully": "Login successfully",
   "register_successfully": "Register Successfully",
-
+  "apply_now": "Apply Now",
   "name_is_required": "Name is required!",
   "name_is_not_valid": "This name is not valid",
   "email_is_required": "Email is required!",
@@ -46,5 +46,7 @@
   "password_and_confirm_password_must_be_same": "Password and confirm password must be same!",
   "phone_number_is_required": "Phone number is required!",
   "phone_number_is_not_valid": "This phone number is not valid",
-  "this_field_is_required": "This field is required"
+  "this_field_is_required": "This field is required",
+  "welcome_to_flowery_rider_app": "Welcome to\n Flowery rider app",
+  "app_version": "v 6.3.0 - (446)"
 }
