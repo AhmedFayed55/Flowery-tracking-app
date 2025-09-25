@@ -49,3 +49,4 @@ jobs:
             -Dsonar.sources=lib
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
+            -Dsonar.coverage.exclusions=**
