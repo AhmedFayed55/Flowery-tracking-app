@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
-import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/forget_password/forget_password_request.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/forget_password/forget_password_respone.dart';
@@ -9,15 +8,19 @@ import 'package:flowery_tracking_app/features/auth/forget_password/data/models/r
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/reset_password/reset_password_respone.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
+import 'package:flowery_tracking_app/features/auth/forget_password/data/sources/forget_password_remote_ds.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/domain/repositories/forget_password_repo.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 @Injectable(as: ForgetPasswordRepo)
 class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
-  final ApiServices _apiServices;
+  final ForgetPasswordRemoteDS _forgetPasswordRemoteDs;
   final InternetConnectionChecker _internetConnectionChecker;
-  ForgetPasswordRepoImpl(this._apiServices, this._internetConnectionChecker);
+  ForgetPasswordRepoImpl(
+    this._forgetPasswordRemoteDs,
+    this._internetConnectionChecker,
+  );
   @override
   Future<ApiResult<ForgetPasswordRespone>> forgotPassword(
     ForgotPasswordRequest body,
@@ -29,7 +32,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
       );
     }
     try {
-      final result = await _apiServices.forgotPassword(body);
+      final result = await _forgetPasswordRemoteDs.forgotPassword(body);
       return ApiSuccessResult(data: result);
     } on DioException catch (dioError) {
       if (dioError.response?.statusCode == 404) {
@@ -58,7 +61,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
       );
     }
     try {
-      final result = await _apiServices.resetPassword(body);
+      final result = await _forgetPasswordRemoteDs.resetPassword(body);
       return ApiSuccessResult(data: result);
     } on DioException catch (dioError) {
       if (dioError.response?.statusCode == 404) {
@@ -87,7 +90,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
       );
     }
     try {
-      final result = await _apiServices.verifyCode(body);
+      final result = await _forgetPasswordRemoteDs.verifyCode(body);
       return ApiSuccessResult(data: result);
     } on DioException catch (dioError) {
       if (dioError.response?.statusCode == 400) {
