@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "57434167645",
+    "project_id": "flowery-tracking-app",
+    "storage_bucket": "flowery-tracking-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57434167645:android:2b0fed82d5285bdd1ef0b4",
+        "android_client_info": {
+          "package_name": "com.example.flowery_tracking_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPRJAPA0hKKi30WWtAsXjPPdgKTxfUPgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
