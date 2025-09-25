@@ -30,6 +30,20 @@ abstract class Validations {
     return null;
   }
 
+  static String? loginValidateEmail(BuildContext context, String? email) {
+    if (email == null || email.isEmpty) {
+      return AppLocalizations.of(context)!.email_is_required;
+    }
+    return null;
+  }
+
+  static String? loginValidatePassword(BuildContext context, String? password) {
+    if (password == null || password.isEmpty) {
+      return AppLocalizations.of(context)!.password_is_required;
+    }
+    return null;
+  }
+
   static String? confirmPassword(
     BuildContext context,
     String? newPassword, [
