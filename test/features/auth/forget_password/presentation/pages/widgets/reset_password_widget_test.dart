@@ -3,7 +3,7 @@ import 'package:flowery_tracking_app/features/auth/forget_password/presentation/
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/presentation/pages/widgets/REset_password_widget.dart';
+import 'package:flowery_tracking_app/features/auth/forget_password/presentation/pages/widgets/reset_password_widget.dart';
 import 'package:mockito/mockito.dart';
 
 import '../forget_password_screen_test.mocks.dart';
