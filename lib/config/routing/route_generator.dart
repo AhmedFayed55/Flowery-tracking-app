@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/features/application_approved/presentation/pages/application_approved_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+
+      case AppRoutes.applicationApproved:
+        return MaterialPageRoute(builder: (context) => const ApplicationApprovedScreen(),);
 
       default:
         return unDefinedRoute();
