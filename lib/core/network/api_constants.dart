@@ -2,7 +2,7 @@ abstract class ApiConstants {
   static const String baseUrl = "https://flower.elevateegy.com/api/v1/";
   static const String forgotPassword = "drivers/forgotPassword";
   static const String verifyResetCode = "drivers/verifyResetCode";
-  static const String resetPassword = "drivers/vresetPassword";
+  static const String resetPassword = "drivers/resetPassword";
   static const String login = "drivers/signin";
   static const String gemeniBaseUrl =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash/";

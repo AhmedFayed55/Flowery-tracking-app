@@ -56,7 +56,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
             DialogueUtils.hideLoading(context);
             ToastMessage.toastMsg('Applied successfully');
 
-            // context.pushNamed(AppRoutes)
+            context.pushNamed(AppRoutes.applicationApproved);
           }
         },
         child: Builder(
