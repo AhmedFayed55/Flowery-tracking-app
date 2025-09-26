@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
 import 'package:flowery_tracking_app/core/helpers/flutter_toast.dart';
@@ -55,186 +56,208 @@ class _ApplyScreenState extends State<ApplyScreen> {
             DialogueUtils.hideLoading(context);
             ToastMessage.toastMsg('Applied successfully');
 
-           // context.pushNamed(AppRoutes)
-          }          
-
+            // context.pushNamed(AppRoutes)
+          }
         },
         child: Builder(
           builder: (context) {
             final cubit = context.read<ApplyViewModel>();
 
             return Scaffold(
-              body: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Text('Welcome!!', style: TextStyle(fontSize: 20)),
-                        const SizedBox(height: 10),
-                        SelectedCountryTextField(
-                          onCountrySelected: (countryName, countryCode) {
-                            selectedCountryName = countryName;
-                            countryCodeEntity = countryCode;
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.firstNameController,
-                          validator: (value) =>
-                              Validations.validateName(context, value),
-                          decoration: const InputDecoration(
-                            labelText: 'First legal name',
-                            hintText: 'Enter first legal name',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.lastNameController,
-                          validator: (value) =>
-                              Validations.validateName(context, value),
-                          decoration: const InputDecoration(
-                            labelText: 'Last legal name',
-                            hintText: 'Enter last legal name',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-
-                        BlocBuilder<ApplyViewModel, ApplyState>(
-                          buildWhen: (previous, current) =>
-                              previous.vehicelEntity != current.vehicelEntity,
-                          builder: (context, state) {
-                            final vehicles = state.vehicelEntity ?? [];
-                            return SelectedCarTextField(
-                              cars: vehicles,
-                              onCarSelected: (id) => carId = id,
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.carNumberController,
-                          validator: (value) =>
-                              Validations.validateRequired(context, value),
-                          decoration: const InputDecoration(
-                            labelText: 'Vehicle number',
-                            hintText: 'Enter vehicle number',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        ImageField(
-                          label: 'License image',
-                          hint: 'Upload license image',
-                          onImagePicked: (image) => licenseImage = image,
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.emailController,
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'Enter email',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.phoneController,
-                          decoration: const InputDecoration(
-                            labelText: 'Phone number',
-                            hintText: 'Enter phone number',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: cubit.idNumberController,
-                          decoration: const InputDecoration(
-                            labelText: 'ID number',
-                            hintText: 'Enter ID number',
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        ImageField(
-                          label: 'ID image',
-                          hint: 'Upload ID image',
-                          onImagePicked: (imageid) => idImage = imageid,
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                controller: cubit.passwordController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                  hintText: 'Enter password',
-                                ),
-                              ),
+              appBar: AppBar(
+                scrolledUnderElevation: 0,
+                leading: IconButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  icon: const Icon(Icons.arrow_back_ios),
+                ),
+                title: const Text('Apply'),
+              ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome!!',
+                            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                              fontSize: 20
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: TextFormField(
-                                controller: cubit.confirmPasswordController,
-                                validator: (value) =>
-                                    Validations.confirmPassword(context, value),
-                                decoration: const InputDecoration(
-                                  labelText: 'Confirm password',
-                                  hintText: 'Confirm password',
-                                ),
-                              ),
+                          ),
+                          const SizedBox(height: 10),
+                           Text(
+                            'You want to be a delivery man?\nJoin our team ',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                          const SizedBox(height: 32),
+                          SelectedCountryTextField(
+                            onCountrySelected: (countryName, countryCode) {
+                              selectedCountryName = countryName;
+                              countryCodeEntity = countryCode;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.firstNameController,
+                            validator: (value) =>
+                                Validations.validateName(context, value),
+                            decoration: const InputDecoration(
+                              labelText: 'First legal name',
+                              hintText: 'Enter first legal name',
                             ),
-                          ],
-                        ),
-                        GenderSelectorWidget(
-                          onChanged: (gender) {
-                            selectedGender = gender;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              String rawPhone = cubit.phoneController.text
-                                  .trim();
-                              if (rawPhone.startsWith('0')) {
-                                rawPhone = rawPhone.substring(1);
-                              }
-                              cubit.doIntent(
-                                ApplyDriverEvent(
-                                  RequestApplyEntity(
-                                    country: selectedCountryName,
-                                    firstName: cubit.firstNameController.text
-                                        .trim(),
-                                    lastName: cubit.lastNameController.text
-                                        .trim(),
-                                    vehicleType: carId,
-                                    vehicleNumber: cubit
-                                        .carNumberController
-                                        .text
-                                        .trim(),
-                                    vehicleLicense: licenseImage!,
-                                    nID: cubit.idNumberController.text.trim(),
-                                    nIDImg: idImage!,
-                                    email: cubit.emailController.text.trim(),
-                                    gender: selectedGender
-                                        .toString()
-                                        .split('.')
-                                        .last,
-                                    phone: '$countryCodeEntity$rawPhone',
-
-                                    password: cubit.passwordController.text
-                                        .trim(),
-                                    rePassword: cubit
-                                        .confirmPasswordController
-                                        .text
-                                        .trim(),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.lastNameController,
+                            validator: (value) =>
+                                Validations.validateName(context, value),
+                            decoration: const InputDecoration(
+                              labelText: 'Last legal name',
+                              hintText: 'Enter last legal name',
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                
+                          BlocBuilder<ApplyViewModel, ApplyState>(
+                            buildWhen: (previous, current) =>
+                                previous.vehicelEntity != current.vehicelEntity,
+                            builder: (context, state) {
+                              final vehicles = state.vehicelEntity ?? [];
+                              return SelectedCarTextField(
+                                cars: vehicles,
+                                onCarSelected: (id) => carId = id,
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.carNumberController,
+                            validator: (value) =>
+                                Validations.validateRequired(context, value),
+                            decoration: const InputDecoration(
+                              labelText: 'Vehicle number',
+                              hintText: 'Enter vehicle number',
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          ImageField(
+                            label: 'License image',
+                            hint: 'Upload license image',
+                            onImagePicked: (image) => licenseImage = image,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.emailController,
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              hintText: 'Enter email',
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.phoneController,
+                            decoration: const InputDecoration(
+                              labelText: 'Phone number',
+                              hintText: 'Enter phone number',
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: cubit.idNumberController,
+                            decoration: const InputDecoration(
+                              labelText: 'ID number',
+                              hintText: 'Enter ID number',
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          ImageField(
+                            label: 'ID image',
+                            hint: 'Upload ID image',
+                            onImagePicked: (imageid) => idImage = imageid,
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: cubit.passwordController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Password',
+                                    hintText: 'Enter password',
                                   ),
                                 ),
-                              );
-                            }
-                          },
-                          child: const Text('Apply'),
-                        ),
-                      ],
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: cubit.confirmPasswordController,
+                                  validator: (value) =>
+                                      Validations.confirmPassword(context, value),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Confirm password',
+                                    hintText: 'Confirm password',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          GenderSelectorWidget(
+                            onChanged: (gender) {
+                              selectedGender = gender;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                String rawPhone = cubit.phoneController.text
+                                    .trim();
+                                if (rawPhone.startsWith('0')) {
+                                  rawPhone = rawPhone.substring(1);
+                                }
+                                cubit.doIntent(
+                                  ApplyDriverEvent(
+                                    RequestApplyEntity(
+                                      country: selectedCountryName,
+                                      firstName: cubit.firstNameController.text
+                                          .trim(),
+                                      lastName: cubit.lastNameController.text
+                                          .trim(),
+                                      vehicleType: carId,
+                                      vehicleNumber: cubit
+                                          .carNumberController
+                                          .text
+                                          .trim(),
+                                      vehicleLicense: licenseImage!,
+                                      nID: cubit.idNumberController.text.trim(),
+                                      nIDImg: idImage!,
+                                      email: cubit.emailController.text.trim(),
+                                      gender: selectedGender
+                                          .toString()
+                                          .split('.')
+                                          .last,
+                                      phone: '$countryCodeEntity$rawPhone',
+                
+                                      password: cubit.passwordController.text
+                                          .trim(),
+                                      rePassword: cubit
+                                          .confirmPasswordController
+                                          .text
+                                          .trim(),
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            child: const Text('Apply'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
