@@ -12,8 +12,8 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: ApplyRemotDataSource)
 class ApplyRemotDataSourceImp implements ApplyRemotDataSource {
   final ApiServices _apiServices;
-  final GeminiApiService _geminiApiService;
-  ApplyRemotDataSourceImp(this._apiServices, this._geminiApiService);
+ // final GeminiApiService _geminiApiService;
+  ApplyRemotDataSourceImp(this._apiServices,);
   @override
   Future<ApplyResponceDto> applyDriver(ApplyRequestDto applyRequestDto) async {
     final formData = FormData.fromMap({
@@ -29,19 +29,19 @@ class ApplyRemotDataSourceImp implements ApplyRemotDataSource {
     return _apiServices.getAllVehicles();
   }
 
-  @override
-  Future<Map<String, dynamic>> verifyID(File imageId) {
-    return _geminiApiService.sendImage(
-      image: imageId,
-      instructions: "Check if this is a valid ID Card",
-    );
-  }
+  // @override
+  // Future<Map<String, dynamic>> verifyID(File imageId) {
+  //   return _geminiApiService.sendImage(
+  //     image: imageId,
+  //     instructions: "Check if this is a valid ID Card",
+  //   );
+  // }
 
-  @override
-  Future<Map<String, dynamic>> verifyLicense(File license) {
-    return _geminiApiService.sendImage(
-      image: license,
-      instructions: "Check if this is a valid Driver License",
-    );
-  }
+  // @override
+  // Future<Map<String, dynamic>> verifyLicense(File license) {
+  //   return _geminiApiService.sendImage(
+  //     image: license,
+  //     instructions: "Check if this is a valid Driver License",
+  //   );
+  // }
 }
