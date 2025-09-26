@@ -64,5 +64,7 @@
   "something_went_wrong" : "حدث خطاء ما",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "your_application_submitted": "تم إرسال طلبك!",
+  "thank_you_for_providing": "شكرًا لك على تقديم طلبك،\nسوف نقوم بمراجعة طلبك والرد عليك قريبًا."
 }
