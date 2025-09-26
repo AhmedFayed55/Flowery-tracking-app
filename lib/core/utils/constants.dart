@@ -8,4 +8,7 @@ abstract class AppConstants {
   static const String authorization = 'Authorization';
   static const String bearer = "Bearer";
   static const String noInternet = 'No Internet Connection';
+  static const String vehicleLicenseKey='vehicleLicense';
+  static const String nIDImgKey='NIDImg';
+  
 }

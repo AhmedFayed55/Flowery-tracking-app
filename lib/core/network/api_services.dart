@@ -9,10 +9,13 @@ import 'package:flowery_tracking_app/features/auth/forget_password/data/models/r
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
+import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';
 part 'api_services.g.dart';
 
 @RestApi()
 @injectable
+
 abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
@@ -29,4 +32,10 @@ abstract class ApiServices {
 
   @PUT(ApiConstants.resetPassword)
   Future<ResetPasswordRespone> resetPassword(@Body() ResetPasswordBody body);
+  @POST(ApiConstants.applyDriver)
+  @MultiPart()
+  Future<ApplyResponceDto> apply(@Body() FormData formData);
+
+  @GET(ApiConstants.getAllVehicles)
+  Future<VehiclesResponseDto>getAllVehicles();
 }

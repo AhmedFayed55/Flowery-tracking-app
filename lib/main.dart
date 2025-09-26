@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/config/theme/app_theme.dart';
+import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'config/routing/initial_route.dart';
@@ -9,6 +10,8 @@ import 'core/l10n/translations/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ // await dotenv.load(fileName: "assets/env.txt");
+
   await configureDependencies();
   runApp(
     BlocProvider(
@@ -33,6 +36,7 @@ class FloweryTrackingApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute: getInitialRoute(),
+          home:const ApplyScreen()
         );
       },
     );
