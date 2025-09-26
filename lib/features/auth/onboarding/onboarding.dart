@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
@@ -30,7 +32,7 @@ class OnBoardingScreen extends StatelessWidget {
             verticalSpace(24),
             ElevatedButton(
               onPressed: () {
-                /// Navigator to Login Screen
+                context.pushNamed(AppRoutes.login);
               },
               child: Text(AppLocalizations.of(context)!.login),
             ),
