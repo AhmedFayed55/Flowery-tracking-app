@@ -1,0 +1,18 @@
+default_platform(:android)
+
+platform :android do
+  desc "Firebase App Distribution"
+  lane :firebase_distribution do
+    sh "flutter clean"
+    sh "flutter pub get"
+    sh "flutter pub run build_runner build --delete-conflicting-outputs"
+    sh "flutter build apk --release"
+    firebase_app_distribution(
+        app: "1:57434167645:android:2b0fed82d5285bdd1ef0b4",
+        groups: "Team",
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk"
+      )
+
+  end
+end
