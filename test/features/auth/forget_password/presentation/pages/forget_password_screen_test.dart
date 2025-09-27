@@ -37,9 +37,9 @@ void main() {
     // Arrange
     when(
       mockCubit.state,
-    ).thenReturn(const ForgetPasswordState(isvrifyCodeSent: false));
+    ).thenReturn(const ForgetPasswordState(isVerifyCodeSent: false));
     when(mockCubit.stream).thenAnswer(
-      (_) => Stream.value(const ForgetPasswordState(isvrifyCodeSent: false)),
+      (_) => Stream.value(const ForgetPasswordState(isVerifyCodeSent: false)),
     );
 
     // Act
@@ -56,9 +56,9 @@ void main() {
     // Arrange
     when(
       mockCubit.state,
-    ).thenReturn(const ForgetPasswordState(isvrifyCodeSent: true));
+    ).thenReturn(const ForgetPasswordState(isVerifyCodeSent: true));
     when(mockCubit.stream).thenAnswer(
-      (_) => Stream.value(const ForgetPasswordState(isvrifyCodeSent: true)),
+      (_) => Stream.value(const ForgetPasswordState(isVerifyCodeSent: true)),
     );
 
     // Act
@@ -74,11 +74,11 @@ void main() {
     (tester) async {
       // Arrange
       when(mockCubit.state).thenReturn(
-        const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+        const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
       );
       when(mockCubit.stream).thenAnswer(
         (_) => Stream.value(
-          const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+          const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
         ),
       );
 

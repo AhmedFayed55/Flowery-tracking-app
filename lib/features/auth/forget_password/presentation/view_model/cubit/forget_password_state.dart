@@ -1,71 +1,112 @@
 part of 'forget_password_cubit.dart';
 
 class ForgetPasswordState extends Equatable {
-  final bool isvrifyCodeSent;
-  final bool isVerifyCodeSentLoading;
+  final bool isVerifyCodeSent;
   final bool isOtpCorrect;
-  final bool isOtpCorrectLoading;
   final bool isPasswordReset;
-  final bool isPasswordResetLoading;
-
   final String? email;
 
-  final String? errorOtp;
-  final String? errorEmail;
-  final String? errorPassword;
+  final ForgetPasswordLoading loading;
+  final ForgetPasswordErrors errors;
 
   const ForgetPasswordState({
-    this.isvrifyCodeSent = false,
+    this.isVerifyCodeSent = false,
     this.isOtpCorrect = false,
     this.isPasswordReset = false,
-    this.isOtpCorrectLoading = false,
-    this.isPasswordResetLoading = false,
-    this.isVerifyCodeSentLoading = false,
     this.email = '',
-    this.errorOtp = '',
-    this.errorEmail = '',
-    this.errorPassword = '',
+    this.loading = const ForgetPasswordLoading(),
+    this.errors = const ForgetPasswordErrors(),
   });
 
   ForgetPasswordState copyWith({
-    bool? isvrifyCodeSent,
+    bool? isVerifyCodeSent,
     bool? isOtpCorrect,
     bool? isPasswordReset,
-    bool? isOtpCorrectLoading,
-    bool? isPasswordResetLoading,
-    bool? isVerifyCodeSentLoading,
     String? email,
-    String? errorOtp,
-    String? errorEmail,
-    String? errorPassword,
+    ForgetPasswordLoading? loading,
+    ForgetPasswordErrors? errors,
   }) {
     return ForgetPasswordState(
-      isvrifyCodeSent: isvrifyCodeSent ?? this.isvrifyCodeSent,
+      isVerifyCodeSent: isVerifyCodeSent ?? this.isVerifyCodeSent,
       isOtpCorrect: isOtpCorrect ?? this.isOtpCorrect,
       isPasswordReset: isPasswordReset ?? this.isPasswordReset,
       email: email ?? this.email,
-      isOtpCorrectLoading: isOtpCorrectLoading ?? this.isOtpCorrectLoading,
-      isPasswordResetLoading:
-          isPasswordResetLoading ?? this.isPasswordResetLoading,
-      isVerifyCodeSentLoading:
-          isVerifyCodeSentLoading ?? this.isVerifyCodeSentLoading,
-      errorOtp: errorOtp ?? this.errorOtp,
-      errorEmail: errorEmail ?? this.errorEmail,
-      errorPassword: errorPassword ?? this.errorPassword,
+      loading: loading ?? this.loading,
+      errors: errors ?? this.errors,
     );
   }
 
   @override
   List<Object?> get props => [
-    isvrifyCodeSent,
+    isVerifyCodeSent,
     isOtpCorrect,
     isPasswordReset,
     email,
+    loading,
+    errors,
+  ];
+}
+
+class ForgetPasswordLoading extends Equatable {
+  final bool isVerifyCodeSentLoading;
+  final bool isOtpCorrectLoading;
+  final bool isPasswordResetLoading;
+
+  const ForgetPasswordLoading({
+    this.isVerifyCodeSentLoading = false,
+    this.isOtpCorrectLoading = false,
+    this.isPasswordResetLoading = false,
+  });
+
+  ForgetPasswordLoading copyWith({
+    bool? isVerifyCodeSentLoading,
+    bool? isOtpCorrectLoading,
+    bool? isPasswordResetLoading,
+  }) {
+    return ForgetPasswordLoading(
+      isVerifyCodeSentLoading:
+          isVerifyCodeSentLoading ?? this.isVerifyCodeSentLoading,
+      isOtpCorrectLoading: isOtpCorrectLoading ?? this.isOtpCorrectLoading,
+      isPasswordResetLoading:
+          isPasswordResetLoading ?? this.isPasswordResetLoading,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+    isVerifyCodeSentLoading,
+    isOtpCorrectLoading,
+    isPasswordResetLoading,
+  ];
+}
+
+class ForgetPasswordErrors extends Equatable {
+  final String? errorOtp;
+  final String? errorEmail;
+  final String? errorPassword;
+
+  const ForgetPasswordErrors({
+    this.errorOtp = '',
+    this.errorEmail = '',
+    this.errorPassword = '',
+  });
+
+  ForgetPasswordErrors copyWith({
+    String? errorOtp,
+    String? errorEmail,
+    String? errorPassword,
+  }) {
+    return ForgetPasswordErrors(
+      errorOtp: errorOtp ?? this.errorOtp,
+      errorEmail: errorEmail ?? this.errorEmail,
+      errorPassword: errorPassword ?? this.errorPassword,
+    );
+  }
+  
+  @override
+  List<Object?> get props =>  [
     errorOtp,
     errorEmail,
     errorPassword,
-    isOtpCorrectLoading,
-    isPasswordResetLoading,
-    isVerifyCodeSentLoading,
   ];
 }

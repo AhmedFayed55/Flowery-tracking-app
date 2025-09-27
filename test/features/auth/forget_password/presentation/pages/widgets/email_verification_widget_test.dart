@@ -32,9 +32,9 @@ void main() {
   ) async {
     when(
       mockCubit.state,
-    ).thenReturn(const ForgetPasswordState(isvrifyCodeSent: true));
+    ).thenReturn(const ForgetPasswordState(isVerifyCodeSent: true));
     when(mockCubit.stream).thenAnswer(
-      (_) => Stream.value(const ForgetPasswordState(isvrifyCodeSent: true)),
+      (_) => Stream.value(const ForgetPasswordState(isVerifyCodeSent: true)),
     );
 
     await tester.pumpWidget(createTestableWidget());

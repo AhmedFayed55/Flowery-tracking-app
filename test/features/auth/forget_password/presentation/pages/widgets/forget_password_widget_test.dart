@@ -31,9 +31,9 @@ void main() {
   ) async {
     when(
       mockCubit.state,
-    ).thenReturn(const ForgetPasswordState(isvrifyCodeSent: false));
+    ).thenReturn(const ForgetPasswordState(isVerifyCodeSent: false));
     when(mockCubit.stream).thenAnswer(
-      (_) => Stream.value(const ForgetPasswordState(isvrifyCodeSent: false)),
+      (_) => Stream.value(const ForgetPasswordState(isVerifyCodeSent: false)),
     );
 
     await tester.pumpWidget(createTestableWidget());
@@ -46,9 +46,9 @@ void main() {
     (WidgetTester tester) async {
       when(
         mockCubit.state,
-      ).thenReturn(const ForgetPasswordState(isvrifyCodeSent: false));
+      ).thenReturn(const ForgetPasswordState(isVerifyCodeSent: false));
       when(mockCubit.stream).thenAnswer(
-        (_) => Stream.value(const ForgetPasswordState(isvrifyCodeSent: false)),
+        (_) => Stream.value(const ForgetPasswordState(isVerifyCodeSent: false)),
       );
 
       await tester.pumpWidget(createTestableWidget());

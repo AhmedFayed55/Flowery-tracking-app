@@ -41,8 +41,16 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     emit(
       state.copyWith(
         email: email,
-        isVerifyCodeSentLoading: true,
-        errorEmail: '',
+        loading: const ForgetPasswordLoading(
+          isVerifyCodeSentLoading: true,
+          isOtpCorrectLoading: false,
+          isPasswordResetLoading: false,
+        ),
+        errors: const ForgetPasswordErrors(
+          errorOtp: '',
+          errorEmail: '',
+          errorPassword: '',
+        ),
       ),
     );
     final result = await _forgetPasswordUsecase.invoke(
@@ -52,8 +60,17 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       case ApiSuccessResult():
         emit(
           state.copyWith(
-            isvrifyCodeSent: true,
-            isVerifyCodeSentLoading: false,
+            isVerifyCodeSent: true,
+            loading: const ForgetPasswordLoading(
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+              isPasswordResetLoading: false,
+            ),
+            errors: const ForgetPasswordErrors(
+              errorOtp: '',
+              errorEmail: '',
+              errorPassword: '',
+            ),
             email: email,
           ),
         );
@@ -61,8 +78,17 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       case ApiErrorResult():
         emit(
           state.copyWith(
-            errorEmail: result.failure.errorMessage,
-            isVerifyCodeSentLoading: false,
+            isVerifyCodeSent: false,
+            loading: const ForgetPasswordLoading(
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+              isPasswordResetLoading: false,
+            ),
+            errors: ForgetPasswordErrors(
+              errorOtp: '',
+              errorEmail: result.failure.errorMessage,
+              errorPassword: '',
+            ),
           ),
         );
         break;
@@ -70,20 +96,50 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   Future<void> verifyCode(String code) async {
-    emit(state.copyWith(isOtpCorrectLoading: true, errorOtp: ''));
+    emit(
+      state.copyWith(
+        loading: const ForgetPasswordLoading(
+          isVerifyCodeSentLoading: false,
+          isOtpCorrectLoading: true,
+          isPasswordResetLoading: false,
+        ),
+        errors: const ForgetPasswordErrors(
+          errorOtp: '',
+          errorEmail: '',
+          errorPassword: '',
+        ),
+      ),
+    );
     final result = await _verifyCodeUsecase.invoke(
       VerifyPasswordBody(resetCode: code),
     );
     switch (result) {
       case ApiSuccessResult():
-        emit(state.copyWith(isOtpCorrect: true, isOtpCorrectLoading: false));
+        emit(
+          state.copyWith(
+            isOtpCorrect: true,
+            loading: const ForgetPasswordLoading(
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+              isPasswordResetLoading: false,
+            ),
+          ),
+        );
         break;
       case ApiErrorResult():
         emit(
           state.copyWith(
             isOtpCorrect: false,
-            errorOtp: result.failure.errorMessage,
-            isOtpCorrectLoading: false,
+            loading: const ForgetPasswordLoading(
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+              isPasswordResetLoading: false,
+            ),
+            errors: ForgetPasswordErrors(
+              errorOtp: result.failure.errorMessage,
+              errorEmail: '',
+              errorPassword: '',
+            ),
           ),
         );
         break;
@@ -91,21 +147,49 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   Future<void> resetPassword(String password) async {
-    emit(state.copyWith(isPasswordResetLoading: true, errorPassword: ''));
+    emit(
+      state.copyWith(
+        loading: const ForgetPasswordLoading(
+          isPasswordResetLoading: true,
+          isVerifyCodeSentLoading: false,
+          isOtpCorrectLoading: false,
+        ),
+        errors: const ForgetPasswordErrors(
+          errorOtp: '',
+          errorEmail: '',
+          errorPassword: '',
+        ),
+      ),
+    );
     final result = await _resetPasswordUsecase.invoke(
       ResetPasswordBody(newPassword: password, email: state.email),
     );
     switch (result) {
       case ApiSuccessResult():
         emit(
-          state.copyWith(isPasswordReset: true, isPasswordResetLoading: false),
+          state.copyWith(
+            isPasswordReset: true,
+            loading: const ForgetPasswordLoading(
+              isPasswordResetLoading: false,
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+            ),
+          ),
         );
         break;
       case ApiErrorResult():
         emit(
           state.copyWith(
-            errorPassword: result.failure.errorMessage,
-            isPasswordResetLoading: false,
+            loading: const ForgetPasswordLoading(
+              isPasswordResetLoading: false,
+              isVerifyCodeSentLoading: false,
+              isOtpCorrectLoading: false,
+            ),
+            errors: ForgetPasswordErrors(
+              errorOtp: '',
+              errorEmail: '',
+              errorPassword: result.failure.errorMessage,
+            ),
           ),
         );
         break;

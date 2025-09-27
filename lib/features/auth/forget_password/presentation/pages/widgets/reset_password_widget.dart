@@ -95,7 +95,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                       });
                     }
                   },
-                  child: state.isPasswordResetLoading
+                  child: state.loading.isPasswordResetLoading
                       ? const CircularProgressIndicator(color: Colors.white)
                       : Text(trans.confirm),
                 );
