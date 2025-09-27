@@ -34,8 +34,8 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      - name: Run tests with coverage
+        run: flutter test --coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -50,3 +50,14 @@ jobs:
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
             -Dsonar.coverage.exclusions=**
+            -Dsonar.dart.coverage.reportPaths=coverage/lcov.info
+
+      - name: SonarCloud Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 10
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+        continue-on-error: true
+
