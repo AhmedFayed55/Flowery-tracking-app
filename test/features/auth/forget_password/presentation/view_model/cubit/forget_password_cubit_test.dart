@@ -65,12 +65,25 @@ void main() {
       expect: () => [
         const ForgetPasswordState().copyWith(
           email: email,
-          isVerifyCodeSentLoading: true,
-          errorEmail: '',
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: true,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
         ),
         const ForgetPasswordState().copyWith(
-          isvrifyCodeSent: true,
-          isVerifyCodeSentLoading: false,
+          isVerifyCodeSent: true,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+
           email: email,
         ),
       ],
@@ -89,12 +102,28 @@ void main() {
       expect: () => [
         cubit.state.copyWith(
           email: email,
-          isVerifyCodeSentLoading: true,
-          errorEmail: '',
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: true,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
         ),
         cubit.state.copyWith(
-          errorEmail: 'Error Email',
-          isVerifyCodeSentLoading: false,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: 'Error Email',
+            errorPassword: '',
+          ),
         ),
       ],
     );
@@ -110,12 +139,24 @@ void main() {
       act: (cubit) => cubit.verifyCode(code),
       expect: () => [
         const ForgetPasswordState().copyWith(
-          isOtpCorrectLoading: true,
-          errorOtp: '',
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: true,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
         ),
         const ForgetPasswordState().copyWith(
           isOtpCorrect: true,
-          isOtpCorrectLoading: false,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
         ),
       ],
     );
@@ -131,11 +172,31 @@ void main() {
       },
       act: (cubit) => cubit.verifyCode(code),
       expect: () => [
-        cubit.state.copyWith(isOtpCorrectLoading: true, errorOtp: ''),
+        cubit.state.copyWith(
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: true,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
+        ),
+
         cubit.state.copyWith(
           isOtpCorrect: false,
-          errorOtp: 'Invalid Code',
-          isOtpCorrectLoading: false,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: 'Invalid Code',
+            errorEmail: '',
+            errorPassword: '',
+          ),
         ),
       ],
     );
@@ -153,13 +214,25 @@ void main() {
       expect: () => [
         const ForgetPasswordState().copyWith(
           email: email,
-          isPasswordResetLoading: true,
-          errorPassword: '',
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: true,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
         ),
         const ForgetPasswordState().copyWith(
           email: email,
           isPasswordReset: true,
-          isPasswordResetLoading: false,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
         ),
       ],
     );
@@ -176,10 +249,29 @@ void main() {
       },
       act: (cubit) => cubit.resetPassword(password),
       expect: () => [
-        cubit.state.copyWith(isPasswordResetLoading: true, errorPassword: ''),
         cubit.state.copyWith(
-          errorPassword: 'Reset Failed',
-          isPasswordResetLoading: false,
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: true,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: '',
+          ),
+        ),
+        cubit.state.copyWith(
+          loading: const ForgetPasswordLoading(
+            isVerifyCodeSentLoading: false,
+            isOtpCorrectLoading: false,
+            isPasswordResetLoading: false,
+          ),
+          errors: const ForgetPasswordErrors(
+            errorOtp: '',
+            errorEmail: '',
+            errorPassword: 'Reset Failed',
+          ),
         ),
       ],
     );

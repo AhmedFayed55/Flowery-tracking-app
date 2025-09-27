@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
+import 'package:flowery_tracking_app/features/auth/forget_password/presentation/pages/widgets/pin_code_builder.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pinput/pinput.dart';
 
 class EmailVerificationWidget extends StatefulWidget {
   const EmailVerificationWidget({super.key});
@@ -17,9 +17,7 @@ class EmailVerificationWidget extends StatefulWidget {
 }
 
 class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
-  final pinController = TextEditingController();
-  final focusNode = FocusNode();
-  final formKey = GlobalKey<FormState>();
+
 
   int _secondsRemaining = 0;
   Timer? _timer;
@@ -50,8 +48,6 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
   @override
   void dispose() {
     _timer?.cancel();
-    pinController.dispose();
-    focusNode.dispose();
 
     super.dispose();
   }
@@ -79,70 +75,7 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
               ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
             ),
             verticalSpace(32),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: state.isOtpCorrectLoading
-                  ? const CircularProgressIndicator()
-                  : Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          Pinput(
-                            length: 6,
-                            controller: pinController,
-                            focusNode: focusNode,
-                            showCursor: true,
-                            onCompleted: (pin) async {
-                              await cubit.doIntent(VerifyCodeEvent(pin));
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter OTP';
-                              }
-
-                              return null;
-                            },
-                            errorPinTheme: PinTheme(
-                              width: 68,
-                              height: 74,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            defaultPinTheme: PinTheme(
-                              width: 68,
-                              height: 74,
-                              decoration: BoxDecoration(
-                                color: AppColors.darkGrey.withValues(
-                                  alpha: 0.2,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              textStyle: const TextStyle(
-                                fontSize: 20,
-                                color: AppColors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          if (state.errorOtp != null &&
-                              state.errorOtp!.isNotEmpty) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              state.errorOtp!,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-            ),
+            const PinCodeBuilder(),
             verticalSpace(32),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -180,3 +113,4 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
     );
   }
 }
+

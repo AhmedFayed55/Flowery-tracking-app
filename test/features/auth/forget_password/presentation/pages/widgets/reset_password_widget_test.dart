@@ -28,11 +28,11 @@ void main() {
 
   testWidgets('ResetPasswordWidget UI Correctly ', (WidgetTester tester) async {
     when(mockCubit.state).thenReturn(
-      const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+      const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
     );
     when(mockCubit.stream).thenAnswer(
       (_) => Stream.value(
-        const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+        const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
       ),
     );
 
@@ -46,11 +46,11 @@ void main() {
     'ResetPasswordWidget UI when tap on confirm button with no data ',
     (WidgetTester tester) async {
       when(mockCubit.state).thenReturn(
-        const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+        const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
       );
       when(mockCubit.stream).thenAnswer(
         (_) => Stream.value(
-          const ForgetPasswordState(isvrifyCodeSent: true, isOtpCorrect: true),
+          const ForgetPasswordState(isVerifyCodeSent: true, isOtpCorrect: true),
         ),
       );
 

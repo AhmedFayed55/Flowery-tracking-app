@@ -73,15 +73,15 @@ class _ForgetPasswordWidgetState extends State<ForgetPasswordWidget> {
             verticalSpace(48),
             BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
               listener: (context, state) {
-                if (state.errorEmail != null && state.errorEmail!.isNotEmpty) {
+                if (state.errors.errorEmail != null && state.errors.errorEmail!.isNotEmpty) {
                   ToastMessage.toastMsg(
-                    state.errorEmail!,
+                    state.errors.errorEmail!,
                     backgroundColor: AppColors.red,
                   );
                 }
               },
               builder: (context, state) {
-                if (state.isVerifyCodeSentLoading) {
+                if (state.loading.isVerifyCodeSentLoading) {
                   return const CircularProgressIndicator();
                 }
                 return ElevatedButton(

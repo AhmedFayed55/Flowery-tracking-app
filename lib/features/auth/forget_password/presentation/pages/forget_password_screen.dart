@@ -25,9 +25,9 @@ class ForgetPasswordScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (BuildContext context, ForgetPasswordState state) {
-          if (state.isvrifyCodeSent != true) {
+          if (state.isVerifyCodeSent != true) {
             return const ForgetPasswordWidget();
-          } else if (state.isvrifyCodeSent == true &&
+          } else if (state.isVerifyCodeSent == true &&
               state.isOtpCorrect != true) {
             return const EmailVerificationWidget();
           } else if (state.isOtpCorrect == true &&
