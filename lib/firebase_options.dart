@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'flowery-tracking-app.firebasestorage.app',
     iosBundleId: 'com.example.floweryTrackingApp',
   );
-
 }
