@@ -13,7 +13,7 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
-      case AppRoutes.register:
+        case AppRoutes.register:
         return MaterialPageRoute(builder: (context) => const ApplyScreen());
 
       default:
