@@ -33,7 +33,7 @@ class ApplyRemotDataSourceImp implements ApplyRemotDataSource {
   Future<Map<String, dynamic>> verifyID(File imageId) {
     return _geminiApiService.sendImage(
       image: imageId,
-      instructions: "Check if this is a valid ID Card",
+      instructions: AppConstants.instructionIdCard,
     );
   }
 
@@ -41,7 +41,7 @@ class ApplyRemotDataSourceImp implements ApplyRemotDataSource {
   Future<Map<String, dynamic>> verifyLicense(File license) {
     return _geminiApiService.sendImage(
       image: license,
-      instructions: "Check if this is a valid Driver License",
+      instructions: AppConstants.instructionDriverLicense,
     );
   }
 }

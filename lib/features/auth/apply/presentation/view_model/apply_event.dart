@@ -5,5 +5,6 @@ sealed class ApplyEvent {}
 class ApplyDriverEvent extends ApplyEvent {
   RequestApplyEntity requestEntity;
   ApplyDriverEvent(this.requestEntity);
-}  
+}
+
 class GetVehiclesEvent extends ApplyEvent {}

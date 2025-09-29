@@ -8,7 +8,6 @@ part 'api_services.g.dart';
 
 @RestApi()
 @injectable
-
 abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
@@ -18,5 +17,5 @@ abstract class ApiServices {
   Future<ApplyResponceDto> apply(@Body() FormData formData);
 
   @GET(ApiConstants.getAllVehicles)
-  Future<VehiclesResponseDto>getAllVehicles();
+  Future<VehiclesResponseDto> getAllVehicles();
 }
