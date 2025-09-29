@@ -48,5 +48,7 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "flowery_rider": "Flowery Rider",
+  "flower_order" : "Flower Order"
 }
