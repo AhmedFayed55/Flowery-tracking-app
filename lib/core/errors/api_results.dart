@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'failures.dart';
 
@@ -17,6 +20,12 @@ class ApiErrorResult<T> extends ApiResult<T> {
 }
 
 Future<ApiResult<T>> safeApiCall<T>(Future<T> Function() apiCall) async {
+   final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
+  if (!isConnected) {
+    return ApiErrorResult<T>(
+      failure: Failure(errorMessage: 'no internet'),
+    );
+  }
   try {
     final result = await apiCall();
     return ApiSuccessResult<T>(data: result);

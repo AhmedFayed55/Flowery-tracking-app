@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:flowery_tracking_app/features/auth/apply/data/data_source/gemeni_api_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -45,4 +47,7 @@ abstract class ExternalModules {
   @lazySingleton
   InternetConnectionChecker provideInternetConnectionChecker() =>
       InternetConnectionChecker.instance;
+
+  @lazySingleton
+  FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
 }
