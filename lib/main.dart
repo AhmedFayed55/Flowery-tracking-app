@@ -1,3 +1,4 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class FloweryTrackingApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: getInitialRoute(),
+          initialRoute: AppRoutes.mainLayout,
         );
       },
     );

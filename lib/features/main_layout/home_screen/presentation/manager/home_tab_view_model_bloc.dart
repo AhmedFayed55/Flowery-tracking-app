@@ -15,11 +15,11 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
   doIntent(HomeTabEvent event){
     switch(event){
       case GetAllPendingOrdersEvent():
-
+        return _getAllPendingOrders();
     }
   }
 
-  Future<void> getAllPendingOrders()async{
+  Future<void> _getAllPendingOrders()async{
     emit(state.copyWith(isLoadingGetOrders: true,getPendingOrdersEntity: null, errorGetOrders: null));
     var result = await _getAllPendingOrdersUseCase.invoke();
     switch(result){
