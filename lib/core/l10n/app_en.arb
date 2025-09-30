@@ -50,5 +50,8 @@
   "orders": "Orders",
   "profile": "Profile",
   "flowery_rider": "Flowery Rider",
-  "flower_order" : "Flower Order"
+  "flower_order" : "Flower Order",
+  "picked_address": "Picked Address",
+  "reject" : "Reject",
+  "accept" : "Accept"
 }
