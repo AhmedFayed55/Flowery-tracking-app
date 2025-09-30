@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
@@ -45,4 +46,7 @@ abstract class ExternalModules {
   @lazySingleton
   InternetConnectionChecker provideInternetConnectionChecker() =>
       InternetConnectionChecker.instance;
+
+  @lazySingleton
+  FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
 }
