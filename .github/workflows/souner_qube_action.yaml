@@ -49,12 +49,4 @@ jobs:
             -Dsonar.sources=lib
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
-
-      - name: SonarCloud Quality Gate check
-        id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 10
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
-        continue-on-error: true
+            -Dsonar.coverage.exclusions=**

@@ -20,10 +20,16 @@ class LocaleCubit extends Cubit<Locale> {
   void changeLocale() {
     var lanCode = state.languageCode;
     if (lanCode == AppConstants.enKey) {
-      getIt<SharedPrefHelper>().saveData(key: AppConstants.languageCode, val: AppConstants.arKey);
+      getIt<SharedPrefHelper>().saveData(
+        key: AppConstants.languageCode,
+        val: AppConstants.arKey,
+      );
       emit(const Locale(AppConstants.arKey));
     } else {
-      getIt<SharedPrefHelper>().saveData(key: AppConstants.languageCode, val: AppConstants.enKey);
+      getIt<SharedPrefHelper>().saveData(
+        key: AppConstants.languageCode,
+        val: AppConstants.enKey,
+      );
       emit(const Locale(AppConstants.enKey));
     }
   }

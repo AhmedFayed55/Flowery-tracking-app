@@ -11,9 +11,12 @@ import 'core/l10n/translations/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  runApp(BlocProvider(
+  runApp(
+    BlocProvider(
       create: (context) => getIt<LocaleCubit>(),
-      child: const FloweryTrackingApp()));
+      child: const FloweryTrackingApp(),
+    ),
+  );
 }
 
 class FloweryTrackingApp extends StatelessWidget {
