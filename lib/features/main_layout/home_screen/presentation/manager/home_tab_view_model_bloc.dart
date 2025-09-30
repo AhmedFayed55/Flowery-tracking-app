@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/use_cases/get_all_pending_orders_use_case.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_event.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_state.dart';
@@ -11,23 +14,33 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
   HomeTabViewModel(this._getAllPendingOrdersUseCase):super(const HomeTabState());
 
   final GetAllPendingOrdersUseCase _getAllPendingOrdersUseCase;
+  List<OrdersEntity> localOrders = [];
 
   doIntent(HomeTabEvent event){
     switch(event){
       case GetAllPendingOrdersEvent():
-
+        _getAllPendingOrders();
+      case RejectOrderEvent(:final orderId):
+        _deleteOrder(orderId);
     }
   }
 
-  Future<void> getAllPendingOrders()async{
-    emit(state.copyWith(isLoadingGetOrders: true,getPendingOrdersEntity: null, errorGetOrders: null));
+  Future<void> _getAllPendingOrders()async{
+    emit(state.copyWith(isLoadingGetOrders: true,orders: [], errorGetOrders: null));
     var result = await _getAllPendingOrdersUseCase.invoke();
     switch(result){
       case ApiSuccessResult():
-        emit(state.copyWith(isLoadingGetOrders: false, getPendingOrdersEntity: result.data));
+        localOrders = result.data.orders!;
+        emit(state.copyWith(isLoadingGetOrders: false, orders: result.data.orders));
       case ApiErrorResult():
         emit(state.copyWith(isLoadingGetOrders: false, errorGetOrders: result.failure.errorMessage));
     }
+  }
+
+  void _deleteOrder(String orderId) {
+    localOrders.removeWhere((order) => order.id == orderId);
+    log("Order with ID $orderId has been removed. Remaining orders: ${localOrders.length}");
+    emit(state.copyWith(orders: List.from(localOrders)));
   }
 
 }

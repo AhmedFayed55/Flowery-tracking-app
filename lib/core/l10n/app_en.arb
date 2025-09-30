@@ -53,5 +53,6 @@
   "flower_order" : "Flower Order",
   "picked_address": "Picked Address",
   "reject" : "Reject",
-  "accept" : "Accept"
+  "accept" : "Accept",
+  "try_again": "Try Again"
 }

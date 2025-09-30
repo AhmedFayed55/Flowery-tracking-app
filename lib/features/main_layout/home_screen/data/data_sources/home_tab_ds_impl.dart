@@ -10,7 +10,9 @@ class HomeTabDataSourceImpl implements HomeTabDataSource{
 
   @override
   Future<GetPendingOrdersDto> getAllPendingOrders() async{
-    return await _apiServices.getAllPendingOrders();
+    return await _apiServices.getAllPendingOrders(
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ2NTU2ZmRkODkzN2UwNTczZmE0OTYiLCJpYXQiOjE3NTkyNTcyMjV9.hfAYlf5Cg8OYzKzqAhIA7qZOlWr1aZpSyIyrOue8Dks"
+    );
   }
 
 }

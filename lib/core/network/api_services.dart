@@ -14,6 +14,8 @@ abstract class ApiServices {
   factory ApiServices(Dio dio) = _ApiServices;
 
   @GET(ApiConstants.getAllPendingOrders)
-  Future<GetPendingOrdersDto> getAllPendingOrders();
+  Future<GetPendingOrdersDto> getAllPendingOrders(
+      @Header("Authorization") String token
+      );
 
 }
