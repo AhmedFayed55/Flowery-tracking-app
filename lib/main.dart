@@ -9,11 +9,12 @@ import 'config/routing/route_generator.dart';
 import 'core/di/di.dart';
 import 'core/general_cubits/locale_cubit.dart';
 import 'core/l10n/translations/app_localizations.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await configureDependencies();
-  Firebase.initializeApp();
   runApp(
     BlocProvider(
       create: (context) => getIt<LocaleCubit>(),

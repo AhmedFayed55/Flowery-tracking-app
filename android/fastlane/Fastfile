@@ -8,8 +8,8 @@ platform :android do
     sh "flutter pub run build_runner build --delete-conflicting-outputs"
     sh "flutter build apk --release"
     firebase_app_distribution(
-        app: "1:57434167645:android:2b0fed82d5285bdd1ef0b4",
-        groups: "Team",
+        app: "1:653026383061:android:30d9469a242b44d3f9be5c",
+        groups: "Testers",
         firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
         android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk"
       )
