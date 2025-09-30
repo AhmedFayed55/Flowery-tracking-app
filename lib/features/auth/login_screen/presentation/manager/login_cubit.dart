@@ -56,7 +56,7 @@ class LoginCubit extends Cubit<LoginState> {
       key: AppConstants.isRemember,
       val: changeRememberMe,
     );
-    emit(state.copyWith(isRememberMe: changeRememberMe));
+    emit(state.copyWith(isRememberMe: changeRememberMe, isError: false));
   }
 
   Future<void> _onChangedEmail(String email) async {
