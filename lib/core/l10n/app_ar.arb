@@ -1,4 +1,5 @@
 {
+  "@@locale": "ar",
   "login": "تسجيل الدخول",
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
@@ -32,7 +33,6 @@
   "error": "خطأ",
   "login_successfully": "تم تسجيل الدخول بنجاح",
   "register_successfully": "تم التسجيل بنجاح",
-
   "name_is_required": "الاسم مطلوب!",
   "name_is_not_valid": "هذا الاسم غير صالح",
   "email_is_required": "البريد الإلكتروني مطلوب!",
@@ -47,7 +47,24 @@
   "phone_number_is_required": "رقم الهاتف مطلوب!",
   "phone_number_is_not_valid": "رقم الهاتف غير صالح",
   "this_field_is_required": "هذا الحقل مطلوب",
+  "forget_password_desc": "يرجى ادخال بريدك الالكتروني\n المرتبط بحسابك",
+  "confirm": "تأكيد",
+  "email_verification": "تحقق من البريد الالكتروني",
+  "email_verification_desc": "يرجى ادخال رمز التحقق المرسل\n لبريدك الالكتروني",
+  "did_not_receive_code": "لم تستلم الرمز؟",
+  "resend_code": "اعادة لارسال ",
+  "reset_password": "استعادة كلمة المرور",
+  "reset_password_desc": "لا يمكن ان تكون كلمة المرور فارغة ويجب\n ان تحتوي على 6 حروف على الاقل\n وحرف كبير ورقم واحد على الاقل",
+  "new_password": "كلمة المرور الجديدة",
+  "enter_new_password": "ادخل كلمة المرور الجديدة",
+  "enter_confirm_password": "ادخل تأكيد كلمة المرور",
+  "new_password_is_required": "كلمة المرور الجديدة مطلوبة!",
+  "new_password_is_not_valid": "كلمة المرور الجديدة غير صالحة",
+  "password_reset_successfully": "تم استعادة كلمة المرور بنجاح",
+  "something_went_wrong" : "حدث خطاء ما",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "your_application_submitted": "تم إرسال طلبك!",
+  "thank_you_for_providing": "شكرًا لك على تقديم طلبك،\nسوف نقوم بمراجعة طلبك والرد عليك قريبًا."
 }
