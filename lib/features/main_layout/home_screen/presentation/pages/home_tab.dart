@@ -18,7 +18,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
+      getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -31,35 +31,49 @@ class HomeTab extends StatelessWidget {
         ),
         body: BlocBuilder<HomeTabViewModel, HomeTabState>(
           builder: (context, state) {
-            if (state.isLoadingGetOrders) {
-              return const Column(children: [CustomShimmerWidget()]);
-            } else if (state.errorGetOrders != null) {
-              return Center(
-                child: OutlinedButton(
-                  onPressed: () => context.read<HomeTabViewModel>().doIntent(GetAllPendingOrdersEvent()),
-                  child: Text(context.localization.try_again),
-                ),
-              );
-            } else {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 29,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) =>
-                            PendingOrderCart(order: state.orders[index],),
-                        separatorBuilder: (context, index) => verticalSpace(16),
-                        itemCount: state.orders.length,
+            final viewModel = context.read<HomeTabViewModel>();
+
+            return RefreshIndicator(
+              key: viewModel.refreshIndicatorKey,
+              onRefresh: () async {
+                context.read<HomeTabViewModel>().doIntent(GetAllPendingOrdersEvent());
+                await Future.delayed(const Duration(milliseconds: 500));
+              },
+              child: Builder(
+                builder: (context) {
+                  if (state.isLoadingGetOrders) {
+                    return const Column(children: [CustomShimmerWidget()]);
+                  } else if (state.errorGetOrders != null) {
+                    return Center(
+                      child: OutlinedButton(
+                        onPressed: () => viewModel.doIntent(GetAllPendingOrdersEvent()),
+                        child: Text(context.localization.try_again),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 29,
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.separated(
+                              itemBuilder: (context, index) =>
+                                  PendingOrderCart(order: state.orders[index]),
+                              separatorBuilder: (context, index) =>
+                                  verticalSpace(16),
+                              itemCount: state.orders.length,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+            );
           },
         ),
       ),

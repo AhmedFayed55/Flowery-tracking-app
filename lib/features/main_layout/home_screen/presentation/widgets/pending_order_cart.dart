@@ -1,7 +1,6 @@
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_event.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_state.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_view_model_bloc.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/picked_or_user_address_widget.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/price_and_options_widget.dart';
@@ -57,15 +56,13 @@ class PendingOrderCart extends StatelessWidget {
             address: '20th st, Sheikh Zayed, Giza ',
             image: order.user?.photo ?? '',
           ),
-          BlocBuilder<HomeTabViewModel,HomeTabState>(
-            builder: (context, state) {
-              return PriceAndOptionsWidget(price: order.totalPrice!.toInt(),
-                rejectOnTap: () =>
-                    context.read<HomeTabViewModel>().doIntent(
-                        RejectOrderEvent(order.id!)),
-                acceptOnTap: () {},);
-            },
-          )
+          PriceAndOptionsWidget(
+            price: order.totalPrice!.toInt(),
+            rejectOnTap: () => context.read<HomeTabViewModel>().doIntent(
+              RejectOrderEvent(order.id!),
+            ),
+            acceptOnTap: () {},
+          ),
         ],
       ),
     );

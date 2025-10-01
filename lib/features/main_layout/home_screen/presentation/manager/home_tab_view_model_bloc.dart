@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/use_cases/get_all_pending_orders_use_case.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_event.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,7 +13,8 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
   HomeTabViewModel(this._getAllPendingOrdersUseCase):super(const HomeTabState());
 
   final GetAllPendingOrdersUseCase _getAllPendingOrdersUseCase;
-  List<OrdersEntity> localOrders = [];
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+
 
   doIntent(HomeTabEvent event){
     switch(event){
@@ -30,7 +30,6 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
     var result = await _getAllPendingOrdersUseCase.invoke();
     switch(result){
       case ApiSuccessResult():
-        localOrders = result.data.orders!;
         emit(state.copyWith(isLoadingGetOrders: false, orders: result.data.orders));
       case ApiErrorResult():
         emit(state.copyWith(isLoadingGetOrders: false, errorGetOrders: result.failure.errorMessage));
@@ -38,9 +37,10 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
   }
 
   void _deleteOrder(String orderId) {
-    localOrders.removeWhere((order) => order.id == orderId);
-    log("Order with ID $orderId has been removed. Remaining orders: ${localOrders.length}");
-    emit(state.copyWith(orders: List.from(localOrders)));
+    emit(state.copyWith(isLoadingGetOrders: true));
+    state.orders.removeWhere((order) => order.id == orderId);
+    log("Order with ID $orderId has been removed. Remaining orders: ${state.orders.length}");
+    emit(state.copyWith(isLoadingGetOrders: false));
   }
 
 }
