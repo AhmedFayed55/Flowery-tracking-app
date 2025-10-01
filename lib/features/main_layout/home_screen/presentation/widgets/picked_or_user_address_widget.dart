@@ -4,9 +4,10 @@ import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 
 class PickedOrUserAddressWidget extends StatelessWidget {
-  const PickedOrUserAddressWidget({super.key, required this.name, required this.address});
+  const PickedOrUserAddressWidget({super.key, required this.name, required this.address, required this.image});
   final String name;
   final String address;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                   loadingProgress == null
                       ? child
                       : const CircularProgressIndicator(color: AppColors.pink),
-                  'https://www.elevateegy.com/elevate.png',
+                  image
                 ),
               ),
             ),
