@@ -48,5 +48,11 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "current_password":"Current Password",
+  "new_password":"New Password",
+  "confirm_password":"Confirm Password",
+  "change_password":"Change Password",
+  "up_date":"Update",
+  "update_successfully":"Update successfully"
 }
