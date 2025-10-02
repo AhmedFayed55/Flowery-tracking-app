@@ -52,6 +52,4 @@ abstract class ExternalModules {
     return FirebaseFirestore.instance;
   }
 
-  @lazySingleton
-  FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
 }
