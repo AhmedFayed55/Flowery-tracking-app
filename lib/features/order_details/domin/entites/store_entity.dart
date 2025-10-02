@@ -1,0 +1,23 @@
+class StoreEntity {
+  StoreEntity({
+      this.name, 
+      this.image, 
+      this.address, 
+      this.phoneNumber, 
+      this.latLong,});
+
+  String? name;
+  String? image;
+  String? address;
+  String? phoneNumber;
+  String? latLong;
+
+  
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "image": image,
+    "address": address,
+    "phoneNumber": phoneNumber,
+    "latLong": latLong,
+  };
+}

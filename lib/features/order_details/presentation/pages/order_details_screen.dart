@@ -1,5 +1,11 @@
+import 'dart:developer';
+
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/di/di.dart';
+import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart' hide OrderStatus;
+import 'package:flowery_tracking_app/features/order_details/domin/repo/order_details_repo.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/call_card.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/order_status.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/product_card.dart';
@@ -29,7 +35,19 @@ class OrderDetailsScreen extends StatelessWidget {
           width: double.infinity,
           height: 56,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              // var result = await getIt<OrderDetailsRepo>().updateOrderStatus(
+              //   '154545',
+              //   'pending',
+              // );
+              // switch (result) {
+              //   case FirebaseSuccessResult():
+              //     log('success');
+              //     break;
+              //   case FirebaseErrorResult():
+              //     log('error: ${result.failure.errorMessage} ');
+              // }
+            },
 
             child: Text(
               'Arrived at Pickup point',
