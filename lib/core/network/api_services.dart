@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
@@ -17,7 +16,11 @@ import 'package:flowery_tracking_app/features/auth/login_screen/data/models/logi
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
+import 'package:dio/dio.dart';
+import 'package:flowery_tracking_app/core/network/api_constants.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/response/profile_response_model.dart';
+import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'api_services.g.dart';
 
@@ -26,6 +29,7 @@ part 'api_services.g.dart';
 abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
+
 
 
   @GET(ApiConstants.getDriverData)
@@ -52,4 +56,8 @@ abstract class ApiServices {
 
   @POST(ApiConstants.login)
   Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
+
+  @GET(ApiConstants.mainProfile)
+  Future<ProfileResponseModel> getProfile();
+
 }
