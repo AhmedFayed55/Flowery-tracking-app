@@ -2,7 +2,8 @@ name: Validate PR Title
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    branches:
+      - development
 
 jobs:
   validate-pr-title:

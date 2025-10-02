@@ -26,7 +26,7 @@ class IdFields extends StatelessWidget {
             hintText: AppLocalizations.of(context)!.enter_id_number,
           ),
         ),
-        
+
         ImageField(
           label: AppLocalizations.of(context)!.id_image,
           hint: AppLocalizations.of(context)!.upload_id_image,

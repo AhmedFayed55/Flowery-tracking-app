@@ -47,6 +47,7 @@ class VehicelFields extends StatelessWidget {
         ),
 
         ImageField(
+          key: const Key('ImageFieldKey'),
           label: AppLocalizations.of(context)!.license_image,
           hint: AppLocalizations.of(context)!.upload_license_image,
           onImagePicked: onLicensePicked,

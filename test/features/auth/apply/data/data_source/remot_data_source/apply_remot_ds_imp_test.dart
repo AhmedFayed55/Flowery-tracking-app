@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/driver_model_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart'; 
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
 
@@ -54,10 +54,12 @@ void main() {
       );
 
       when(mockApplyRequestDto.toPartMap()).thenReturn({'key': 'value'});
-      when(mockApplyRequestDto.vehicleLicensePart)
-          .thenAnswer((_) async => MultipartFile.fromBytes([0]));
-      when(mockApplyRequestDto.nIDImgPart)
-          .thenAnswer((_) async => MultipartFile.fromBytes([0]));
+      when(
+        mockApplyRequestDto.vehicleLicensePart,
+      ).thenAnswer((_) async => MultipartFile.fromBytes([0]));
+      when(
+        mockApplyRequestDto.nIDImgPart,
+      ).thenAnswer((_) async => MultipartFile.fromBytes([0]));
       when(mockApiServices.apply(any)).thenAnswer((_) async => fakeResponse);
 
       // Act
@@ -71,8 +73,9 @@ void main() {
     test('getvehicles calls apiServices.getAllVehicles', () async {
       // Arrange
       final fakeResponse = VehiclesResponseDto(message: '', vehicles: []);
-      when(mockApiServices.getAllVehicles())
-          .thenAnswer((_) async => fakeResponse);
+      when(
+        mockApiServices.getAllVehicles(),
+      ).thenAnswer((_) async => fakeResponse);
 
       // Act
       final result = await dataSource.getvehicles();
@@ -87,20 +90,24 @@ void main() {
       final fakeFile = File('id.png');
       final fakeResult = <String, dynamic>{'result': 'ok'};
 
-      when(mockGeminiApiService.sendImage(
-        image: anyNamed('image'),
-        instructions: anyNamed('instructions'),
-      )).thenAnswer((_) async => fakeResult);
+      when(
+        mockGeminiApiService.sendImage(
+          image: anyNamed('image'),
+          instructions: anyNamed('instructions'),
+        ),
+      ).thenAnswer((_) async => fakeResult);
 
       // Act
       final result = await dataSource.verifyID(fakeFile);
 
       // Assert
       expect(result, fakeResult);
-      verify(mockGeminiApiService.sendImage(
-        image: fakeFile,
-        instructions: anyNamed('instructions'),
-      )).called(1);
+      verify(
+        mockGeminiApiService.sendImage(
+          image: fakeFile,
+          instructions: anyNamed('instructions'),
+        ),
+      ).called(1);
     });
 
     test('verifyLicense calls geminiApiService.sendImage', () async {
@@ -108,20 +115,24 @@ void main() {
       final fakeFile = File('license.png');
       final fakeResult = <String, dynamic>{'result': 'ok'};
 
-      when(mockGeminiApiService.sendImage(
-        image: anyNamed('image'),
-        instructions: anyNamed('instructions'),
-      )).thenAnswer((_) async => fakeResult);
+      when(
+        mockGeminiApiService.sendImage(
+          image: anyNamed('image'),
+          instructions: anyNamed('instructions'),
+        ),
+      ).thenAnswer((_) async => fakeResult);
 
       // Act
       final result = await dataSource.verifyLicense(fakeFile);
 
       // Assert
       expect(result, fakeResult);
-      verify(mockGeminiApiService.sendImage(
-        image: fakeFile,
-        instructions: anyNamed('instructions'),
-      )).called(1);
+      verify(
+        mockGeminiApiService.sendImage(
+          image: fakeFile,
+          instructions: anyNamed('instructions'),
+        ),
+      ).called(1);
     });
   });
 }

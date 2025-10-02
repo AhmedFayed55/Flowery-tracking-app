@@ -10,7 +10,7 @@ class ApplyState {
     this.isLoading = false,
     this.errorMessage = '',
     this.driver,
-    this.vehicelEntity,
+    this.vehicelEntity = const [],
   });
   ApplyState copyWith({
     bool? isLoading,

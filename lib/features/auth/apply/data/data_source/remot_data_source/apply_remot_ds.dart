@@ -7,6 +7,6 @@ import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/veh
 abstract class ApplyRemotDataSource {
   Future<ApplyResponceDto> applyDriver(ApplyRequestDto applyRequestDto);
   Future<VehiclesResponseDto> getvehicles();
-   Future<Map<String, dynamic>> verifyLicense(File license);
-   Future<Map<String, dynamic>> verifyID(File imageId);
+  Future<Map<String, dynamic>> verifyLicense(File license);
+  Future<Map<String, dynamic>> verifyID(File imageId);
 }

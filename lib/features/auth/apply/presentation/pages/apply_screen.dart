@@ -34,11 +34,24 @@ class _ApplyScreenState extends State<ApplyScreen> {
   String countryCodeEntity = '';
   Genders selectedGender = Genders.male;
   final _formKey = GlobalKey<FormState>();
+  late ApplyViewModel cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = getIt<ApplyViewModel>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (cubit.state.vehicelEntity!.isEmpty) {
+        cubit.doIntent(GetVehiclesEvent());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ApplyViewModel>(
-      create: (context) =>
-          getIt<ApplyViewModel>()..doIntent(GetVehiclesEvent()),
+    return BlocProvider.value(
+      value: cubit,
       child: BlocListener<ApplyViewModel, ApplyState>(
         listener: (context, state) {
           if (state.isLoading) {
@@ -58,13 +71,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
             ToastMessage.toastMsg(
               AppLocalizations.of(context)!.applied_successfully,
             );
-
-            // context.pushNamed(AppRoutes)
           }
         },
         child: Builder(
           builder: (context) {
-            final cubit = context.read<ApplyViewModel>();
             return Scaffold(
               appBar: AppBar(
                 title: Text(AppLocalizations.of(context)!.apply),
@@ -81,7 +91,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const AppBarApply(),
-
                           SelectedCountryTextField(
                             onCountrySelected: (countryName, countryCode) {
                               selectedCountryName = countryName;
@@ -90,28 +99,22 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           ),
                           NameFields(cubit: cubit),
                           VehicelFields(
-                            onCarSelected: (id) => carId = id,
                             cubit: cubit,
+                            onCarSelected: (id) => carId = id,
                             onLicensePicked: (image) {
-                              setState(() {
-                                licenseImage = image;
-                              });
+                              setState(() => licenseImage = image);
                             },
                           ),
                           ContactFields(cubit: cubit),
                           IdFields(
                             cubit: cubit,
-                            onImageIdPicked: (imageId) => setState(() {
-                              idImage = imageId;
-                            }),
+                            onImageIdPicked: (image) =>
+                                setState(() => idImage = image),
                           ),
-
                           PasswordFields(cubit: cubit),
                           GenderSelectorWidget(
                             selectedGender: selectedGender,
-                            onChanged: (Genders p1) {
-                              selectedGender = p1;
-                            },
+                            onChanged: (gender) => selectedGender = gender,
                           ),
                           ApplyButton(
                             cubit: cubit,

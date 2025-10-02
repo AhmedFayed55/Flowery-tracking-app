@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flowery_tracking_app/config/theme/app_theme.dart';
 import 'package:flowery_tracking_app/features/main_layout/main_layout.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,11 @@ import 'config/routing/route_generator.dart';
 import 'core/di/di.dart';
 import 'core/general_cubits/locale_cubit.dart';
 import 'core/l10n/translations/app_localizations.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await dotenv.load(fileName: ".env");
-
-  // final geminiApiKey = dotenv.env['GEMINI_API_KEY'];
-  // print("GEMINI_API_KEY: $geminiApiKey");
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await configureDependencies();
   runApp(
     BlocProvider(

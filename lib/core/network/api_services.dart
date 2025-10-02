@@ -3,7 +3,7 @@ import 'package:flowery_tracking_app/core/network/api_constants.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 part 'api_services.g.dart';
 
 @RestApi()

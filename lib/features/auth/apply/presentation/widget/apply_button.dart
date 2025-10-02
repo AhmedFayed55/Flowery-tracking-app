@@ -38,12 +38,14 @@ class ApplyButton extends StatelessWidget {
             rawPhone = rawPhone.substring(1);
           }
           if (licenseImage == null || idImage == null) {
-      // لو أي صورة ناقصة
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please upload both license and ID images')),
-      );
-      return;
-    }
+            // لو أي صورة ناقصة
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Please upload both license and ID images'),
+              ),
+            );
+            return;
+          }
           cubit.doIntent(
             ApplyDriverEvent(
               RequestApplyEntity(

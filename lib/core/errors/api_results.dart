@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'failures.dart';

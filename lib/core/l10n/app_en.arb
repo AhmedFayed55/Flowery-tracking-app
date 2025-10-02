@@ -69,8 +69,8 @@
   "license_image":"License image",
   "upload_license_image":"Upload license image",
   "please_upload":"Please upload",
-  "successfully_uploaded":"Successfully Uploaded"
- 
-
-
+  "successfully_uploaded":"Successfully Uploaded",
+  "home": "Home",
+  "orders": "Orders",
+  "profile": "Profile"
 }

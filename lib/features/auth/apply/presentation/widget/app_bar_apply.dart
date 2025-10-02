@@ -10,7 +10,7 @@ class AppBarApply extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.apply,
+          AppLocalizations.of(context)!.welcom,
           style: Theme.of(
             context,
           ).textTheme.labelMedium!.copyWith(fontSize: 20),

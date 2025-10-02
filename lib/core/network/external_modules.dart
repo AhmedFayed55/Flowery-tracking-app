@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/data_source/gemeni_api_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -64,4 +65,6 @@ abstract class ExternalModules {
   GeminiApiService provideGeminiApiService(@Named("gemini") Dio dio) {
     return GeminiApiService(dio);
   }
+
+  FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
 }

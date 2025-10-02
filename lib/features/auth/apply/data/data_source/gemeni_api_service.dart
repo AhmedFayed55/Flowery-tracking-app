@@ -38,7 +38,6 @@ class GeminiApiService {
       data: jsonEncode(body),
     );
 
-    
     return response.data;
   }
 }
