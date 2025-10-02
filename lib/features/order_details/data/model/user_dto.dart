@@ -19,7 +19,7 @@ class UserDto {
   @JsonKey(name: "photo")
   final String? photo;
 
-  UserDto ({
+  UserDto({
     this.id,
     this.firstName,
     this.lastName,

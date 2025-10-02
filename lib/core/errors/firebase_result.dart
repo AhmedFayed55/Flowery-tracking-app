@@ -16,13 +16,17 @@ class FirebaseErrorResult<T> extends FirebaseResult<T> {
   FirebaseErrorResult({required this.failure});
 }
 
-Future<FirebaseResult<T>> safeFirebaseCall<T>(Future<T> Function() firebaseCall) async {
+Future<FirebaseResult<T>> safeFirebaseCall<T>(
+  Future<T> Function() firebaseCall,
+) async {
   try {
     final result = await firebaseCall();
     return FirebaseSuccessResult<T>(data: result);
   } on FirebaseException catch (firebaseError) {
     return FirebaseErrorResult<T>(
-      failure: Failure(errorMessage: firebaseError.message ?? "Unknown Firebase error"),
+      failure: Failure(
+        errorMessage: firebaseError.message ?? "Unknown Firebase error",
+      ),
     );
   } catch (error) {
     return FirebaseErrorResult<T>(

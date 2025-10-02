@@ -15,7 +15,7 @@ class StoreDto {
   @JsonKey(name: "latLong")
   final String? latLong;
 
-  StoreDto ({
+  StoreDto({
     this.name,
     this.image,
     this.address,

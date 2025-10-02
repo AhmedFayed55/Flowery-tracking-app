@@ -49,5 +49,16 @@
   "this_field_is_required": "هذا الحقل مطلوب",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "order": "الطلب",
+  "profile": "الملف الشخصي",
+  "orderDetails": "تفاصيل الطلب",
+  "pickupAddress": "عنوان الاستلام",
+  "userAddress": "عنوان المستخدم",
+  "orderDetailsSection": "تفاصيل الطلب",
+  "total": "الإجمالي",
+  "egp": "ج.م",
+  "paymentMethod": "طريقة الدفع",
+  "paid": "مدفوع",
+  "cashOnDelivery": "الدفع عند الاستلام",
+  "invalidDate": "تاريخ غير صالح"
 }

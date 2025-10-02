@@ -1,14 +1,16 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 
 class OrderStatus extends StatelessWidget {
-  const OrderStatus({
-    super.key,
-  });
+  const OrderStatus({super.key, required this.orderId, required this.date});
+  final String orderId;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
+    var trans = context.localization;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -27,14 +29,14 @@ class OrderStatus extends StatelessWidget {
               ).textTheme.bodyLarge!.copyWith(color: AppColors.green),
             ),
             verticalSpace(8),
-    
+
             Text(
-              'Order #123456',
+              '${trans.order} $orderId',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             verticalSpace(8),
             Text(
-              'Wed, 03 Sep 2024, 11:00 AM ',
+              date,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.darkGrey.withValues(alpha: 0.8),
               ),
@@ -45,4 +47,3 @@ class OrderStatus extends StatelessWidget {
     );
   }
 }
-

@@ -48,5 +48,16 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "order": "Order",
+  "profile": "Profile",
+  "orderDetails": "Order Details",
+  "pickupAddress": "Pickup address",
+  "userAddress": "User address",
+  "orderDetailsSection": "Order details",
+  "total": "Total",
+  "egp": "EGP",
+  "paymentMethod": "Payment method",
+  "paid": "Paid",
+  "cashOnDelivery": "Cash on delivery",
+  "invalidDate": "Invalid date"
 }

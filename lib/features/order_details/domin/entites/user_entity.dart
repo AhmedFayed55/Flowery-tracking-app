@@ -1,12 +1,13 @@
 class UserEntity {
   UserEntity({
-      this.id, 
-      this.firstName, 
-      this.lastName, 
-      this.email, 
-      this.gender, 
-      this.phone, 
-      this.photo,});
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.gender,
+    this.phone,
+    this.photo,
+  });
 
   String? id;
   String? firstName;
@@ -15,7 +16,6 @@ class UserEntity {
   String? gender;
   String? phone;
   String? photo;
-
 
   Map<String, dynamic> toJson() => {
     "_id": id,

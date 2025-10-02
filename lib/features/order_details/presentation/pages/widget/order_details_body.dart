@@ -1,0 +1,151 @@
+import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/extensions/extensions.dart';
+import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
+import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_cubit.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/call_card.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/custom_change_order_status_bottom.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/details_widget.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/order_details_shimmer.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/order_status.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/product_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
+
+class OrderDetailsBody extends StatefulWidget {
+  const OrderDetailsBody({super.key});
+
+  @override
+  State<OrderDetailsBody> createState() => _OrderDetailsBodyState();
+}
+
+class _OrderDetailsBodyState extends State<OrderDetailsBody> {
+  @override
+  void initState() {
+    context.read<OrderDetailsCubit>().doIntent(
+      //TODO: get orderId from local storage
+      GetOrderDetailsEvent(orderId: "1"),
+    );
+    super.initState();
+  }
+
+  String formatIsoToReadableDate(String isoDate) {
+    try {
+      DateTime dateTime = DateTime.parse(isoDate).toLocal();
+      return DateFormat("EEE, dd MMM yyyy, hh:mm a").format(dateTime);
+    } catch (e) {
+      return "Invalid date";
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var trans = context.localization;
+    var order = context.watch<OrderDetailsCubit>().state.orderDetails;
+    return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+      listener: (context, state) {
+        if (state.errorMessage != null) {
+          DialogueUtils.showAlertDialog(context, state.errorMessage!);
+        }
+      },
+      builder: (context, state) {
+        if (state.isSceenLoading) {
+          return Scaffold(
+            appBar: AppBar(title: Text(trans.orderDetails)),
+            body: const OrderDetailsShimmer(),
+          );
+        }
+        return Scaffold(
+          bottomNavigationBar: const CustomChangeOrderStatusBottom(),
+          appBar: AppBar(
+            title: Text(trans.orderDetails),
+            scrolledUnderElevation: 0,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  StepProgressIndicator(
+                    padding: 4,
+
+                    roundedEdges: const Radius.circular(3),
+                    totalSteps: 5,
+                    currentStep: state.riderOrderStatus?.statusStep ?? 0,
+                    selectedColor: AppColors.green,
+                  ),
+                  verticalSpace(24),
+
+                  OrderStatus(
+                    orderId: order!.orderNumber!,
+                    date: formatIsoToReadableDate(order.createdAt!),
+                  ),
+
+                  verticalSpace(16),
+                  Text(
+                    trans.pickupAddress,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  verticalSpace(16),
+                  CallCard(
+                    phoneNumber: order.store!.phoneNumber!,
+                    title: order.store!.name!,
+                    address: order.store!.address!,
+                    imgeUrl: order.store!.image!,
+                  ),
+                  verticalSpace(24),
+                  Text(
+                    trans.userAddress,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  verticalSpace(16),
+
+                  order.shippingAddress == null
+                      ? Container()
+                      : CallCard(
+                          phoneNumber: order.user!.phone!,
+                          title:
+                              '${order.user!.firstName!} ${order.user!.lastName!}',
+                          address:
+                              "${order.shippingAddress!.street!} , ${order.shippingAddress!.city!}",
+                          imgeUrl: order.user!.photo!,
+                        ),
+                  verticalSpace(24),
+                  Text(
+                    trans.orderDetailsSection,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  verticalSpace(16),
+                  ListView.builder(
+                    itemCount: order.orderItems!.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) =>
+                        ProductCard(orderItems: order.orderItems![index]),
+                  ),
+                  verticalSpace(24),
+                  DetailsWidget(
+                    firstText: trans.total,
+                    secondText: '${trans.egp} ${order.totalPrice}',
+                  ),
+                  verticalSpace(16),
+                  DetailsWidget(
+                    firstText: trans.paymentMethod,
+                    secondText: order.isPaid ?? false
+                        ? trans.paid
+                        : trans.cashOnDelivery,
+                  ),
+                  verticalSpace(8),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

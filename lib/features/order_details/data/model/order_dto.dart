@@ -1,3 +1,4 @@
+import 'package:flowery_tracking_app/features/order_details/data/model/shipping_address.dart';
 import 'package:flowery_tracking_app/features/order_details/data/model/store_dto.dart';
 import 'package:flowery_tracking_app/features/order_details/data/model/user_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -28,6 +29,8 @@ class OrderDto {
   final String? createdAt;
   @JsonKey(name: "updatedAt")
   final String? updatedAt;
+  @JsonKey(name: "shippingAddress")
+  ShippingAddressDto? shippingAddressDto;
   @JsonKey(name: "orderNumber")
   final String? orderNumber;
   @JsonKey(name: "__v")
@@ -35,7 +38,7 @@ class OrderDto {
   @JsonKey(name: "store")
   final StoreDto? store;
 
-  OrderDto ({
+  OrderDto({
     this.id,
     this.user,
     this.orderItems,

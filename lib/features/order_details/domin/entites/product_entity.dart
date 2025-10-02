@@ -1,21 +1,22 @@
 class ProductEntity {
   ProductEntity({
-      this.id, 
-      this.title, 
-      this.slug, 
-      this.description, 
-      this.imgCover, 
-      this.images, 
-      this.price, 
-      this.priceAfterDiscount, 
-      this.quantity, 
-      this.category, 
-      this.occasion, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v, 
-      this.isSuperAdmin, 
-      this.sold,});
+    this.id,
+    this.title,
+    this.slug,
+    this.description,
+    this.imgCover,
+    this.images,
+    this.price,
+    this.priceAfterDiscount,
+    this.quantity,
+    this.category,
+    this.occasion,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.isSuperAdmin,
+    this.sold,
+  });
 
   String? id;
   String? title;
@@ -52,5 +53,4 @@ class ProductEntity {
     "isSuperAdmin": isSuperAdmin,
     "sold": sold,
   };
-
 }

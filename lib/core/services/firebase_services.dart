@@ -6,7 +6,7 @@ class FirebaseService {
   final FirebaseFirestore _firestore;
 
   FirebaseService({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+    : _firestore = firestore;
 
   Future<void> addData(
     String collectionPath,

@@ -14,7 +14,7 @@ class RouteGenerator {
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
       case AppRoutes.orderDetails:
-        return MaterialPageRoute(builder: (context) => const OrderDetailsScreen());
+        return MaterialPageRoute(builder: (context) => OrderDetailsScreen());
       default:
         return unDefinedRoute();
     }

@@ -6,8 +6,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallCard extends StatelessWidget {
-  const CallCard({super.key, required this.phoneNumber});
+  const CallCard({
+    super.key,
+    required this.phoneNumber,
+    required this.title,
+    required this.address,
+    required this.imgeUrl,
+  });
   final String phoneNumber;
+  final String title;
+  final String address;
+  final String imgeUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,9 @@ class CallCard extends StatelessWidget {
                       loadingProgress == null
                       ? child
                       : const CircularProgressIndicator(color: AppColors.pink),
-                  'https://www.elevateegy.com/elevate.png',
+                  imgeUrl.contains('http') || imgeUrl.contains('https')
+                      ? imgeUrl
+                      : 'https://flower.elevateegy.com/uploads/$imgeUrl',
                 ),
               ),
             ),
@@ -53,7 +64,7 @@ class CallCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Flowery store',
+                  title,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.black.withValues(alpha: 0.4),
@@ -73,7 +84,7 @@ class CallCard extends StatelessWidget {
                     ),
                     horizontalSpace(4),
                     Text(
-                      '20th st, Sheikh Zayed, Giza ',
+                      address,
                       style: Theme.of(
                         context,
                       ).textTheme.bodyMedium!.copyWith(color: AppColors.black),
@@ -103,9 +114,7 @@ class CallCard extends StatelessWidget {
             horizontalSpace(8),
             GestureDetector(
               onTap: () async {
-                final Uri url = Uri.parse(
-                  "https://wa.me/$phoneNumber?text=Hello",
-                );
+                final Uri url = Uri.parse("https://wa.me/$phoneNumber");
                 if (!await launchUrl(
                   url,
                   mode: LaunchMode.externalApplication,

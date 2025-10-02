@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/features/order_details/data/mapper/mapper.dart';
 import 'package:flowery_tracking_app/features/order_details/data/sources/order_details_ds.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/entites/order_entity.dart';
@@ -50,7 +52,7 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   @override
   Future<FirebaseResult> updateOrderStatusFirebase(
     String orderId,
-    String status,
+    RiderOrderStatus status,
   ) async {
     final bool isConnected = await _internetConnectionChecker.hasConnection;
     if (!isConnected) {
@@ -74,15 +76,25 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   }
 
   @override
-  Future<ApiResult> updateOrderStatusApi(String orderId, String status) async {
+  Future<ApiResult> updateOrderStatusApi(
+    String orderId,
+    OrderStatus status,
+  ) async {
     final bool isConnected = await _internetConnectionChecker.hasConnection;
     if (!isConnected) {
       return ApiErrorResult<OrdersEntity>(
         failure: Failure(errorMessage: AppConstants.noInternet),
       );
     }
-    return safeApiCall(
-      () => _orderDetailsDs.updateOrderStatusApi(orderId, status),
-    );
+    try {
+      await _orderDetailsDs.updateOrderStatusApi(orderId, status);
+      return ApiSuccessResult(data: null);
+    } on DioException catch (firebaseError) {
+      return ApiErrorResult(
+        failure: ServerFailure.fromDioError(dioException: firebaseError),
+      );
+    } catch (e) {
+      return ApiErrorResult(failure: Failure(errorMessage: e.toString()));
+    }
   }
 }

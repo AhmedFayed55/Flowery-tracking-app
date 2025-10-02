@@ -1,12 +1,16 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/features/order_details/domin/entites/order_items_entity.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  const ProductCard({super.key, required this.orderItems});
+  final OrderItemsEntity orderItems;
 
   @override
   Widget build(BuildContext context) {
+    var trans = context.localization;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -40,7 +44,10 @@ class ProductCard extends StatelessWidget {
                       loadingProgress == null
                       ? child
                       : const CircularProgressIndicator(color: AppColors.pink),
-                  'https://flower.elevateegy.com/uploads/336d4a68-109d-4f29-a35c-d5ca2215b4ff-cover_image.png',
+                  orderItems.product!.imgCover!.contains('http') ||
+                          orderItems.product!.imgCover!.contains('https')
+                      ? orderItems.product!.imgCover!
+                      : 'https://flower.elevateegy.com/uploads/${orderItems.product!.imgCover!}',
                 ),
               ),
             ),
@@ -49,7 +56,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Red roses,15 Pink Rose Bouquet',
+                  orderItems.product!.title!,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.black.withValues(alpha: 0.4),
@@ -57,7 +64,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 verticalSpace(4),
                 Text(
-                  'EGP 250',
+                  '${orderItems.product!.price!} ${trans.egp}',
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium!.copyWith(color: AppColors.black),
@@ -66,7 +73,7 @@ class ProductCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              'x1',
+              'x${orderItems.quantity}',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.pink,
                 fontSize: 16,
