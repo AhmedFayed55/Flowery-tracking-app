@@ -13,5 +13,4 @@ abstract class ApiConstants {
   static const String getDriverData = 'drivers/profile-data';
   static const String editProfile = 'drivers/editProfile';
   static const String uploadProfilePhoto = 'drivers/upload-photo';
-  static const String getAllVehicles = 'vehicles';
 }

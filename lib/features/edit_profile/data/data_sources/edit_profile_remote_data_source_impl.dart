@@ -80,9 +80,7 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
   @override
   Future<ApiResult<VehiclesResponseEntity>> getVehicles() async {
     try {
-      final VehiclesResponseDto response = await _profileApiService
-          .getAllVehicles();
-
+      final VehiclesResponseDto response = await _profileApiService.getAllVehicles();
       return ApiSuccessResult(data: response.toEntity());
     } on DioException catch (e) {
       return ApiErrorResult(
