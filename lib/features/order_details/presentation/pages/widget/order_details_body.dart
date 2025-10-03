@@ -1,7 +1,13 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
+import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart' hide OrderStatus;
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_cubit.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/call_card.dart';
@@ -25,9 +31,9 @@ class OrderDetailsBody extends StatefulWidget {
 class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   @override
   void initState() {
+    var orderId = getIt<SharedPrefHelper>().getData(key: AppConstants.orderId);
     context.read<OrderDetailsCubit>().doIntent(
-      //TODO: get orderId from local storage
-      GetOrderDetailsEvent(orderId: "1"),
+      GetOrderDetailsEvent(orderId: orderId as String),
     );
     super.initState();
   }
@@ -54,13 +60,25 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
       builder: (context, state) {
         if (state.isSceenLoading) {
           return Scaffold(
-            appBar: AppBar(title: Text(trans.orderDetails)),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () =>
+                    context.pushReplacementNamed(AppRoutes.mainLayout),
+                icon: const Icon(Icons.arrow_back_ios_new),
+              ),
+              title: Text(trans.orderDetails),
+            ),
             body: const OrderDetailsShimmer(),
           );
         }
         return Scaffold(
           bottomNavigationBar: const CustomChangeOrderStatusBottom(),
           appBar: AppBar(
+            leading:  state.riderOrderStatus == RiderOrderStatus.delivered ? IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new),
+                onPressed: () => context
+                    .pushReplacementNamed(AppRoutes.mainLayout),
+              ) : const SizedBox(),
             title: Text(trans.orderDetails),
             scrolledUnderElevation: 0,
           ),
@@ -104,16 +122,12 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                   ),
                   verticalSpace(16),
 
-                  order.shippingAddress == null
-                      ? Container()
-                      : CallCard(
-                          phoneNumber: order.user!.phone!,
-                          title:
-                              '${order.user!.firstName!} ${order.user!.lastName!}',
-                          address:
-                              "${order.shippingAddress!.street!} , ${order.shippingAddress!.city!}",
-                          imgeUrl: order.user!.photo!,
-                        ),
+                  CallCard(
+                    phoneNumber: order.user!.phone!,
+                    title: '${order.user!.firstName!} ${order.user!.lastName!}',
+                    address: "20th st, Sheikh Zayed, Giza ",
+                    imgeUrl: order.user!.photo!,
+                  ),
                   verticalSpace(24),
                   Text(
                     trans.orderDetailsSection,
@@ -125,7 +139,10 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) =>
-                        ProductCard(orderItems: order.orderItems![index]),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: ProductCard(orderItems: order.orderItems![index]),
+                        ),
                   ),
                   verticalSpace(24),
                   DetailsWidget(

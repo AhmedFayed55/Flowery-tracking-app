@@ -74,7 +74,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text(context.localization.edit_profile)),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(context.localization.edit_profile)),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Form(

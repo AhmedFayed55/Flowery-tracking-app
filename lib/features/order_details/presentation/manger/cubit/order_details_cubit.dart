@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
+import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
-import 'package:flowery_tracking_app/features/order_details/domin/entites/order_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/get_order_details_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_api_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_firebase_usecase.dart';
@@ -86,7 +89,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     emit(state.copyWith(isUpdating: true, errorMessage: null));
 
     final result = await _updateOrderApiUsecase.invoke(
-      '68a7537ca8bca307f9df6c99',
+      orderId,
       status,
     );
 
@@ -109,12 +112,13 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
     if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
       final result = await _updateOrderApiUsecase.invoke(
-        '68a75430a8bca307f9df6dc5',
+        orderId,
         OrderStatus.completed,
       );
 
       if (result is ApiSuccessResult) {
         await updateOrderStatusFirebase(orderId, RiderOrderStatus.delivered);
+        getIt<SharedPrefHelper>().removeData(key: AppConstants.orderId);
       } else if (result is ApiErrorResult) {
         emit(
           state.copyWith(

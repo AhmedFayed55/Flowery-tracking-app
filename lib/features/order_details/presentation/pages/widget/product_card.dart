@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
-import 'package:flowery_tracking_app/features/order_details/domin/entites/order_items_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orderItems_entity.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -56,7 +56,8 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  orderItems.product!.title!,
+                  orderItems.product!.title!.substring(0, 16),
+                
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.black.withValues(alpha: 0.4),

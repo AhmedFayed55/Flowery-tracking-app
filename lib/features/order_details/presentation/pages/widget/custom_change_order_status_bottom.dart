@@ -38,7 +38,7 @@ class CustomChangeOrderStatusBottom extends StatelessWidget {
                       ?.id;
                   if (orderId != null) {
                     context.read<OrderDetailsCubit>().doIntent(
-                      ChangeToNextStatusEvent(orderId: '1'),
+                      ChangeToNextStatusEvent(orderId: orderId),
                     );
                   }
                 },
