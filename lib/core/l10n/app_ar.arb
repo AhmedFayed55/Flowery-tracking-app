@@ -100,6 +100,9 @@
   "new_password_is_not_valid": "كلمة المرور الجديدة غير صالحة",
   "password_reset_successfully": "تم استعادة كلمة المرور بنجاح",
   "something_went_wrong" : "حدث خطاء ما"
-
+  "english": "الإنجليزية",
+  "language": "اللغة",
+  "vehicle_info": "معلومات المركبة",
+  "app_version": "الإصدار 6.3.0 - (446)"
 }
 

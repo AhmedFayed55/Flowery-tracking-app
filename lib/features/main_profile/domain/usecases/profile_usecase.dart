@@ -9,7 +9,7 @@ class ProfileUseCase {
 
   ProfileUseCase({required this.profileRepositoryContract});
 
-  Future<ApiResult<ProfileResponseEntity>> getProfile() async {
+  Future<ApiResult<ProfileResponseEntity>> call() async {
     var result = await profileRepositoryContract.getProfile();
     return result;
   }

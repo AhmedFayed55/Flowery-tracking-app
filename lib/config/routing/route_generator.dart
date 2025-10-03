@@ -3,6 +3,7 @@ import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/presentation/pages/forget_password_screen.dart';
 import 'package:flowery_tracking_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/pages/main_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +24,11 @@ class RouteGenerator {
             child: const ForgetPasswordScreen(),
           ),
         );
+
+
+      case AppRoutes.mainProfile:
+        return MaterialPageRoute(builder: (context) => const MainProfile());
+
       default:
         return unDefinedRoute();
     }
