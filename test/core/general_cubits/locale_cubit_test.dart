@@ -24,8 +24,9 @@ void main() {
 
   group('Locale Cubit Testing', () {
     test('initial state should be Locale from SharedPref or default en', () {
-      when(mockSharedPrefHelper.getData(key: AppConstants.languageCode))
-          .thenReturn(AppConstants.arKey);
+      when(
+        mockSharedPrefHelper.getData(key: AppConstants.languageCode),
+      ).thenReturn(AppConstants.arKey);
 
       final cubit = LocaleCubit();
 
@@ -35,46 +36,56 @@ void main() {
     blocTest<LocaleCubit, Locale>(
       'emits Locale(ar) when current is en',
       build: () {
-        when(mockSharedPrefHelper.getData(key: AppConstants.languageCode))
-            .thenReturn(AppConstants.enKey);
+        when(
+          mockSharedPrefHelper.getData(key: AppConstants.languageCode),
+        ).thenReturn(AppConstants.enKey);
 
-        when(mockSharedPrefHelper.saveData(
-          key: AppConstants.languageCode,
-          val: AppConstants.arKey,
-        )).thenAnswer((_) async => true);
+        when(
+          mockSharedPrefHelper.saveData(
+            key: AppConstants.languageCode,
+            val: AppConstants.arKey,
+          ),
+        ).thenAnswer((_) async => true);
 
         return LocaleCubit();
       },
       act: (cubit) => cubit.changeLocale(),
       expect: () => [const Locale(AppConstants.arKey)],
       verify: (_) {
-        verify(mockSharedPrefHelper.saveData(
-          key: AppConstants.languageCode,
-          val: AppConstants.arKey,
-        )).called(1);
+        verify(
+          mockSharedPrefHelper.saveData(
+            key: AppConstants.languageCode,
+            val: AppConstants.arKey,
+          ),
+        ).called(1);
       },
     );
 
     blocTest<LocaleCubit, Locale>(
       'emits Locale(en) when current is ar',
       build: () {
-        when(mockSharedPrefHelper.getData(key: AppConstants.languageCode))
-            .thenReturn(AppConstants.arKey);
+        when(
+          mockSharedPrefHelper.getData(key: AppConstants.languageCode),
+        ).thenReturn(AppConstants.arKey);
 
-        when(mockSharedPrefHelper.saveData(
-          key: AppConstants.languageCode,
-          val: AppConstants.enKey,
-        )).thenAnswer((_) async => true);
+        when(
+          mockSharedPrefHelper.saveData(
+            key: AppConstants.languageCode,
+            val: AppConstants.enKey,
+          ),
+        ).thenAnswer((_) async => true);
 
         return LocaleCubit();
       },
       act: (cubit) => cubit.changeLocale(),
       expect: () => [const Locale(AppConstants.enKey)],
       verify: (_) {
-        verify(mockSharedPrefHelper.saveData(
-          key: AppConstants.languageCode,
-          val: AppConstants.enKey,
-        )).called(1);
+        verify(
+          mockSharedPrefHelper.saveData(
+            key: AppConstants.languageCode,
+            val: AppConstants.enKey,
+          ),
+        ).called(1);
       },
     );
   });

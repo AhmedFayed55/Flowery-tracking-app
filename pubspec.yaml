@@ -65,6 +65,7 @@ dependencies:
   country_picker: ^2.0.27
   image: ^4.0.21
 
+  cloud_firestore: ^6.0.2
 
 
 

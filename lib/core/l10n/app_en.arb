@@ -70,6 +70,13 @@
   "home": "Home",
   "orders": "Orders",
   "profile": "Profile",
+  "flowery_rider": "Flowery Rider",
+  "flower_order" : "Flower Order",
+  "picked_address": "Picked Address",
+  "reject" : "Reject",
+  "accept" : "Accept",
+  "try_again": "Try Again",
+  "profile": "Profile",
   "your_application_submitted": "Your application has been\nsubmitted!",
   "thank_you_for_providing": "Thank you for providing your application,\nwe will review your application and will\nget back to you soon."
 }

@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCPRJAPA0hKKi30WWtAsXjPPdgKTxfUPgw',
-    appId: '1:57434167645:android:2b0fed82d5285bdd1ef0b4',
-    messagingSenderId: '57434167645',
-    projectId: 'flowery-tracking-app',
-    storageBucket: 'flowery-tracking-app.firebasestorage.app',
+    apiKey: 'AIzaSyDD2afZ8jaTeqBiWWbumUYFB9dJXKJErvQ',
+    appId: '1:653026383061:android:30d9469a242b44d3f9be5c',
+    messagingSenderId: '653026383061',
+    projectId: 'tracking-app-61dee',
+    storageBucket: 'tracking-app-61dee.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAoHgdpfYdAZZWLrBvHih3qoOJdCNCCdp8',
-    appId: '1:57434167645:ios:e4bafb5c962d5b8b1ef0b4',
-    messagingSenderId: '57434167645',
-    projectId: 'flowery-tracking-app',
-    storageBucket: 'flowery-tracking-app.firebasestorage.app',
+    apiKey: 'AIzaSyCbNpwnYH5avtokTBxJX1MJcWW-mRuvkow',
+    appId: '1:653026383061:ios:4873c5bd316351eff9be5c',
+    messagingSenderId: '653026383061',
+    projectId: 'tracking-app-61dee',
+    storageBucket: 'tracking-app-61dee.firebasestorage.app',
     iosBundleId: 'com.example.floweryTrackingApp',
   );
-
 }

@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/core/utils/assets.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/pages/home_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../config/theme/colors.dart';
@@ -19,13 +20,7 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     final AppLocalizations localization = AppLocalizations.of(context)!;
     final List<Widget> pages = [
-      Center(
-        key: const Key('home_page'),
-        child: Text(
-          localization.home,
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
-      ),
+      const HomeTab(),
       Center(
         key: const Key('orders_page'),
         child: Text(

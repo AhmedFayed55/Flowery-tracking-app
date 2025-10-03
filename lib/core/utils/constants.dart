@@ -10,5 +10,7 @@ abstract class AppConstants {
   static const String noInternet = 'No Internet Connection';
   static const String vehicleLicenseKey='vehicleLicense';
   static const String nIDImgKey='NIDImg';
-  
+
+  static const String orderId = 'orderId';
+  static const String ordersCollection = 'orders';
 }

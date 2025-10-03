@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/data_source/gemeni_api_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -47,21 +48,9 @@ abstract class ExternalModules {
   InternetConnectionChecker provideInternetConnectionChecker() =>
       InternetConnectionChecker.instance;
 
-  // @lazySingleton
-  // @Named("gemini")
-  // Dio provideGeminiDio() {
-  //   final dio = Dio();
-  //   dio.options.baseUrl = ApiConstants.gemeniBaseUrl;
-  //   dio.options.headers = {
-  //     'Content-Type': 'application/json',
-  //     'X-goog-api-key': "AIzaSyCY4vXcKoksoMn9IpzyPjHLZSYzBkqnM84",
-  //   };
-  //   dio.interceptors.add(getIt.get<PrettyDioLogger>());
-  //   return dio;
-  // }
+  @lazySingleton
+  FirebaseFirestore provideFirebaseFirestore() {
+    return FirebaseFirestore.instance;
+  }
 
-  // @lazySingleton
-  // GeminiApiService provideGeminiApiService(@Named("gemini") Dio dio) {
-  //   return GeminiApiService(dio);
-  // }
 }

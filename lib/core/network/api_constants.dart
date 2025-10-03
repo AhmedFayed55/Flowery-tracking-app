@@ -8,4 +8,5 @@ abstract class ApiConstants {
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash/";
   static const String applyDriver = 'drivers/apply';
   static const String getAllVehicles = 'vehicles';
+  static const String getAllPendingOrders = "orders/pending-orders";
 }
