@@ -48,7 +48,7 @@ void main() {
     provideDummy<ApiResult<UploadPhotoResponseDto>>(
       ApiErrorResult(failure: Failure(errorMessage: 'dummy')),
     );
-    provideDummy<ApiResult<VehiclesResponseDto>>(
+    provideDummy<ApiResult<VehiclessResponseDto>>(
       ApiErrorResult(failure: Failure(errorMessage: 'dummy')),
     );
   });
@@ -187,7 +187,7 @@ void main() {
 
   group('getVehicles', () {
     test('returns success', () async {
-      final respDto = VehiclesResponseDto(
+      final respDto = VehiclessResponseDto(
         message: 'ok',
         vehicles: [
           VehicleDto(

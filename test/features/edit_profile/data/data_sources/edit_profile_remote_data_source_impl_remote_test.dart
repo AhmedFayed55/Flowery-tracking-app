@@ -144,7 +144,7 @@ void main() {
 
   group('getVehicles', () {
     test('returns ApiSuccessResult on success', () async {
-      final dto = VehiclesResponseDto(
+      final dto = VehiclessResponseDto(
         message: 'ok',
         vehicles: [
           VehicleDto(
@@ -169,7 +169,7 @@ void main() {
       when(mockApiServices.getAllVehicles()).thenAnswer((_) async => dto);
 
       final result = await dataSource.getVehicles();
-      expect(result, isA<ApiSuccessResult<VehiclesResponseDto>>());
+      expect(result, isA<ApiSuccessResult<VehiclessResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.vehicles.length, 2);
       expect(success.data.vehicles.first.type, 'Car');

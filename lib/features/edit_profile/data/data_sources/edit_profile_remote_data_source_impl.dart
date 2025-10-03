@@ -38,9 +38,8 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
   }
 
   @override
-  Future<ApiResult<VehiclesResponseDto>> getVehicles() async {
-    return safeApiCall(() => _profileApiService.getAllVehicles());
-
+  Future<ApiResult<VehicleResponseDto>> getVehicles() async {
+    return safeApiCall(() => _profileApiService.getAllVehicle());
   }
 
   @override

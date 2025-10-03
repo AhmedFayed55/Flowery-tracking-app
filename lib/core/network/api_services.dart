@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/response/vehicle_response_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/auth/apply/data/model/responce/apply_responce_dto.dart';
@@ -47,6 +48,9 @@ abstract class ApiServices {
 
   @GET(ApiConstants.getAllVehicles)
   Future<VehiclesResponseDto> getAllVehicles();
+
+  @GET(ApiConstants.getAllVehicles)
+  Future<VehicleResponseDto> getAllVehicle();
 
   @GET(ApiConstants.getAllPendingOrders)
   Future<GetPendingOrdersDto> getAllPendingOrders();

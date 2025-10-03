@@ -16,7 +16,7 @@ abstract interface class EditProfileRemoteDataSource {
 
   Future<ApiResult<UploadPhotoResponseDto>> uploadProfilePhoto(File imageFile);
 
-  Future<ApiResult<VehiclesResponseDto>> getVehicles();
+  Future<ApiResult<VehicleResponseDto>> getVehicles();
 
   Future<ApiResult<EditProfileResponseDto>> updateVehicle(
     EditVehicleRequestModel editVehicleRequestModel,

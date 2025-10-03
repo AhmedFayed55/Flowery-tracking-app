@@ -15,7 +15,7 @@ extension EditVehicleRequestMapper on EditVehicleRequestEntity {
   }
 }
 
-extension VehiclesResponseMapper on VehiclesResponseDto {
+extension VehiclesResponseMapper on VehicleResponseDto {
   VehiclesResponseEntity toEntity() {
     return VehiclesResponseEntity(
       message: message,
