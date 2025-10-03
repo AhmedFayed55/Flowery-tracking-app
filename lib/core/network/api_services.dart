@@ -22,6 +22,8 @@ import '../../features/main_layout/home_screen/data/models/get_pending_orders_dt
 
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/response/change_password_response_dto.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/response/profile_response_model.dart';
+
 part 'api_services.g.dart';
 
 @RestApi()
@@ -86,4 +88,7 @@ abstract class ApiServices {
   Future<ChangePasswordResponseDto> changePassword(
     @Body() ChangePasswordRequestDto changePasswordRequestDto,
   );
+  @GET(ApiConstants.mainProfile)
+  Future<ProfileResponseModel> getProfile();
+
 }

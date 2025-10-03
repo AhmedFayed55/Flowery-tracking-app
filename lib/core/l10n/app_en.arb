@@ -113,5 +113,8 @@
   "thank_you_for_providing": "Thank you for providing your application,\nwe will review your application and will\nget back to you soon.",
   "current_password": "Current Password",
   "change_password": "Change Password",
-  "up_date": "Update"
+  "up_date": "Update",
+  "english": "English",
+  "language": "Language",
+  "vehicle_info": "Vehicle info"
 }

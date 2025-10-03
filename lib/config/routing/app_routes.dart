@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const String applicationApproved = "/approved";
   static const String orderDetails = "/orderDetails";
   static const String updateVehicle = "/updateVehicle";
+  static const String mainProfile = "/mainProfile";
 }
