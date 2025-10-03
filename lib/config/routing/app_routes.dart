@@ -12,4 +12,5 @@ abstract class AppRoutes {
   static const String logout = "/logout";
   static const String onBoarding = "/onBoarding";
   static const String applicationApproved = "/approved";
+  static const String orderDetails = "/orderDetails";
 }

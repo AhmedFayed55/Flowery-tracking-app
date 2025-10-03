@@ -13,4 +13,6 @@ abstract class AppConstants {
 
   static const String orderId = 'orderId';
   static const String ordersCollection = 'orders';
+  static const String noInternet = 'No Internet Connection';
+  static const String orderId = 'orderId';
 }

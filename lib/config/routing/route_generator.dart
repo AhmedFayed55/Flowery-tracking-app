@@ -6,6 +6,7 @@ import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/appl
 import 'package:flowery_tracking_app/features/application_approved/presentation/pages/application_approved_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flowery_tracking_app/features/auth/onboarding/onboarding.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +20,8 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+      case AppRoutes.orderDetails:
+        return MaterialPageRoute(builder: (context) => OrderDetailsScreen());
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

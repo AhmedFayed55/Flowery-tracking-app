@@ -5,4 +5,6 @@ abstract class AppAssets {
   static const String onBoarding = "assets/images/onboarding.png";
   static const String approved = "assets/images/approved.png";
   static const String approvedScreenShadow = "assets/images/bg.png";
+  static const String locationIcon = "assets/images/location.svg";
+  static const String whatsAppIcon = "assets/images/whatsapp.svg";
 }

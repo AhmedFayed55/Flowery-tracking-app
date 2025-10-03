@@ -9,4 +9,5 @@ abstract class ApiConstants {
   static const String applyDriver = 'drivers/apply';
   static const String getAllVehicles = 'vehicles';
   static const String getAllPendingOrders = "orders/pending-orders";
+  static const String ordersState = "orders/state/{id}";
 }
