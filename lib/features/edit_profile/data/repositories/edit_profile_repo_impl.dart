@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/data_sources/edit_profile_remote_data_source.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/mapper/edit_profile_mappers.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/mapper/upload_photo_mapper.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/mapper/vehicle_mapper.dart';
 import 'package:flowery_tracking_app/features/edit_profile/domain/entities/request/edit_profile_request_entity.dart';
 import 'package:flowery_tracking_app/features/edit_profile/domain/entities/request/edit_vehicle_request_entity.dart';
 import 'package:flowery_tracking_app/features/edit_profile/domain/entities/response/edit_profile_response_entity.dart';
@@ -19,31 +22,75 @@ class EditProfileRepoImpl implements EditProfileRepo {
   @override
   Future<ApiResult<EditProfileResponseEntity>> editProfile(
     EditProfileRequestEntity editProfileRequestEntity,
-  ) {
-    return _profileRemoteDataSource.editProfile(editProfileRequestEntity);
+  ) async {
+    final result = await _profileRemoteDataSource.editProfile(
+      editProfileRequestEntity.toModel(),
+    );
+    return switch (result) {
+      ApiSuccessResult(data: final resultDto) => ApiSuccessResult(
+        data: resultDto.toEntity(),
+      ),
+      ApiErrorResult(failure: final failure) => ApiErrorResult(
+        failure: failure,
+      ),
+    };
   }
 
   @override
-  Future<ApiResult<GetLoggedDriverResponseEntity>> getLoggedUserData() {
-    return _profileRemoteDataSource.getLoggedUserData();
+  Future<ApiResult<GetLoggedDriverResponseEntity>> getLoggedUserData() async {
+    final result = await _profileRemoteDataSource.getLoggedUserData();
+    return switch (result) {
+      ApiSuccessResult(data: final resultDto) => ApiSuccessResult(
+        data: resultDto.toEntity(),
+      ),
+      ApiErrorResult(failure: final failure) => ApiErrorResult(
+        failure: failure,
+      ),
+    };
   }
 
   @override
   Future<ApiResult<UploadPhotoResponseEntity>> uploadProfilePhoto(
     File imageFile,
-  ) {
-    return _profileRemoteDataSource.uploadProfilePhoto(imageFile);
+  ) async {
+    final result = await _profileRemoteDataSource.uploadProfilePhoto(imageFile);
+    return switch (result) {
+      ApiSuccessResult(data: final resultDto) => ApiSuccessResult(
+        data: resultDto.toEntity(),
+      ),
+      ApiErrorResult(failure: final failure) => ApiErrorResult(
+        failure: failure,
+      ),
+    };
   }
 
   @override
-  Future<ApiResult<VehiclesResponseEntity>> getVehicles() {
-    return _profileRemoteDataSource.getVehicles();
+  Future<ApiResult<VehiclesResponseEntity>> getVehicles() async {
+    final result = await _profileRemoteDataSource.getVehicles();
+    return switch (result) {
+      ApiSuccessResult(data: final resultDto) => ApiSuccessResult(
+        data: resultDto.toEntity(),
+      ),
+      ApiErrorResult(failure: final failure) => ApiErrorResult(
+        failure: failure,
+      ),
+    };
   }
 
   @override
   Future<ApiResult<EditProfileResponseEntity>> updateVehicle(
     EditVehicleRequestEntity editVehicleRequestEntity,
-  ) {
-    return _profileRemoteDataSource.updateVehicle(editVehicleRequestEntity);
+  ) async {
+    final result = await _profileRemoteDataSource.updateVehicle(
+      editVehicleRequestEntity.toModel(),
+    );
+    return switch (result) {
+      ApiSuccessResult(data: final resultDto) => ApiSuccessResult(
+        data: resultDto.toEntity(),
+      ),
+      ApiErrorResult(failure: final failure) => ApiErrorResult(
+        failure: failure,
+      ),
+    };
   }
 }

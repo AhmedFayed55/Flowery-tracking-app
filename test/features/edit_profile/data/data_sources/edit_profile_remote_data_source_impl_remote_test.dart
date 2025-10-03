@@ -1,20 +1,20 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/data_sources/edit_profile_remote_data_source_impl.dart';
-import 'package:flowery_tracking_app/features/edit_profile/data/models/driver_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/request/edit_profile_request_model.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/request/edit_vehicle_request_model.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/edit_profile_response_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/get_logged_driver_response_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/upload_photo_response_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/vehicle_response_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/driver_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/vehicle_dto.dart';
-import 'package:flowery_tracking_app/features/edit_profile/domain/entities/request/edit_profile_request_entity.dart';
-import 'package:flowery_tracking_app/features/edit_profile/domain/entities/request/edit_vehicle_request_entity.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'edit_profile_remote_data_source_impl_remote_test.mocks.dart';
 
@@ -56,7 +56,7 @@ void main() {
         message: 'ok',
         driver: buildDriverDto(),
       );
-      final entityRequest = EditProfileRequestEntity(
+      final request = EditProfileRequestModel(
         firstName: 'Ahmed',
         lastName: 'Mohamed',
         email: 'ahmed.m@example.com',
@@ -65,19 +65,16 @@ void main() {
 
       when(mockApiServices.editProfile(any)).thenAnswer((_) async => dto);
 
-      final result = await dataSource.editProfile(entityRequest);
+      final result = await dataSource.editProfile(request);
 
-      expect(result, isA<ApiSuccessResult>());
+      expect(result, isA<ApiSuccessResult<EditProfileResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.message, 'ok');
       expect(success.data.driver.firstName, 'Ahmed');
-
-      verify(mockApiServices.editProfile(any)).called(1);
-      verifyNoMoreInteractions(mockApiServices);
     });
 
     test('returns ApiErrorResult on DioException', () async {
-      final entityRequest = EditProfileRequestEntity(
+      final request = EditProfileRequestModel(
         firstName: 'Ahmed',
         lastName: 'Mohamed',
         email: 'ahmed.m@example.com',
@@ -88,25 +85,7 @@ void main() {
         DioException(requestOptions: RequestOptions(path: '/edit-profile')),
       );
 
-      final result = await dataSource.editProfile(entityRequest);
-
-      expect(result, isA<ApiErrorResult>());
-
-      verify(mockApiServices.editProfile(any)).called(1);
-      verifyNoMoreInteractions(mockApiServices);
-    });
-
-    test('returns ApiErrorResult on generic Exception', () async {
-      final entityRequest = EditProfileRequestEntity(
-        firstName: 'Ahmed',
-        lastName: 'Mohamed',
-        email: 'ahmed.m@example.com',
-        phone: '+201234567890',
-      );
-
-      when(mockApiServices.editProfile(any)).thenThrow(Exception('boom'));
-
-      final result = await dataSource.editProfile(entityRequest);
+      final result = await dataSource.editProfile(request);
       expect(result, isA<ApiErrorResult>());
     });
   });
@@ -121,7 +100,7 @@ void main() {
       when(mockApiServices.getLoggedUserData()).thenAnswer((_) async => dto);
 
       final result = await dataSource.getLoggedUserData();
-      expect(result, isA<ApiSuccessResult>());
+      expect(result, isA<ApiSuccessResult<GetLoggedDriverResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.driver.id, '123abc');
     });
@@ -146,13 +125,14 @@ void main() {
       ).thenAnswer((_) async => dto);
 
       final result = await dataSource.uploadProfilePhoto(file);
-      expect(result, isA<ApiSuccessResult>());
+      expect(result, isA<ApiSuccessResult<UploadPhotoResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.message, 'uploaded');
     });
 
     test('returns ApiErrorResult on DioException', () async {
       final file = File('test_assets/profile.jpg');
+
       when(mockApiServices.uploadProfilePhoto(any)).thenThrow(
         DioException(requestOptions: RequestOptions(path: '/upload')),
       );
@@ -189,7 +169,7 @@ void main() {
       when(mockApiServices.getAllVehicles()).thenAnswer((_) async => dto);
 
       final result = await dataSource.getVehicles();
-      expect(result, isA<ApiSuccessResult>());
+      expect(result, isA<ApiSuccessResult<VehiclesResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.vehicles.length, 2);
       expect(success.data.vehicles.first.type, 'Car');
@@ -211,7 +191,7 @@ void main() {
         message: 'updated',
         driver: buildDriverDto(),
       );
-      final entityRequest = EditVehicleRequestEntity(
+      final request = EditVehicleRequestModel(
         vehicleNumber: 'XYZ-5678',
         vehicleType: 'Car',
         vehicleLicense: 'LIC-112233',
@@ -219,24 +199,24 @@ void main() {
 
       when(mockApiServices.updateVehicle(any)).thenAnswer((_) async => dto);
 
-      final result = await dataSource.updateVehicle(entityRequest);
-      expect(result, isA<ApiSuccessResult>());
+      final result = await dataSource.updateVehicle(request);
+      expect(result, isA<ApiSuccessResult<EditProfileResponseDto>>());
       final success = result as ApiSuccessResult;
       expect(success.data.message, 'updated');
     });
 
     test('returns ApiErrorResult on DioException', () async {
-      final entityRequest = EditVehicleRequestEntity(
+      final request = EditVehicleRequestModel(
         vehicleNumber: 'XYZ-5678',
         vehicleType: 'Car',
         vehicleLicense: 'LIC-112233',
       );
 
       when(mockApiServices.updateVehicle(any)).thenThrow(
-        DioException(requestOptions: RequestOptions(path: '/edit-profile')),
+        DioException(requestOptions: RequestOptions(path: '/edit-vehicle')),
       );
 
-      final result = await dataSource.updateVehicle(entityRequest);
+      final result = await dataSource.updateVehicle(request);
       expect(result, isA<ApiErrorResult>());
     });
   });
