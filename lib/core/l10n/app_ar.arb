@@ -49,5 +49,9 @@
   "this_field_is_required": "هذا الحقل مطلوب",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "english": "الإنجليزية",
+  "language": "اللغة",
+  "vehicle_info": "معلومات المركبة",
+  "app_version": "الإصدار 6.3.0 - (446)"
 }

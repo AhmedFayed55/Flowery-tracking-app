@@ -48,5 +48,9 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "english": "English",
+  "language": "Language",
+  "vehicle_info": "Vehicle info",
+  "app_version": "v 6.3.0 - (446)"
 }
