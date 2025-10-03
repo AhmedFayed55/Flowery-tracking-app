@@ -4,6 +4,7 @@ import 'package:flowery_tracking_app/features/auth/forget_password/presentation/
 import 'package:flowery_tracking_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
 import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
 import 'package:flowery_tracking_app/features/application_approved/presentation/pages/application_approved_screen.dart';
+import 'package:flowery_tracking_app/features/auth/change_password/view/page/change_password_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flowery_tracking_app/features/auth/onboarding/onboarding.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/order_details_screen.dart';
@@ -50,7 +51,11 @@ class RouteGenerator {
         );
       case AppRoutes.updateVehicle:
         return MaterialPageRoute(
-          builder: (context) => const EditVehicleScreen(),
+          builder: (context) => const EditVehicleScreen(), 
+        );
+      case AppRoutes.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => const ChangePasswordScreen(),
         );
 
       default:

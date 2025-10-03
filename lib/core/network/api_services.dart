@@ -20,6 +20,8 @@ import '../../features/edit_profile/data/models/response/get_logged_driver_respo
 import '../../features/edit_profile/data/models/response/upload_photo_response_dto.dart';
 import '../../features/main_layout/home_screen/data/models/get_pending_orders_dto.dart';
 
+import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
+import 'package:flowery_tracking_app/features/auth/change_password/data/model/response/change_password_response_dto.dart';
 part 'api_services.g.dart';
 
 @RestApi()
@@ -78,5 +80,10 @@ abstract class ApiServices {
   @MultiPart()
   Future<UploadPhotoResponseDto> uploadProfilePhoto(
     @Part(name: "photo") File photo,
+  );
+  
+  @PATCH(ApiConstants.changePassword)
+  Future<ChangePasswordResponseDto> changePassword(
+    @Body() ChangePasswordRequestDto changePasswordRequestDto,
   );
 }
