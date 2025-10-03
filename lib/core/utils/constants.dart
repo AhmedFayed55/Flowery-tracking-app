@@ -12,4 +12,14 @@ abstract class AppConstants {
   static const String nIDImgKey = 'NIDImg';
   static const String orderId = 'orderId';
   static const String ordersCollection = 'orders';
+
+  static const String gender = 'gender';
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String femaleValue = 'Female';
+  static const int mainDuration = 10;
+  static const int resendDuration = 3;
+  static const int imageQuality = 80;
+  static const String passwordCharacters = "★★★★★★";
+  static const String notificationCountExceeded = '9+';
 }

@@ -7,6 +7,8 @@ import 'package:flowery_tracking_app/features/application_approved/presentation/
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flowery_tracking_app/features/auth/onboarding/onboarding.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/order_details_screen.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_profile_screen.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_vehicle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,6 +42,15 @@ class RouteGenerator {
       case AppRoutes.applicationApproved:
         return MaterialPageRoute(
           builder: (context) => const ApplicationApprovedScreen(),
+        );
+
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
+        );
+      case AppRoutes.updateVehicle:
+        return MaterialPageRoute(
+          builder: (context) => const EditVehicleScreen(),
         );
 
       default:
