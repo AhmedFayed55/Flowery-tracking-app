@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
-import 'package:flowery_tracking_app/features/auth/apply/data/data_source/gemeni_api_service.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/request/apply_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';

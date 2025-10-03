@@ -74,11 +74,13 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
         return Scaffold(
           bottomNavigationBar: const CustomChangeOrderStatusBottom(),
           appBar: AppBar(
-            leading:  state.riderOrderStatus == RiderOrderStatus.delivered ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: () => context
-                    .pushReplacementNamed(AppRoutes.mainLayout),
-              ) : const SizedBox(),
+            leading: state.riderOrderStatus == RiderOrderStatus.delivered
+                ? IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () =>
+                        context.pushReplacementNamed(AppRoutes.mainLayout),
+                  )
+                : const SizedBox(),
             title: Text(trans.orderDetails),
             scrolledUnderElevation: 0,
           ),
@@ -138,11 +140,10 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                     itemCount: order.orderItems!.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) =>
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: ProductCard(orderItems: order.orderItems![index]),
-                        ),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: ProductCard(orderItems: order.orderItems![index]),
+                    ),
                   ),
                   verticalSpace(24),
                   DetailsWidget(

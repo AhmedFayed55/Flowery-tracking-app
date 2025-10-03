@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flowery_tracking_app/features/auth/apply/data/model/request/apply_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';

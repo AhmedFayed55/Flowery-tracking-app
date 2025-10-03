@@ -25,15 +25,16 @@ class ProfileCubit extends Cubit<ProfileState> {
     var result = await profileUseCase.call();
     switch (result) {
       case ApiSuccessResult<ProfileResponseEntity>():
-        emit(state.copyWith(isLoading: false, isSuccess: true,driverDtoEntity: result.data.driverDtoEntity));
-        break;
-      case ApiErrorResult<ProfileResponseEntity>():
         emit(
           state.copyWith(
             isLoading: false,
-            isError: true,
+            isSuccess: true,
+            driverDtoEntity: result.data.driverDtoEntity,
           ),
         );
+        break;
+      case ApiErrorResult<ProfileResponseEntity>():
+        emit(state.copyWith(isLoading: false, isError: true));
     }
   }
 }

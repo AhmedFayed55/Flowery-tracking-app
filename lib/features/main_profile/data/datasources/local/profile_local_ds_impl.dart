@@ -9,5 +9,4 @@ class ProfileLocalDataSourceImpl extends ProfileLocalDataSource {
   Future<ApiResult<ProfileResponseEntity>> getProfile() {
     throw UnimplementedError();
   }
-
 }

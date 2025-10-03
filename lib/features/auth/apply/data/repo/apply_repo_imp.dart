@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
-import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/mapper/mapper_request_to_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/data_source/remot_data_source/apply_remot_ds.dart';
 import 'package:flowery_tracking_app/features/auth/apply/domain/entites/driver_entity.dart';
 import 'package:flowery_tracking_app/features/auth/apply/domain/entites/request_apply_entity.dart';
 import 'package:flowery_tracking_app/features/auth/apply/domain/entites/vehicel_entity.dart';
 import 'package:flowery_tracking_app/features/auth/apply/domain/repo/apply_repo.dart';
-import 'package:image/image.dart' as img;
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ApplyRepo)

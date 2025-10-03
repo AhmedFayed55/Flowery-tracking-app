@@ -88,10 +88,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   Future<void> updateOrderStatusApi(String orderId, OrderStatus status) async {
     emit(state.copyWith(isUpdating: true, errorMessage: null));
 
-    final result = await _updateOrderApiUsecase.invoke(
-      orderId,
-      status,
-    );
+    final result = await _updateOrderApiUsecase.invoke(orderId, status);
 
     if (result is ApiSuccessResult) {
       final mapped = RiderOrderStatus.fromOrderStatus(status);

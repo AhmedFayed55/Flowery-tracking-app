@@ -1,8 +1,11 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/flutter_toast.dart';
 import 'package:flowery_tracking_app/core/helpers/validators.dart';
+import 'package:flowery_tracking_app/core/services/token_service.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/domain/entities/change_password_request_entity.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/view/view_model/change_password_cubit.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/view/view_model/change_password_event.dart';
@@ -36,6 +39,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         listener: (context, state) {
           if (state.isSuccess == true) {
             ToastMessage.toastMsg(context.localization.update_successfully);
+            getIt<TokenService>().deleteToken();
+            context.pushReplacementNamed(AppRoutes.onBoarding);
           }
           if (state.message != null) {
             ToastMessage.toastMsg(state.message!);

@@ -23,6 +23,7 @@ class HomeTab extends StatelessWidget {
           getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
       child: Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,
           title: Text(
             context.localization.flowery_rider,
@@ -35,10 +36,13 @@ class HomeTab extends StatelessWidget {
         body: BlocConsumer<HomeTabViewModel, HomeTabState>(
           listener: (context, state) {
             if (state.isOrderSaved) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text("Successfully saved order")));
-              context.pushNamedAndRemoveUntil(AppRoutes.orderDetails, predicate: (route) => true);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Successfully saved order")),
+              );
+              context.pushNamedAndRemoveUntil(
+                AppRoutes.orderDetails,
+                predicate: (route) => true,
+              );
             }
             if (state.errorSaveOrder != null) {
               ScaffoldMessenger.of(

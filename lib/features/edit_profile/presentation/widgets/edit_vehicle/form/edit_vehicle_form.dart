@@ -89,8 +89,7 @@ class _EditVehicleFormState extends State<EditVehicleForm> {
 
                         CustomElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                            }
+                            if (_formKey.currentState!.validate()) {}
                           },
                           isLoading: false,
                           widget: Text(context.localization.update),

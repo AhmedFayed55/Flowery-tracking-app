@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
@@ -75,8 +77,12 @@ class _EditProfileFormState extends State<EditProfileForm> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(context.localization.edit_profile)),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
+              onPressed: () => context.pop(),
+            ),
+            title: Text(context.localization.edit_profile),
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Form(
@@ -120,7 +126,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                         SizedBox(height: spaceMed),
                         BuildPasswordField(
                           onChangePressed: () {
-                            Navigator.pushNamed(context, "/changePassword");
+                            context.pushNamed(AppRoutes.changePassword);
                           },
                         ),
                         SizedBox(height: spaceMed),

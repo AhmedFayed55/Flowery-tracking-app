@@ -52,7 +52,7 @@ class RouteGenerator {
         );
       case AppRoutes.updateVehicle:
         return MaterialPageRoute(
-          builder: (context) => const EditVehicleScreen(), 
+          builder: (context) => const EditVehicleScreen(),
         );
       case AppRoutes.changePassword:
         return MaterialPageRoute(

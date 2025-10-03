@@ -1,6 +1,6 @@
 import 'package:flowery_tracking_app/core/utils/assets.dart';
-import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/pages/home_tab.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/pages/main_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../config/theme/colors.dart';
@@ -29,7 +29,7 @@ class _MainLayoutState extends State<MainLayout> {
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
-      const EditProfileScreen(),
+      const MainProfile(),
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(

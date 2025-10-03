@@ -83,12 +83,11 @@ abstract class ApiServices {
   Future<UploadPhotoResponseDto> uploadProfilePhoto(
     @Part(name: "photo") File photo,
   );
-  
+
   @PATCH(ApiConstants.changePassword)
   Future<ChangePasswordResponseDto> changePassword(
     @Body() ChangePasswordRequestDto changePasswordRequestDto,
   );
   @GET(ApiConstants.mainProfile)
   Future<ProfileResponseModel> getProfile();
-
 }
