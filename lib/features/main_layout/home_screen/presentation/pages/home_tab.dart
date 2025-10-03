@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/components/shimmer.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
@@ -18,9 +20,10 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
+          getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             context.localization.flowery_rider,
             style: context.textTheme.bodyLarge!.copyWith(
@@ -29,14 +32,29 @@ class HomeTab extends StatelessWidget {
             ),
           ),
         ),
-        body: BlocBuilder<HomeTabViewModel, HomeTabState>(
+        body: BlocConsumer<HomeTabViewModel, HomeTabState>(
+          listener: (context, state) {
+            if (state.isOrderSaved) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text("Successfully saved order")));
+              context.pushNamedAndRemoveUntil(AppRoutes.orderDetails, predicate: (route) => true);
+            }
+            if (state.errorSaveOrder != null) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorSaveOrder!)));
+            }
+          },
           builder: (context, state) {
             final viewModel = context.read<HomeTabViewModel>();
 
             return RefreshIndicator(
               key: viewModel.refreshIndicatorKey,
               onRefresh: () async {
-                context.read<HomeTabViewModel>().doIntent(GetAllPendingOrdersEvent());
+                context.read<HomeTabViewModel>().doIntent(
+                  GetAllPendingOrdersEvent(),
+                );
                 await Future.delayed(const Duration(milliseconds: 500));
               },
               child: Builder(
@@ -46,7 +64,8 @@ class HomeTab extends StatelessWidget {
                   } else if (state.errorGetOrders != null) {
                     return Center(
                       child: OutlinedButton(
-                        onPressed: () => viewModel.doIntent(GetAllPendingOrdersEvent()),
+                        onPressed: () =>
+                            viewModel.doIntent(GetAllPendingOrdersEvent()),
                         child: Text(context.localization.try_again),
                       ),
                     );

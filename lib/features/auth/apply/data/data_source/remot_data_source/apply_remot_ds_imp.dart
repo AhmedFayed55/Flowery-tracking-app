@@ -12,8 +12,8 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: ApplyRemotDataSource)
 class ApplyRemotDataSourceImp implements ApplyRemotDataSource {
   final ApiServices _apiServices;
- // final GeminiApiService _geminiApiService;
-  ApplyRemotDataSourceImp(this._apiServices,);
+  // final GeminiApiService _geminiApiService;
+  ApplyRemotDataSourceImp(this._apiServices);
   @override
   Future<ApplyResponceDto> applyDriver(ApplyRequestDto applyRequestDto) async {
     final formData = FormData.fromMap({

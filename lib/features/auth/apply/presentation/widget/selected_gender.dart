@@ -29,10 +29,7 @@ class _GenderSelectorWidgetState extends State<GenderSelectorWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          "Gender",
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        Text("Gender", style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(width: 8),
         Expanded(
           child: Row(

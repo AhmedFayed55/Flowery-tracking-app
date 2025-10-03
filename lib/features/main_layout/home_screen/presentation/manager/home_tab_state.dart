@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/orders_entity.dart';
 
-class HomeTabState extends Equatable{
+class HomeTabState extends Equatable {
   final bool isLoadingGetOrders;
   final String? errorGetOrders;
   final List<OrdersEntity> orders;
@@ -25,7 +25,7 @@ class HomeTabState extends Equatable{
     bool? isLoadingSaveOrder,
     String? errorSaveOrder,
     bool? isOrderSaved,
-  }){
+  }) {
     return HomeTabState(
       isLoadingGetOrders: isLoadingGetOrders ?? this.isLoadingGetOrders,
       errorGetOrders: errorGetOrders ?? this.errorGetOrders,
@@ -45,5 +45,4 @@ class HomeTabState extends Equatable{
     errorSaveOrder,
     isOrderSaved,
   ];
-
 }

@@ -58,9 +58,9 @@ class ApplyRequestDto {
       );
 
   Future<MultipartFile> get nIDImgPart async => await MultipartFile.fromFile(
-        nIDImg.path,
-        filename: nIDImg.uri.pathSegments.last,
-      );
+    nIDImg.path,
+    filename: nIDImg.uri.pathSegments.last,
+  );
 
   Future<FormData> toFormData() async {
     return FormData.fromMap({

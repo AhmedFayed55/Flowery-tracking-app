@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserDto {
   @JsonKey(name: "_id")
   final String? id;
@@ -19,7 +19,7 @@ class UserDto {
   @JsonKey(name: "photo")
   final String? photo;
 
-  UserDto ({
+  UserDto({
     this.id,
     this.firstName,
     this.lastName,

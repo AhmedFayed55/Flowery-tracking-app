@@ -9,20 +9,18 @@ import '../../domain/entities/orders_entity.dart';
 import '../maper/maper.dart';
 
 @Injectable(as: HomeTabRepo)
-class HomeTabRepoImpl implements HomeTabRepo{
-
+class HomeTabRepoImpl implements HomeTabRepo {
   final HomeTabRemoteDataSource _remoteDataSource;
   final HomeTabFirebaseDataSource _firebaseDataSource;
   HomeTabRepoImpl(this._remoteDataSource, this._firebaseDataSource);
 
-
-   @override
-   Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders() async {
-     return await safeApiCall(() async {
-       final response = await _remoteDataSource.getAllPendingOrders();
-       return toGetPendingOrdersEntity(response);
-     });
-   }
+  @override
+  Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders() async {
+    return await safeApiCall(() async {
+      final response = await _remoteDataSource.getAllPendingOrders();
+      return toGetPendingOrdersEntity(response);
+    });
+  }
 
   @override
   Future<FirebaseResult<void>> saveOrder(OrdersEntity order) async {
@@ -31,5 +29,4 @@ class HomeTabRepoImpl implements HomeTabRepo{
       return await _firebaseDataSource.saveOrder(dto);
     });
   }
-
 }

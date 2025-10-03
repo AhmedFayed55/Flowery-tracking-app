@@ -9,6 +9,6 @@ class SaveOrderUseCase {
 
   SaveOrderUseCase(this._repo);
 
-  Future<FirebaseResult<void>> invoke(OrdersEntity order) => _repo.saveOrder(order);
-
+  Future<FirebaseResult<void>> invoke(OrdersEntity order) =>
+      _repo.saveOrder(order);
 }

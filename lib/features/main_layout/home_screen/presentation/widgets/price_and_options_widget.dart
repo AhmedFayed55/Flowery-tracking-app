@@ -3,7 +3,12 @@ import 'package:flowery_tracking_app/core/utils/font_weight.dart';
 import 'package:flutter/material.dart';
 
 class PriceAndOptionsWidget extends StatelessWidget {
-  const PriceAndOptionsWidget({super.key, required this.price, required this.rejectOnTap, required this.acceptOnTap});
+  const PriceAndOptionsWidget({
+    super.key,
+    required this.price,
+    required this.rejectOnTap,
+    required this.acceptOnTap,
+  });
   final num price;
   final void Function() rejectOnTap;
   final void Function() acceptOnTap;

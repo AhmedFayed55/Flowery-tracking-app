@@ -35,7 +35,7 @@ class OrdersDto {
   @JsonKey(name: "store")
   final StoreDto? store;
 
-  OrdersDto ({
+  OrdersDto({
     this.id,
     this.user,
     this.orderItems,

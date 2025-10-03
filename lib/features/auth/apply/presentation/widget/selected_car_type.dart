@@ -43,7 +43,7 @@ class _SelectedCarTextFieldState extends State<SelectedCarTextField> {
                     final car = widget.cars[index];
                     return ListTile(
                       title: Text(car.type),
-                      trailing: Image.network(car.image, width: 50, height: 50), 
+                      trailing: Image.network(car.image, width: 50, height: 50),
                       onTap: () {
                         setState(() => _selectedCar = car);
                         widget.onCarSelected(car.id);

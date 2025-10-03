@@ -14,11 +14,7 @@ class GetPendingOrdersDto {
   @JsonKey(name: "orders")
   final List<OrdersDto>? orders;
 
-  GetPendingOrdersDto ({
-    this.message,
-    this.metadata,
-    this.orders,
-  });
+  GetPendingOrdersDto({this.message, this.metadata, this.orders});
 
   factory GetPendingOrdersDto.fromJson(Map<String, dynamic> json) {
     return _$GetPendingOrdersDtoFromJson(json);
@@ -28,16 +24,3 @@ class GetPendingOrdersDto {
     return _$GetPendingOrdersDtoToJson(this);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

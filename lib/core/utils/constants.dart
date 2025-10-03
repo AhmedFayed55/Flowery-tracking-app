@@ -8,11 +8,8 @@ abstract class AppConstants {
   static const String authorization = 'Authorization';
   static const String bearer = "Bearer";
   static const String noInternet = 'No Internet Connection';
-  static const String vehicleLicenseKey='vehicleLicense';
-  static const String nIDImgKey='NIDImg';
-
+  static const String vehicleLicenseKey = 'vehicleLicense';
+  static const String nIDImgKey = 'NIDImg';
   static const String orderId = 'orderId';
   static const String ordersCollection = 'orders';
-  static const String noInternet = 'No Internet Connection';
-  static const String orderId = 'orderId';
 }

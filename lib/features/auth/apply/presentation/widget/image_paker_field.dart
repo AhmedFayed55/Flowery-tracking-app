@@ -67,17 +67,20 @@ class _ImageFieldState extends State<ImageField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-    readOnly: true,
-    onTap: _showPickerDialog,
-    decoration: InputDecoration(
-      labelText: widget.label,
-      hintText: _selectedImage == null ? widget.hint : 'Successfully Uploaded',
-      suffixIcon: Icon(
-        _selectedImage == null ? Icons.file_upload_outlined : Icons.check_circle,
-        color: _selectedImage == null ? AppColors.black : AppColors.pink,
+      readOnly: true,
+      onTap: _showPickerDialog,
+      decoration: InputDecoration(
+        labelText: widget.label,
+        hintText: _selectedImage == null
+            ? widget.hint
+            : 'Successfully Uploaded',
+        suffixIcon: Icon(
+          _selectedImage == null
+              ? Icons.file_upload_outlined
+              : Icons.check_circle,
+          color: _selectedImage == null ? AppColors.black : AppColors.pink,
+        ),
       ),
-    ),
-  );
-    
+    );
   }
 }

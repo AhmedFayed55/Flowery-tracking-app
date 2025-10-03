@@ -85,12 +85,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         children: [
                           Text(
                             'Welcome!!',
-                            style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                              fontSize: 20
-                            ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.labelMedium!.copyWith(fontSize: 20),
                           ),
                           const SizedBox(height: 10),
-                           Text(
+                          Text(
                             'You want to be a delivery man?\nJoin our team ',
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
@@ -122,7 +122,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                
+
                           BlocBuilder<ApplyViewModel, ApplyState>(
                             buildWhen: (previous, current) =>
                                 previous.vehicelEntity != current.vehicelEntity,
@@ -197,7 +197,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                 child: TextFormField(
                                   controller: cubit.confirmPasswordController,
                                   validator: (value) =>
-                                      Validations.confirmPassword(context, value),
+                                      Validations.confirmPassword(
+                                        context,
+                                        value,
+                                      ),
                                   decoration: const InputDecoration(
                                     labelText: 'Confirm password',
                                     hintText: 'Confirm password',
@@ -242,7 +245,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                           .split('.')
                                           .last,
                                       phone: '$countryCodeEntity$rawPhone',
-                
+
                                       password: cubit.passwordController.text
                                           .trim(),
                                       rePassword: cubit

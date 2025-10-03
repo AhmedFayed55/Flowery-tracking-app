@@ -15,14 +15,14 @@ import '../../../../../core/utils/constants.dart';
 import '../../domain/entities/orders_entity.dart';
 
 @injectable
-class HomeTabViewModel extends Cubit<HomeTabState>{
-
-  HomeTabViewModel(this._getAllPendingOrdersUseCase, this._saveOrderUseCase):super(const HomeTabState());
+class HomeTabViewModel extends Cubit<HomeTabState> {
+  HomeTabViewModel(this._getAllPendingOrdersUseCase, this._saveOrderUseCase)
+    : super(const HomeTabState());
 
   final GetAllPendingOrdersUseCase _getAllPendingOrdersUseCase;
   final SaveOrderUseCase _saveOrderUseCase;
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
-
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
 
   Future<void> doIntent(HomeTabEvent event) {
     switch (event) {
@@ -36,27 +36,48 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
     }
   }
 
-  Future<void> _saveOrder(OrdersEntity order)async{
+  Future<void> _saveOrder(OrdersEntity order) async {
     emit(state.copyWith(isLoadingSaveOrder: true, errorSaveOrder: null));
-    var result =  await _saveOrderUseCase.invoke(order);
-    switch(result){
+    var result = await _saveOrderUseCase.invoke(order);
+    switch (result) {
       case FirebaseSuccessResult():
-        getIt<SharedPrefHelper>().saveData(key: AppConstants.orderId, val: order.id);
-        emit(state.copyWith(isLoadingSaveOrder: false,isOrderSaved: true));
+        getIt<SharedPrefHelper>().saveData(
+          key: AppConstants.orderId,
+          val: order.id,
+        );
+        emit(state.copyWith(isLoadingSaveOrder: false, isOrderSaved: true));
       case FirebaseErrorResult():
-        emit(state.copyWith(isLoadingSaveOrder: false,errorSaveOrder: result.failure.errorMessage));
+        emit(
+          state.copyWith(
+            isLoadingSaveOrder: false,
+            errorSaveOrder: result.failure.errorMessage,
+          ),
+        );
     }
   }
 
-  Future<void> _getAllPendingOrders()async{
-    emit(state.copyWith(isLoadingGetOrders: true,orders: [], errorGetOrders: null));
+  Future<void> _getAllPendingOrders() async {
+    emit(
+      state.copyWith(
+        isLoadingGetOrders: true,
+        orders: [],
+        errorGetOrders: null,
+      ),
+    );
     var result = await _getAllPendingOrdersUseCase.invoke();
-    switch(result){
+    switch (result) {
       case ApiSuccessResult():
-        emit(state.copyWith(isLoadingGetOrders: false, orders: result.data.orders));
+        emit(
+          state.copyWith(isLoadingGetOrders: false, orders: result.data.orders),
+        );
       case ApiErrorResult():
         log("Error is ${result.failure.errorMessage}");
-        emit(state.copyWith(isLoadingGetOrders: false, errorGetOrders: result.failure.errorMessage));
+        emit(
+          state.copyWith(
+            isLoadingGetOrders: false,
+            errorGetOrders: result.failure.errorMessage,
+          ),
+        );
     }
   }
 
@@ -65,5 +86,4 @@ class HomeTabViewModel extends Cubit<HomeTabState>{
     state.orders.removeWhere((order) => order.id == orderId);
     emit(state.copyWith(isLoadingGetOrders: false));
   }
-
 }

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'store_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class StoreDto {
   @JsonKey(name: "name")
   final String? name;
@@ -15,7 +15,7 @@ class StoreDto {
   @JsonKey(name: "latLong")
   final String? latLong;
 
-  StoreDto ({
+  StoreDto({
     this.name,
     this.image,
     this.address,

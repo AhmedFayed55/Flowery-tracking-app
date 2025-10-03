@@ -52,5 +52,4 @@ abstract class ExternalModules {
   FirebaseFirestore provideFirebaseFirestore() {
     return FirebaseFirestore.instance;
   }
-
 }

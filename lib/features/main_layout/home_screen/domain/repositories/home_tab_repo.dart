@@ -4,7 +4,7 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 import '../../../../../core/errors/firebase_results.dart';
 import '../entities/orders_entity.dart';
 
-abstract interface class HomeTabRepo{
+abstract interface class HomeTabRepo {
   Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders();
   Future<FirebaseResult<void>> saveOrder(OrdersEntity order);
 }

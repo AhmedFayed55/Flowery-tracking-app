@@ -87,7 +87,7 @@ UserEntity toUserEntity(UserDto dto) => UserEntity(
   gender: dto.gender,
 );
 
-               //  ================= Entity -> DTO ==================
+//  ================= Entity -> DTO ==================
 
 OrderItemsDto toOrderItemsDto(OrderItemsEntity entity) => OrderItemsDto(
   id: entity.id,

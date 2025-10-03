@@ -31,12 +31,16 @@ class RouteGenerator {
         );
 
       case AppRoutes.onBoarding:
-        return MaterialPageRoute(builder: (context) => const OnBoardingScreen());
-        case AppRoutes.register:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoardingScreen(),
+        );
+      case AppRoutes.register:
         return MaterialPageRoute(builder: (context) => const ApplyScreen());
 
       case AppRoutes.applicationApproved:
-        return MaterialPageRoute(builder: (context) => const ApplicationApprovedScreen(),);
+        return MaterialPageRoute(
+          builder: (context) => const ApplicationApprovedScreen(),
+        );
 
       default:
         return unDefinedRoute();

@@ -3,7 +3,7 @@ import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCountryTextField extends StatefulWidget {
-  final void Function(String countryName,String countryCode ) onCountrySelected;
+  final void Function(String countryName, String countryCode) onCountrySelected;
 
   const SelectedCountryTextField({super.key, required this.onCountrySelected});
 

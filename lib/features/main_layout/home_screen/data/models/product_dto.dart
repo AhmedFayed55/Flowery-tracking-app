@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ProductDto {
   @JsonKey(name: "_id")
   final String? id;
@@ -37,7 +37,7 @@ class ProductDto {
   @JsonKey(name: "sold")
   final int? sold;
 
-  ProductDto ({
+  ProductDto({
     this.id,
     this.title,
     this.slug,

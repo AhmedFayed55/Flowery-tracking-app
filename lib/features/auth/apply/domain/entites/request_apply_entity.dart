@@ -12,9 +12,8 @@ class RequestApplyEntity {
   final String email;
   final String gender;
   final String phone;
- final String password;
- final String rePassword;
-
+  final String password;
+  final String rePassword;
 
   RequestApplyEntity({
     required this.country,

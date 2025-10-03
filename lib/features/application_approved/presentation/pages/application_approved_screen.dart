@@ -53,8 +53,8 @@ class ApplicationApprovedScreen extends StatelessWidget {
                   ),
                   verticalSpace(size.height * 0.03),
                   ElevatedButton(
-                    onPressed: ()  {
-                     context.pushReplacementNamed(AppRoutes.onBoarding);
+                    onPressed: () {
+                      context.pushReplacementNamed(AppRoutes.onBoarding);
                     },
                     child: Text(localizations.login),
                   ),
