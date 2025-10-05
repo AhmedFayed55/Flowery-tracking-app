@@ -35,8 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state.isError) {
             return DialogueUtils.showAlertDialog(
-              context,
-              AppLocalizations.of(context)!.invalid_credentials,
+              context,state.showMessage
             );
           }
         },

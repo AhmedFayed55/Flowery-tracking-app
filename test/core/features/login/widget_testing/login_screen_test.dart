@@ -184,7 +184,6 @@ void main() {
       );
       await tester.pump();
       expect(find.byType(Text), findsNWidgets(11));
-      expect(find.text(localization.invalid_credentials), findsOneWidget);
       expect(find.text(localization.error), findsOneWidget);
       expect(find.text(localization.ok), findsOneWidget);
     });
