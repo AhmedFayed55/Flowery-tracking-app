@@ -29,7 +29,22 @@ class HomeTab extends StatelessWidget {
             ),
           ),
         ),
-        body: BlocBuilder<HomeTabViewModel, HomeTabState>(
+        body: BlocConsumer<HomeTabViewModel, HomeTabState>(
+          listener: (context, state) {
+            if (state.isOrderSaved) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Successfully saved order")),
+              );
+              // context.pushReplacementNamed(
+              //   AppRoutes.orderDetails,
+              // );
+            }
+            if (state.errorSaveOrder != null) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorSaveOrder!)));
+            }
+          },
           builder: (context, state) {
             final viewModel = context.read<HomeTabViewModel>();
 
