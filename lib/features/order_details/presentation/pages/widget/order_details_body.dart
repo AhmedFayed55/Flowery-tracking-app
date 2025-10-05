@@ -49,6 +49,11 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
 
   @override
   Widget build(BuildContext context) {
+    var padding16width = context.width * 0.043;
+    var padding4width = context.width * 0.01;
+    var size24height = context.height * 0.025;
+    var size16height = context.height * 0.016;
+    var size8height = context.height * 0.008;
     var trans = context.localization;
     var order = context.watch<OrderDetailsCubit>().state.orderDetails;
     return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
@@ -85,44 +90,45 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
             scrolledUnderElevation: 0,
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding:  EdgeInsets.symmetric(horizontal: padding16width),
             child: SingleChildScrollView(
+              clipBehavior: Clip.none,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   StepProgressIndicator(
-                    padding: 4,
+                    padding: padding4width,
 
                     roundedEdges: const Radius.circular(3),
                     totalSteps: 5,
                     currentStep: state.riderOrderStatus?.statusStep ?? 0,
                     selectedColor: AppColors.green,
                   ),
-                  verticalSpace(24),
+                  verticalSpace(size24height),
 
                   OrderStatus(
                     orderId: order!.orderNumber!,
                     date: formatIsoToReadableDate(order.createdAt!),
                   ),
 
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   Text(
                     trans.pickupAddress,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   CallCard(
                     phoneNumber: order.store!.phoneNumber!,
                     title: order.store!.name!,
                     address: order.store!.address!,
                     imgeUrl: order.store!.image!,
                   ),
-                  verticalSpace(24),
+                  verticalSpace(size24height),
                   Text(
                     trans.userAddress,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
 
                   CallCard(
                     phoneNumber: order.user!.phone!,
@@ -130,13 +136,13 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                     address: "20th st, Sheikh Zayed, Giza ",
                     imgeUrl: order.user!.photo!,
                   ),
-                  verticalSpace(24),
+                  verticalSpace(size24height),
                   Text(
                     trans.orderDetailsSection,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
-                  ListView.builder(
+                  verticalSpace(size16height),
+                  state.orderDetails!.orderItems!.isNotEmpty ? ListView.builder(
                     itemCount: order.orderItems!.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -144,20 +150,20 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: ProductCard(orderItems: order.orderItems![index]),
                     ),
-                  ),
-                  verticalSpace(24),
+                  ) : const SizedBox(),
+                  verticalSpace(size24height),
                   DetailsWidget(
                     firstText: trans.total,
                     secondText: '${trans.egp} ${order.totalPrice}',
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   DetailsWidget(
                     firstText: trans.paymentMethod,
                     secondText: order.isPaid ?? false
                         ? trans.paid
                         : trans.cashOnDelivery,
                   ),
-                  verticalSpace(8),
+                  verticalSpace(size8height),
                 ],
               ),
             ),

@@ -10,6 +10,10 @@ class OrderStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var padding16width = context.width * 0.043;
+
+    var size8height = context.height * 0.008;
+
     var trans = context.localization;
     return Container(
       width: double.infinity,
@@ -18,7 +22,7 @@ class OrderStatus extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(padding16width),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -26,18 +30,18 @@ class OrderStatus extends StatelessWidget {
               'Status : Accepted',
               style: Theme.of(
                 context,
-              ).textTheme.bodyLarge!.copyWith(color: AppColors.green),
+              ).textTheme.bodyMedium!.copyWith(color: AppColors.green),
             ),
-            verticalSpace(8),
+            verticalSpace(size8height),
 
             Text(
               '${trans.order} $orderId',
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
-            verticalSpace(8),
+            verticalSpace(size8height),
             Text(
               date,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: AppColors.darkGrey.withValues(alpha: 0.8),
               ),
             ),
