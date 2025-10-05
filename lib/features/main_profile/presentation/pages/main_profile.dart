@@ -5,7 +5,8 @@ import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_data.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_action_row.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,9 @@ class _MainProfileState extends State<MainProfile> {
           leading: const Icon(Icons.arrow_back_ios),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                /// Notification action
+              },
               icon: const Badge(child: Icon(Icons.notifications_none)),
             ),
           ],
@@ -41,15 +44,18 @@ class _MainProfileState extends State<MainProfile> {
             children: [
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomData(
+                  return CustomInfoCard(
                     leading: const CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.cyan,
+
+                      /// when add image to profile
+                      // backgroundImage: ,
+                      backgroundColor: AppColors.pink,
                     ),
                     horizontalSpacing: 16,
                     firstText: state.driverDtoEntity?.firstName,
                     middleText: state.driverDtoEntity?.email,
-                    lastText: state.driverDtoEntity?.photo,
+                    lastText: state.driverDtoEntity?.phone,
                     iconDataTrailing: Icons.arrow_forward_ios,
                   );
                 },
@@ -57,7 +63,7 @@ class _MainProfileState extends State<MainProfile> {
               verticalSpace(24),
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomData(
+                  return CustomInfoCard(
                     firstText: context.localization.vehicle_info,
                     middleText: state.driverDtoEntity?.vehicleType,
                     lastText: state.driverDtoEntity?.vehicleNumber,
@@ -66,44 +72,30 @@ class _MainProfileState extends State<MainProfile> {
                 },
               ),
               verticalSpace(24),
-              Row(
-                children: [
-                  const Icon(Icons.translate, size: 24),
-                  horizontalSpace(4),
-                  Text(
-                    context.localization.language,
-                    style: Theme.of(context).textTheme.displaySmall,
+              CustomActionRow(
+                icon: Icons.translate,
+                title: context.localization.language,
+                trailing: TextButton(
+                  onPressed: () {
+                    /// localization action
+                  },
+                  child: Text(
+                    context.localization.english,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.pink),
                   ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      /// localization action
-                    },
-                    child: Text(
-                      context.localization.english,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: AppColors.pink),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              Row(
-                children: [
-                  const Icon(Icons.logout, size: 24),
-                  horizontalSpace(4),
-                  Text(
-                    context.localization.language,
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      /// logout action
-                    },
-                    icon: const Icon(Icons.logout, size: 24),
-                  ),
-                ],
+              CustomActionRow(
+                icon: Icons.logout,
+                title: context.localization.logout,
+                trailing: IconButton(
+                  onPressed: () {
+                    /// logout action
+                  },
+                  icon: const Icon(Icons.logout, size: 24),
+                ),
               ),
               const Spacer(),
               Text(

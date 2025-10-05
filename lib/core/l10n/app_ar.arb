@@ -102,7 +102,8 @@
   "something_went_wrong" : "حدث خطاء ما"
   "english": "الإنجليزية",
   "language": "اللغة",
+  "logout": "تسجيل الخروج",
   "vehicle_info": "معلومات المركبة",
-  "app_version": "الإصدار 6.3.0 - (446)"
+  "app_version": "6.3.0 - (446)"
 }
 

@@ -104,6 +104,7 @@
   "something_went_wrong" : "Something went wrong"
   "english": "English",
   "language": "Language",
+  "logout": "Logout",
   "vehicle_info": "Vehicle info",
   "app_version": "v 6.3.0 - (446)"
 }
