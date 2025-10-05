@@ -1,5 +1,5 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/entities/profile_response_entity.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/profile_usecase.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
@@ -24,10 +24,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(state.copyWith(isLoading: true));
     var result = await profileUseCase.call();
     switch (result) {
-      case ApiSuccessResult<ProfileResponseEntity>():
-        emit(state.copyWith(isLoading: false, isSuccess: true,driverDtoEntity: result.data.driverDtoEntity));
+      case ApiSuccessResult<DriverDtoEntity>():
+        emit(state.copyWith(isLoading: false, isSuccess: true,driverDtoEntity: result.data));
         break;
-      case ApiErrorResult<ProfileResponseEntity>():
+      case ApiErrorResult<DriverDtoEntity>():
         emit(
           state.copyWith(
             isLoading: false,
