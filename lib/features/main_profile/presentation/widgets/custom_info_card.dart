@@ -1,9 +1,8 @@
+import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/entities/profile_response_entity.dart';
 import 'package:flutter/material.dart';
 
-class CustomData extends StatelessWidget {
+class CustomInfoCard extends StatelessWidget {
   final String? firstText;
   final String? middleText;
   final String? lastText;
@@ -11,7 +10,15 @@ class CustomData extends StatelessWidget {
   final Widget? leading;
   final double? horizontalSpacing;
 
-  const CustomData({super.key, this.firstText,this.middleText,this.lastText, this.leading, this.iconDataTrailing,this.horizontalSpacing});
+  const CustomInfoCard({
+    super.key,
+    this.firstText,
+    this.middleText,
+    this.lastText,
+    this.leading,
+    this.iconDataTrailing,
+    this.horizontalSpacing,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +26,21 @@ class CustomData extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       height: MediaQuery.of(context).size.height * .13,
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.black26),
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 4,
+            spreadRadius: 2,
+            offset: const Offset(0, 0),
+          ),
+        ],
         borderRadius: BorderRadiusGeometry.circular(10),
       ),
       child: Row(
         children: [
           if (leading != null) Expanded(flex: 2, child: leading!),
-          if(horizontalSpacing != null) horizontalSpace(horizontalSpacing!),
+          if (horizontalSpacing != null) horizontalSpace(horizontalSpacing!),
           Expanded(
             flex: 6,
             child: Column(
@@ -60,9 +75,12 @@ class CustomData extends StatelessWidget {
           if (iconDataTrailing != null)
             Expanded(
               flex: 1,
-              child: IconButton(onPressed: () {
-                /// button onPressed
-              }, icon: Icon(iconDataTrailing!, size: 24)),
+              child: IconButton(
+                onPressed: () {
+                  /// button onPressed
+                },
+                icon: Icon(iconDataTrailing!, size: 24),
+              ),
             ),
         ],
       ),
