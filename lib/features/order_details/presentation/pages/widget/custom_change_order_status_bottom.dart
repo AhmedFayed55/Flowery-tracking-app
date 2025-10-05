@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_cubit.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
@@ -10,9 +11,16 @@ class CustomChangeOrderStatusBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var padding16width = context.width * 0.043;
+    var padding32width = context.width * 0.07;
+    var size56height = context.height * 0.057;
+
     final state = context.watch<OrderDetailsCubit>().state;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      padding: EdgeInsets.symmetric(
+        horizontal: padding16width,
+        vertical: padding32width,
+      ),
 
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -26,7 +34,7 @@ class CustomChangeOrderStatusBottom extends StatelessWidget {
       ),
       child: SizedBox(
         width: double.infinity,
-        height: 56,
+        height: size56height,
         child: ElevatedButton(
           onPressed: state.riderOrderStatus == RiderOrderStatus.delivered
               ? null
@@ -38,7 +46,7 @@ class CustomChangeOrderStatusBottom extends StatelessWidget {
                       ?.id;
                   if (orderId != null) {
                     context.read<OrderDetailsCubit>().doIntent(
-                      ChangeToNextStatusEvent(orderId: '1'),
+                      ChangeToNextStatusEvent(orderId: orderId),
                     );
                   }
                 },

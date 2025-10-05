@@ -1,7 +1,13 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
+import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
+import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart' hide OrderStatus;
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_cubit.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/call_card.dart';
@@ -25,9 +31,9 @@ class OrderDetailsBody extends StatefulWidget {
 class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   @override
   void initState() {
+    var orderId = getIt<SharedPrefHelper>().getData(key: AppConstants.orderId);
     context.read<OrderDetailsCubit>().doIntent(
-      //TODO: get orderId from local storage
-      GetOrderDetailsEvent(orderId: "1"),
+      GetOrderDetailsEvent(orderId: orderId as String),
     );
     super.initState();
   }
@@ -43,6 +49,11 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
 
   @override
   Widget build(BuildContext context) {
+    var padding16width = context.width * 0.043;
+    var padding4width = context.width * 0.01;
+    var size24height = context.height * 0.025;
+    var size16height = context.height * 0.016;
+    var size8height = context.height * 0.008;
     var trans = context.localization;
     var order = context.watch<OrderDetailsCubit>().state.orderDetails;
     return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
@@ -54,92 +65,105 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
       builder: (context, state) {
         if (state.isSceenLoading) {
           return Scaffold(
-            appBar: AppBar(title: Text(trans.orderDetails)),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () =>
+                    context.pushReplacementNamed(AppRoutes.mainLayout),
+                icon: const Icon(Icons.arrow_back_ios_new),
+              ),
+              title: Text(trans.orderDetails),
+            ),
             body: const OrderDetailsShimmer(),
           );
         }
         return Scaffold(
           bottomNavigationBar: const CustomChangeOrderStatusBottom(),
           appBar: AppBar(
+            leading: state.riderOrderStatus == RiderOrderStatus.delivered
+                ? IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () =>
+                        context.pushReplacementNamed(AppRoutes.mainLayout),
+                  )
+                : const SizedBox(),
             title: Text(trans.orderDetails),
             scrolledUnderElevation: 0,
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding:  EdgeInsets.symmetric(horizontal: padding16width),
             child: SingleChildScrollView(
+              clipBehavior: Clip.none,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   StepProgressIndicator(
-                    padding: 4,
+                    padding: padding4width,
 
                     roundedEdges: const Radius.circular(3),
                     totalSteps: 5,
                     currentStep: state.riderOrderStatus?.statusStep ?? 0,
                     selectedColor: AppColors.green,
                   ),
-                  verticalSpace(24),
+                  verticalSpace(size24height),
 
                   OrderStatus(
                     orderId: order!.orderNumber!,
                     date: formatIsoToReadableDate(order.createdAt!),
                   ),
 
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   Text(
                     trans.pickupAddress,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   CallCard(
                     phoneNumber: order.store!.phoneNumber!,
                     title: order.store!.name!,
                     address: order.store!.address!,
                     imgeUrl: order.store!.image!,
                   ),
-                  verticalSpace(24),
+                  verticalSpace(size24height),
                   Text(
                     trans.userAddress,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
 
-                  order.shippingAddress == null
-                      ? Container()
-                      : CallCard(
-                          phoneNumber: order.user!.phone!,
-                          title:
-                              '${order.user!.firstName!} ${order.user!.lastName!}',
-                          address:
-                              "${order.shippingAddress!.street!} , ${order.shippingAddress!.city!}",
-                          imgeUrl: order.user!.photo!,
-                        ),
-                  verticalSpace(24),
+                  CallCard(
+                    phoneNumber: order.user!.phone!,
+                    title: '${order.user!.firstName!} ${order.user!.lastName!}',
+                    address: "20th st, Sheikh Zayed, Giza ",
+                    imgeUrl: order.user!.photo!,
+                  ),
+                  verticalSpace(size24height),
                   Text(
                     trans.orderDetailsSection,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  verticalSpace(16),
-                  ListView.builder(
+                  verticalSpace(size16height),
+                  state.orderDetails!.orderItems!.isNotEmpty ? ListView.builder(
                     itemCount: order.orderItems!.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) =>
-                        ProductCard(orderItems: order.orderItems![index]),
-                  ),
-                  verticalSpace(24),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: ProductCard(orderItems: order.orderItems![index]),
+                    ),
+                  ) : const SizedBox(),
+                  verticalSpace(size24height),
                   DetailsWidget(
                     firstText: trans.total,
                     secondText: '${trans.egp} ${order.totalPrice}',
                   ),
-                  verticalSpace(16),
+                  verticalSpace(size16height),
                   DetailsWidget(
                     firstText: trans.paymentMethod,
                     secondText: order.isPaid ?? false
                         ? trans.paid
                         : trans.cashOnDelivery,
                   ),
-                  verticalSpace(8),
+                  verticalSpace(size8height),
                 ],
               ),
             ),

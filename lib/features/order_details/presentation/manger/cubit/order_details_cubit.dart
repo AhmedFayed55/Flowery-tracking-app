@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
-import 'package:flowery_tracking_app/features/order_details/domin/entites/order_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/get_order_details_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_api_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_firebase_usecase.dart';
