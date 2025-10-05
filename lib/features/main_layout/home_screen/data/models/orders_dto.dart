@@ -6,7 +6,7 @@ import 'order_items_dto.dart';
 
 part 'orders_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class OrdersDto {
   @JsonKey(name: "_id")
   final String? id;

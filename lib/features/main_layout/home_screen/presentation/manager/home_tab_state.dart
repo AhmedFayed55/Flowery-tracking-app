@@ -5,8 +5,14 @@ class HomeTabState extends Equatable{
   final bool isLoadingGetOrders;
   final String? errorGetOrders;
   final List<OrdersEntity> orders;
+  final bool isLoadingSaveOrder;
+  final String? errorSaveOrder;
+  final bool isOrderSaved;
 
   const HomeTabState({
+    this.isLoadingSaveOrder = false,
+    this.errorSaveOrder,
+    this.isOrderSaved = false,
     this.isLoadingGetOrders = false,
     this.errorGetOrders,
     this.orders = const [],
@@ -16,11 +22,17 @@ class HomeTabState extends Equatable{
     bool? isLoadingGetOrders,
     String? errorGetOrders,
     List<OrdersEntity>? orders,
+    bool? isLoadingSaveOrder,
+    String? errorSaveOrder,
+    bool? isOrderSaved,
   }){
     return HomeTabState(
       isLoadingGetOrders: isLoadingGetOrders ?? this.isLoadingGetOrders,
       errorGetOrders: errorGetOrders ?? this.errorGetOrders,
       orders: orders ?? this.orders,
+      isLoadingSaveOrder: isLoadingSaveOrder ?? this.isLoadingSaveOrder,
+      errorSaveOrder: errorSaveOrder ?? this.errorSaveOrder,
+      isOrderSaved: isOrderSaved ?? this.isOrderSaved,
     );
   }
 
@@ -29,6 +41,9 @@ class HomeTabState extends Equatable{
     isLoadingGetOrders,
     errorGetOrders,
     orders,
+    isLoadingSaveOrder,
+    errorSaveOrder,
+    isOrderSaved,
   ];
 
 }

@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_event.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_view_model_bloc.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_view_model.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/picked_or_user_address_widget.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/price_and_options_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,9 @@ class PendingOrderCart extends StatelessWidget {
             rejectOnTap: () => context.read<HomeTabViewModel>().doIntent(
               RejectOrderEvent(order.id!),
             ),
-            acceptOnTap: () {},
+            acceptOnTap: () => context.read<HomeTabViewModel>().doIntent(
+              SaveOrderEvent(order),
+            ),
           ),
         ],
       ),
