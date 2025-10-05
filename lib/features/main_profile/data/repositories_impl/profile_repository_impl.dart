@@ -17,8 +17,10 @@ class ProfileRepositoryImpl extends ProfileRepositoryContract {
 
   @override
   Future<ApiResult<DriverDtoEntity>> getProfile() async {
-    var driverDto = await profileRemoteDataSource.getProfile();
-    var driverDtoEntity = driverDto.toEntity();
-    return ApiSuccessResult<DriverDtoEntity>(data: driverDtoEntity);
+    return await safeApiCall<DriverDtoEntity>(() async {
+      var loginResponseModel = await profileRemoteDataSource.getProfile();
+      var loginResponseEntity = loginResponseModel.toEntity();
+      return loginResponseEntity;
+    });
   }
 }
