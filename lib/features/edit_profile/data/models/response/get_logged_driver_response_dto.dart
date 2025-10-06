@@ -1,4 +1,4 @@
-import 'package:flowery_tracking_app/features/edit_profile/data/data/models/driver_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/driver_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_logged_driver_response_dto.g.dart';
