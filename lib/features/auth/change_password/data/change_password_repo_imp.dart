@@ -7,16 +7,16 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: ChangePasswordRepo)
 class ChangePasswordRepoImp implements ChangePasswordRepo {
-  final ChangePasswordDataSource changePasswordDataSource;
+  final ChangePasswordDataSource _changePasswordDataSource;
 
-  ChangePasswordRepoImp({required this.changePasswordDataSource});
+  ChangePasswordRepoImp(this._changePasswordDataSource);
   @override
   Future<ApiResult<void>> changePassword(
     ChangePasswordRequestEntity changePasswordRequestEntity,
   ) async {
     return safeApiCall(
-      () async => await changePasswordDataSource.changePassword(
-        mapperRequestToDto(changePasswordRequestEntity),
+      () async => await _changePasswordDataSource.changePassword(
+        changePasswordRequestEntity.toDtoChangePassword(),
       ),
     );
   }

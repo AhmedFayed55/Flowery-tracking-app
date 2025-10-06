@@ -22,9 +22,7 @@ void main() {
         newPassword: 'newPassword',
         password: 'oldPassword',
       );
-  var repo = ChangePasswordRepoImp(
-    changePasswordDataSource: mockChangePasswordDataSource,
-  );
+  var repo = ChangePasswordRepoImp(mockChangePasswordDataSource);
   ChangePasswordRequestEntity changePasswordRequestEntity =
       ChangePasswordRequestEntity(
         newPassword: 'newPassword',
