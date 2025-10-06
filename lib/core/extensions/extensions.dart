@@ -17,7 +17,6 @@ extension Localization on BuildContext {
   AppLocalizations get localization => AppLocalizations.of(this)!;
 }
 
-
 extension ThemeX on BuildContext {
   /// Full ThemeData
   ThemeData get theme => Theme.of(this);
@@ -31,4 +30,3 @@ extension ThemeX on BuildContext {
   /// Is current theme light?
   bool get isDark => theme.brightness == Brightness.light;
 }
-
