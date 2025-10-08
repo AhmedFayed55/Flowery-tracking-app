@@ -1,5 +1,6 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/profile_usecase.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
@@ -22,18 +23,34 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> _getProfile() async {
     emit(state.copyWith(isLoading: true));
-    var result = await profileUseCase.call();
-    switch (result) {
+    var driverResult = await profileUseCase.getProfile();
+    switch (driverResult) {
       case ApiSuccessResult<DriverDtoEntity>():
-        emit(state.copyWith(isLoading: false, isSuccess: true,driverDtoEntity: result.data));
+        final driverVehicleType = driverResult.data.vehicleType;
+        if (driverVehicleType == null || driverVehicleType.isEmpty) {
+          emit(state.copyWith(isLoading: false, isError: true));
+          return;
+        }
+        var vehicleResult = await profileUseCase.getVehicle(
+          driverVehicleType,
+        );
+        switch (vehicleResult) {
+          case ApiSuccessResult<VehicleDtoEntity>():
+            emit(
+              state.copyWith(
+                isLoading: false,
+                isSuccess: true,
+                driverDtoEntity: driverResult.data,
+                vehicleDtoEntity: vehicleResult.data,
+              ),
+            );
+            break;
+          case ApiErrorResult<VehicleDtoEntity>():
+            emit(state.copyWith(isLoading: false, isError: true));
+        }
         break;
       case ApiErrorResult<DriverDtoEntity>():
-        emit(
-          state.copyWith(
-            isLoading: false,
-            isError: true,
-          ),
-        );
+        emit(state.copyWith(isLoading: false, isError: true));
     }
   }
 }

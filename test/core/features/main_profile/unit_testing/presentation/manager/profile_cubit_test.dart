@@ -31,7 +31,7 @@ void main() {
       );
       provideDummy<ApiResult<DriverDtoEntity>>(successResult);
 
-      when(mockProfileUseCase.call()).thenAnswer((_) async => successResult);
+      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => successResult);
 
       /// Act
       await profileCubit.doIntent(GetProfileEvent());
@@ -42,7 +42,7 @@ void main() {
       expect(profileCubit.state.isError, false);
       expect(profileCubit.state.driverDtoEntity, driverDtoEntity);
 
-      verify(mockProfileUseCase.call()).called(1);
+      verify(mockProfileUseCase.getProfile()).called(1);
     });
 
     test("emit error state for ApiErrorResult", () async {
@@ -51,7 +51,7 @@ void main() {
       var errorResult = ApiErrorResult<DriverDtoEntity>(failure: failure);
       provideDummy<ApiResult<DriverDtoEntity>>(errorResult);
 
-      when(mockProfileUseCase.call()).thenAnswer((_) async => errorResult);
+      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => errorResult);
 
       /// Act
       await profileCubit.doIntent(GetProfileEvent());
@@ -62,7 +62,7 @@ void main() {
       expect(profileCubit.state.isError, true);
       expect(profileCubit.state.driverDtoEntity, null);
 
-      verify(mockProfileUseCase.call()).called(1);
+      verify(mockProfileUseCase.getProfile()).called(1);
     });
   });
 }

@@ -33,7 +33,7 @@ void main() {
     ).thenAnswer((_) async => mockResult);
 
     // Act
-    var result = await profileUseCase.call();
+    var result = await profileUseCase.getProfile();
 
     // Assert
     expect(result, isA<ApiSuccessResult<DriverDtoEntity>>());
@@ -55,7 +55,7 @@ void main() {
     ).thenAnswer((_) async => errorResult);
 
     // Act
-    var result = await profileUseCase.call();
+    var result = await profileUseCase.getProfile();
 
     // Assert
     expect(result, isA<ApiErrorResult<DriverDtoEntity>>());
