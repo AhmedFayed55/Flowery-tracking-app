@@ -33,7 +33,7 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   void initState() {
     var orderId = getIt<SharedPrefHelper>().getData(key: AppConstants.orderId);
     context.read<OrderDetailsCubit>().doIntent(
-      GetOrderDetailsEvent(orderId: orderId as String),
+      GetOrderDetailsEvent(orderId: '68cac4fbdd8937e0573d6c83'),
     );
     super.initState();
   }

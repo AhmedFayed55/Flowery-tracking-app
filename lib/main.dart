@@ -37,7 +37,7 @@ class FloweryTrackingApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: getInitialRoute(),
+          initialRoute: AppRoutes.orderDetails //getInitialRoute(),
         );
       },
     );

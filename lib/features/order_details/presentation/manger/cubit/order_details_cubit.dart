@@ -1,14 +1,19 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/get_order_details_usecase.dart';
+import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_driver_location_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_api_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_firebase_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:location/location.dart';
 
 part 'order_details_state.dart';
 
@@ -17,8 +22,13 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   final GetOrderDetailsUsecase _getOrderDetailsUsecase;
   final UpdateOrderFirebaseUsecase _updateOrderFirebaseUsecase;
   final UpdateOrderApiUsecase _updateOrderApiUsecase;
+  final UpdateDriverLocationUsecase _updateDriverLocationUsecase;
+  final Location _location;
+  StreamSubscription<LocationData>? _locationSubscription;
 
   OrderDetailsCubit(
+    this._location,
+    this._updateDriverLocationUsecase,
     this._getOrderDetailsUsecase,
     this._updateOrderFirebaseUsecase,
     this._updateOrderApiUsecase,
@@ -44,6 +54,10 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     final result = await _getOrderDetailsUsecase.invoke(orderId);
 
     if (result is FirebaseSuccessResult<OrdersEntity>) {
+      var orderState = RiderOrderStatus.fromString(result.data.state!);
+      if (orderState != RiderOrderStatus.pending) {
+        streamOnDriverLocation();
+      }
       emit(
         state.copyWith(
           isLoading: false,
@@ -85,10 +99,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   Future<void> updateOrderStatusApi(String orderId, OrderStatus status) async {
     emit(state.copyWith(isUpdating: true, errorMessage: null));
 
-    final result = await _updateOrderApiUsecase.invoke(
-      '68a7537ca8bca307f9df6c99',
-      status,
-    );
+    final result = await _updateOrderApiUsecase.invoke(orderId, status);
 
     if (result is ApiSuccessResult) {
       final mapped = RiderOrderStatus.fromOrderStatus(status);
@@ -107,26 +118,70 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     emit(state.copyWith(isUpdating: true, errorMessage: null));
     if (state.riderOrderStatus == null) return;
 
-    if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
-      final result = await _updateOrderApiUsecase.invoke(
-        '68a75430a8bca307f9df6dc5',
-        OrderStatus.completed,
-      );
-
-      if (result is ApiSuccessResult) {
-        await updateOrderStatusFirebase(orderId, RiderOrderStatus.delivered);
-      } else if (result is ApiErrorResult) {
-        emit(
-          state.copyWith(
-            isUpdating: false,
-            errorMessage: result.failure.errorMessage,
-          ),
-        );
-      }
-      return;
+    if (state.riderOrderStatus == RiderOrderStatus.pending) {
+      streamOnDriverLocation();
     }
+
+    // if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
+    //   final result = await _updateOrderApiUsecase.invoke(
+    //     orderId,
+    //     OrderStatus.completed,
+    //   );
+
+    //   if (result is ApiSuccessResult) {
+    //     await updateOrderStatusFirebase(orderId, RiderOrderStatus.delivered);
+    //   } else if (result is ApiErrorResult) {
+    //     emit(
+    //       state.copyWith(
+    //         isUpdating: false,
+    //         errorMessage: result.failure.errorMessage,
+    //       ),
+    //     );
+    //   }
+    //   return;
+    // }
 
     final nextStatus = state.riderOrderStatus!.nextStatus();
     await updateOrderStatusFirebase(orderId, nextStatus);
+  }
+
+  void streamOnDriverLocation() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await _location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await _location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await _location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationSubscription = _location.onLocationChanged.listen((event) {
+      log(event.toString());
+      var result = _updateDriverLocationUsecase.invoke(
+        state.orderDetails!.id!,
+        "${event.latitude},${event.longitude}",
+      );
+    });
+  }
+
+  void stopDriverLocationStream() {
+    _locationSubscription?.cancel();
+    _locationSubscription = null;
+  }
+
+  @override
+  Future<void> close() {
+    stopDriverLocationStream();
+    return super.close();
   }
 }

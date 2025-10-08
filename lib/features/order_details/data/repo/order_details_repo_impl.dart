@@ -5,8 +5,8 @@ import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/maper/maper.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/data/maper/to_entity_maper.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/data/sources/order_details_ds.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/repo/order_details_repo.dart';
 import 'package:injectable/injectable.dart';
@@ -96,5 +96,29 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
     } catch (e) {
       return ApiErrorResult(failure: Failure(errorMessage: e.toString()));
     }
+  }
+  
+  @override
+  Future<FirebaseResult> updateDriverLocation(String orderId, String location) async{
+
+    final bool isConnected = await _internetConnectionChecker.hasConnection;
+    if (!isConnected) {
+      return FirebaseErrorResult(
+        failure: Failure(errorMessage: AppConstants.noInternet),
+      );
+    }
+    try {
+      await _orderDetailsDs.updateDriverLocation(orderId, location);
+      return FirebaseSuccessResult(data: null);
+    } on FirebaseException catch (firebaseError) {
+      return FirebaseErrorResult(
+        failure: Failure(
+          errorMessage: firebaseError.message ?? "Unknown Firebase error",
+        ),
+      );
+    } catch (e) {
+      return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
+    }
+  
   }
 }
