@@ -49,5 +49,9 @@
   "this_field_is_required": "هذا الحقل مطلوب",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "location_not_found" : "الموقع غير موجود",
+  "pickup_location" : "موقع التسليم",
+  "user_location" : "موقع المستخدم"
+
 }

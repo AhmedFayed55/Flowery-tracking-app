@@ -28,7 +28,6 @@ class CallCard extends StatelessWidget {
     var size8height = context.height * 0.008;
     var size4height = context.height * 0.004;
     return Container(
-      
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.white[10],

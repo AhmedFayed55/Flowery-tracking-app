@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:location/location.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../di/di.dart';
@@ -49,4 +50,8 @@ abstract class ExternalModules {
 
   @lazySingleton
   FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
+
+  @lazySingleton
+  Location provideLocation() => Location();
+
 }

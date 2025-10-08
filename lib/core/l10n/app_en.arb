@@ -48,5 +48,8 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "location_not_found" : "Location not found",
+  "pickup_location" : "Pickup Location",
+  "user_location" : "User Location"
 }
