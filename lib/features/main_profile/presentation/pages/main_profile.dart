@@ -65,7 +65,7 @@ class _MainProfileState extends State<MainProfile> {
                 builder: (context, state) {
                   return CustomInfoCard(
                     firstText: context.localization.vehicle_info,
-                    middleText: state.driverDtoEntity?.vehicleType,
+                    middleText: state.vehicleDtoEntity?.type,
                     lastText: state.driverDtoEntity?.vehicleNumber,
                     iconDataTrailing: Icons.arrow_forward_ios,
                   );

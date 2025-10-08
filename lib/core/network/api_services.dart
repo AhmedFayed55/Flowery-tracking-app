@@ -19,6 +19,7 @@ import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/driver_dto.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -60,4 +61,6 @@ abstract class ApiServices {
   @GET(ApiConstants.mainProfile)
   Future<DriverDto> getProfile();
 
+  @GET("${ApiConstants.getVehicle}/{vehicle}")
+  Future<VehicleDto> getVehicle(@Path("vehicle") String vehicleType);
 }
