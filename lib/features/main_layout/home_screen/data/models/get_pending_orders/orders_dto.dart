@@ -1,5 +1,5 @@
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/store_dto.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/user_dto.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/store_dto.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/user_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'order_items_dto.dart';

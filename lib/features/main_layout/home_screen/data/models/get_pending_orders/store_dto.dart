@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'store_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class StoreDto {
   @JsonKey(name: "name")
   final String? name;

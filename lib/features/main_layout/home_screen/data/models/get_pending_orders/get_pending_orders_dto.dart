@@ -5,7 +5,7 @@ import 'orders_dto.dart';
 
 part 'get_pending_orders_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GetPendingOrdersDto {
   @JsonKey(name: "message")
   final String? message;

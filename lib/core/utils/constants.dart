@@ -9,4 +9,6 @@ abstract class AppConstants {
   static const String bearer = "Bearer";
   static const String orderId = 'orderId';
   static const String ordersCollection = 'orders';
+  static const String inProgress = 'inProgress';
+  static const String orderState = 'state';
 }

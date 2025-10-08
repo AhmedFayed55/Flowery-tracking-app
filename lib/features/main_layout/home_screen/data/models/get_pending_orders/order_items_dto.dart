@@ -1,9 +1,9 @@
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/product_dto.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/product_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'order_items_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class OrderItemsDto {
   @JsonKey(name: "product")
   final ProductDto? product;
