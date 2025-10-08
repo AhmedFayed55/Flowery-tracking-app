@@ -54,5 +54,6 @@
   "picked_address": "Picked Address",
   "reject" : "Reject",
   "accept" : "Accept",
-  "try_again": "Try Again"
+  "try_again": "Try Again",
+  "success_saved_order": "Successfully saved order"
 }

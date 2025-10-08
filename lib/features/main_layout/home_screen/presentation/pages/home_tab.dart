@@ -18,9 +18,10 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent()),
+      getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent())..doIntent(GetLoggedDriverDataEvent()),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             context.localization.flowery_rider,
             style: context.textTheme.bodyLarge!.copyWith(
@@ -33,7 +34,9 @@ class HomeTab extends StatelessWidget {
           listener: (context, state) {
             if (state.isOrderSaved) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Successfully saved order")),
+                SnackBar(
+                    backgroundColor: context.colorScheme.primary,
+                    content: Text(context.localization.success_saved_order)),
               );
               // context.pushReplacementNamed(
               //   AppRoutes.orderDetails,
@@ -66,24 +69,19 @@ class HomeTab extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 29,
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ListView.separated(
-                              itemBuilder: (context, index) =>
-                                  PendingOrderCart(order: state.orders[index]),
-                              separatorBuilder: (context, index) =>
-                                  verticalSpace(16),
-                              itemCount: state.orders.length,
-                            ),
+                    return Column(
+                      children: [
+                        verticalSpace(context.height * 0.03),
+                        Expanded(
+                          child: ListView.separated(
+                            itemBuilder: (context, index) =>
+                                PendingOrderCart(order: state.orders[index]),
+                            separatorBuilder: (context, index) =>
+                                verticalSpace(16),
+                            itemCount: state.orders.length,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   }
                 },

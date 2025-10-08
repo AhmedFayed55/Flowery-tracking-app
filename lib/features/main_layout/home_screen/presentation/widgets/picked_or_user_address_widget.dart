@@ -64,6 +64,7 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                     const Icon(Icons.location_on_outlined),
                     horizontalSpace(4),
                     Text(
+                      overflow: TextOverflow.ellipsis,
                       address,
                       style: context.textTheme.bodyMedium!.copyWith(color: AppColors.black),
                     ),
