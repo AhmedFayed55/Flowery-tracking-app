@@ -11,4 +11,5 @@ abstract interface class OrderDetailsRepo {
   );
   Future<ApiResult> updateOrderStatusApi(String orderId, OrderStatus status);
   Future<FirebaseResult> updateDriverLocation(String orderId, String location);
+  Stream<Map<String, dynamic>?> streamOrder(String orderId);
 }

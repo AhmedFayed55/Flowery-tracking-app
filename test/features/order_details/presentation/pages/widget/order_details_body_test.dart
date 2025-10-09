@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/store_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/user_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/store_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/user_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/order_details_body.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/order_details_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +51,14 @@ void main() {
         isLoading: false,
         isUpdating: false,
         riderOrderStatus: RiderOrderStatus.pending,
-        orderDetails: null,
+        orderDetails: null, isOrderCompleted: false,
       ),
     );
 
     when(mockCubit.stream).thenAnswer(
       (_) => Stream.value(
         const OrderDetailsState(
+          isOrderCompleted: false,
           isSceenLoading: true,
           isLoading: false,
           isUpdating: false,
@@ -78,6 +79,7 @@ void main() {
 
     when(mockCubit.state).thenReturn(
       const OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: true,
         isLoading: false,
         isUpdating: false,
@@ -89,6 +91,7 @@ void main() {
     when(mockCubit.stream).thenAnswer(
       (_) => Stream.value(
         const OrderDetailsState(
+          isOrderCompleted: false,
           isSceenLoading: true,
           isLoading: false,
           isUpdating: false,
@@ -110,6 +113,7 @@ void main() {
 
     when(mockCubit.state).thenReturn(
       OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,

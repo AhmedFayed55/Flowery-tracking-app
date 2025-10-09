@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
+import 'package:flowery_tracking_app/core/utils/firebase_constant.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/get_order_details_usecase.dart';
+import 'package:flowery_tracking_app/features/order_details/domin/usecase/stream_in_order_state_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_driver_location_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_api_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_firebase_usecase.dart';
@@ -14,7 +15,6 @@ import 'package:flowery_tracking_app/features/order_details/presentation/manger/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:location/location.dart';
-
 part 'order_details_state.dart';
 
 @injectable
@@ -25,8 +25,12 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   final UpdateDriverLocationUsecase _updateDriverLocationUsecase;
   final Location _location;
   StreamSubscription<LocationData>? _locationSubscription;
+  StreamSubscription<Map<String, dynamic>?>? _orderSubscription;
+
+  final StreamOrderUseCase _streamOrderUseCase;
 
   OrderDetailsCubit(
+    this._streamOrderUseCase,
     this._location,
     this._updateDriverLocationUsecase,
     this._getOrderDetailsUsecase,
@@ -47,6 +51,28 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     }
   }
 
+  void listenToOrder(String orderId) {
+    _orderSubscription?.cancel();
+
+    _orderSubscription = _streamOrderUseCase(orderId).listen(
+      (data) {
+        if (data != null) {
+          if (data[FirebaseConstant.userState] == OrderStatus.completed.statusText) {
+            emit(state.copyWith(isOrderCompleted: true));
+            _orderSubscription?.cancel();
+          }
+        }
+      },
+      onError: (error) {
+        emit(state.copyWith(errorMessage: error.toString()));
+      },
+    );
+  }
+
+  void closeOrderSubscription() {
+    _orderSubscription?.cancel();
+  }
+
   Future<void> getOrderDetails(String orderId) async {
     emit(
       state.copyWith(isSceenLoading: true, isLoading: true, errorMessage: null),
@@ -57,6 +83,9 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       var orderState = RiderOrderStatus.fromString(result.data.state!);
       if (orderState != RiderOrderStatus.pending) {
         streamOnDriverLocation();
+      }
+      if (orderState == RiderOrderStatus.arrivedToUser) {
+        listenToOrder(orderId);
       }
       emit(
         state.copyWith(
@@ -122,6 +151,11 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       streamOnDriverLocation();
     }
 
+    if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
+      log("streaming order");
+      listenToOrder(orderId);
+    }
+
     // if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
     //   final result = await _updateOrderApiUsecase.invoke(
     //     orderId,
@@ -164,6 +198,12 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
         return;
       }
     }
+    _location.changeSettings(
+  accuracy: LocationAccuracy.low,
+  interval: 1000,
+  distanceFilter: 0, 
+);
+
 
     _locationSubscription = _location.onLocationChanged.listen((event) {
       log(event.toString());
@@ -176,12 +216,14 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
   void stopDriverLocationStream() {
     _locationSubscription?.cancel();
+
     _locationSubscription = null;
   }
 
   @override
   Future<void> close() {
     stopDriverLocationStream();
+    closeOrderSubscription();
     return super.close();
   }
 }

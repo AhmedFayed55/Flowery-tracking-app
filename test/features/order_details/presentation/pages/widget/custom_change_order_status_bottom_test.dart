@@ -1,6 +1,6 @@
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orders_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_cubit.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/custom_change_order_status_bottom.dart';
@@ -34,6 +34,7 @@ void main() {
   testWidgets('shows CircularProgressIndicator when updating', (tester) async {
     when(mockCubit.state).thenReturn(
       const OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: true,
@@ -42,6 +43,7 @@ void main() {
     when(mockCubit.stream).thenAnswer(
       (_) => Stream.fromIterable([
         const OrderDetailsState(
+          isOrderCompleted: false,
           isSceenLoading: false,
           isLoading: false,
           isUpdating: true,
@@ -56,6 +58,7 @@ void main() {
   testWidgets('shows correct text when status is pending', (tester) async {
     when(mockCubit.state).thenReturn(
       const OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,
@@ -65,6 +68,7 @@ void main() {
     when(mockCubit.stream).thenAnswer(
       (_) => Stream.fromIterable([
         const OrderDetailsState(
+          isOrderCompleted: false,
           isSceenLoading: false,
           isLoading: false,
           isUpdating: false,
@@ -80,6 +84,7 @@ void main() {
   testWidgets('disables button when status is delivered', (tester) async {
     when(mockCubit.state).thenReturn(
       const OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,
@@ -88,6 +93,7 @@ void main() {
     );
     when(mockCubit.stream).thenAnswer((_) =>  Stream.fromIterable([
       const OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,
@@ -105,6 +111,7 @@ void main() {
   ) async {
     when(mockCubit.state).thenReturn(
       OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,
@@ -114,6 +121,7 @@ void main() {
     );
     when(mockCubit.stream).thenAnswer((_) =>  Stream.fromIterable([
       OrderDetailsState(
+        isOrderCompleted: false,
         isSceenLoading: false,
         isLoading: false,
         isUpdating: false,

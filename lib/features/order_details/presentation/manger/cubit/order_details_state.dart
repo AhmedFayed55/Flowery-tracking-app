@@ -7,6 +7,7 @@ class OrderDetailsState extends Equatable {
   final OrdersEntity? orderDetails;
   final RiderOrderStatus? riderOrderStatus;
   final String? errorMessage;
+  final bool isOrderCompleted;
 
   const OrderDetailsState({
     required this.isSceenLoading,
@@ -14,11 +15,13 @@ class OrderDetailsState extends Equatable {
     required this.isUpdating,
     this.orderDetails,
     this.riderOrderStatus,
+    required this.isOrderCompleted,
     this.errorMessage,
   });
 
   factory OrderDetailsState.initial() {
     return const OrderDetailsState(
+      isOrderCompleted: false,
       isSceenLoading: true,
       isLoading: false,
       isUpdating: false,
@@ -29,6 +32,7 @@ class OrderDetailsState extends Equatable {
   }
 
   OrderDetailsState copyWith({
+    bool? isOrderCompleted,
     bool? isLoading,
     bool? isUpdating,
     bool? isSceenLoading,
@@ -37,6 +41,7 @@ class OrderDetailsState extends Equatable {
     String? errorMessage,
   }) {
     return OrderDetailsState(
+      isOrderCompleted:  isOrderCompleted ?? this.isOrderCompleted,
       isSceenLoading: isSceenLoading ?? this.isSceenLoading,
       isLoading: isLoading ?? this.isLoading,
       isUpdating: isUpdating ?? this.isUpdating,
@@ -48,6 +53,7 @@ class OrderDetailsState extends Equatable {
 
   @override
   List<Object?> get props => [
+    isOrderCompleted,
     isLoading,
     isUpdating,
     orderDetails,

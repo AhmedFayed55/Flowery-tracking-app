@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/orders_dto.dart';
 
@@ -8,5 +9,6 @@ abstract interface class OrderDetailsDs {
     RiderOrderStatus status,
   );
   Future<void> updateOrderStatusApi(String orderId, OrderStatus status);
-  Future<void> updateDriverLocation(String orderId, String location) ;
+  Future<void> updateDriverLocation(String orderId, String location);
+  Stream<DocumentSnapshot<Map<String, dynamic>>> streamOrder(String orderId);
 }

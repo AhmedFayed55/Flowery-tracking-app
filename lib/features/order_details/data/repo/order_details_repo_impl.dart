@@ -97,10 +97,12 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
       return ApiErrorResult(failure: Failure(errorMessage: e.toString()));
     }
   }
-  
-  @override
-  Future<FirebaseResult> updateDriverLocation(String orderId, String location) async{
 
+  @override
+  Future<FirebaseResult> updateDriverLocation(
+    String orderId,
+    String location,
+  ) async {
     final bool isConnected = await _internetConnectionChecker.hasConnection;
     if (!isConnected) {
       return FirebaseErrorResult(
@@ -119,6 +121,12 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
     } catch (e) {
       return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
     }
-  
+  }
+
+  @override
+  Stream<Map<String, dynamic>?> streamOrder(String orderId) {
+    return _orderDetailsDs.streamOrder(orderId).map((snapshot) {
+      return snapshot.data();
+    });
   }
 }

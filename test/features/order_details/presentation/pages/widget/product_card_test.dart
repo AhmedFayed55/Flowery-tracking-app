@@ -1,6 +1,6 @@
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/orderItems_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/product_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orderItems_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/product_entity.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/pages/widget/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
