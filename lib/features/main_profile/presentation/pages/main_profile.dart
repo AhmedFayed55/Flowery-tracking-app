@@ -1,12 +1,15 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
+import 'package:flowery_tracking_app/core/general_cubits/locale_cubit.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_action_row.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_info_card.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/dialog_change_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,6 +25,7 @@ class _MainProfileState extends State<MainProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final currentLang = context.read<LocaleCubit>().state.languageCode;
     return BlocProvider(
       create: (context) => profileCubit..doIntent(GetProfileEvent()),
       child: Scaffold(
@@ -47,7 +51,6 @@ class _MainProfileState extends State<MainProfile> {
                   return CustomInfoCard(
                     leading: const CircleAvatar(
                       radius: 30,
-
                       /// when add image to profile
                       // backgroundImage: ,
                       backgroundColor: AppColors.pink,
@@ -77,10 +80,20 @@ class _MainProfileState extends State<MainProfile> {
                 title: context.localization.language,
                 trailing: TextButton(
                   onPressed: () {
-                    /// localization action
+                    showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20),
+                        ),
+                      ),
+                      builder: (context) => const DialogChangeLocale(),
+                    );
                   },
                   child: Text(
-                    context.localization.english,
+                    currentLang == AppConstants.enKey
+                        ? context.localization.english
+                        : context.localization.arabic,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.pink),
