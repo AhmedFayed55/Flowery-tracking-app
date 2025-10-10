@@ -103,6 +103,8 @@
   "password_reset_successfully" : "Password reset successfully",
   "something_went_wrong" : "Something went wrong"
   "english": "English",
+  "arabic": "Arabic",
+  "change_language": "Change Language",
   "language": "Language",
   "logout": "Logout",
   "vehicle_info": "Vehicle info",
