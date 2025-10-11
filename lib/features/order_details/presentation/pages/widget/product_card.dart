@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orderItems_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/order_items_entity.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
