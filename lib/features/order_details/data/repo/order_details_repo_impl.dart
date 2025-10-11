@@ -71,8 +71,10 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
     // } catch (e) {
     //   return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
     // }
-  
-    return safeFirebaseCall(() => _orderDetailsDs.updateOrderStatusFirebase(orderId, status));
+
+    return safeFirebaseCall(
+      () => _orderDetailsDs.updateOrderStatusFirebase(orderId, status),
+    );
   }
 
   @override
@@ -99,7 +101,9 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
     //   return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
     // }
 
-    return safeFirebaseCall(() => _orderDetailsDs.updateDriverLocation(orderId, location));
+    return safeFirebaseCall(
+      () => _orderDetailsDs.updateDriverLocation(orderId, location),
+    );
   }
 
   @override

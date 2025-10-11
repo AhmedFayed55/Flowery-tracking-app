@@ -91,15 +91,17 @@ void main() {
         riderOrderStatus: RiderOrderStatus.delivered,
       ),
     );
-    when(mockCubit.stream).thenAnswer((_) =>  Stream.fromIterable([
-      const OrderDetailsState(
-        isOrderCompleted: false,
-        isSceenLoading: false,
-        isLoading: false,
-        isUpdating: false,
-        riderOrderStatus: RiderOrderStatus.delivered,
-      ),
-    ]));
+    when(mockCubit.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const OrderDetailsState(
+          isOrderCompleted: false,
+          isSceenLoading: false,
+          isLoading: false,
+          isUpdating: false,
+          riderOrderStatus: RiderOrderStatus.delivered,
+        ),
+      ]),
+    );
 
     await tester.pumpWidget(createWidgetUnderTest());
     final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
@@ -119,16 +121,18 @@ void main() {
         orderDetails: OrdersEntity(id: 'abc123'),
       ),
     );
-    when(mockCubit.stream).thenAnswer((_) =>  Stream.fromIterable([
-      OrderDetailsState(
-        isOrderCompleted: false,
-        isSceenLoading: false,
-        isLoading: false,
-        isUpdating: false,
-        riderOrderStatus: RiderOrderStatus.pending,
-        orderDetails: OrdersEntity(id: 'abc123'),
-      ),
-    ]));
+    when(mockCubit.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        OrderDetailsState(
+          isOrderCompleted: false,
+          isSceenLoading: false,
+          isLoading: false,
+          isUpdating: false,
+          riderOrderStatus: RiderOrderStatus.pending,
+          orderDetails: OrdersEntity(id: 'abc123'),
+        ),
+      ]),
+    );
 
     when(mockCubit.doIntent(any)).thenAnswer((_) async {});
 

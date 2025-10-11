@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Widget createWidgetUnderTest({required String first, required String second}) {
+  Widget createWidgetUnderTest({
+    required String first,
+    required String second,
+  }) {
     return MaterialApp(
       home: Scaffold(
         body: Builder(
-          builder: (context) => DetailsWidget(
-            firstText: first,
-            secondText: second,
-          ),
+          builder: (context) =>
+              DetailsWidget(firstText: first, secondText: second),
         ),
       ),
     );

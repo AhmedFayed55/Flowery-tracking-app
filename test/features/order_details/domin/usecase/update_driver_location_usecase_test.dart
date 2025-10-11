@@ -21,43 +21,48 @@ void main() {
   const orderId = 'order_123';
   const location = '30.0444,31.2357';
 
-  provideDummy<FirebaseResult>(
-    FirebaseSuccessResult<void>(data: null),
+  provideDummy<FirebaseResult>(FirebaseSuccessResult<void>(data: null));
+
+  test(
+    ' should return FirebaseSuccessResult when repo returns success',
+    () async {
+      // arrange
+      when(
+        mockRepo.updateDriverLocation(orderId, location),
+      ).thenAnswer((_) async => FirebaseSuccessResult<void>(data: null));
+
+      // act
+      final result = await usecase.invoke(orderId, location);
+
+      // assert
+      expect(result, isA<FirebaseSuccessResult<void>>());
+      verify(mockRepo.updateDriverLocation(orderId, location)).called(1);
+      verifyNoMoreInteractions(mockRepo);
+    },
   );
 
-  test(' should return FirebaseSuccessResult when repo returns success', () async {
-    // arrange
-    when(mockRepo.updateDriverLocation(orderId, location))
-        .thenAnswer((_) async => FirebaseSuccessResult<void>(data: null));
+  test(
+    ' should return FirebaseErrorResult when repo returns failure',
+    () async {
+      // arrange
+      const errorMessage = 'Failed to update driver location';
+      when(mockRepo.updateDriverLocation(orderId, location)).thenAnswer(
+        (_) async => FirebaseErrorResult<void>(
+          failure: Failure(errorMessage: errorMessage),
+        ),
+      );
 
-    // act
-    final result = await usecase.invoke(orderId, location);
+      // act
+      final result = await usecase.invoke(orderId, location);
 
-    // assert
-    expect(result, isA<FirebaseSuccessResult<void>>());
-    verify(mockRepo.updateDriverLocation(orderId, location)).called(1);
-    verifyNoMoreInteractions(mockRepo);
-  });
-
-  test(' should return FirebaseErrorResult when repo returns failure', () async {
-    // arrange
-    const errorMessage = 'Failed to update driver location';
-    when(mockRepo.updateDriverLocation(orderId, location)).thenAnswer(
-      (_) async => FirebaseErrorResult<void>(
-        failure: Failure(errorMessage: errorMessage),
-      ),
-    );
-
-    // act
-    final result = await usecase.invoke(orderId, location);
-
-    // assert
-    expect(result, isA<FirebaseErrorResult<void>>());
-    expect(
-      (result as FirebaseErrorResult).failure.errorMessage,
-      errorMessage,
-    );
-    verify(mockRepo.updateDriverLocation(orderId, location)).called(1);
-    verifyNoMoreInteractions(mockRepo);
-  });
+      // assert
+      expect(result, isA<FirebaseErrorResult<void>>());
+      expect(
+        (result as FirebaseErrorResult).failure.errorMessage,
+        errorMessage,
+      );
+      verify(mockRepo.updateDriverLocation(orderId, location)).called(1);
+      verifyNoMoreInteractions(mockRepo);
+    },
+  );
 }

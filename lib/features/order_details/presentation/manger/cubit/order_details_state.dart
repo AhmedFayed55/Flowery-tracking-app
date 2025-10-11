@@ -41,7 +41,7 @@ class OrderDetailsState extends Equatable {
     String? errorMessage,
   }) {
     return OrderDetailsState(
-      isOrderCompleted:  isOrderCompleted ?? this.isOrderCompleted,
+      isOrderCompleted: isOrderCompleted ?? this.isOrderCompleted,
       isSceenLoading: isSceenLoading ?? this.isSceenLoading,
       isLoading: isLoading ?? this.isLoading,
       isUpdating: isUpdating ?? this.isUpdating,

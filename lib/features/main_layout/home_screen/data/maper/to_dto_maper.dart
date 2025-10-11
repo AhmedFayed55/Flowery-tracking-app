@@ -86,12 +86,14 @@ DriverDataDto toDriverDataDto(DriverDataEntity entity) => DriverDataDto(
   nId: entity.nid,
   country: entity.country,
   gender: entity.gender,
-  nIDImg: entity.nIDImg
+  nIDImg: entity.nIDImg,
 );
 
 ToFirebaseDto toFirebaseDto(ToFirebaseEntity entity) => ToFirebaseDto(
-  driverData: entity.driverData != null ? toDriverDataDto(entity.driverData!) : null,
+  driverData: entity.driverData != null
+      ? toDriverDataDto(entity.driverData!)
+      : null,
   driverLocation: null,
   orders: entity.orders != null ? toOrdersDto(entity.orders!) : null,
-  userState: AppConstants.inProgress
+  userState: AppConstants.inProgress,
 );

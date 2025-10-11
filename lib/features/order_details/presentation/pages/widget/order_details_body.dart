@@ -33,7 +33,7 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   void initState() {
     var orderId = getIt<SharedPrefHelper>().getData(key: AppConstants.orderId);
     context.read<OrderDetailsCubit>().doIntent(
-      GetOrderDetailsEvent(orderId: '68cac4fbdd8937e0573d6c83'),
+      GetOrderDetailsEvent(orderId: orderId as String),
     );
     super.initState();
   }
@@ -61,7 +61,7 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
         if (state.errorMessage != null) {
           DialogueUtils.showAlertDialog(context, state.errorMessage!);
         }
-        if(state.isOrderCompleted){
+        if (state.isOrderCompleted) {
           //TODO: navigate to order completed page
         }
       },
@@ -93,7 +93,7 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
             scrolledUnderElevation: 0,
           ),
           body: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: padding16width),
+            padding: EdgeInsets.symmetric(horizontal: padding16width),
             child: SingleChildScrollView(
               clipBehavior: Clip.none,
               child: Column(
@@ -145,15 +145,19 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   verticalSpace(size16height),
-                  state.orderDetails!.orderItems!.isNotEmpty ? ListView.builder(
-                    itemCount: order.orderItems!.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: ProductCard(orderItems: order.orderItems![index]),
-                    ),
-                  ) : const SizedBox(),
+                  state.orderDetails!.orderItems!.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: order.orderItems!.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: ProductCard(
+                              orderItems: order.orderItems![index],
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                   verticalSpace(size24height),
                   DetailsWidget(
                     firstText: trans.total,

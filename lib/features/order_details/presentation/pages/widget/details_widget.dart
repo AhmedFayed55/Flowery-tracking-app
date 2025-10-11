@@ -28,7 +28,7 @@ class DetailsWidget extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding:  EdgeInsets.all(padding16width),
+        padding: EdgeInsets.all(padding16width),
         child: Row(
           children: [
             Text(firstText, style: Theme.of(context).textTheme.bodyMedium),

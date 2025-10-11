@@ -10,10 +10,13 @@ import 'package:injectable/injectable.dart';
 class OrderDetailsDsImpl implements OrderDetailsDs {
   final FirebaseService _firebaseService;
 
-  OrderDetailsDsImpl(this._firebaseService,);
+  OrderDetailsDsImpl(this._firebaseService);
   @override
   Future<OrdersDto?> getOrderDetails(String orderId) async {
-    var result = await _firebaseService.getData(FirebaseConstant.orders, orderId);
+    var result = await _firebaseService.getData(
+      FirebaseConstant.orders,
+      orderId,
+    );
     if (!result.exists) {
       return null;
     }
@@ -36,10 +39,9 @@ class OrderDetailsDsImpl implements OrderDetailsDs {
   @override
   Future<void> updateDriverLocation(String orderId, String location) async {
     return _firebaseService.updateData(FirebaseConstant.orders, orderId, {
-     FirebaseConstant.driverLocation : location,
+      FirebaseConstant.driverLocation: location,
     });
   }
-
 
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamOrder(String orderId) {

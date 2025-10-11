@@ -21,39 +21,39 @@ void main() {
     mockDocumentSnapshot = MockDocumentSnapshot<Map<String, dynamic>>();
     dataSource = OrderDetailsDsImpl(mockFirebaseService);
   });
- group('getOrderDetails', () {
-  const orderId = 'order_123';
-  final firestoreData = {
-    FirebaseConstant.orders: {'_id': orderId, 'state': 'pending'},
-  };
+  group('getOrderDetails', () {
+    const orderId = 'order_123';
+    final firestoreData = {
+      FirebaseConstant.orders: {'_id': orderId, 'state': 'pending'},
+    };
 
-  test('returns OrdersDto when document exists', () async {
-    when(
-      mockFirebaseService.getData(FirebaseConstant.orders, orderId),
-    ).thenAnswer((_) async => mockDocumentSnapshot);
+    test('returns OrdersDto when document exists', () async {
+      when(
+        mockFirebaseService.getData(FirebaseConstant.orders, orderId),
+      ).thenAnswer((_) async => mockDocumentSnapshot);
 
-    when(mockDocumentSnapshot.exists).thenReturn(true);
-    when(mockDocumentSnapshot.data()).thenReturn(firestoreData);
+      when(mockDocumentSnapshot.exists).thenReturn(true);
+      when(mockDocumentSnapshot.data()).thenReturn(firestoreData);
 
-    final result = await dataSource.getOrderDetails(orderId);
+      final result = await dataSource.getOrderDetails(orderId);
 
-    expect(result, isA<OrdersDto>());
-    expect(result?.id, equals(orderId));
-    expect(result?.state, equals('pending'));
+      expect(result, isA<OrdersDto>());
+      expect(result?.id, equals(orderId));
+      expect(result?.state, equals('pending'));
+    });
+
+    test('returns null when document does not exist', () async {
+      when(
+        mockFirebaseService.getData(FirebaseConstant.orders, orderId),
+      ).thenAnswer((_) async => mockDocumentSnapshot);
+
+      when(mockDocumentSnapshot.exists).thenReturn(false);
+
+      final result = await dataSource.getOrderDetails(orderId);
+
+      expect(result, isNull);
+    });
   });
-
-  test('returns null when document does not exist', () async {
-    when(
-      mockFirebaseService.getData(FirebaseConstant.orders, orderId),
-    ).thenAnswer((_) async => mockDocumentSnapshot);
-
-    when(mockDocumentSnapshot.exists).thenReturn(false);
-
-    final result = await dataSource.getOrderDetails(orderId);
-
-    expect(result, isNull);
-  });
-});
 
   group('updateOrderStatusFirebase', () {
     const orderId = 'order_123';

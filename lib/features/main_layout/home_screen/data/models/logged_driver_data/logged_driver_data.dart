@@ -10,10 +10,7 @@ class LoggedDriverDto {
   @JsonKey(name: "driver")
   final DriverDataDto? driver;
 
-  LoggedDriverDto ({
-    this.message,
-    this.driver,
-  });
+  LoggedDriverDto({this.message, this.driver});
 
   factory LoggedDriverDto.fromJson(Map<String, dynamic> json) {
     return _$LoggedDriverDtoFromJson(json);
@@ -23,7 +20,3 @@ class LoggedDriverDto {
     return _$LoggedDriverDtoToJson(this);
   }
 }
-
-
-
-

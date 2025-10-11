@@ -102,13 +102,14 @@ DriverDataEntity toDriverDataEntity(DriverDataDto dto) => DriverDataEntity(
   country: dto.country,
   nid: dto.nId,
   nIDImg: dto.nIDImg,
-  vehicleType: dto.vehicleType
+  vehicleType: dto.vehicleType,
 );
 
 ToFirebaseEntity toToFirebaseEntity(ToFirebaseDto dto) => ToFirebaseEntity(
-  driverData: dto.driverData != null ? toDriverDataEntity(dto.driverData!) : null,
-  driverLocation: dto.driverLocation ,
+  driverData: dto.driverData != null
+      ? toDriverDataEntity(dto.driverData!)
+      : null,
+  driverLocation: dto.driverLocation,
   orders: dto.orders != null ? toOrdersEntity(dto.orders!) : null,
   userState: dto.userState,
 );
-

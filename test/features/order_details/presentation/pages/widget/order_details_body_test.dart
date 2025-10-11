@@ -51,7 +51,8 @@ void main() {
         isLoading: false,
         isUpdating: false,
         riderOrderStatus: RiderOrderStatus.pending,
-        orderDetails: null, isOrderCompleted: false,
+        orderDetails: null,
+        isOrderCompleted: false,
       ),
     );
 

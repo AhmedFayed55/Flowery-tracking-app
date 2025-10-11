@@ -19,11 +19,7 @@ void main() {
 
   const orderId = 'order_123';
 
-  final mockStreamData = {
-    'id': orderId,
-    'state': 'pending',
-    'totalPrice': 150,
-  };
+  final mockStreamData = {'id': orderId, 'state': 'pending', 'totalPrice': 150};
 
   test(' should return the same stream from repository', () async {
     // arrange
@@ -33,10 +29,9 @@ void main() {
     // act
     final stream = useCase(orderId);
 
-    // assert 
+    // assert
     expectLater(stream, emitsInOrder([mockStreamData]));
 
-    
     controller.add(mockStreamData);
     await controller.close();
 

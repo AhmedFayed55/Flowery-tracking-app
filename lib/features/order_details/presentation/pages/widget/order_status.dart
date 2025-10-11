@@ -38,7 +38,7 @@ class OrderStatus extends StatelessWidget {
               '${trans.order} $orderId',
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.black,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
               ),
             ),
             verticalSpace(size8height),

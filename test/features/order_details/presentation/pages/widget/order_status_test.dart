@@ -7,8 +7,8 @@ void main() {
   testWidgets('OrderStatus displays correct data', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: OrderStatus(orderId: '123', date: '2025-10-05'),
         ),

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('ProductCard displays product data correctly', (WidgetTester tester) async {
+  testWidgets('ProductCard displays product data correctly', (
+    WidgetTester tester,
+  ) async {
     final product = ProductEntity(
       title: 'Rose Bouquet',
       price: 200,
@@ -16,11 +18,9 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(
-          body: ProductCard(orderItems: orderItem),
-        ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(body: ProductCard(orderItems: orderItem)),
       ),
     );
 

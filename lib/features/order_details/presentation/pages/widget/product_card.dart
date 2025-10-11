@@ -30,11 +30,14 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: padding8width, vertical: padding16width),
+        padding: EdgeInsets.symmetric(
+          horizontal: padding8width,
+          vertical: padding16width,
+        ),
         child: Row(
           children: [
             CircleAvatar(
-              radius:size44height /2,
+              radius: size44height / 2,
 
               backgroundColor: AppColors.white,
               child: ClipRRect(
@@ -71,9 +74,8 @@ class ProductCard extends StatelessWidget {
                 verticalSpace(4),
                 Text(
                   '${orderItems.product!.price!} ${trans.egp}',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall!.copyWith(color: AppColors.black ,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: AppColors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   group('CallCard Widget Tests', () {
-    testWidgets('renders correctly with given data', (WidgetTester tester) async {
+    testWidgets('renders correctly with given data', (
+      WidgetTester tester,
+    ) async {
       // Arrange
       const widget = MaterialApp(
         home: Scaffold(
@@ -26,10 +28,15 @@ void main() {
       expect(find.text('Alexandria, Egypt'), findsOneWidget);
       expect(find.byType(CircleAvatar), findsOneWidget);
       expect(find.byIcon(Icons.call_outlined), findsOneWidget);
-      expect(find.byType(SvgPicture), findsWidgets); // location + WhatsApp icons
+      expect(
+        find.byType(SvgPicture),
+        findsWidgets,
+      ); // location + WhatsApp icons
     });
 
-    testWidgets('tapping call icon triggers phone launch intent', (WidgetTester tester) async {
+    testWidgets('tapping call icon triggers phone launch intent', (
+      WidgetTester tester,
+    ) async {
       bool called = false;
 
       await tester.pumpWidget(
