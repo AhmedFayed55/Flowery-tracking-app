@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:equatable/equatable.dart';
-import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/core/utils/firebase_constant.dart';
@@ -9,7 +8,6 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/get_order_details_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/stream_in_order_state_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_driver_location_usecase.dart';
-import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_api_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/domin/usecase/update_order_firebase_usecase.dart';
 import 'package:flowery_tracking_app/features/order_details/presentation/manger/cubit/order_details_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +19,6 @@ part 'order_details_state.dart';
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   final GetOrderDetailsUsecase _getOrderDetailsUsecase;
   final UpdateOrderFirebaseUsecase _updateOrderFirebaseUsecase;
-  final UpdateOrderApiUsecase _updateOrderApiUsecase;
   final UpdateDriverLocationUsecase _updateDriverLocationUsecase;
   final Location _location;
   StreamSubscription<LocationData>? _locationSubscription;
@@ -35,7 +32,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     this._updateDriverLocationUsecase,
     this._getOrderDetailsUsecase,
     this._updateOrderFirebaseUsecase,
-    this._updateOrderApiUsecase,
   ) : super(OrderDetailsState.initial());
 
   Future<void> doIntent(OrderDetailsEvent event) async {
@@ -44,8 +40,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
         await getOrderDetails(event.orderId);
       case UpdateOrderStatusFirebaseEvent():
         await updateOrderStatusFirebase(event.orderId, event.status);
-      case UpdateOrderStatusApiEvent():
-        await updateOrderStatusApi(event.orderId, event.status);
       case ChangeToNextStatusEvent():
         await changeToNextStatus(event.orderId);
     }
@@ -57,7 +51,8 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     _orderSubscription = _streamOrderUseCase(orderId).listen(
       (data) {
         if (data != null) {
-          if (data[FirebaseConstant.userState] == OrderStatus.completed.statusText) {
+          if (data[FirebaseConstant.userState] ==
+              OrderStatus.completed.statusText) {
             emit(state.copyWith(isOrderCompleted: true));
             _orderSubscription?.cancel();
           }
@@ -81,12 +76,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
     if (result is FirebaseSuccessResult<OrdersEntity>) {
       var orderState = RiderOrderStatus.fromString(result.data.state!);
-      if (orderState != RiderOrderStatus.pending) {
-        streamOnDriverLocation();
-      }
-      if (orderState == RiderOrderStatus.arrivedToUser) {
-        listenToOrder(orderId);
-      }
       emit(
         state.copyWith(
           isLoading: false,
@@ -95,6 +84,12 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
           riderOrderStatus: RiderOrderStatus.fromString(result.data.state!),
         ),
       );
+      if (orderState != RiderOrderStatus.pending) {
+        streamOnDriverLocation();
+      }
+      if (orderState == RiderOrderStatus.arrivedToUser) {
+        listenToOrder(orderId);
+      }
     } else if (result is FirebaseErrorResult<OrdersEntity>) {
       emit(
         state.copyWith(
@@ -125,24 +120,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     }
   }
 
-  Future<void> updateOrderStatusApi(String orderId, OrderStatus status) async {
-    emit(state.copyWith(isUpdating: true, errorMessage: null));
-
-    final result = await _updateOrderApiUsecase.invoke(orderId, status);
-
-    if (result is ApiSuccessResult) {
-      final mapped = RiderOrderStatus.fromOrderStatus(status);
-      emit(state.copyWith(isUpdating: false, riderOrderStatus: mapped));
-    } else if (result is ApiErrorResult) {
-      emit(
-        state.copyWith(
-          isUpdating: false,
-          errorMessage: result.failure.errorMessage,
-        ),
-      );
-    }
-  }
-
   Future<void> changeToNextStatus(String orderId) async {
     emit(state.copyWith(isUpdating: true, errorMessage: null));
     if (state.riderOrderStatus == null) return;
@@ -155,25 +132,6 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       log("streaming order");
       listenToOrder(orderId);
     }
-
-    // if (state.riderOrderStatus == RiderOrderStatus.arrivedToUser) {
-    //   final result = await _updateOrderApiUsecase.invoke(
-    //     orderId,
-    //     OrderStatus.completed,
-    //   );
-
-    //   if (result is ApiSuccessResult) {
-    //     await updateOrderStatusFirebase(orderId, RiderOrderStatus.delivered);
-    //   } else if (result is ApiErrorResult) {
-    //     emit(
-    //       state.copyWith(
-    //         isUpdating: false,
-    //         errorMessage: result.failure.errorMessage,
-    //       ),
-    //     );
-    //   }
-    //   return;
-    // }
 
     final nextStatus = state.riderOrderStatus!.nextStatus();
     await updateOrderStatusFirebase(orderId, nextStatus);
@@ -199,15 +157,14 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       }
     }
     _location.changeSettings(
-  accuracy: LocationAccuracy.low,
-  interval: 1000,
-  distanceFilter: 0, 
-);
-
+      accuracy: LocationAccuracy.low,
+      interval: 1000,
+      distanceFilter: 0,
+    );
 
     _locationSubscription = _location.onLocationChanged.listen((event) {
       log(event.toString());
-      var result = _updateDriverLocationUsecase.invoke(
+      _updateDriverLocationUsecase.invoke(
         state.orderDetails!.id!,
         "${event.latitude},${event.longitude}",
       );

@@ -16,7 +16,6 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/user_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/logged_driver_data/driver_data_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/to_firebase/to_firebase_entity.dart';
-import 'package:latlong2/latlong.dart';
 
 GetPendingOrdersEntity toGetPendingOrdersEntity(GetPendingOrdersDto dto) =>
     GetPendingOrdersEntity(

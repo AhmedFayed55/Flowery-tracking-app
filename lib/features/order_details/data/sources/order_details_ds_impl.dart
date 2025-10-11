@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/core/services/firebase_services.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/core/utils/firebase_constant.dart';
@@ -10,18 +9,17 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: OrderDetailsDs)
 class OrderDetailsDsImpl implements OrderDetailsDs {
   final FirebaseService _firebaseService;
-  final ApiServices _apiServices;
 
-  OrderDetailsDsImpl(this._firebaseService, this._apiServices);
+  OrderDetailsDsImpl(this._firebaseService,);
   @override
   Future<OrdersDto?> getOrderDetails(String orderId) async {
-    var result = await _firebaseService.getData('orders', orderId);
+    var result = await _firebaseService.getData(FirebaseConstant.orders, orderId);
     if (!result.exists) {
       return null;
     }
 
     return OrdersDto.fromJson(
-      (result.data() as Map<String, dynamic>)['orders'],
+      (result.data() as Map<String, dynamic>)[FirebaseConstant.orders],
     );
   }
 
@@ -42,12 +40,6 @@ class OrderDetailsDsImpl implements OrderDetailsDs {
     });
   }
 
-  @override
-  Future<void> updateOrderStatusApi(String orderId, OrderStatus status) {
-    return _apiServices.updateOrderStatusApi(orderId, {
-      FirebaseConstant.state: status.statusText,
-    });
-  }
 
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamOrder(String orderId) {

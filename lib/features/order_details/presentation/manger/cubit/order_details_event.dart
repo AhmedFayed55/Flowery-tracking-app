@@ -21,16 +21,6 @@ class UpdateOrderStatusFirebaseEvent extends OrderDetailsEvent {
   List<Object?> get props => [orderId, status];
 }
 
-class UpdateOrderStatusApiEvent extends OrderDetailsEvent {
-  final String orderId;
-  final OrderStatus status;
-
-  UpdateOrderStatusApiEvent({required this.orderId, required this.status});
-  
-  @override
-  List<Object?> get props => [orderId, status];
-}
-
 final class ChangeToNextStatusEvent extends OrderDetailsEvent {
   final String orderId;
 

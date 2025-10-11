@@ -8,7 +8,6 @@ abstract interface class OrderDetailsDs {
     String orderId,
     RiderOrderStatus status,
   );
-  Future<void> updateOrderStatusApi(String orderId, OrderStatus status);
   Future<void> updateDriverLocation(String orderId, String location);
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamOrder(String orderId);
 }

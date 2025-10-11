@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
-import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
@@ -61,41 +59,20 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
       );
     }
 
-    try {
-      await _orderDetailsDs.updateOrderStatusFirebase(orderId, status);
-      return FirebaseSuccessResult(data: null);
-    } on FirebaseException catch (firebaseError) {
-      return FirebaseErrorResult(
-        failure: Failure(
-          errorMessage: firebaseError.message ?? "Unknown Firebase error",
-        ),
-      );
-    } catch (e) {
-      return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
-    }
-  }
-
-  @override
-  Future<ApiResult> updateOrderStatusApi(
-    String orderId,
-    OrderStatus status,
-  ) async {
-    final bool isConnected = await _internetConnectionChecker.hasConnection;
-    if (!isConnected) {
-      return ApiErrorResult<OrdersEntity>(
-        failure: Failure(errorMessage: AppConstants.noInternet),
-      );
-    }
-    try {
-      await _orderDetailsDs.updateOrderStatusApi(orderId, status);
-      return ApiSuccessResult(data: null);
-    } on DioException catch (firebaseError) {
-      return ApiErrorResult(
-        failure: ServerFailure.fromDioError(dioException: firebaseError),
-      );
-    } catch (e) {
-      return ApiErrorResult(failure: Failure(errorMessage: e.toString()));
-    }
+    // try {
+    //   await _orderDetailsDs.updateOrderStatusFirebase(orderId, status);
+    //   return FirebaseSuccessResult(data: null);
+    // } on FirebaseException catch (firebaseError) {
+    //   return FirebaseErrorResult(
+    //     failure: Failure(
+    //       errorMessage: firebaseError.message ?? "Unknown Firebase error",
+    //     ),
+    //   );
+    // } catch (e) {
+    //   return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
+    // }
+  
+    return safeFirebaseCall(() => _orderDetailsDs.updateOrderStatusFirebase(orderId, status));
   }
 
   @override
@@ -109,18 +86,20 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
         failure: Failure(errorMessage: AppConstants.noInternet),
       );
     }
-    try {
-      await _orderDetailsDs.updateDriverLocation(orderId, location);
-      return FirebaseSuccessResult(data: null);
-    } on FirebaseException catch (firebaseError) {
-      return FirebaseErrorResult(
-        failure: Failure(
-          errorMessage: firebaseError.message ?? "Unknown Firebase error",
-        ),
-      );
-    } catch (e) {
-      return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
-    }
+    // try {
+    //   await _orderDetailsDs.updateDriverLocation(orderId, location);
+    //   return FirebaseSuccessResult(data: null);
+    // } on FirebaseException catch (firebaseError) {
+    //   return FirebaseErrorResult(
+    //     failure: Failure(
+    //       errorMessage: firebaseError.message ?? "Unknown Firebase error",
+    //     ),
+    //   );
+    // } catch (e) {
+    //   return FirebaseErrorResult(failure: Failure(errorMessage: e.toString()));
+    // }
+
+    return safeFirebaseCall(() => _orderDetailsDs.updateDriverLocation(orderId, location));
   }
 
   @override
