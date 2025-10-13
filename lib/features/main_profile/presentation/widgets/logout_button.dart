@@ -12,7 +12,7 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ListTile(
+    return ListTile(
       leading: const Icon(Icons.logout, color: AppColors.darkGrey, size: 16),
       title: Text(
         context.localization.logout,
@@ -25,7 +25,6 @@ class LogoutButton extends StatelessWidget {
     );
   }
 }
-
 
 void _logout(context) {
   showDialog(

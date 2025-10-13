@@ -68,7 +68,7 @@ void main() {
       );
       expect(
         find.byWidgetPredicate(
-              (widget) => widget is Icon && widget.icon == Icons.translate,
+          (widget) => widget is Icon && widget.icon == Icons.translate,
         ),
         findsWidgets,
       );

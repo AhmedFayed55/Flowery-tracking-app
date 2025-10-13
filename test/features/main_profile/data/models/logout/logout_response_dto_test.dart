@@ -11,13 +11,18 @@ void main() {
     expect(entity.message, null);
   });
 
-  test('when call toEntity with non-null values should return correct values', () {
-    LogoutResponseDto dto = LogoutResponseDto(error: "error", message: "success");
+  test(
+    'when call toEntity with non-null values should return correct values',
+    () {
+      LogoutResponseDto dto = LogoutResponseDto(
+        error: "error",
+        message: "success",
+      );
 
-    var entity = dto.toEntity();
+      var entity = dto.toEntity();
 
-    expect(entity.error, dto.error);
-    expect(entity.message, dto.message);
-  });
-
+      expect(entity.error, dto.error);
+      expect(entity.message, dto.message);
+    },
+  );
 }

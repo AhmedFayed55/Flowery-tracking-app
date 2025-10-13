@@ -27,8 +27,9 @@ void main() {
       );
       provideDummy<ApiResult<LogoutResponseEntity>>(mockResult);
 
-      when(mockProfileRepositoryContract.logout())
-          .thenAnswer((_) async => mockResult);
+      when(
+        mockProfileRepositoryContract.logout(),
+      ).thenAnswer((_) async => mockResult);
 
       var result = await logoutUseCase.invoke();
 
@@ -44,8 +45,9 @@ void main() {
         failure: Failure(errorMessage: "Logout failed"),
       );
 
-      when(mockProfileRepositoryContract.logout())
-          .thenAnswer((_) async => errorResult);
+      when(
+        mockProfileRepositoryContract.logout(),
+      ).thenAnswer((_) async => errorResult);
 
       var result = await logoutUseCase.invoke();
 

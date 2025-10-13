@@ -41,9 +41,7 @@ void main() {
 
     vehicleDto = VehicleDto(id: "1", type: "Car");
     vehicleDtoEntity = vehicleDto.toEntity();
-    logoutResponseDto = LogoutResponseDto(
-      message: "Logout successful",
-    );
+    logoutResponseDto = LogoutResponseDto(message: "Logout successful");
     logoutResponseEntity = logoutResponseDto.toEntity();
   });
 
@@ -154,9 +152,9 @@ void main() {
     // ---------->>> logout <<<----------
 
     test("success case for logout with ApiSuccessResult", () async {
-
-      when(mockProfileRemoteDataSource.logout())
-          .thenAnswer((_) async => logoutResponseDto);
+      when(
+        mockProfileRemoteDataSource.logout(),
+      ).thenAnswer((_) async => logoutResponseDto);
 
       var result = await profileRepositoryImpl.logout();
 
@@ -165,12 +163,12 @@ void main() {
       expect(result, isA<ApiSuccessResult<LogoutResponseEntity>>());
       var successResult = result as ApiSuccessResult<LogoutResponseEntity>;
       expect(successResult.data.message, equals(logoutResponseEntity.message));
-
-
     });
 
     test("Error case for logout with DioException", () async {
-      final dioException = DioException(requestOptions: RequestOptions(path: ''));
+      final dioException = DioException(
+        requestOptions: RequestOptions(path: ''),
+      );
       when(mockProfileRemoteDataSource.logout()).thenThrow(dioException);
 
       var result = await profileRepositoryImpl.logout();
@@ -195,6 +193,5 @@ void main() {
       expect(errorResult.failure, isA<Failure>());
       expect(errorResult.failure.errorMessage, contains("Generic error"));
     });
-
   });
 }

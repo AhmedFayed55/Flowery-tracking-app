@@ -33,9 +33,7 @@ void main() {
     );
     vehicleDto = VehicleDto(id: "1");
 
-    logoutResponseDto = LogoutResponseDto(
-      message: "Logout successful",
-    );
+    logoutResponseDto = LogoutResponseDto(message: "Logout successful");
   });
 
   group("Test ProfileRemoteDataSourceImpl in Data_Layer", () {
@@ -73,7 +71,6 @@ void main() {
     });
 
     test("success case for logout returns LogoutResponseDto", () async {
-
       when(mockApiServices.logout()).thenAnswer((_) async => logoutResponseDto);
 
       var result = await profileRemoteDataSourceImpl.logout();
