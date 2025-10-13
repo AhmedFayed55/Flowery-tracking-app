@@ -49,5 +49,13 @@
   "this_field_is_required": "هذا الحقل مطلوب",
   "home": "الرئيسية",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "recent_orders": "الطلبات الأخيرة",
+  "cancelled": "أُلغيت",
+  "completed": "مكتملة",
+  "flower_order": "طلب ورد",
+  "pickup_address": "عنوان الاستلام",
+  "user_address": "عنوان المستخدم",
+  "my_orders": "طلباتي",
+  "flowery_store": "متجر فلاوري"
 }

@@ -48,5 +48,13 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "recent_orders": "Recent orders",
+  "cancelled": "Cancelled",
+  "completed": "Completed",
+  "flower_order": "Flower order",
+  "pickup_address": "Pickup address",
+  "user_address": "User address",
+  "my_orders": "My orders",
+  "flowery_store": "Flowery store"
 }
