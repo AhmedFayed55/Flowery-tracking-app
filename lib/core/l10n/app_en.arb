@@ -108,5 +108,8 @@
   "language": "Language",
   "logout": "Logout",
   "vehicle_info": "Vehicle info",
-  "app_version": "v 6.3.0 - (446)"
+  "app_version": "v 6.3.0 - (446)",
+  "confirm_logout": "Confirm Logout!!",
+  "cancel": "Cancel",
+  "logout_successfully": "Logout Successfully"
 }
