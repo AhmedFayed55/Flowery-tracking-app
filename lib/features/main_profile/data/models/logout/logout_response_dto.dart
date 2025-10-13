@@ -10,10 +10,7 @@ class LogoutResponseDto {
   @JsonKey(name: "error")
   final String? error;
 
-  LogoutResponseDto ({
-    this.message,
-    this.error,
-  });
+  LogoutResponseDto({this.message, this.error});
 
   factory LogoutResponseDto.fromJson(Map<String, dynamic> json) {
     return _$LogoutResponseDtoFromJson(json);
@@ -23,12 +20,7 @@ class LogoutResponseDto {
     return _$LogoutResponseDtoToJson(this);
   }
 
-  LogoutResponseEntity toEntity(){
-    return LogoutResponseEntity(
-      message: message,
-      error: error
-    );
+  LogoutResponseEntity toEntity() {
+    return LogoutResponseEntity(message: message, error: error);
   }
 }
-
-

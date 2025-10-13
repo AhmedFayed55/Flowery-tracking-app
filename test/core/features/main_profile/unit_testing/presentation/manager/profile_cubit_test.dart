@@ -37,14 +37,22 @@ void main() {
 
   group("ProfileCubit doIntent -> GetProfileEvent", () {
     test("emit success state when both profile and vehicle succeed", () async {
-      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverDtoEntity);
-      var vehicleSuccess = ApiSuccessResult<VehicleDtoEntity>(data: vehicleDtoEntity);
+      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+        data: driverDtoEntity,
+      );
+      var vehicleSuccess = ApiSuccessResult<VehicleDtoEntity>(
+        data: vehicleDtoEntity,
+      );
 
       provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
       provideDummy<ApiResult<VehicleDtoEntity>>(vehicleSuccess);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
-      when(mockProfileUseCase.getVehicle(any)).thenAnswer((_) async => vehicleSuccess);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverSuccess);
+      when(
+        mockProfileUseCase.getVehicle(any),
+      ).thenAnswer((_) async => vehicleSuccess);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -63,7 +71,9 @@ void main() {
       var driverError = ApiErrorResult<DriverDtoEntity>(failure: failure);
       provideDummy<ApiResult<DriverDtoEntity>>(driverError);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverError);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverError);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -82,10 +92,14 @@ void main() {
         firstName: "John",
         vehicleType: null,
       );
-      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverWithoutVehicle);
+      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+        data: driverWithoutVehicle,
+      );
       provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverSuccess);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -98,7 +112,9 @@ void main() {
     });
 
     test("emit error state when vehicleResult is ApiErrorResult", () async {
-      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverDtoEntity);
+      var driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+        data: driverDtoEntity,
+      );
       var vehicleError = ApiErrorResult<VehicleDtoEntity>(
         failure: Failure(errorMessage: "Vehicle error"),
       );
@@ -106,8 +122,12 @@ void main() {
       provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
       provideDummy<ApiResult<VehicleDtoEntity>>(vehicleError);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
-      when(mockProfileUseCase.getVehicle(any)).thenAnswer((_) async => vehicleError);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverSuccess);
+      when(
+        mockProfileUseCase.getVehicle(any),
+      ).thenAnswer((_) async => vehicleError);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -140,7 +160,8 @@ void main() {
 
     test("emit errorMsgLogout when logout fails", () async {
       var logoutError = ApiErrorResult<LogoutResponseEntity>(
-          failure: Failure(errorMessage: "Logout failed"));
+        failure: Failure(errorMessage: "Logout failed"),
+      );
       provideDummy<ApiResult<LogoutResponseEntity>>(logoutError);
 
       when(mockLogoutUseCase.invoke()).thenAnswer((_) async => logoutError);

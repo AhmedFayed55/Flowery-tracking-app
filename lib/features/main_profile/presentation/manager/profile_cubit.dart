@@ -14,7 +14,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileUseCase profileUseCase;
   final LogoutUseCase logoutUseCase;
 
-  ProfileCubit(this.logoutUseCase, {required this.profileUseCase}) : super(ProfileState());
+  ProfileCubit(this.logoutUseCase, {required this.profileUseCase})
+    : super(ProfileState());
 
   Future<void> doIntent(ProfileEvent event) async {
     switch (event) {
@@ -26,7 +27,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> _logout() async{
+  Future<void> _logout() async {
     emit(state.copyWith(isSuccessLogout: false, errorMsgLogout: null));
 
     var result = await logoutUseCase.invoke();
@@ -36,11 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(isSuccessLogout: true));
         break;
       case ApiErrorResult<LogoutResponseEntity>():
-        emit(
-          state.copyWith(
-            errorMsgLogout: result.failure.errorMessage,
-          ),
-        );
+        emit(state.copyWith(errorMsgLogout: result.failure.errorMessage));
     }
   }
 
@@ -54,9 +51,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(state.copyWith(isLoading: false, isError: true));
           return;
         }
-        var vehicleResult = await profileUseCase.getVehicle(
-          driverVehicleType,
-        );
+        var vehicleResult = await profileUseCase.getVehicle(driverVehicleType);
         switch (vehicleResult) {
           case ApiSuccessResult<VehicleDtoEntity>():
             emit(

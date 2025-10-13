@@ -24,7 +24,7 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
   }
 
   @override
-  Future<LogoutResponseDto> logout() async{
+  Future<LogoutResponseDto> logout() async {
     return await apiServices.logout();
   }
 }

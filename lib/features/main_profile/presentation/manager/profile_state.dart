@@ -27,7 +27,7 @@ class ProfileState {
     DriverDtoEntity? driverDtoEntity,
     VehicleDtoEntity? vehicleDtoEntity,
     bool? isSuccessLogout,
-    String? errorMsgLogout
+    String? errorMsgLogout,
   }) {
     return ProfileState(
       isLoading: isLoading ?? this.isLoading,
@@ -36,7 +36,7 @@ class ProfileState {
       driverDtoEntity: driverDtoEntity ?? this.driverDtoEntity,
       vehicleDtoEntity: vehicleDtoEntity ?? this.vehicleDtoEntity,
       isSuccessLogout: isSuccessLogout ?? this.isSuccessLogout,
-      errorMsgLogout: errorMsgLogout ?? this.errorMsgLogout
+      errorMsgLogout: errorMsgLogout ?? this.errorMsgLogout,
     );
   }
 }

@@ -27,7 +27,7 @@ class ProfileRepositoryImpl extends ProfileRepositoryContract {
   }
 
   @override
-  Future<ApiResult<VehicleDtoEntity>> getVehicle(String vehicleType) async{
+  Future<ApiResult<VehicleDtoEntity>> getVehicle(String vehicleType) async {
     return await safeApiCall<VehicleDtoEntity>(() async {
       var vehicleDto = await profileRemoteDataSource.getVehicle(vehicleType);
       var vehicleDtoEntity = vehicleDto.toEntity();
@@ -36,8 +36,8 @@ class ProfileRepositoryImpl extends ProfileRepositoryContract {
   }
 
   @override
-  Future<ApiResult<LogoutResponseEntity>> logout() async{
-    return await safeApiCall(() async{
+  Future<ApiResult<LogoutResponseEntity>> logout() async {
+    return await safeApiCall(() async {
       var dto = await profileRemoteDataSource.logout();
       return dto.toEntity();
     });

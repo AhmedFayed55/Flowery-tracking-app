@@ -34,7 +34,7 @@ class _MainLayoutState extends State<MainLayout> {
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
-      const MainProfile()
+      const MainProfile(),
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
