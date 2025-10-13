@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
-import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_cubit.dart';
+import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_view_model.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

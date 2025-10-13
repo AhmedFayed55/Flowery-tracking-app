@@ -2,7 +2,7 @@ import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
-import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_cubit.dart';
+import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_view_model.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_event.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_state.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/widgets/order_item_widget.dart';
@@ -36,7 +36,7 @@ class OrdersPage extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF9ECF0),
+                        color: AppColors.pink[30],
                         borderRadius: BorderRadius.circular(10),
                       ),
                       height: MediaQuery.of(context).size.height * 0.085,
@@ -115,13 +115,13 @@ class OrdersPage extends StatelessWidget {
               verticalSpace(10),
               BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
                 builder: (context, state) {
-                  if (state.getAllOrdersEntity?.ordersDtoEntity! == null ||
-                      state.getAllOrdersEntity!.ordersDtoEntity!.isEmpty) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
                   if (state.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
+                    return const Expanded(child: Center(child: CircularProgressIndicator(color: AppColors.pink)));
+                  }
+                  if (state.isError) {
+                    return Expanded(child: Center(child: Text("no_orders_found",style: Theme.of(context).textTheme.labelSmall,)));
+                  }
+                  if (state.isSuccess) {
                     return Expanded(
                       child: ListView.separated(
                         padding: const EdgeInsets.all(10),
@@ -132,10 +132,33 @@ class OrdersPage extends StatelessWidget {
                           return verticalSpace(16);
                         },
                         itemCount:
-                            state.getAllOrdersEntity?.ordersDtoEntity?.length ?? 0,
+                        state.getAllOrdersEntity?.ordersDtoEntity?.length ?? 0,
                       ),
                     );
+                  }else{
+                    return Center(child: Text("something_went_wrong",style: Theme.of(context).textTheme.labelSmall,));
                   }
+                  // if (state.getAllOrdersEntity?.ordersDtoEntity! == null ||
+                  //     state.getAllOrdersEntity!.ordersDtoEntity!.isEmpty) {
+                  //   return const Center(child: CircularProgressIndicator());
+                  // }
+                  // if (state.isLoading) {
+                  //   return const Center(child: CircularProgressIndicator());
+                  // } else {
+                  //   return Expanded(
+                  //     child: ListView.separated(
+                  //       padding: const EdgeInsets.all(10),
+                  //       itemBuilder: (context, index) {
+                  //         return OrderItemWidget(index: index);
+                  //       },
+                  //       separatorBuilder: (context, index) {
+                  //         return verticalSpace(16);
+                  //       },
+                  //       itemCount:
+                  //           state.getAllOrdersEntity?.ordersDtoEntity?.length ?? 0,
+                  //     ),
+                  //   );
+                  // }
                 },
               ),
             ],
