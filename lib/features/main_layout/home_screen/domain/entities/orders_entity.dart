@@ -1,22 +1,23 @@
 import 'user_entity.dart';
-import 'orderItems_entity.dart';
+import 'order_items_entity.dart';
 import 'store_entity.dart';
 
 class OrdersEntity {
   OrdersEntity({
-      this.id, 
-      this.user, 
-      this.orderItems, 
-      this.totalPrice, 
-      this.paymentType, 
-      this.isPaid, 
-      this.isDelivered, 
-      this.state, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.orderNumber, 
-      this.v, 
-      this.store,});
+    this.id,
+    this.user,
+    this.orderItems,
+    this.totalPrice,
+    this.paymentType,
+    this.isPaid,
+    this.isDelivered,
+    this.state,
+    this.createdAt,
+    this.updatedAt,
+    this.orderNumber,
+    this.v,
+    this.store,
+  });
 
   String? id;
   UserEntity? user;
@@ -31,5 +32,4 @@ class OrdersEntity {
   String? orderNumber;
   num? v;
   StoreEntity? store;
-
 }

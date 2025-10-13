@@ -2,7 +2,6 @@ import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget customMarker(Widget? icon, String title) {
-  
   return Container(
     height: 24,
     padding: const EdgeInsets.symmetric(horizontal: 8),

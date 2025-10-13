@@ -18,34 +18,19 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+
       case AppRoutes.pickupLocation:
-        // var user  = (settings.arguments as Map<String, dynamic>)['user'] as UserEntity;
-        // var stor = (settings.arguments as Map<String, dynamic>)['store'] as StoreEntity;
+        final args = settings.arguments as Map<String, dynamic>;
+        final storeEntity = args['store'] as StoreEntity;
+        final userEntity = args['user'] as UserEntity;
         var pickUpLocationViewModel = getIt.get<PickUpCubit>();
+
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => pickUpLocationViewModel,
-            child: PickUpLocationPage(
-              user: UserEntity(
-                id: '1',
-                lastName: 'Yehia',
-                firstName: 'Ahmed',
-                email: '2Tm5o@example.com',
-                phone: '0123456789',
-                photo: 'default.png',
-                gender: 'male',
-              ),
-              store: StoreEntity(
-                address: "Cairo, Egypt",
-                image: 'default.png',
-                phoneNumber: '0123456789',
-                name: 'Store 1',
-                latLong: "31.000000, 30.000000",
-              ),
-            ),
+            child: PickUpLocationPage(store: storeEntity, user: userEntity),
           ),
         );
-
       default:
         return unDefinedRoute();
     }

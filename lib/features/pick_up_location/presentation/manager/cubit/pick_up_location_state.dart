@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 
-class PickUpState {
+class PickUpState extends Equatable {
   final bool isLoading;
   final String? errorMessage;
   final LocationData? currentLocation;
@@ -32,4 +33,13 @@ class PickUpState {
       markers: markers ?? this.markers,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    isLoading,
+    errorMessage,
+    currentLocation,
+    routePoints,
+    markers,
+  ];
 }

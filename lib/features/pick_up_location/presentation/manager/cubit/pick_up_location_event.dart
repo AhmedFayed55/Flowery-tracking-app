@@ -7,7 +7,6 @@ class InitializeMapEvent extends PickUpEvent {
   InitializeMapEvent(this.destination);
 }
 
-
 class GetRouteEvent extends PickUpEvent {
   final LatLng destination;
   GetRouteEvent(this.destination);

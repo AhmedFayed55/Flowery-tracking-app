@@ -53,5 +53,4 @@ abstract class ExternalModules {
 
   @lazySingleton
   Location provideLocation() => Location();
-
 }

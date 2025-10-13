@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'config/routing/initial_route.dart';
 import 'config/routing/route_generator.dart';
 import 'core/di/di.dart';
@@ -40,7 +38,7 @@ class FloweryTrackingApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: AppRoutes.pickupLocation, //getInitialRoute(),
+          initialRoute: getInitialRoute(),
         );
       },
     );

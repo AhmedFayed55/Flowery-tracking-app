@@ -10,11 +10,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'dart:async';
 
 @injectable
 class PickUpCubit extends Cubit<PickUpState> {
   final GetRoutesUsecase pickUpLocationRepo;
   final Location location;
+  StreamSubscription<LocationData>? locationSubscription;
+  final MapController mapController = MapController();
   PickUpCubit(this.pickUpLocationRepo, this.location)
     : super(const PickUpState());
 
@@ -36,6 +39,7 @@ class PickUpCubit extends Cubit<PickUpState> {
 
   Future<void> _handleInitializeMap(LatLng destination) async {
     emit(state.copyWith(isLoading: true));
+    checkLocationPermission();
     try {
       var current = await location.getLocation();
 
@@ -79,8 +83,36 @@ class PickUpCubit extends Cubit<PickUpState> {
     }
   }
 
-  void _startLiveLocationUpdates(LatLng destination) {
-    location.onLocationChanged.listen(
+  void checkLocationPermission() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+  }
+
+  void _startLiveLocationUpdates(LatLng destination) async {
+    locationSubscription?.cancel();
+    // location.changeSettings(
+    //   accuracy: LocationAccuracy.low,
+    //   interval: 1000,
+    //   distanceFilter: 0,
+    // );
+
+    locationSubscription = location.onLocationChanged.listen(
       (event) async {
         final newRoute = await _handleGetRoute(destination);
 
@@ -139,5 +171,12 @@ class PickUpCubit extends Cubit<PickUpState> {
       case ApiErrorResult():
         return [];
     }
+  }
+
+  @override
+  Future<void> close() {
+    mapController.dispose();
+    locationSubscription?.cancel();
+    return super.close();
   }
 }
