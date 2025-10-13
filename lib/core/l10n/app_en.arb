@@ -48,5 +48,8 @@
   "this_field_is_required": "This field is required",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "thank_you" : "Thank you!!",
+  "the_order_delivered_successfully" : "The order delivered\n successfully",
+  "done" : "Done"
 }
