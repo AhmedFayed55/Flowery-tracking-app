@@ -42,12 +42,14 @@ void main() {
     mockLocaleCubit = MockLocaleCubit();
 
     when(mockLocaleCubit.state).thenReturn(const Locale('en'));
-    when(mockLocaleCubit.stream)
-        .thenAnswer((_) => Stream.value(const Locale('en')));
+    when(
+      mockLocaleCubit.stream,
+    ).thenAnswer((_) => Stream.value(const Locale('en')));
 
     when(mockProfileCubit.state).thenReturn(ProfileState());
-    when(mockProfileCubit.stream)
-        .thenAnswer((_) => Stream.value(ProfileState()));
+    when(
+      mockProfileCubit.stream,
+    ).thenAnswer((_) => Stream.value(ProfileState()));
 
     if (!getIt.isRegistered<ProfileCubit>()) {
       getIt.registerSingleton<ProfileCubit>(mockProfileCubit);
@@ -58,7 +60,9 @@ void main() {
   });
 
   group('MainProfile UI Tests', () {
-    testWidgets('Verify main_profile structure correctly', (WidgetTester tester) async {
+    testWidgets('Verify main_profile structure correctly', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(buildMainProfile());
       expect(find.text(localization.profile), findsOneWidget);
       expect(find.byType(IconButton), findsNWidgets(3));

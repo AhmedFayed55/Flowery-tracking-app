@@ -17,8 +17,6 @@ class EmailVerificationWidget extends StatefulWidget {
 }
 
 class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
-
-
   int _secondsRemaining = 0;
   Timer? _timer;
 
@@ -113,4 +111,3 @@ class _EmailVerificationWidgetState extends State<EmailVerificationWidget> {
     );
   }
 }
-

@@ -102,11 +102,7 @@ class ForgetPasswordErrors extends Equatable {
       errorPassword: errorPassword ?? this.errorPassword,
     );
   }
-  
+
   @override
-  List<Object?> get props =>  [
-    errorOtp,
-    errorEmail,
-    errorPassword,
-  ];
+  List<Object?> get props => [errorOtp, errorEmail, errorPassword];
 }
