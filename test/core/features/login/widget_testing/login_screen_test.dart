@@ -115,8 +115,7 @@ void main() {
       when(mockLoginCubit.stream).thenAnswer(
         (_) => Stream.fromIterable([
           LoginState(isButtonEnabled: false),
-          LoginState(
-            isButtonEnabled: true,),
+          LoginState(isButtonEnabled: true),
         ]),
       );
       await tester.pumpWidget(materialAppToLoginScreen());

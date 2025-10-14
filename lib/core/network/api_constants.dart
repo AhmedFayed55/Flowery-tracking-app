@@ -5,6 +5,9 @@ abstract class ApiConstants {
   static const String uploadProfilePhoto = 'drivers/upload-photo';
   static const String getAllVehicles = 'vehicles';
   static const String login = "drivers/signin";
+  static const String forgotPassword = "forgotPassword";
+  static const String verifyResetCode = "verifyResetCode";
+  static const String resetPassword = "resetPassword";
   static const String mainProfile = "drivers/profile-data";
   static const String getVehicle = "vehicles";
   static const String logout = "drivers/logout";
