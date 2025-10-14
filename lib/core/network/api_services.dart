@@ -4,35 +4,18 @@ import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/app
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-part 'api_services.g.dart';
 
-@RestApi()
-@injectable
-abstract class ApiServices {
-  @factoryMethod
-  factory ApiServices(Dio dio) = _ApiServices;
-
-  @POST(ApiConstants.applyDriver)
-  @MultiPart()
-  Future<ApplyResponceDto> apply(@Body() FormData formData);
-
-  @GET(ApiConstants.getAllVehicles)
-  Future<VehiclesResponseDto> getAllVehicles();
-}
-import 'package:dio/dio.dart';
-import 'package:flowery_tracking_app/core/network/api_constants.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/data/models/login_response_model.dart';
-import 'package:injectable/injectable.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/forget_password/forget_password_request.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/forget_password/forget_password_respone.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/reset_password/reset_password_body.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/reset_password/reset_password_respone.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
-import 'package:flowery_tracking_app/features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
-import 'package:retrofit/retrofit.dart';
+import '../../features/auth/forget_password/data/models/forget_password/forget_password_request.dart';
+import '../../features/auth/forget_password/data/models/forget_password/forget_password_respone.dart';
+import '../../features/auth/forget_password/data/models/reset_password/reset_password_body.dart';
+import '../../features/auth/forget_password/data/models/reset_password/reset_password_respone.dart';
+import '../../features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
+import '../../features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
+import '../../features/auth/login_screen/data/models/login_response_model.dart';
 import '../../features/main_profile/data/models/driver_dto.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
 import '../../features/main_profile/data/models/vehicle_dto.dart';
+
 part 'api_services.g.dart';
 
 @RestApi()
@@ -43,6 +26,7 @@ abstract class ApiServices {
 
   @POST(ApiConstants.login)
   Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
+
   @POST(ApiConstants.forgotPassword)
   Future<ForgetPasswordRespone> forgotPassword(
     @Body() ForgotPasswordRequest body,
@@ -62,4 +46,11 @@ abstract class ApiServices {
 
   @GET(ApiConstants.logout)
   Future<LogoutResponseDto> logout();
+
+  @POST(ApiConstants.applyDriver)
+  @MultiPart()
+  Future<ApplyResponceDto> apply(@Body() FormData formData);
+
+  @GET(ApiConstants.getAllVehicles)
+  Future<VehiclesResponseDto> getAllVehicles();
 }
