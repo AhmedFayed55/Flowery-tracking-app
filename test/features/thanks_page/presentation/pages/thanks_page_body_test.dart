@@ -1,5 +1,5 @@
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/thanks_page/presentation/pages/thanks_page.dart';
+import 'package:flowery_tracking_app/features/thanks_page/presentation/pages/widgets/thanks_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -24,7 +24,7 @@ _testThanksPageUI(WidgetTester tester, Locale locale) async {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: locale,
-      home: const ThanksPage(),
+      home: const ThanksPageBody(),
     ),
   );
 
