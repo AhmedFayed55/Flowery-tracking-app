@@ -7,8 +7,12 @@ class ProfileState {
   final bool isError;
   final DriverDtoEntity? driverDtoEntity;
   final VehicleDtoEntity? vehicleDtoEntity;
+  final bool isSuccessLogout;
+  final String? errorMsgLogout;
 
   ProfileState({
+    this.isSuccessLogout = false,
+    this.errorMsgLogout,
     this.isLoading = false,
     this.isSuccess = false,
     this.isError = false,
@@ -22,6 +26,8 @@ class ProfileState {
     bool? isError,
     DriverDtoEntity? driverDtoEntity,
     VehicleDtoEntity? vehicleDtoEntity,
+    bool? isSuccessLogout,
+    String? errorMsgLogout,
   }) {
     return ProfileState(
       isLoading: isLoading ?? this.isLoading,
@@ -29,6 +35,8 @@ class ProfileState {
       isError: isError ?? this.isError,
       driverDtoEntity: driverDtoEntity ?? this.driverDtoEntity,
       vehicleDtoEntity: vehicleDtoEntity ?? this.vehicleDtoEntity,
+      isSuccessLogout: isSuccessLogout ?? this.isSuccessLogout,
+      errorMsgLogout: errorMsgLogout ?? this.errorMsgLogout,
     );
   }
 }

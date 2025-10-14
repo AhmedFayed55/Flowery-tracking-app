@@ -10,6 +10,7 @@ import 'package:flowery_tracking_app/features/main_profile/presentation/manager/
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_action_row.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_info_card.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/dialog_change_locale.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/logout_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -100,16 +101,7 @@ class _MainProfileState extends State<MainProfile> {
                   ),
                 ),
               ),
-              CustomActionRow(
-                icon: Icons.logout,
-                title: context.localization.logout,
-                trailing: IconButton(
-                  onPressed: () {
-                    /// logout action
-                  },
-                  icon: const Icon(Icons.logout, size: 24),
-                ),
-              ),
+              const LogoutButton(),
               const Spacer(),
               Text(
                 context.localization.app_version,

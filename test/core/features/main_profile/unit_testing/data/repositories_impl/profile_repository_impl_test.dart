@@ -4,9 +4,11 @@ import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/datasources/local/profile_local_ds.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/datasources/remote/profile_remote_ds.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/driver_dto.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/logout/logout_response_dto.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_dto.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/repositories_impl/profile_repository_impl.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/entities/logout_response_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -23,6 +25,8 @@ void main() {
   late DriverDtoEntity driverDtoEntity;
   late VehicleDto vehicleDto;
   late VehicleDtoEntity vehicleDtoEntity;
+  late LogoutResponseDto logoutResponseDto;
+  late LogoutResponseEntity logoutResponseEntity;
 
   setUpAll(() {
     mockProfileRemoteDataSource = MockProfileRemoteDataSource();
@@ -37,6 +41,8 @@ void main() {
 
     vehicleDto = VehicleDto(id: "1", type: "Car");
     vehicleDtoEntity = vehicleDto.toEntity();
+    logoutResponseDto = LogoutResponseDto(message: "Logout successful");
+    logoutResponseEntity = logoutResponseDto.toEntity();
   });
 
   group("Test ProfileRepositoryImpl", () {
@@ -141,6 +147,51 @@ void main() {
       expect(errorResult.failure.errorMessage, contains("Generic error"));
 
       verify(mockProfileRemoteDataSource.getVehicle("1")).called(1);
+    });
+
+    // ---------->>> logout <<<----------
+
+    test("success case for logout with ApiSuccessResult", () async {
+      when(
+        mockProfileRemoteDataSource.logout(),
+      ).thenAnswer((_) async => logoutResponseDto);
+
+      var result = await profileRepositoryImpl.logout();
+
+      verify(mockProfileRemoteDataSource.logout()).called(1);
+
+      expect(result, isA<ApiSuccessResult<LogoutResponseEntity>>());
+      var successResult = result as ApiSuccessResult<LogoutResponseEntity>;
+      expect(successResult.data.message, equals(logoutResponseEntity.message));
+    });
+
+    test("Error case for logout with DioException", () async {
+      final dioException = DioException(
+        requestOptions: RequestOptions(path: ''),
+      );
+      when(mockProfileRemoteDataSource.logout()).thenThrow(dioException);
+
+      var result = await profileRepositoryImpl.logout();
+
+      verify(mockProfileRemoteDataSource.logout()).called(1);
+
+      expect(result, isA<ApiErrorResult<LogoutResponseEntity>>());
+      var errorResult = result as ApiErrorResult<LogoutResponseEntity>;
+      expect(errorResult.failure, isA<ServerFailure>());
+    });
+
+    test("Error case for logout with generic Exception", () async {
+      final exception = Exception("Generic error");
+      when(mockProfileRemoteDataSource.logout()).thenThrow(exception);
+
+      var result = await profileRepositoryImpl.logout();
+
+      verify(mockProfileRemoteDataSource.logout()).called(1);
+
+      expect(result, isA<ApiErrorResult<LogoutResponseEntity>>());
+      var errorResult = result as ApiErrorResult<LogoutResponseEntity>;
+      expect(errorResult.failure, isA<Failure>());
+      expect(errorResult.failure.errorMessage, contains("Generic error"));
     });
   });
 }

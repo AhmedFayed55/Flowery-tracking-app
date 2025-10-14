@@ -1,6 +1,8 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/entities/logout_response_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/usecases/logout_usecase.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/profile_usecase.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
@@ -10,14 +12,32 @@ import 'package:injectable/injectable.dart';
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileUseCase profileUseCase;
+  final LogoutUseCase logoutUseCase;
 
-  ProfileCubit({required this.profileUseCase}) : super(ProfileState());
+  ProfileCubit(this.logoutUseCase, {required this.profileUseCase})
+    : super(ProfileState());
 
   Future<void> doIntent(ProfileEvent event) async {
     switch (event) {
       case GetProfileEvent():
         await _getProfile();
         break;
+      case LogoutEvent():
+        _logout();
+    }
+  }
+
+  Future<void> _logout() async {
+    emit(state.copyWith(isSuccessLogout: false, errorMsgLogout: null));
+
+    var result = await logoutUseCase.invoke();
+
+    switch (result) {
+      case ApiSuccessResult<LogoutResponseEntity>():
+        emit(state.copyWith(isSuccessLogout: true));
+        break;
+      case ApiErrorResult<LogoutResponseEntity>():
+        emit(state.copyWith(errorMsgLogout: result.failure.errorMessage));
     }
   }
 
@@ -31,9 +51,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(state.copyWith(isLoading: false, isError: true));
           return;
         }
-        var vehicleResult = await profileUseCase.getVehicle(
-          driverVehicleType,
-        );
+        var vehicleResult = await profileUseCase.getVehicle(driverVehicleType);
         switch (vehicleResult) {
           case ApiSuccessResult<VehicleDtoEntity>():
             emit(

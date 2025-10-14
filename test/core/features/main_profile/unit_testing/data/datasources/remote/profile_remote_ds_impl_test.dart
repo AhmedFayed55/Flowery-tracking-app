@@ -1,6 +1,7 @@
 import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/datasources/remote/profile_remote_ds_impl.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/driver_dto.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/logout/logout_response_dto.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,6 +15,7 @@ void main() {
   late ProfileRemoteDataSourceImpl profileRemoteDataSourceImpl;
   late DriverDto driverDto;
   late VehicleDto vehicleDto;
+  late LogoutResponseDto logoutResponseDto;
 
   setUpAll(() {
     mockApiServices = MockApiServices();
@@ -30,6 +32,8 @@ void main() {
       phone: "0123456789",
     );
     vehicleDto = VehicleDto(id: "1");
+
+    logoutResponseDto = LogoutResponseDto(message: "Logout successful");
   });
 
   group("Test ProfileRemoteDataSourceImpl in Data_Layer", () {
@@ -64,6 +68,17 @@ void main() {
       expect(result.type, equals(vehicleDto.type));
 
       verify(mockApiServices.getVehicle(vehicleType)).called(1);
+    });
+
+    test("success case for logout returns LogoutResponseDto", () async {
+      when(mockApiServices.logout()).thenAnswer((_) async => logoutResponseDto);
+
+      var result = await profileRemoteDataSourceImpl.logout();
+
+      expect(result, isA<LogoutResponseDto>());
+      expect(result.message, equals("Logout successful"));
+
+      verify(mockApiServices.logout()).called(1);
     });
   });
 }
