@@ -1,6 +1,6 @@
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_view_model.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/pages/main_profile.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_action_row.dart';

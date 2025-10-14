@@ -2,7 +2,7 @@ import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository_contract.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/profile_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,19 +10,19 @@ import 'package:mockito/mockito.dart';
 
 import 'profile_usecase_test.mocks.dart';
 
-@GenerateMocks([ProfileRepositoryContract])
+@GenerateMocks([ProfileRepository])
 void main() {
-  late MockProfileRepositoryContract mockProfileRepositoryContract;
+  late MockProfileRepository mockProfileRepository;
   late ProfileUseCase profileUseCase;
   late DriverDtoEntity driverDtoEntity;
   late VehicleDtoEntity vehicleDtoEntity;
 
   setUpAll(() {
-    mockProfileRepositoryContract = MockProfileRepositoryContract();
+    mockProfileRepository = MockProfileRepository();
     driverDtoEntity = DriverDtoEntity(firstName: "John", lastName: "Doe");
     vehicleDtoEntity = VehicleDtoEntity(id: "1", type: "car");
     profileUseCase = ProfileUseCase(
-      profileRepositoryContract: mockProfileRepositoryContract,
+      profileRepository: mockProfileRepository,
     );
   });
 
@@ -33,7 +33,7 @@ void main() {
 
       // Arrange
       when(
-        mockProfileRepositoryContract.getProfile(),
+        mockProfileRepository.getProfile(),
       ).thenAnswer((_) async => mockResult);
 
       // Act
@@ -45,7 +45,7 @@ void main() {
       expect(successResult.data.firstName, equals(driverDtoEntity.firstName));
       expect(successResult.data.lastName, equals(driverDtoEntity.lastName));
 
-      verify(mockProfileRepositoryContract.getProfile()).called(1);
+      verify(mockProfileRepository.getProfile()).called(1);
     });
 
     test("error case for getProfile in ProfileUseCase", () async {
@@ -55,7 +55,7 @@ void main() {
 
       // Arrange
       when(
-        mockProfileRepositoryContract.getProfile(),
+        mockProfileRepository.getProfile(),
       ).thenAnswer((_) async => errorResult);
 
       // Act
@@ -67,7 +67,7 @@ void main() {
       expect(error.failure, isA<Failure>());
       expect(error.failure.errorMessage, contains("Generic error"));
 
-      verify(mockProfileRepositoryContract.getProfile()).called(1);
+      verify(mockProfileRepository.getProfile()).called(1);
     });
   });
 
@@ -80,7 +80,7 @@ void main() {
 
       // Arrange
       when(
-        mockProfileRepositoryContract.getVehicle("car"),
+        mockProfileRepository.getVehicle("car"),
       ).thenAnswer((_) async => mockResult);
 
       // Act
@@ -92,7 +92,7 @@ void main() {
       expect(successResult.data.id, equals(vehicleDtoEntity.id));
       expect(successResult.data.type, equals(vehicleDtoEntity.type));
 
-      verify(mockProfileRepositoryContract.getVehicle("car")).called(1);
+      verify(mockProfileRepository.getVehicle("car")).called(1);
     });
 
     test("error case for getVehicle in ProfileUseCase", () async {
@@ -102,7 +102,7 @@ void main() {
 
       // Arrange
       when(
-        mockProfileRepositoryContract.getVehicle("Car"),
+        mockProfileRepository.getVehicle("Car"),
       ).thenAnswer((_) async => errorResult);
 
       // Act
@@ -113,7 +113,7 @@ void main() {
       var error = result as ApiErrorResult<VehicleDtoEntity>;
       expect(error.failure.errorMessage, contains("Vehicle not found"));
 
-      verify(mockProfileRepositoryContract.getVehicle("Car")).called(1);
+      verify(mockProfileRepository.getVehicle("Car")).called(1);
     });
   });
 }
