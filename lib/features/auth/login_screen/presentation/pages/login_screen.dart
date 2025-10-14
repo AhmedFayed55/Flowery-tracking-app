@@ -5,7 +5,7 @@ import 'package:flowery_tracking_app/core/helpers/dialogue_utils.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/helpers/validators.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_cubit.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_view_model.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_event.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_state.dart';
 import 'package:flutter/material.dart';

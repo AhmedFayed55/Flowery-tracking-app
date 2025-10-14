@@ -5,13 +5,13 @@ import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/entities/login_response_entity.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/usecases/login_usecase.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_cubit.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_view_model.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_event.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'login_cubit_test.mocks.dart';
+import 'login_view_model_test.mocks.dart';
 
 @GenerateMocks([LoginUseCase, SharedPrefHelper])
 void main() {

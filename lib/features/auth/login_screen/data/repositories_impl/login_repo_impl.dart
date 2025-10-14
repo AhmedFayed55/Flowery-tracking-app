@@ -1,19 +1,19 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/data/datasources/remote/login_remote_ds_contract.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/data/datasources/remote/login_remote_ds.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/entities/login_response_entity.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/domain/repositories/login_repo_contract.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/domain/repositories/login_repo.dart';
 import 'package:injectable/injectable.dart';
 
 
-@Injectable(as: LoginRepositoryContract)
-class LoginRepositoryImpl implements LoginRepositoryContract {
-  LoginRemoteDataSourceContract loginRemoteDataSourceContract;
+@Injectable(as: LoginRepository)
+class LoginRepositoryImpl implements LoginRepository {
+  LoginRemoteDataSource loginRemoteDataSource;
   SharedPrefHelper sharedPrefHelper;
 
   LoginRepositoryImpl({
-    required this.loginRemoteDataSourceContract,
+    required this.loginRemoteDataSource,
     required this.sharedPrefHelper,
   });
 
@@ -23,7 +23,7 @@ class LoginRepositoryImpl implements LoginRepositoryContract {
     String password,
   ) async {
     return await safeApiCall<LoginResponseEntity>(() async {
-      var loginResponseModel = await loginRemoteDataSourceContract.login(
+      var loginResponseModel = await loginRemoteDataSource.login(
         email,
         password,
       );

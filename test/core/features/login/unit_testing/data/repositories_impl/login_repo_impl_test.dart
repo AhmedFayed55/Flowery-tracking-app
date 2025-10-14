@@ -3,7 +3,7 @@ import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/data/datasources/remote/login_remote_ds_contract.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/data/datasources/remote/login_remote_ds.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/data/models/login_response_model.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/data/repositories_impl/login_repo_impl.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/entities/login_response_entity.dart';
@@ -12,7 +12,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'login_repo_impl_test.mocks.dart';
 
-@GenerateMocks([LoginRemoteDataSourceContract, SharedPrefHelper])
+@GenerateMocks([LoginRemoteDataSource, SharedPrefHelper])
 void main() {
   late String email;
   late String password;
@@ -20,11 +20,11 @@ void main() {
   late MockSharedPrefHelper mockSharedPrefHelper;
   late LoginResponseModel loginResponseModel;
   late LoginRepositoryImpl loginRepositoryImpl;
-  late MockLoginRemoteDataSourceContract mockLoginRemoteDataSourceContract;
+  late MockLoginRemoteDataSource mockLoginRemoteDataSource;
   late LoginResponseEntity loginResponseEntity;
 
   setUpAll(() {
-    mockLoginRemoteDataSourceContract = MockLoginRemoteDataSourceContract();
+    mockLoginRemoteDataSource = MockLoginRemoteDataSource();
     email = "Email";
     password = "Password";
     value = "token";
@@ -32,7 +32,7 @@ void main() {
     mockSharedPrefHelper = MockSharedPrefHelper();
     loginResponseEntity = LoginResponseEntity(token: value);
     loginRepositoryImpl = LoginRepositoryImpl(
-      loginRemoteDataSourceContract: mockLoginRemoteDataSourceContract,
+      loginRemoteDataSource: mockLoginRemoteDataSource,
       sharedPrefHelper: mockSharedPrefHelper,
     );
   });
@@ -48,7 +48,7 @@ void main() {
 
       // Arrange
       when(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).thenAnswer((_) async => loginResponseModel);
       when(
         mockSharedPrefHelper.saveData(key: AppConstants.token, val: value),
@@ -63,7 +63,7 @@ void main() {
       expect(successResult.data.token, equals(loginResponseEntity.token));
 
       verify(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).called(1);
       verify(
         mockSharedPrefHelper.saveData(key: AppConstants.token, val: value),
@@ -77,7 +77,7 @@ void main() {
 
       // Arrange
       when(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).thenThrow(dioException);
 
       // Act
@@ -89,7 +89,7 @@ void main() {
       expect(errorResult.failure, isA<ServerFailure>());
 
       verify(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).called(1);
       verifyNever(
         mockSharedPrefHelper.saveData(
@@ -105,7 +105,7 @@ void main() {
 
       // Arrange
       when(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).thenThrow(exception);
 
       // Act
@@ -118,7 +118,7 @@ void main() {
       expect(errorResult.failure.errorMessage, contains(errorMessage));
 
       verify(
-        mockLoginRemoteDataSourceContract.login(email, password),
+        mockLoginRemoteDataSource.login(email, password),
       ).called(1);
       verifyNever(
         mockSharedPrefHelper.saveData(
