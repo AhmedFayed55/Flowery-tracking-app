@@ -23,6 +23,7 @@ Future<ApiResult<T>> safeApiCall<T>(Future<T> Function() apiCall) async {
   if (!isConnected) {
     return ApiErrorResult<T>(failure: Failure(errorMessage: 'no internet'));
   }
+
   try {
     final result = await apiCall();
     return ApiSuccessResult<T>(data: result);
