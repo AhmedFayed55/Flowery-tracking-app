@@ -15,7 +15,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const MainLayout());
 
       case AppRoutes.thanksPage:
-        return MaterialPageRoute(builder: (context) => const ThanksPage());
+        final orderId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => ThanksPage(orderId: orderId),
+        );
 
       default:
         return unDefinedRoute();
