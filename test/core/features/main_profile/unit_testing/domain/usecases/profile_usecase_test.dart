@@ -21,9 +21,7 @@ void main() {
     mockProfileRepository = MockProfileRepository();
     driverDtoEntity = DriverDtoEntity(firstName: "John", lastName: "Doe");
     vehicleDtoEntity = VehicleDtoEntity(id: "1", type: "car");
-    profileUseCase = ProfileUseCase(
-      profileRepository: mockProfileRepository,
-    );
+    profileUseCase = ProfileUseCase(profileRepository: mockProfileRepository);
   });
 
   group("getProfile Tests", () {
