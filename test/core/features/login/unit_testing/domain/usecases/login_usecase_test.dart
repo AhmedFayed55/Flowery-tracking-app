@@ -1,27 +1,27 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/entities/login_response_entity.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/domain/repositories/login_repo_contract.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/domain/repositories/login_repo.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/usecases/login_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'login_usecase_test.mocks.dart';
 
-@GenerateMocks([LoginRepositoryContract])
+@GenerateMocks([LoginRepository])
 void main() {
   late String email;
   late String password;
   late LoginUseCase loginUseCase;
-  late MockLoginRepositoryContract mockLoginRepositoryContract;
+  late MockLoginRepository mockLoginRepository;
   late LoginResponseEntity loginResponseEntity;
 
   setUpAll(() {
-    mockLoginRepositoryContract = MockLoginRepositoryContract();
+    mockLoginRepository = MockLoginRepository();
     email = "Email";
     password = "Password";
     loginResponseEntity = LoginResponseEntity(message: "Success");
     loginUseCase = LoginUseCase(
-      loginRepositoryContract: mockLoginRepositoryContract,
+      loginRepository: mockLoginRepository,
     );
   });
 
@@ -34,7 +34,7 @@ void main() {
 
     // Arrange
     when(
-      mockLoginRepositoryContract.login(email, password),
+      mockLoginRepository.login(email, password),
     ).thenAnswer((_) async => mockLoginResponseEntity);
 
     // Act
@@ -45,6 +45,6 @@ void main() {
     var successResult = result as ApiSuccessResult<LoginResponseEntity>;
     expect(successResult.data.token, equals(loginResponseEntity.token));
 
-    verify(mockLoginRepositoryContract.login(email, password)).called(1);
+    verify(mockLoginRepository.login(email, password)).called(1);
   });
 }

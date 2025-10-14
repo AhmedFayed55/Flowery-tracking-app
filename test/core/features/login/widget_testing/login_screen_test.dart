@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_cubit.dart';
+import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_view_model.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/manager/login_state.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
