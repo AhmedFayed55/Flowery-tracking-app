@@ -2,7 +2,6 @@ import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/routing/app_routes.dart';
 import '../../../../core/helpers/flutter_toast.dart';
 import '../../../../core/utils/font_weight.dart';
+import '../manager/profile_view_model.dart';
 
 class LogoutAlertDialogue extends StatelessWidget {
   const LogoutAlertDialogue({super.key});

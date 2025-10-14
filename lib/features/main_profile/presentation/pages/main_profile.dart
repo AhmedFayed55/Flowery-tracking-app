@@ -52,6 +52,7 @@ class _MainProfileState extends State<MainProfile> {
                   return CustomInfoCard(
                     leading: const CircleAvatar(
                       radius: 30,
+
                       /// when add image to profile
                       // backgroundImage: ,
                       backgroundColor: AppColors.pink,
@@ -84,8 +85,8 @@ class _MainProfileState extends State<MainProfile> {
                     showModalBottomSheet(
                       context: context,
                       shape: const RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
                         ),
                       ),
                       builder: (context) => const DialogChangeLocale(),
