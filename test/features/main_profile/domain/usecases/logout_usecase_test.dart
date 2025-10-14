@@ -1,21 +1,21 @@
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/logout_response_entity.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository_contract.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/logout_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import '../../../../core/features/main_profile/unit_testing/domain/usecases/profile_usecase_test.mocks.dart';
 
-@GenerateMocks([ProfileRepositoryContract])
+@GenerateMocks([ProfileRepository])
 void main() {
-  late MockProfileRepositoryContract mockProfileRepositoryContract;
+  late MockProfileRepository mockProfileRepositoryContract;
   late LogoutUseCase logoutUseCase;
   late LogoutResponseEntity logoutResponseEntity;
 
   setUpAll(() {
-    mockProfileRepositoryContract = MockProfileRepositoryContract();
+    mockProfileRepositoryContract = MockProfileRepository();
     logoutResponseEntity = LogoutResponseEntity(message: "Logout successful");
     logoutUseCase = LogoutUseCase(mockProfileRepositoryContract);
   });

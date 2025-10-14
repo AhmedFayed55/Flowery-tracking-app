@@ -1,10 +1,10 @@
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/theme/colors.dart';
 import '../../../../core/di/di.dart';
+import '../manager/profile_view_model.dart';
 import 'logout_alert_dialogue.dart';
 
 class LogoutButton extends StatelessWidget {

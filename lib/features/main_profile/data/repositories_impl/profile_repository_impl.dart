@@ -4,11 +4,11 @@ import 'package:flowery_tracking_app/features/main_profile/data/datasources/remo
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/logout_response_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
-import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository_contract.dart';
+import 'package:flowery_tracking_app/features/main_profile/domain/repositories/profile_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: ProfileRepositoryContract)
-class ProfileRepositoryImpl extends ProfileRepositoryContract {
+@Injectable(as: ProfileRepository)
+class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRemoteDataSource profileRemoteDataSource;
   ProfileLocalDataSource profileLocalDataSource;
 

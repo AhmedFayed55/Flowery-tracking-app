@@ -51,7 +51,9 @@
   "orders": "الطلبات",
   "profile": "الملف الشخصي",
   "english": "الإنجليزية",
+  "arabic": "العربية",
   "language": "اللغة",
+  "change_language": "تغيير اللغة",
   "logout": "تسجيل الخروج",
   "vehicle_info": "معلومات المركبة",
   "app_version": "6.3.0 - (446)"

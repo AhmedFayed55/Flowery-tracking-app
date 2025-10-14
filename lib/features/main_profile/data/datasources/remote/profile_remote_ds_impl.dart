@@ -6,7 +6,7 @@ import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_d
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
-class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
+class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   ApiServices apiServices;
 
   ProfileRemoteDataSourceImpl({required this.apiServices});
