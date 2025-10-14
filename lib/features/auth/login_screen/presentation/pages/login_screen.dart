@@ -1,3 +1,4 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
@@ -34,9 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             /// pushNamedAndRemoveUntil to main_layout
           }
           if (state.isError) {
-            return DialogueUtils.showAlertDialog(
-              context,state.showMessage
-            );
+            return DialogueUtils.showAlertDialog(context, state.showMessage);
           }
         },
         child: Scaffold(
@@ -120,9 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const Spacer(),
                       TextButton(
-                        onPressed: () {
-                          /// Navigate to forget_Password screen
-                        },
+                        onPressed: () =>
+                            context.pushNamed(AppRoutes.forgetPassword),
                         child: Text(
                           AppLocalizations.of(context)!.forget_password,
                           style: Theme.of(context).textTheme.bodySmall

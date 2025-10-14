@@ -62,9 +62,7 @@ void main() {
       var successResult = result as ApiSuccessResult<LoginResponseEntity>;
       expect(successResult.data.token, equals(loginResponseEntity.token));
 
-      verify(
-        mockLoginRemoteDataSource.login(email, password),
-      ).called(1);
+      verify(mockLoginRemoteDataSource.login(email, password)).called(1);
       verify(
         mockSharedPrefHelper.saveData(key: AppConstants.token, val: value),
       ).called(1);
@@ -88,9 +86,7 @@ void main() {
       var errorResult = result as ApiErrorResult<LoginResponseEntity>;
       expect(errorResult.failure, isA<ServerFailure>());
 
-      verify(
-        mockLoginRemoteDataSource.login(email, password),
-      ).called(1);
+      verify(mockLoginRemoteDataSource.login(email, password)).called(1);
       verifyNever(
         mockSharedPrefHelper.saveData(
           key: AppConstants.token,
@@ -117,9 +113,7 @@ void main() {
       expect(errorResult.failure, isA<Failure>());
       expect(errorResult.failure.errorMessage, contains(errorMessage));
 
-      verify(
-        mockLoginRemoteDataSource.login(email, password),
-      ).called(1);
+      verify(mockLoginRemoteDataSource.login(email, password)).called(1);
       verifyNever(
         mockSharedPrefHelper.saveData(
           key: AppConstants.token,

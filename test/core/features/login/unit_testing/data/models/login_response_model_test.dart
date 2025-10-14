@@ -24,6 +24,5 @@ void main() {
     var result = loginResponseModel.toEntity();
     expect(loginResponseEntity.message, equals(result.message));
     expect(loginResponseEntity.token, equals(result.token));
-
   });
 }

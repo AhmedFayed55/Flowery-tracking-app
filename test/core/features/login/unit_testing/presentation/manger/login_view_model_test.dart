@@ -68,7 +68,8 @@ void main() {
       ///Arrange
       var mocFailure = Failure(errorMessage: "Error");
       var errorResult = ApiErrorResult<LoginResponseEntity>(
-        failure: mocFailure,);
+        failure: mocFailure,
+      );
       provideDummy<ApiResult<LoginResponseEntity>>(errorResult);
 
       when(
@@ -92,53 +93,59 @@ void main() {
   group("LoginCubit doIntent -> IsRememberMeEvent", () {
     test("emit isRemember state", () async {
       ///Arrange
-      when(mockSharedPrefHelper.saveData(
-        key: AppConstants.isRemember,
-        val:  anyNamed('val'),
-      )).thenAnswer((_) async => true);
+      when(
+        mockSharedPrefHelper.saveData(
+          key: AppConstants.isRemember,
+          val: anyNamed('val'),
+        ),
+      ).thenAnswer((_) async => true);
 
       ///Act
-      await loginCubit.doIntent(
-        IsRememberMeEvent(isRemember: true),
-      );
+      await loginCubit.doIntent(IsRememberMeEvent(isRemember: true));
 
       ///Assert
       expect(loginCubit.state.isRememberMe, true);
       expect(loginCubit.state.isError, false);
-      verify(mockSharedPrefHelper.saveData(key: AppConstants.isRemember, val: true)).called(1);
+      verify(
+        mockSharedPrefHelper.saveData(key: AppConstants.isRemember, val: true),
+      ).called(1);
     });
   });
 
   group("LoginCubit doIntent -> EmailChangedEvent & PasswordChangedEvent", () {
-    test("emit state with updated email and enable button if password not empty", () async {
-      // Arrange
-      expect(loginCubit.state.email, "");
-      expect(loginCubit.state.isButtonEnabled, false);
+    test(
+      "emit state with updated email and enable button if password not empty",
+      () async {
+        // Arrange
+        expect(loginCubit.state.email, "");
+        expect(loginCubit.state.isButtonEnabled, false);
 
-      // Act
-      await loginCubit.doIntent(EmailChangedEvent(email: email));
+        // Act
+        await loginCubit.doIntent(EmailChangedEvent(email: email));
 
-      // Assert
-      expect(loginCubit.state.email, email);
-      expect(loginCubit.state.isError, false);
-      expect(loginCubit.state.isButtonEnabled, false);
-    });
+        // Assert
+        expect(loginCubit.state.email, email);
+        expect(loginCubit.state.isError, false);
+        expect(loginCubit.state.isButtonEnabled, false);
+      },
+    );
 
-    test("emit state with updated password and enable button if email not empty", () async {
-      // Arrange
-      await loginCubit.doIntent(EmailChangedEvent(email: email));
-      expect(loginCubit.state.password, "");
-      expect(loginCubit.state.isButtonEnabled, false);
+    test(
+      "emit state with updated password and enable button if email not empty",
+      () async {
+        // Arrange
+        await loginCubit.doIntent(EmailChangedEvent(email: email));
+        expect(loginCubit.state.password, "");
+        expect(loginCubit.state.isButtonEnabled, false);
 
-      // Act
-      await loginCubit.doIntent(PasswordChangedEvent(password: password));
+        // Act
+        await loginCubit.doIntent(PasswordChangedEvent(password: password));
 
-      // Assert
-      expect(loginCubit.state.password, password);
-      expect(loginCubit.state.isError, false);
-      expect(loginCubit.state.isButtonEnabled, true);
-    });
+        // Assert
+        expect(loginCubit.state.password, password);
+        expect(loginCubit.state.isError, false);
+        expect(loginCubit.state.isButtonEnabled, true);
+      },
+    );
   });
-
-
 }

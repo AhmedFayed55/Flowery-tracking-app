@@ -20,9 +20,7 @@ void main() {
     email = "Email";
     password = "Password";
     loginResponseEntity = LoginResponseEntity(message: "Success");
-    loginUseCase = LoginUseCase(
-      loginRepository: mockLoginRepository,
-    );
+    loginUseCase = LoginUseCase(loginRepository: mockLoginRepository);
   });
 
   /// Success

@@ -6,7 +6,6 @@ import 'package:flowery_tracking_app/features/auth/login_screen/domain/entities/
 import 'package:flowery_tracking_app/features/auth/login_screen/domain/repositories/login_repo.dart';
 import 'package:injectable/injectable.dart';
 
-
 @Injectable(as: LoginRepository)
 class LoginRepositoryImpl implements LoginRepository {
   LoginRemoteDataSource loginRemoteDataSource;
