@@ -35,9 +35,19 @@ import 'package:retrofit/retrofit.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
 
 import 'package:retrofit/retrofit.dart';
+import 'package:retrofit/retrofit.dart';
+
+import '../../features/auth/forget_password/data/models/forget_password/forget_password_request.dart';
+import '../../features/auth/forget_password/data/models/forget_password/forget_password_respone.dart';
+import '../../features/auth/forget_password/data/models/reset_password/reset_password_body.dart';
+import '../../features/auth/forget_password/data/models/reset_password/reset_password_respone.dart';
+import '../../features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
+import '../../features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
+import '../../features/auth/login_screen/data/models/login_response_model.dart';
 import '../../features/main_profile/data/models/driver_dto.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
 import '../../features/main_profile/data/models/vehicle_dto.dart';
+
 part 'api_services.g.dart';
 
 @RestApi()
@@ -45,6 +55,11 @@ part 'api_services.g.dart';
 abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
+
+
+  @POST(ApiConstants.login)
+  Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
+
 
   @POST(ApiConstants.forgotPassword)
   Future<ForgetPasswordRespone> forgotPassword(
@@ -92,4 +107,11 @@ abstract class ApiServices {
 
   @GET(ApiConstants.logout)
   Future<LogoutResponseDto> logout();
+
+  @POST(ApiConstants.applyDriver)
+  @MultiPart()
+  Future<ApplyResponceDto> apply(@Body() FormData formData);
+
+  @GET(ApiConstants.getAllVehicles)
+  Future<VehiclesResponseDto> getAllVehicles();
 }
