@@ -62,6 +62,7 @@
   "password_reset_successfully" : "Password reset successfully",
   "something_went_wrong" : "Something went wrong",
   "this_field_is_required": "This field is required",
+  "continue_text": "Continue",
   "home": "Home",
   "orders": "Orders",
   "profile": "Profile",
