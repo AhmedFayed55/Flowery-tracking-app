@@ -3,7 +3,7 @@ import 'package:flowery_tracking_app/core/errors/failures.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/driver_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/entities/vehicle_dto_entity.dart';
 import 'package:flowery_tracking_app/features/main_profile/domain/usecases/profile_usecase.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_view_model.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

@@ -2,7 +2,7 @@ import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/general_cubits/locale_cubit.dart';
 import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_view_model.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/dialog_change_locale.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'dialog_change_locale_test.mocks.dart';
-import 'main_profile_test.mocks.dart';
 
 @GenerateMocks([ProfileCubit, LocaleCubit, SharedPrefHelper])
 void main() {

@@ -4,7 +4,7 @@ import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/general_cubits/locale_cubit.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
-import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_cubit.dart';
+import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_view_model.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/custom_action_row.dart';
