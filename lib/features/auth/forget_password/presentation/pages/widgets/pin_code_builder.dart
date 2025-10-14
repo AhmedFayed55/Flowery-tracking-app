@@ -6,22 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
 class PinCodeBuilder extends StatefulWidget {
-  const PinCodeBuilder({
-    super.key,
-  });
-
-
+  const PinCodeBuilder({super.key});
 
   @override
   State<PinCodeBuilder> createState() => _PinCodeBuilderState();
 }
 
-
 class _PinCodeBuilderState extends State<PinCodeBuilder> {
   final pinController = TextEditingController();
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-
 
   @override
   void dispose() {
@@ -32,7 +26,7 @@ class _PinCodeBuilderState extends State<PinCodeBuilder> {
 
   @override
   Widget build(BuildContext context) {
-  var cubit = context.watch<ForgetPasswordCubit>();
+    var cubit = context.watch<ForgetPasswordCubit>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: cubit.state.loading.isOtpCorrectLoading
@@ -53,7 +47,7 @@ class _PinCodeBuilderState extends State<PinCodeBuilder> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter OTP';
                       }
-    
+
                       return null;
                     },
                     errorPinTheme: PinTheme(
@@ -73,9 +67,7 @@ class _PinCodeBuilderState extends State<PinCodeBuilder> {
                       width: 68,
                       height: 74,
                       decoration: BoxDecoration(
-                        color: AppColors.darkGrey.withValues(
-                          alpha: 0.2,
-                        ),
+                        color: AppColors.darkGrey.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       textStyle: const TextStyle(

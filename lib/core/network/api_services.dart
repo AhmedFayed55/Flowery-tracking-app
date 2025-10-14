@@ -8,6 +8,7 @@ import 'package:flowery_tracking_app/features/edit_profile/data/models/response/
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/upload_photo_response_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/response/vehicle_response_dto.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:retrofit/http.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:dio/dio.dart';
@@ -23,6 +24,11 @@ import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_d
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
+
+import 'package:retrofit/retrofit.dart';
+import '../../features/main_profile/data/models/driver_dto.dart';
+import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
+import '../../features/main_profile/data/models/vehicle_dto.dart';
 part 'api_services.g.dart';
 
 @RestApi()
@@ -30,6 +36,17 @@ part 'api_services.g.dart';
 abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
+
+  @POST(ApiConstants.forgotPassword)
+  Future<ForgetPasswordRespone> forgotPassword(
+    @Body() ForgotPasswordRequest body,
+  );
+
+  @POST(ApiConstants.verifyResetCode)
+  Future<VerifyPasswordRespone> verifyCode(@Body() VerifyPasswordBody body);
+
+  @PUT(ApiConstants.resetPassword)
+  Future<ResetPasswordRespone> resetPassword(@Body() ResetPasswordBody body);
 
 
 

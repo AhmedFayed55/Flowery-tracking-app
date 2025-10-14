@@ -44,8 +44,8 @@ void main() {
   });
 
   testWidgets('shows Pinput when not loading', (tester) async {
-    when( mockCubit.state).thenReturn(
-    const ForgetPasswordState(
+    when(mockCubit.state).thenReturn(
+      const ForgetPasswordState(
         loading: ForgetPasswordLoading(
           isOtpCorrectLoading: false,
           isVerifyCodeSentLoading: false,
@@ -60,7 +60,7 @@ void main() {
   });
 
   testWidgets('shows error message when errorOtp exists', (tester) async {
-    when( mockCubit.state).thenReturn(
+    when(mockCubit.state).thenReturn(
       const ForgetPasswordState(
         errors: ForgetPasswordErrors(
           errorOtp: 'Invalid OTP',
