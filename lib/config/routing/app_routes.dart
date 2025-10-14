@@ -11,4 +11,5 @@ abstract class AppRoutes {
   static const String editProfile = "/editProfile";
   static const String logout = "/logout";
   static const String onBoarding = "/onBoarding";
+  static const String mainProfile = "/mainProfile";
 }
