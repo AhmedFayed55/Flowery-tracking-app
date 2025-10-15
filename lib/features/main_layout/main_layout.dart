@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/core/utils/assets.dart';
+import 'package:flowery_tracking_app/features/orders_page/presentation/pages/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../config/theme/colors.dart';
@@ -27,13 +28,7 @@ class _MainLayoutState extends State<MainLayout> {
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
-      Center(
-        key: const Key('orders_page'),
-        child: Text(
-          localization.orders,
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
-      ),
+      OrdersPage(),
       const MainProfile(),
     ];
     return Scaffold(

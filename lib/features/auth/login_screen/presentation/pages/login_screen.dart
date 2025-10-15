@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state.isSuccess) {
-            /// pushNamedAndRemoveUntil to main_layout
+            context.pushReplacementNamed(AppRoutes.mainLayout);
           }
           if (state.isError) {
             return DialogueUtils.showAlertDialog(context, state.showMessage);

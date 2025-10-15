@@ -24,14 +24,19 @@ void main() {
   });
 
   Widget createWidgetUnderTest(OrderStateModel orderState, {int index = 0}) {
-    // Dummy data
     final dummyOrders = GetAllOrdersEntity(
       ordersDtoEntity: [
         OrdersDtoEntity(
           orderDtoEntity: OrderDtoEntity(state: AppConstants.completed),
         ),
+        OrdersDtoEntity(
+          orderDtoEntity: OrderDtoEntity(state: AppConstants.pending),
+        ),
+        OrdersDtoEntity(
+          orderDtoEntity: OrderDtoEntity(state: AppConstants.completed),
+        ),
       ],
-      metadataDtoEntity: MetadataDtoEntity(totalItems: 5),
+      metadataDtoEntity: MetadataDtoEntity(totalItems: 3),
     );
 
     final state = GetAllOrdersState(getAllOrdersEntity: dummyOrders);
@@ -49,7 +54,7 @@ void main() {
     );
   }
 
-  testWidgets("OrderStateWidget if state is matched", (
+  testWidgets("OrderStateWidget displays correct count when state matches", (
     WidgetTester tester,
   ) async {
     final orderState = OrderStateModel(
@@ -60,11 +65,12 @@ void main() {
     await tester.pumpWidget(createWidgetUnderTest(orderState));
     await tester.pumpAndSettle();
 
-    expect(find.text('5'), findsOneWidget);
+  
+    expect(find.text('2'), findsOneWidget);
     expect(find.byIcon(Icons.check_circle_outline), findsOneWidget);
   });
 
-  testWidgets("OrderStateWidget if state is not matched", (
+  testWidgets("OrderStateWidget displays 0 when no orders match state", (
     WidgetTester tester,
   ) async {
     final orderState = OrderStateModel(
@@ -75,6 +81,7 @@ void main() {
     await tester.pumpWidget(createWidgetUnderTest(orderState));
     await tester.pumpAndSettle();
 
+    
     expect(find.text('0'), findsOneWidget);
     expect(find.byIcon(Icons.cancel_outlined), findsOneWidget);
   });

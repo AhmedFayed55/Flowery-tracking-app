@@ -18,9 +18,19 @@ class OrderStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = context.width;
-    var cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
-    var orderStateApi = cubit?.ordersDtoEntity?[index].orderDtoEntity?.state;
+    final screenWidth = context.width;
+    final cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
+    final ordersList = cubit?.ordersDtoEntity ?? [];
+
+    final orderStateApi = (index >= 0 && index < ordersList.length)
+        ? ordersList[index].orderDtoEntity?.state
+        : null;
+
+    
+    final totalSameState = ordersList
+        .where((order) => order.orderDtoEntity?.state == orderState.state)
+        .length;
+
     return Container(
       padding: const EdgeInsets.all(10),
       width: screenWidth * 0.41,
@@ -33,9 +43,7 @@ class OrderStateWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            orderState.state == orderStateApi
-                ? "${cubit?.metadataDtoEntity?.totalItems}"
-                : "0",
+            "$totalSameState",
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Row(
@@ -44,9 +52,10 @@ class OrderStateWidget extends StatelessWidget {
               horizontalSpace(5),
               Text(
                 orderState.state,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium?.copyWith(fontSize: 16),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(fontSize: 16),
               ),
             ],
           ),
