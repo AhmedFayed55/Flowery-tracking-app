@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
+import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/response/change_password_response_dto.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';
-import 'package:retrofit/retrofit.dart';
 import 'package:flowery_tracking_app/features/orders_page/data/models/response/get_all_orders_response.dart';
 import '../../features/auth/forget_password/data/models/forget_password/forget_password_request.dart';
 import '../../features/auth/forget_password/data/models/forget_password/forget_password_respone.dart';
@@ -26,6 +26,11 @@ abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
 
+  @PUT(ApiConstants.ordersState)
+  Future<void> updateOrderStatusApi(
+    @Path("id") String orderId,
+    @Body() Map<String, dynamic> body,
+  );
   @POST(ApiConstants.login)
   Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
 

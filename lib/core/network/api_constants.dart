@@ -1,5 +1,7 @@
 abstract class ApiConstants {
   static const String baseUrl = "https://flower.elevateegy.com/api/v1/";
+  static const String ordersState = "orders/state/{id}";
+  static const String state = "state";
   static const String changePassword = "drivers/change-password";
   static const String getAllDriverOrders = "orders/driver-orders";
   static const String gemeniBaseUrl =
