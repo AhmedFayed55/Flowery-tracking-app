@@ -9,6 +9,8 @@ import 'package:flowery_tracking_app/features/order_details/presentation/pages/o
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/manager/cubit/pick_up_location_cubit.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/pages/pick_up_location.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_profile_screen.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_vehicle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,6 +50,14 @@ class RouteGenerator {
             create: (context) => getIt.get<ForgetPasswordCubit>(),
             child: const ForgetPasswordScreen(),
           ),
+        );
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
+        );
+      case AppRoutes.updateVehicle:
+        return MaterialPageRoute(
+          builder: (context) => const EditVehicleScreen(),
         );
 
       case AppRoutes.ordersPage:

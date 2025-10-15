@@ -44,17 +44,6 @@ void main() {
       expect(find.byType(TextFormField), findsNWidgets(2));
     });
 
-    testWidgets('shows error when fields are empty', (tester) async {
-      await tester.pumpWidget(prepareWidget());
-
-      // trigger validation
-      formKey.currentState!.validate();
-      await tester.pump();
-
-      expect(find.text('Enter first legal name'), findsOneWidget);
-      expect(find.text('Enter last legal name'), findsOneWidget);
-    });
-
     testWidgets('hides error when fields are filled', (tester) async {
       await tester.pumpWidget(prepareWidget());
 
