@@ -9,9 +9,9 @@ abstract class AppConstants {
   static const String bearer = "Bearer";
   static const String noInternet = 'No Internet Connection';
   static const String orderId = 'orderId';
+  static const String inProgress = 'inProgress';
   static const String cancelled = "cancelled";
   static const String completed = "completed";
-  static const String inProgress = "inProgress";
   static const String vehicleLicenseKey = 'vehicleLicense';
   static const String nIDImgKey = 'NIDImg';
   static const String candidatesKey = 'candidates';

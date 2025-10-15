@@ -13,23 +13,11 @@ class FirebaseService {
     String docId,
     Map<String, dynamic> data,
   ) async {
-    try {
-      await _firestore.collection(collectionPath).doc(docId).set(data);
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to add data: ${e.message}');
-    } catch (e) {
-      throw Exception('An unexpected error occurred: $e');
-    }
+    await _firestore.collection(collectionPath).doc(docId).set(data);
   }
 
   Future<DocumentSnapshot> getData(String collectionPath, String docId) async {
-    try {
-      return await _firestore.collection(collectionPath).doc(docId).get();
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to get data: ${e.message}');
-    } catch (e) {
-      throw Exception('An unexpected error occurred: $e');
-    }
+    return await _firestore.collection(collectionPath).doc(docId).get();
   }
 
   Future<void> updateData(
@@ -37,23 +25,11 @@ class FirebaseService {
     String docId,
     Map<String, dynamic> data,
   ) async {
-    try {
-      await _firestore.collection(collectionPath).doc(docId).update(data);
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to update data: ${e.message}');
-    } catch (e) {
-      throw Exception('An unexpected error occurred: $e');
-    }
+    await _firestore.collection(collectionPath).doc(docId).update(data);
   }
 
   Future<void> deleteData(String collectionPath, String docId) async {
-    try {
-      await _firestore.collection(collectionPath).doc(docId).delete();
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to delete data: ${e.message}');
-    } catch (e) {
-      throw Exception('An unexpected error occurred: $e');
-    }
+    await _firestore.collection(collectionPath).doc(docId).delete();
   }
 
   Stream<DocumentSnapshot> streamData(String collectionPath, String docId) {
