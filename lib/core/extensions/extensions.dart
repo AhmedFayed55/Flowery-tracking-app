@@ -16,3 +16,17 @@ extension Localization on BuildContext {
   /// usage: context.localization
   AppLocalizations get localization => AppLocalizations.of(this)!;
 }
+
+extension ThemeX on BuildContext {
+  /// Full ThemeData
+  ThemeData get theme => Theme.of(this);
+
+  /// Shortcut to textTheme
+  TextTheme get textTheme => theme.textTheme;
+
+  /// Shortcut to colorScheme
+  ColorScheme get colorScheme => theme.colorScheme;
+
+  /// Is current theme light?
+  bool get isDark => theme.brightness == Brightness.light;
+}

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
@@ -17,6 +18,12 @@ import '../../features/auth/login_screen/data/models/login_response_model.dart';
 import '../../features/main_profile/data/models/driver_dto.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
 import '../../features/main_profile/data/models/vehicle_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/request/edit_profile_request_model.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/request/edit_vehicle_request_model.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/response/edit_profile_response_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/response/get_logged_driver_response_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/response/upload_photo_response_dto.dart';
+import 'package:flowery_tracking_app/features/edit_profile/data/models/response/vehicle_response_dto.dart';
 
 part 'api_services.g.dart';
 
@@ -56,10 +63,33 @@ abstract class ApiServices {
   @GET(ApiConstants.getAllVehicles)
   Future<VehiclesResponseDto> getAllVehicles();
 
+
   @PATCH(ApiConstants.changePassword)
   Future<ChangePasswordResponseDto> changePassword(
     @Body() ChangePasswordRequestDto changePasswordRequestDto,
   );
   @GET(ApiConstants.getAllDriverOrders)
   Future<GetAllOrdersResponse> getAllDriverOrders();
+
+  @GET(ApiConstants.getDriverData)
+  Future<GetLoggedDriverResponseDto> getLoggedUserData();
+
+  @PUT(ApiConstants.editProfile)
+  Future<EditProfileResponseDto> editProfile(
+    @Body() EditProfileRequestModel editProfileRequest,
+  );
+
+  @PUT(ApiConstants.editProfile)
+  Future<EditProfileResponseDto> updateVehicle(
+    @Body() EditVehicleRequestModel editVehicleRequest,
+  );
+
+  @PUT(ApiConstants.uploadProfilePhoto)
+  @MultiPart()
+  Future<UploadPhotoResponseDto> uploadProfilePhoto(
+    @Part(name: "photo") File photo,
+  );
+
+  @GET(ApiConstants.getAllVehicles)
+  Future<VehicleResponseDto> getAllVehiclesEditProfile();
 }
