@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   group("safeApiCall", () {

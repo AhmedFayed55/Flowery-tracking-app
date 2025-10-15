@@ -10,6 +10,7 @@ abstract class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.white,
         foregroundColor: AppColors.black,
+        scrolledUnderElevation: 0,
         elevation: 0,
         titleTextStyle: TextStyle(
           fontSize: 20,
