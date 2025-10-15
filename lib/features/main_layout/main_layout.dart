@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../config/theme/colors.dart';
 import '../../core/helpers/spacing.dart';
 import '../../core/l10n/translations/app_localizations.dart';
+import '../main_profile/presentation/pages/main_profile.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -33,13 +34,7 @@ class _MainLayoutState extends State<MainLayout> {
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
-      Center(
-        key: const Key('profile_page'),
-        child: Text(
-          localization.profile,
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
-      ),
+      const MainProfile(),
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
