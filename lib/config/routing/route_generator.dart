@@ -2,6 +2,7 @@ import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/view/page/change_password_screen.dart';
 import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
+import 'package:flowery_tracking_app/features/orders_page/presentation/pages/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/di/di.dart';
@@ -37,6 +38,9 @@ class RouteGenerator {
             child: const ForgetPasswordScreen(),
           ),
         );
+
+      case AppRoutes.ordersPage:
+        return MaterialPageRoute(builder: (context) => OrdersPage());
 
       default:
         return unDefinedRoute();
