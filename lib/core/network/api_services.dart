@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/response/change_password_response_dto.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/apply_responce_dto.dart';
 import 'package:flowery_tracking_app/features/auth/apply/data/model/responce/vehicel_responce_dto.dart';
 import 'package:flowery_tracking_app/features/orders_page/data/models/response/get_all_orders_response.dart';

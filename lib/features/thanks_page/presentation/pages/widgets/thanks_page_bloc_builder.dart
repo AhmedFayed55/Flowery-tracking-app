@@ -51,7 +51,6 @@ class _ThanksPageBlocBuilderState extends State<ThanksPageBlocBuilder> {
                     },
                     child: const Text('Try again'),
                   ),
-
                 ],
               ),
             ),

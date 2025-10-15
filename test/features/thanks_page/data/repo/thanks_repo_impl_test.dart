@@ -44,8 +44,9 @@ void main() {
       // Arrange
       when(mockConnectionChecker.hasConnection).thenAnswer((_) async => true);
 
-      when(mockThanksDs.updateOrderStatusApi(orderId, orderStatus))
-          .thenAnswer((_) async =>  ApiSuccessResult(data: 'Success'));
+      when(
+        mockThanksDs.updateOrderStatusApi(orderId, orderStatus),
+      ).thenAnswer((_) async => ApiSuccessResult(data: 'Success'));
 
       // Act
       final result = await repo.updateOrderStatusApi(orderId, orderStatus);

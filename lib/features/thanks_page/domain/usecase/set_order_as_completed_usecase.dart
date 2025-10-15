@@ -7,8 +7,7 @@ import 'package:injectable/injectable.dart';
 class SetOrderAsCompletedUsecase {
   final ThanksRepo _repo;
   SetOrderAsCompletedUsecase(this._repo);
-  Future<ApiResult> invoke(String orderId, ) {
+  Future<ApiResult> invoke(String orderId) {
     return _repo.updateOrderStatusApi(orderId, OrderStatus.completed);
   }
 }
-

@@ -26,33 +26,39 @@ void main() {
     const orderId = '123';
     const orderStatus = OrderStatus.completed;
 
-    test(' calls ApiServices.updateOrderStatusApi with correct parameters', () async {
-      // Arrange
-      when(mockApiServices.updateOrderStatusApi(any, any))
-          .thenAnswer((_) async => Future.value());
+    test(
+      ' calls ApiServices.updateOrderStatusApi with correct parameters',
+      () async {
+        // Arrange
+        when(
+          mockApiServices.updateOrderStatusApi(any, any),
+        ).thenAnswer((_) async => Future.value());
 
-      // Act
-      await thanksDs.updateOrderStatusApi(orderId, orderStatus);
+        // Act
+        await thanksDs.updateOrderStatusApi(orderId, orderStatus);
 
-      // Assert
-      verify(
-        mockApiServices.updateOrderStatusApi(
-          orderId,
-          {ApiConstants.state: orderStatus.statusText},
-        ),
-      ).called(1);
-    });
+        // Assert
+        verify(
+          mockApiServices.updateOrderStatusApi(orderId, {
+            ApiConstants.state: orderStatus.statusText,
+          }),
+        ).called(1);
+      },
+    );
 
     test(' calls SharedPrefHelper.removeData with correct key', () async {
       // Arrange
-      when(mockSharedPrefHelper.removeData(key: anyNamed('key')))
-          .thenAnswer((_) async => Future.value( true));
+      when(
+        mockSharedPrefHelper.removeData(key: anyNamed('key')),
+      ).thenAnswer((_) async => Future.value(true));
 
       // Act
       await thanksDs.deleteOrderLocal();
 
       // Assert
-      verify(mockSharedPrefHelper.removeData(key: AppConstants.orderId)).called(1);
+      verify(
+        mockSharedPrefHelper.removeData(key: AppConstants.orderId),
+      ).called(1);
     });
   });
 }
