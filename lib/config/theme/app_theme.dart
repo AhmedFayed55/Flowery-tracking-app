@@ -135,7 +135,7 @@ abstract class AppTheme {
         ),
         bodyMedium: TextStyle(
           fontWeight: AppFontWeight.medium,
-          fontSize: 16,
+          fontSize: 14,
           color: AppColors.black,
         ),
         titleSmall: TextStyle(

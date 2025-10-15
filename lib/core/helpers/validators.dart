@@ -89,4 +89,21 @@ abstract class Validations {
     }
     return null;
   }
+
+  static String? validateInternationalPhoneNumber(
+    BuildContext context,
+    String? phoneNumber,
+  ) {
+    if (phoneNumber == null || phoneNumber.isEmpty) {
+      return AppLocalizations.of(context)!.phone_number_is_required;
+    }
+
+    final internationalPhoneRegex = RegExp(r'^\+\d{7,15}$');
+
+    if (!internationalPhoneRegex.hasMatch(phoneNumber)) {
+      return AppLocalizations.of(context)!.enter_phone_with_country_code;
+    }
+
+    return null;
+  }
 }

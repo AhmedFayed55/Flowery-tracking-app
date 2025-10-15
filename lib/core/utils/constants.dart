@@ -24,4 +24,14 @@ abstract class AppConstants {
   static const String instructionIdCard = 'Check if this is a valid ID Card';
   static const String instructionDriverLicense =
       'Check if this is a valid Driver License';
+  static const String gender = 'gender';
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String femaleValue = 'Female';
+  static const int mainDuration = 10;
+  static const int resendDuration = 3;
+  static const int pickerImageQuality = 100;
+  static const int imageQuality = 80;
+  static const String passwordCharacters = "★★★★★★";
+  static const String notificationCountExceeded = '9+';
 }
