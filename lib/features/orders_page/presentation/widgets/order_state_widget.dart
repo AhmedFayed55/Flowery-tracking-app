@@ -53,6 +53,5 @@ class OrderStateWidget extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

@@ -30,19 +30,15 @@ class OrdersPage extends StatelessWidget {
         body: BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(color: AppColors.pink),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(color: AppColors.pink),
               );
             }
             if (state.isError) {
-              return Expanded(
-                child: Center(
-                  child: Text(
-                    context.localization.no_orders_found,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
+              return Center(
+                child: Text(
+                  context.localization.no_orders_found,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
               );
             }
