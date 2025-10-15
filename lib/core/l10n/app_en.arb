@@ -80,11 +80,9 @@
   "continue_text": "Continue",
   "home": "Home",
   "orders": "Orders",
-  "profile": "Profile",
   "location_not_found" : "Location not found",
   "pickup_location" : "Pickup Location",
-  "user_location" : "User Location"
-  "profile": "Profile",
+  "user_location" : "User Location",
   "thank_you" : "Thank you!!",
   "the_order_delivered_successfully" : "The order delivered\n successfully",
   "done" : "Done",
