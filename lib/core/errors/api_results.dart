@@ -21,10 +21,9 @@ Future<ApiResult<T>> safeApiCall<T>(Future<T> Function() apiCall) async {
   final bool isConnected =
       await InternetConnectionChecker.instance.hasConnection;
   if (!isConnected) {
-    return ApiErrorResult<T>(
-      failure: Failure(errorMessage: "No internet connection"),
-    );
+    return ApiErrorResult<T>(failure: Failure(errorMessage: 'no internet'));
   }
+
   try {
     final result = await apiCall();
     return ApiSuccessResult<T>(data: result);
