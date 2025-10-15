@@ -18,10 +18,12 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+
       case AppRoutes.changePassword:
         return MaterialPageRoute(
           builder: (context) => const ChangePasswordScreen(),
         );
+
       case AppRoutes.register:
         return MaterialPageRoute(builder: (context) => const ApplyScreen());
 
