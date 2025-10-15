@@ -107,6 +107,7 @@
   "confirm_logout": "Confirm Logout!!",
   "cancel": "Cancel",
 
+
   "gender": "gender",
   "male": "male",
   "female": "female",
@@ -149,3 +150,5 @@
   
   
 }
+
+

@@ -52,6 +52,7 @@ class RouteGenerator {
       case AppRoutes.ordersPage:
         return MaterialPageRoute(builder: (context) => OrdersPage());
 
+
       default:
         return unDefinedRoute();
     }
