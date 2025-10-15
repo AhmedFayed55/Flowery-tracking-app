@@ -8,6 +8,4 @@ abstract class AppAssets {
   static const String assetsImagesCamera = "assets/images/camera.svg";
   static const String assetsImagesNotification =
       "assets/images/notification.svg";
-
-
 }
