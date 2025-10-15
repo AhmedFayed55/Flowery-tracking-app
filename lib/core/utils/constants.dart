@@ -7,6 +7,9 @@ abstract class AppConstants {
   static const String enKey = 'en';
   static const String authorization = 'Authorization';
   static const String bearer = "Bearer";
+  static const String cancelled = "cancelled";
+  static const String completed = "completed";
+  static const String inProgress = "inProgress";
   static const String vehicleLicenseKey = 'vehicleLicense';
   static const String nIDImgKey = 'NIDImg';
   static const String candidatesKey = 'candidates';

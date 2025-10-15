@@ -1,5 +1,6 @@
 abstract class ApiConstants {
   static const String baseUrl = "https://flower.elevateegy.com/api/v1/";
+  static const String getAllDriverOrders = "orders/driver-orders";
   static const String gemeniBaseUrl =
       "https://generativelanguage.googleapis.com/v1";
   static const String applyDriver = 'drivers/apply';
