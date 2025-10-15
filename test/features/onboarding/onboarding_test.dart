@@ -42,7 +42,7 @@ void main() {
       expect(find.byType(ElevatedButton), findsNWidgets(2));
       await tester.tap(find.widgetWithText(ElevatedButton, localization.login));
       await tester.pumpAndSettle();
-      expect(find.byType(LoginScreen), findsOneWidget);
+      expect(find.text("login Screen"), findsOneWidget);
     });
   });
 }
