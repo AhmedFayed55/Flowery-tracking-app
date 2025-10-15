@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/utils/constants.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/store_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/user_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/store_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/user_entity.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/pages/widgets/map_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

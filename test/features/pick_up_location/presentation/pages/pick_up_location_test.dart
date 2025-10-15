@@ -1,6 +1,6 @@
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/store_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/user_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/store_entity.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/user_entity.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/manager/cubit/pick_up_location_cubit.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/manager/cubit/pick_up_location_state.dart';
 import 'package:flowery_tracking_app/features/pick_up_location/presentation/pages/pick_up_location.dart';
