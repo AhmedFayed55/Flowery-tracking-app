@@ -106,5 +106,8 @@
   "app_version": "v 6.3.0 - (446)",
   "confirm_logout": "Confirm Logout!!",
   "cancel": "Cancel",
+  "gender": "gender",
+  "male": "male",
+  "female": "female",
   "logout_successfully": "Logout Successfully"
 }
