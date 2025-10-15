@@ -38,7 +38,10 @@ class OrdersPage extends StatelessWidget {
               return Center(
                 child: Text(
                   context.localization.no_orders_found,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .labelSmall,
                 ),
               );
             }
@@ -70,7 +73,10 @@ class OrdersPage extends StatelessWidget {
                         verticalSpace(16),
                         Text(
                           context.localization.recent_orders,
-                          style: Theme.of(context).textTheme.labelMedium,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .labelMedium,
                         ),
                         verticalSpace(10),
                       ],
@@ -85,7 +91,7 @@ class OrdersPage extends StatelessWidget {
                           return verticalSpace(16);
                         },
                         itemCount:
-                            state.getAllOrdersEntity?.ordersDtoEntity?.length ??
+                        state.getAllOrdersEntity?.ordersDtoEntity?.length ??
                             0,
                       ),
                     ),
@@ -96,7 +102,10 @@ class OrdersPage extends StatelessWidget {
               return Center(
                 child: Text(
                   context.localization.something_went_wrong,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .labelSmall,
                 ),
               );
             }
