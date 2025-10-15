@@ -10,6 +10,7 @@ abstract class AppRoutes {
   static const String changePassword = "/changePassword";
   static const String editProfile = "/editProfile";
   static const String logout = "/logout";
+  static const String thanksPage = "/thanksPage";
   static const String orderDetails = "/orderDetails";
   static const String ordersPage = "/ordersPage";
   static const String mainProfile = "/mainProfile";
