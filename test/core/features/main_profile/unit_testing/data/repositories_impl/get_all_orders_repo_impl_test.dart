@@ -60,9 +60,7 @@ void main() {
 
     test("Error case for getAllDriverOrders with DioException", () async {
       // Arrange
-      final dioException = DioException(
-        requestOptions: RequestOptions(),
-      );
+      final dioException = DioException(requestOptions: RequestOptions());
       when(
         mockGetAllOrdersRemoteDataSource.getAllDriverOrders(),
       ).thenThrow(dioException);
@@ -97,6 +95,5 @@ void main() {
 
       verify(mockGetAllOrdersRemoteDataSource.getAllDriverOrders()).called(1);
     });
-
   });
 }

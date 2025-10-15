@@ -1,4 +1,5 @@
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/features/auth/change_password/view/page/change_password_screen.dart';
 import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/pages/orders_page.dart';
@@ -18,6 +19,12 @@ class RouteGenerator {
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+
+      case AppRoutes.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => const ChangePasswordScreen(),
+        );
+
       case AppRoutes.register:
         return MaterialPageRoute(builder: (context) => const ApplyScreen());
 

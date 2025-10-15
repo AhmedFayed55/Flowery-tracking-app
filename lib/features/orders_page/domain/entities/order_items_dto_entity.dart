@@ -6,4 +6,10 @@ class OrderItemsDtoEntity {
   final int? quantity;
   final String? id;
 
-  OrderItemsDtoEntity({this.productDtoEntity, this.price, this.quantity, this.id});}
+  OrderItemsDtoEntity({
+    this.productDtoEntity,
+    this.price,
+    this.quantity,
+    this.id,
+  });
+}
