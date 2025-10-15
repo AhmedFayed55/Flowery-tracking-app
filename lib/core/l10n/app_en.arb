@@ -84,6 +84,10 @@
   "location_not_found" : "Location not found",
   "pickup_location" : "Pickup Location",
   "user_location" : "User Location"
+  "profile": "Profile",
+  "thank_you" : "Thank you!!",
+  "the_order_delivered_successfully" : "The order delivered\n successfully",
+  "done" : "Done",
   "order": "Order",
   "orderDetails": "Order Details",
   "pickupAddress": "Pickup address",

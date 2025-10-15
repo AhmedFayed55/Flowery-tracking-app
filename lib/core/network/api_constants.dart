@@ -5,6 +5,8 @@ abstract class ApiConstants {
   static const String coordinates = "coordinates";
   static const String mapUrl =
       "https://api.openrouteservice.org/v2/directions/driving-car?api_key=";
+  static const String ordersState = "orders/state/{id}";
+  static const String state = "state";
   static const String changePassword = "drivers/change-password";
   static const String getAllDriverOrders = "orders/driver-orders";
   static const String gemeniBaseUrl =
