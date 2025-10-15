@@ -1,5 +1,10 @@
 abstract class ApiConstants {
   static const String baseUrl = "https://flower.elevateegy.com/api/v1/";
+  static const String features = "features";
+  static const String geometry = "geometry";
+  static const String coordinates = "coordinates";
+  static const String mapUrl =
+      "https://api.openrouteservice.org/v2/directions/driving-car?api_key=";
   static const String ordersState = "orders/state/{id}";
   static const String state = "state";
   static const String changePassword = "drivers/change-password";
