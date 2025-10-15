@@ -2,7 +2,6 @@ import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_view_model.dart';
-import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,8 +12,6 @@ class OrderItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
-      builder: (context, state) {
         var cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
         return Container(
           width: double.infinity,
@@ -166,7 +163,5 @@ class OrderItemWidget extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
   }
 }
