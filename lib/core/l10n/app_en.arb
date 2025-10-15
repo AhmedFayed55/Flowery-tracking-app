@@ -81,7 +81,6 @@
   "home": "Home",
   "orders": "Orders",
   "order": "Order",
-  "profile": "Profile",
   "orderDetails": "Order Details",
   "pickupAddress": "Pickup address",
   "userAddress": "User address",
@@ -91,7 +90,7 @@
   "paymentMethod": "Payment method",
   "paid": "Paid",
   "cashOnDelivery": "Cash on delivery",
-  "invalidDate": "Invalid date"
+  "invalidDate": "Invalid date",
   "current_password":"Current Password",
   "new_password":"New Password",
   "confirm_password":"Confirm Password",

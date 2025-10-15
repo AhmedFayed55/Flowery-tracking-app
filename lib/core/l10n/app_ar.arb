@@ -75,9 +75,7 @@
   "paymentMethod": "طريقة الدفع",
   "paid": "مدفوع",
   "cashOnDelivery": "الدفع عند الاستلام",
-  "invalidDate": "تاريخ غير صالح"
-}
-  "profile": "الملف الشخصي",
+  "invalidDate": "تاريخ غير صالح",
   "recent_orders": "الطلبات الأخيرة",
   "cancelled": "أُلغيت",
   "completed": "مكتملة",
