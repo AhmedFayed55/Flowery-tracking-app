@@ -124,6 +124,7 @@
   "my_orders": "طلباتي",
   "flowery_store": "متجر فلاوري",
   "no_orders_found": "لا توجد طلبات",
+
   "something_went_wrong" : "حدث خطاء ما",
   "english": "الإنجليزية",
   "arabic": "العربية",
@@ -213,4 +214,7 @@
  
 }
 
+
+
+ 
 
