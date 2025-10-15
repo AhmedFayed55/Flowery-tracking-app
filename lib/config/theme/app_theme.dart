@@ -57,6 +57,7 @@ abstract class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: AppColors.darkGrey.withValues(alpha: .5),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+
         errorStyle: const TextStyle(
           fontSize: 12,
           fontWeight: AppFontWeight.regular,
@@ -134,8 +135,8 @@ abstract class AppTheme {
         ),
         bodyMedium: TextStyle(
           fontWeight: AppFontWeight.medium,
-          fontSize: 14,
-          color: AppColors.white,
+          fontSize: 16,
+          color: AppColors.black,
         ),
         titleSmall: TextStyle(
           fontWeight: AppFontWeight.medium,

@@ -64,7 +64,18 @@
   "password_reset_successfully": "تم استعادة كلمة المرور بنجاح",
   "home": "الرئيسية",
   "orders": "الطلبات",
+  "order": "الطلب",
   "profile": "الملف الشخصي",
+  "orderDetails": "تفاصيل الطلب",
+  "pickupAddress": "عنوان الاستلام",
+  "userAddress": "عنوان المستخدم",
+  "orderDetailsSection": "تفاصيل الطلب",
+  "total": "الإجمالي",
+  "egp": "ج.م",
+  "paymentMethod": "طريقة الدفع",
+  "paid": "مدفوع",
+  "cashOnDelivery": "الدفع عند الاستلام",
+  "invalidDate": "تاريخ غير صالح",
   "recent_orders": "الطلبات الأخيرة",
   "cancelled": "أُلغيت",
   "completed": "مكتملة",
@@ -75,5 +86,4 @@
   "flowery_store": "متجر فلاوري",
   "no_orders_found": "لا توجد طلبات",
   "something_went_wrong": "حدث خطأ ما"
-
 }

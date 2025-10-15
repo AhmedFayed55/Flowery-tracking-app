@@ -1,8 +1,8 @@
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/view/page/change_password_screen.dart';
 import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
-import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/pages/orders_page.dart';
+import 'package:flowery_tracking_app/features/order_details/presentation/pages/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/di/di.dart';
@@ -14,11 +14,10 @@ import '../../features/main_profile/presentation/pages/main_profile.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.login:
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
-
       case AppRoutes.mainLayout:
         return MaterialPageRoute(builder: (context) => const MainLayout());
+      case AppRoutes.orderDetails:
+        return MaterialPageRoute(builder: (context) => OrderDetailsScreen());
 
       case AppRoutes.changePassword:
         return MaterialPageRoute(
