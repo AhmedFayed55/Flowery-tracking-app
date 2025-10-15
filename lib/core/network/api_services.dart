@@ -63,12 +63,14 @@ abstract class ApiServices {
   @GET(ApiConstants.getAllVehicles)
   Future<VehiclesResponseDto> getAllVehicles();
 
+
   @PATCH(ApiConstants.changePassword)
   Future<ChangePasswordResponseDto> changePassword(
     @Body() ChangePasswordRequestDto changePasswordRequestDto,
   );
   @GET(ApiConstants.getAllDriverOrders)
   Future<GetAllOrdersResponse> getAllDriverOrders();
+
 
   @GET(ApiConstants.getDriverData)
   Future<GetLoggedDriverResponseDto> getLoggedUserData();

@@ -24,7 +24,6 @@ abstract class AppConstants {
   static const String instructionIdCard = 'Check if this is a valid ID Card';
   static const String instructionDriverLicense =
       'Check if this is a valid Driver License';
-  static const String noInternet = 'No Internet Connection';
   static const String gender = 'gender';
   static const String male = 'male';
   static const String female = 'female';
