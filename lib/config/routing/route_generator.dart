@@ -1,6 +1,8 @@
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/features/auth/apply/presentation/pages/apply_screen.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/presentation/pages/login_screen.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_profile_screen.dart';
+import 'package:flowery_tracking_app/features/edit_profile/presentation/pages/edit_vehicle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/di/di.dart';
@@ -29,6 +31,14 @@ class RouteGenerator {
             create: (context) => getIt.get<ForgetPasswordCubit>(),
             child: const ForgetPasswordScreen(),
           ),
+        );
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
+        );
+      case AppRoutes.updateVehicle:
+        return MaterialPageRoute(
+          builder: (context) => const EditVehicleScreen(),
         );
 
       default:

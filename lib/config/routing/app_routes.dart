@@ -11,4 +11,5 @@ abstract class AppRoutes {
   static const String editProfile = "/editProfile";
   static const String logout = "/logout";
   static const String mainProfile = "/mainProfile";
+  static const String updateVehicle = "/updateVehicle";
 }
