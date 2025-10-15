@@ -1,0 +1,13 @@
+import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
+
+abstract interface class OrderDetailsRepo {
+  Future<FirebaseResult<OrdersEntity>> getOrderDetails(String orderId);
+  Future<FirebaseResult> updateOrderStatusFirebase(
+    String orderId,
+    RiderOrderStatus status,
+  );
+  Future<FirebaseResult> updateDriverLocation(String orderId, String location);
+  Stream<Map<String, dynamic>?> streamOrder(String orderId);
+}

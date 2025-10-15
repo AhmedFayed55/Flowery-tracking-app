@@ -10,6 +10,7 @@ abstract class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.white,
         foregroundColor: AppColors.black,
+        scrolledUnderElevation: 0,
         elevation: 0,
         titleTextStyle: TextStyle(
           fontSize: 20,
@@ -56,6 +57,7 @@ abstract class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: AppColors.darkGrey.withValues(alpha: .5),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+
         errorStyle: const TextStyle(
           fontSize: 12,
           fontWeight: AppFontWeight.regular,
@@ -133,8 +135,8 @@ abstract class AppTheme {
         ),
         bodyMedium: TextStyle(
           fontWeight: AppFontWeight.medium,
-          fontSize: 14,
-          color: AppColors.white,
+          fontSize: 16,
+          color: AppColors.black,
         ),
         titleSmall: TextStyle(
           fontWeight: AppFontWeight.medium,
