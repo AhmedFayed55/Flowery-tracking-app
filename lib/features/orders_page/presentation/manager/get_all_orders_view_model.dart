@@ -11,7 +11,8 @@ import 'get_all_orders_state.dart';
 class GetAllOrdersCubit extends Cubit<GetAllOrdersState> {
   final GetAllOrdersUseCase getAllOrdersUseCase;
 
-  GetAllOrdersCubit({required this.getAllOrdersUseCase}) : super(GetAllOrdersState());
+  GetAllOrdersCubit({required this.getAllOrdersUseCase})
+    : super(GetAllOrdersState());
 
   Future<void> doIntent(GetAllDriverOrdersEvent event) async {
     switch (event) {
@@ -26,7 +27,13 @@ class GetAllOrdersCubit extends Cubit<GetAllOrdersState> {
     var getAllOrdersEntity = await getAllOrdersUseCase.getAllDriverOrders();
     switch (getAllOrdersEntity) {
       case ApiSuccessResult<GetAllOrdersEntity>():
-        emit(state.copyWith(isLoading: false, isSuccess: true,getAllOrdersEntity: getAllOrdersEntity.data));
+        emit(
+          state.copyWith(
+            isLoading: false,
+            isSuccess: true,
+            getAllOrdersEntity: getAllOrdersEntity.data,
+          ),
+        );
         break;
       case ApiErrorResult<GetAllOrdersEntity>():
         emit(state.copyWith(isLoading: false, isError: true));
