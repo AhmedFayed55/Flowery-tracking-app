@@ -56,5 +56,7 @@
   "pickup_address": "Pickup address",
   "user_address": "User address",
   "my_orders": "My orders",
-  "flowery_store": "Flowery store"
+  "flowery_store": "Flowery store",
+  "no_orders_found": "No Orders Found",
+  "something_went_wrong": "Something Went Wrong"
 }

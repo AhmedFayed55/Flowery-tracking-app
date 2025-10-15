@@ -8,13 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderItemWidget extends StatelessWidget {
   final int index;
-  const OrderItemWidget({super.key,required this.index,
-  });
+
+  const OrderItemWidget({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
       builder: (context, state) {
+        var cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
         return Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height * .35,
@@ -43,14 +44,14 @@ class OrderItemWidget extends StatelessWidget {
                   ),
                   horizontalSpace(5),
                   Text(
-                    "${state.getAllOrdersEntity?.ordersDtoEntity?[index].orderDtoEntity?.state}",
+                    "${cubit?.ordersDtoEntity?[index].orderDtoEntity?.state}",
                     style: Theme.of(
                       context,
                     ).textTheme.displayMedium?.copyWith(color: AppColors.green),
                   ),
                   const Spacer(),
                   Text(
-                    "${state.getAllOrdersEntity?.ordersDtoEntity?[index].orderDtoEntity?.orderNumber}",
+                    "${cubit?.ordersDtoEntity?[index].orderDtoEntity?.orderNumber}",
                     style: Theme.of(
                       context,
                     ).textTheme.displayMedium?.copyWith(color: AppColors.black),
@@ -75,8 +76,11 @@ class OrderItemWidget extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    CircleAvatar(radius: 25,
-                      backgroundImage: NetworkImage("${state.getAllOrdersEntity?.ordersDtoEntity?[index].storeDtoEntity?.image}"),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                        "${cubit?.ordersDtoEntity?[index].storeDtoEntity?.image}",
+                      ),
                     ),
                     horizontalSpace(8),
                     Column(
@@ -84,7 +88,7 @@ class OrderItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "${state.getAllOrdersEntity?.ordersDtoEntity?[index].storeDtoEntity?.name}",
+                          "${cubit?.ordersDtoEntity?[index].storeDtoEntity?.name}",
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall?.copyWith(fontSize: 13),
@@ -94,7 +98,7 @@ class OrderItemWidget extends StatelessWidget {
                             const Icon(Icons.location_on_outlined),
                             horizontalSpace(4),
                             Text(
-                              "${state.getAllOrdersEntity?.ordersDtoEntity?[index].storeDtoEntity?.address}",
+                              "${cubit?.ordersDtoEntity?[index].storeDtoEntity?.address}",
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(
                                 context,
@@ -125,17 +129,18 @@ class OrderItemWidget extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const CircleAvatar(radius: 25, backgroundColor: AppColors.pink),
+                    const CircleAvatar(
+                      radius: 25,
+                      backgroundColor: AppColors.pink,
+                    ),
                     horizontalSpace(8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "${state.getAllOrdersEntity?.ordersDtoEntity?[index].
-                          orderDtoEntity?.userDtoEntity?.firstName}" " ${state.
-                          getAllOrdersEntity?.ordersDtoEntity?[index].
-                          orderDtoEntity?.userDtoEntity?.lastName}",
+                          "${cubit?.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.firstName}"
+                          " ${cubit?.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.lastName}",
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall?.copyWith(fontSize: 13),

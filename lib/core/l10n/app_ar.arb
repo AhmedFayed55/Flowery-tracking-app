@@ -57,5 +57,8 @@
   "pickup_address": "عنوان الاستلام",
   "user_address": "عنوان المستخدم",
   "my_orders": "طلباتي",
-  "flowery_store": "متجر فلاوري"
+  "flowery_store": "متجر فلاوري",
+  "no_orders_found": "لا توجد طلبات",
+  "something_went_wrong": "حدث خطأ ما"
+
 }
