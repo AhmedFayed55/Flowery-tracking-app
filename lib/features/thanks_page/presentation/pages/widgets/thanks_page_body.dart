@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
@@ -84,7 +86,9 @@ class ThanksPageBody extends StatelessWidget {
             ),
             verticalSpace(size48height),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushReplacementNamed(AppRoutes.mainLayout);
+              },
               child: Text(AppLocalizations.of(context)!.done),
             ),
           ],

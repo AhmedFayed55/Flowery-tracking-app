@@ -64,7 +64,10 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
           DialogueUtils.showAlertDialog(context, state.errorMessage!);
         }
         if (state.isOrderCompleted) {
-          //TODO: navigate to order completed page
+          context.pushReplacementNamed(
+            AppRoutes.thanksPage,
+            arguments: state.orderDetails!.id,
+          );
         }
       },
       builder: (context, state) {
@@ -122,11 +125,19 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   verticalSpace(size16height),
-                  CallCard(
-                    phoneNumber: order.store!.phoneNumber!,
-                    title: order.store!.name!,
-                    address: order.store!.address!,
-                    imgeUrl: order.store!.image!,
+                  GestureDetector(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.pickupLocation , arguments: {
+                        "user": order.user,
+                        "store": order.store
+                      });
+                    },
+                    child: CallCard(
+                      phoneNumber: order.store!.phoneNumber!,
+                      title: order.store!.name!,
+                      address: order.store!.address!,
+                      imgeUrl: order.store!.image!,
+                    ),
                   ),
                   verticalSpace(size24height),
                   Text(

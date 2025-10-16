@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/components/shimmer.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
@@ -40,9 +42,9 @@ class HomeTab extends StatelessWidget {
                   content: Text(context.localization.success_saved_order),
                 ),
               );
-              // context.pushReplacementNamed(
-              //   AppRoutes.orderDetails,
-              // );
+              context.pushReplacementNamed(
+                AppRoutes.orderDetails,
+              );
             }
             if (state.errorSaveOrder != null) {
               ScaffoldMessenger.of(
