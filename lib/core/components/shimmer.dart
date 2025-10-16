@@ -8,20 +8,23 @@ class CustomShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.separated(
-        itemBuilder: (context, index) => Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
-          child: Container(
-            height: 80,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView.separated(
+          itemBuilder: (context, index) => Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: Container(
+              height: 80,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
+          separatorBuilder: (context, index) => verticalSpace(10),
+          itemCount: 10,
         ),
-        separatorBuilder: (context, index) => verticalSpace(10),
-        itemCount: 7,
       ),
     );
   }

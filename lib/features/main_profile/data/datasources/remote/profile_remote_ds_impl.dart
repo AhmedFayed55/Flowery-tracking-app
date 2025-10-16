@@ -13,8 +13,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<DriverDto> getProfile() async {
-    DriverDto driverDto = await apiServices.getProfile();
-    return driverDto;
+    var profileResponseModel = await apiServices.getProfile();
+    return profileResponseModel.driverDto ?? DriverDto();
   }
 
   @override

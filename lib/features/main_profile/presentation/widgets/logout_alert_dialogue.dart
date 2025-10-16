@@ -1,7 +1,10 @@
 import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
+import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
+import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
+import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_event.dart';
 import 'package:flowery_tracking_app/features/main_profile/presentation/manager/profile_state.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +72,7 @@ class LogoutAlertDialogue extends StatelessWidget {
                   }
                   if (state.isSuccessLogout) {
                     context.pop();
+                    getIt<SharedPrefHelper>().removeData(key: AppConstants.token);
                     context.pushReplacementNamed(AppRoutes.login);
                     ToastMessage.toastMsg(localizations.logout_successfully);
                   }

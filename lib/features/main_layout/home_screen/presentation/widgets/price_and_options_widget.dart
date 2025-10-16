@@ -15,46 +15,59 @@ class PriceAndOptionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = context.width;
+    final screenHeight = context.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           "EGP $price",
           style: context.textTheme.titleSmall!.copyWith(
-            fontWeight: AppFontWeight.semiBold,
-            fontSize: 20,
+            fontWeight: AppFontWeight.bold,
+            fontSize: 14,
           ),
         ),
         GestureDetector(
           onTap: rejectOnTap,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
+            width: screenWidth * 0.3,
+            height: screenHeight * 0.04,
+            // padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
             decoration: BoxDecoration(
+              
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(100),
               border: Border.all(color: context.colorScheme.primary),
             ),
-            child: Text(
-              context.localization.reject,
-              style: context.textTheme.titleSmall!.copyWith(
-                color: context.colorScheme.primary,
+            child: Center(
+              child: Text(
+                context.localization.reject,
+                style: context.textTheme.titleSmall!.copyWith(
+                  color: context.colorScheme.primary,
+                ),
               ),
             ),
           ),
         ),
         GestureDetector(
+
           onTap: acceptOnTap,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
+              width: screenWidth * 0.3,
+            height: screenHeight * 0.04,
+            // padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
             decoration: BoxDecoration(
               color: context.colorScheme.primary,
               borderRadius: BorderRadius.circular(100),
               border: Border.all(color: context.colorScheme.primary),
             ),
-            child: Text(
-              context.localization.accept,
-              style: context.textTheme.titleSmall!.copyWith(
-                color: context.colorScheme.onPrimary,
+            child: Center(
+              child: Text(
+                context.localization.accept,
+                style: context.textTheme.titleSmall!.copyWith(
+                  color: context.colorScheme.onPrimary,
+                ),
               ),
             ),
           ),

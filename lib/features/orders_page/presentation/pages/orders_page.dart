@@ -18,8 +18,9 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screensHeight = context.height;
-    var orderState = OrderStateModel.getOrderStates();
+    final screensHeight = context.height;
+    final orderState = OrderStateModel.getOrderStates();
+
     return BlocProvider(
       create: (context) => getAllOrdersCubit..doIntent(GetAllOrdersEvent()),
       child: Scaffold(
@@ -34,6 +35,7 @@ class OrdersPage extends StatelessWidget {
                 child: CircularProgressIndicator(color: AppColors.pink),
               );
             }
+
             if (state.isError) {
               return Center(
                 child: Text(
@@ -42,48 +44,43 @@ class OrdersPage extends StatelessWidget {
                 ),
               );
             }
+
             if (state.isSuccess) {
               return Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: screensHeight * 0.085,
-                          child: ListView.separated(
-                            physics: const PageScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return OrderStateWidget(
-                                orderState: orderState[index],
-                                index: index,
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return horizontalSpace(33);
-                            },
-                            itemCount: orderState.length,
-                          ),
-                        ),
-                        verticalSpace(16),
-                        Text(
-                          context.localization.recent_orders,
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        verticalSpace(10),
-                      ],
+                    SizedBox(
+                      height: screensHeight * 0.085,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return OrderStateWidget(
+                            orderState: orderState[index],
+                            index: index,
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            horizontalSpace(33),
+                        itemCount: orderState.length,
+                      ),
                     ),
+                    verticalSpace(16),
+
+                    Text(
+                      context.localization.recent_orders,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    verticalSpace(10),
+
                     Expanded(
                       child: ListView.separated(
                         padding: const EdgeInsets.all(10),
                         itemBuilder: (context, index) {
                           return OrderItemWidget(index: index);
                         },
-                        separatorBuilder: (context, index) {
-                          return verticalSpace(16);
-                        },
+                        separatorBuilder: (context, index) => verticalSpace(16),
                         itemCount:
                             state.getAllOrdersEntity?.ordersDtoEntity?.length ??
                             0,
@@ -92,14 +89,14 @@ class OrdersPage extends StatelessWidget {
                   ],
                 ),
               );
-            } else {
-              return Center(
-                child: Text(
-                  context.localization.something_went_wrong,
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              );
             }
+
+            return Center(
+              child: Text(
+                context.localization.something_went_wrong,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            );
           },
         ),
       ),

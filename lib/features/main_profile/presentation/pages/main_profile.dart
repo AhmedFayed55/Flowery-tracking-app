@@ -14,6 +14,8 @@ import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'loading_to_profile.dart';
+
 class MainProfile extends StatefulWidget {
   const MainProfile({super.key});
 
@@ -49,31 +51,41 @@ class _MainProfileState extends State<MainProfile> {
             children: [
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomInfoCard(
-                    leading: const CircleAvatar(
-                      radius: 30,
+                  if (state.isLoading) {
+                    return const LoadingToProfile();
+                  } else {
+                    return CustomInfoCard(
+                      leading: const CircleAvatar(
+                        radius: 35,
 
-                      /// when add image to profile
-                      // backgroundImage: ,
-                      backgroundColor: AppColors.pink,
-                    ),
-                    horizontalSpacing: 16,
-                    firstText: state.driverDtoEntity?.firstName,
-                    middleText: state.driverDtoEntity?.email,
-                    lastText: state.driverDtoEntity?.phone,
-                    iconDataTrailing: Icons.arrow_forward_ios,
-                  );
+                        /// when add image to profile
+                        // backgroundImage: ,
+                        backgroundColor: AppColors.pink,
+                      ),
+                      horizontalSpacing: 16,
+                      firstText: state.driverDtoEntity?.firstName,
+                      middleText: state.driverDtoEntity?.email,
+                      lastText: state.driverDtoEntity?.phone,
+                      iconDataTrailing: Icons.arrow_forward_ios,
+                    );
+                  }
                 },
               ),
               verticalSpace(24),
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomInfoCard(
-                    firstText: context.localization.vehicle_info,
-                    middleText: state.vehicleDtoEntity?.type,
-                    lastText: state.driverDtoEntity?.vehicleNumber,
-                    iconDataTrailing: Icons.arrow_forward_ios,
-                  );
+                  if (state.isLoading) {
+                    return const LoadingToProfile();
+                  } else {
+                    return CustomInfoCard(
+                      firstText: context.localization.vehicle_info,
+                      middleText:
+                          state.driverDtoEntity?.vehicleType ??
+                          context.localization.vehicle_not_found,
+                      lastText: state.driverDtoEntity?.vehicleNumber,
+                      iconDataTrailing: Icons.arrow_forward_ios,
+                    );
+                  }
                 },
               ),
               verticalSpace(24),

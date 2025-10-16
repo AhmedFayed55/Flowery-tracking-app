@@ -48,7 +48,9 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                       loadingProgress == null
                       ? child
                       : const CircularProgressIndicator(color: AppColors.pink),
-                  image,
+                  image.contains('http') || image.contains('https')
+                      ? image
+                      : 'https://flower.elevateegy.com/uploads/$image',
                 ),
               ),
             ),
@@ -71,7 +73,8 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                     Text(
                       overflow: TextOverflow.ellipsis,
                       address,
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodySmall!.copyWith(
+                        overflow: TextOverflow.ellipsis,
                         color: AppColors.black,
                       ),
                     ),

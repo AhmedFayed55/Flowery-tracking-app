@@ -10,6 +10,8 @@ String? getInitialRoute() {
   if (isRemember == false || isRemember == null) {
     return AppRoutes.login;
   } else {
-    return AppRoutes.mainLayout;
+    return getIt<SharedPrefHelper>().getData(key: "orderId") == null || false
+        ? AppRoutes.mainLayout
+        : AppRoutes.orderDetails;
   }
 }
