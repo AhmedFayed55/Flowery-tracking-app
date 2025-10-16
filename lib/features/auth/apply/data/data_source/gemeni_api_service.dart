@@ -8,7 +8,7 @@ class GeminiApiService {
   final Dio _dio;
   GeminiApiService(this._dio) {
     _dio.options.baseUrl = ApiConstants.gemeniBaseUrl;
-    _dio.options.headers['X-goog-api-key'] = dotenv.env['GEMINI_API_KEY'];
+    _dio.options.headers['X-goog-api-key'] = dotenv.env['Gemini_key'];
     _dio.options.headers['Content-Type'] = 'application/json';
   }
 

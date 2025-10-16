@@ -7,12 +7,11 @@ class ToFirebaseEntity {
     this.orders,
     this.driverLocation,
     this.driverData,
-    this.userState
+    this.userState,
   });
 
-
- String? userState;
- LatLng? driverLocation;
- OrdersEntity? orders;
- DriverDataEntity? driverData;
+  String? userState;
+  LatLng? driverLocation;
+  OrdersEntity? orders;
+  DriverDataEntity? driverData;
 }

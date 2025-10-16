@@ -37,7 +37,7 @@ class ProductDto {
   @JsonKey(name: "sold")
   final int? sold;
 
-  ProductDto ({
+  ProductDto({
     this.id,
     this.title,
     this.slug,

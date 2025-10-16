@@ -16,7 +16,7 @@ class ToFirebaseDto {
   @JsonKey(name: "driverData")
   final DriverDataDto? driverData;
 
-  ToFirebaseDto ({
+  ToFirebaseDto({
     this.driverData,
     this.orders,
     this.userState,

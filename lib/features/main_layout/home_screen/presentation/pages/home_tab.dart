@@ -17,8 +17,9 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      getIt<HomeTabViewModel>()..doIntent(GetAllPendingOrdersEvent())..doIntent(GetLoggedDriverDataEvent()),
+      create: (context) => getIt<HomeTabViewModel>()
+        ..doIntent(GetAllPendingOrdersEvent())
+        ..doIntent(GetLoggedDriverDataEvent()),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -35,8 +36,9 @@ class HomeTab extends StatelessWidget {
             if (state.isOrderSaved) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                    backgroundColor: context.colorScheme.primary,
-                    content: Text(context.localization.success_saved_order)),
+                  backgroundColor: context.colorScheme.primary,
+                  content: Text(context.localization.success_saved_order),
+                ),
               );
               // context.pushReplacementNamed(
               //   AppRoutes.orderDetails,
@@ -54,7 +56,9 @@ class HomeTab extends StatelessWidget {
             return RefreshIndicator(
               key: viewModel.refreshIndicatorKey,
               onRefresh: () async {
-                context.read<HomeTabViewModel>().doIntent(GetAllPendingOrdersEvent());
+                context.read<HomeTabViewModel>().doIntent(
+                  GetAllPendingOrdersEvent(),
+                );
                 await Future.delayed(const Duration(milliseconds: 500));
               },
               child: Builder(
@@ -64,7 +68,8 @@ class HomeTab extends StatelessWidget {
                   } else if (state.errorGetOrders != null) {
                     return Center(
                       child: OutlinedButton(
-                        onPressed: () => viewModel.doIntent(GetAllPendingOrdersEvent()),
+                        onPressed: () =>
+                            viewModel.doIntent(GetAllPendingOrdersEvent()),
                         child: Text(context.localization.try_again),
                       ),
                     );

@@ -4,10 +4,9 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/rep
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetLoggedDriverDataUseCase{
+class GetLoggedDriverDataUseCase {
   final HomeTabRepo _repo;
   GetLoggedDriverDataUseCase(this._repo);
 
   Future<ApiResult<DriverDataEntity>> invoke() => _repo.getLoggedDriverData();
-
 }

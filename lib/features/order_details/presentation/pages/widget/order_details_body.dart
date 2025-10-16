@@ -21,6 +21,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../manger/cubit/order_details_state.dart';
+
 class OrderDetailsBody extends StatefulWidget {
   const OrderDetailsBody({super.key});
 

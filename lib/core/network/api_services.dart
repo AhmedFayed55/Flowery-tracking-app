@@ -1,30 +1,9 @@
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/logged_driver_data.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/error_logger.dart';
-import 'package:retrofit/http.dart';
 import '../../features/main_layout/home_screen/data/models/get_pending_orders/get_pending_orders_dto.dart';
 import 'package:dio/dio.dart';
-
-part 'api_services.g.dart';
-
-@RestApi()
-@injectable
-abstract class ApiServices {
-  @factoryMethod
-  factory ApiServices(Dio dio) = _ApiServices;
-
-  @GET(ApiConstants.getAllPendingOrders)
-  Future<GetPendingOrdersDto> getAllPendingOrders();
-
-  @GET(ApiConstants.getDriverData)
-  Future<LoggedDriverDto> getDriverData();
-
-}
 import 'dart:io';
-import 'package:dio/dio.dart';
-import 'package:flowery_tracking_app/core/network/api_constants.dart';
-import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/request/change_password_request_dto.dart';
 import 'package:flowery_tracking_app/features/auth/change_password/data/model/response/change_password_response_dto.dart';
@@ -56,11 +35,18 @@ abstract class ApiServices {
   @factoryMethod
   factory ApiServices(Dio dio) = _ApiServices;
 
+  @GET(ApiConstants.getAllPendingOrders)
+  Future<GetPendingOrdersDto> getAllPendingOrders();
+
+  @GET(ApiConstants.getDriverData)
+  Future<LoggedDriverDto> getDriverData();
+
   @PUT(ApiConstants.ordersState)
   Future<void> updateOrderStatusApi(
     @Path("id") String orderId,
     @Body() Map<String, dynamic> body,
   );
+
   @POST(ApiConstants.login)
   Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
 

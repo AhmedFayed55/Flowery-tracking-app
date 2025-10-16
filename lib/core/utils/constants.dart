@@ -14,8 +14,6 @@ abstract class AppConstants {
   static const String mapUrlTemplate =
       'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
   static const String noInternet = 'No Internet Connection';
-  static const String orderId = 'orderId';
-  static const String inProgress = 'inProgress';
   static const String cancelled = "cancelled";
   static const String completed = "completed";
   static const String vehicleLicenseKey = 'vehicleLicense';

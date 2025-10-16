@@ -8,12 +8,13 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/data/model
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/driver_data_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/get_pending_orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/metadata_entity.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orderItems_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/product_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/store_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/user_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/logged_driver_data/driver_data_entity.dart';
+
+import '../../domain/entities/get_pending_orders/order_items_entity.dart';
 
 GetPendingOrdersEntity toGetPendingOrdersEntity(GetPendingOrdersDto dto) =>
     GetPendingOrdersEntity(
@@ -100,6 +101,5 @@ DriverDataEntity toDriverDataEntity(DriverDataDto dto) => DriverDataEntity(
   country: dto.country,
   nid: dto.nId,
   nIDImg: dto.nIDImg,
-  vehicleType: dto.vehicleType
+  vehicleType: dto.vehicleType,
 );
-

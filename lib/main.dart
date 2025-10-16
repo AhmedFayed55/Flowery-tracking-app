@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/config/routing/initial_route.dart';
 import 'package:flowery_tracking_app/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ void main() async {
   await dotenv.load(fileName: "secret.env");
 
   await configureDependencies();
-  await dotenv.load(fileName: ".env");
 
   runApp(
     BlocProvider(

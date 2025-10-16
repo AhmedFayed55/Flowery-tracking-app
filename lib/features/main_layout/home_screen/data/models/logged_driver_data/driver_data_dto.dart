@@ -37,7 +37,7 @@ class DriverDataDto {
   @JsonKey(name: "passwordChangedAt")
   final String? passwordChangedAt;
 
-  DriverDataDto ({
+  DriverDataDto({
     this.id,
     this.country,
     this.firstName,

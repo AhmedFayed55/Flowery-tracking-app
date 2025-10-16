@@ -14,12 +14,7 @@ class OrderItemsDto {
   @JsonKey(name: "_id")
   final String? id;
 
-  OrderItemsDto ({
-    this.product,
-    this.price,
-    this.quantity,
-    this.id,
-  });
+  OrderItemsDto({this.product, this.price, this.quantity, this.id});
 
   factory OrderItemsDto.fromJson(Map<String, dynamic> json) {
     return _$OrderItemsDtoFromJson(json);

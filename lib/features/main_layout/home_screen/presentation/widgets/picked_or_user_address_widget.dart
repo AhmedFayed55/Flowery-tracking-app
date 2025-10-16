@@ -4,7 +4,12 @@ import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 
 class PickedOrUserAddressWidget extends StatelessWidget {
-  const PickedOrUserAddressWidget({super.key, required this.name, required this.address, required this.image});
+  const PickedOrUserAddressWidget({
+    super.key,
+    required this.name,
+    required this.address,
+    required this.image,
+  });
   final String name;
   final String address;
   final String image;
@@ -38,12 +43,12 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                   height: 44,
                   width: 44,
                   errorBuilder: (context, error, stackTrace) =>
-                  const Icon(Icons.person, color: AppColors.pink, size: 30),
+                      const Icon(Icons.person, color: AppColors.pink, size: 30),
                   loadingBuilder: (context, child, loadingProgress) =>
-                  loadingProgress == null
+                      loadingProgress == null
                       ? child
                       : const CircularProgressIndicator(color: AppColors.pink),
-                  image
+                  image,
                 ),
               ),
             ),
@@ -66,7 +71,9 @@ class PickedOrUserAddressWidget extends StatelessWidget {
                     Text(
                       overflow: TextOverflow.ellipsis,
                       address,
-                      style: context.textTheme.bodyMedium!.copyWith(color: AppColors.black),
+                      style: context.textTheme.bodyMedium!.copyWith(
+                        color: AppColors.black,
+                      ),
                     ),
                   ],
                 ),

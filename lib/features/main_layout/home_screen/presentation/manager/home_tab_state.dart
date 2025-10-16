@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/logged_driver_data/driver_data_entity.dart';
 
-class HomeTabState extends Equatable{
+class HomeTabState extends Equatable {
   final bool isLoadingGetOrders;
   final String? errorGetOrders;
   final List<OrdersEntity> orders;
@@ -32,7 +32,7 @@ class HomeTabState extends Equatable{
     bool? isOrderSaved,
     DriverDataEntity? driverData,
     bool? isOrderStateUpdated,
-  }){
+  }) {
     return HomeTabState(
       isLoadingGetOrders: isLoadingGetOrders ?? this.isLoadingGetOrders,
       errorGetOrders: errorGetOrders ?? this.errorGetOrders,
@@ -56,5 +56,4 @@ class HomeTabState extends Equatable{
     driverData,
     isOrderStateUpdated,
   ];
-
 }

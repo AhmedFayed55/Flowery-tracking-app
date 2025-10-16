@@ -5,17 +5,16 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/data/model
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: HomeTabFirebaseDataSource)
-class HomeTabFirebaseDataSourceImpl implements HomeTabFirebaseDataSource{
+class HomeTabFirebaseDataSourceImpl implements HomeTabFirebaseDataSource {
   final FirebaseService _service;
   HomeTabFirebaseDataSourceImpl(this._service);
 
   @override
-  Future<void> saveOrder(ToFirebaseDto model) async{
+  Future<void> saveOrder(ToFirebaseDto model) async {
     await _service.addData(
       AppConstants.ordersCollection,
       model.orders!.id!,
       model.toJson(),
     );
   }
-
 }

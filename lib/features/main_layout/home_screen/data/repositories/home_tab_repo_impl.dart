@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/data_sources/firebase/home_tab_firebase_ds.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/data_sources/remote/home_tab_remote_ds.dart';
@@ -7,27 +6,23 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/to_firebase/to_firebase_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/repositories/home_tab_repo.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../../core/errors/failures.dart';
 import '../../../../../core/errors/firebase_results.dart';
-import '../../domain/entities/update_order_state/update_order_state.dart';
 import '../maper/to_dto_maper.dart';
 import '../maper/to_entity_maper.dart';
 
 @Injectable(as: HomeTabRepo)
-class HomeTabRepoImpl implements HomeTabRepo{
-
+class HomeTabRepoImpl implements HomeTabRepo {
   final HomeTabRemoteDataSource _remoteDataSource;
   final HomeTabFirebaseDataSource _firebaseDataSource;
   HomeTabRepoImpl(this._remoteDataSource, this._firebaseDataSource);
 
-
-   @override
-   Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders() async {
-     return await safeApiCall(() async {
-       final response = await _remoteDataSource.getAllPendingOrders();
-       return toGetPendingOrdersEntity(response);
-     });
-   }
+  @override
+  Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders() async {
+    return await safeApiCall(() async {
+      final response = await _remoteDataSource.getAllPendingOrders();
+      return toGetPendingOrdersEntity(response);
+    });
+  }
 
   @override
   Future<FirebaseResult<void>> saveOrder(ToFirebaseEntity model) async {
@@ -39,10 +34,9 @@ class HomeTabRepoImpl implements HomeTabRepo{
 
   @override
   Future<ApiResult<DriverDataEntity>> getLoggedDriverData() async {
-    return await safeApiCall(()async{
+    return await safeApiCall(() async {
       final response = await _remoteDataSource.getLoggedDriverData();
       return toDriverDataEntity(response.driver!);
     });
   }
-
 }

@@ -1,4 +1,6 @@
-part of 'order_details_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flowery_tracking_app/core/utils/enums.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 
 class OrderDetailsState extends Equatable {
   final bool isSceenLoading;

@@ -32,20 +32,20 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
   doIntent(HomeTabEvent event) {
     switch (event) {
       case GetAllPendingOrdersEvent():
-       _getAllPendingOrders();
+        _getAllPendingOrders();
       case RejectOrderEvent(:final orderId):
         _deleteOrder(orderId);
-      case SaveOrderEvent(: final order):
+      case SaveOrderEvent(:final order):
         _saveOrder(order);
       case GetLoggedDriverDataEvent():
         _getLoggedDriverData();
     }
   }
 
-  Future<void> _getLoggedDriverData() async{
+  Future<void> _getLoggedDriverData() async {
     emit(state.copyWith(driverData: null));
     var result = await _loggedDriverDataUseCase.invoke();
-    switch(result){
+    switch (result) {
       case ApiSuccessResult():
         emit(state.copyWith(driverData: result.data));
       case ApiErrorResult<DriverDataEntity>():
@@ -55,10 +55,9 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
 
   Future<void> _saveOrder(OrdersEntity order) async {
     emit(state.copyWith(isLoadingSaveOrder: true, errorSaveOrder: null));
-    var result = await _saveOrderUseCase.invoke(ToFirebaseEntity(
-      orders: order,
-      driverData: state.driverData
-    ));
+    var result = await _saveOrderUseCase.invoke(
+      ToFirebaseEntity(orders: order, driverData: state.driverData),
+    );
     switch (result) {
       case FirebaseSuccessResult():
         getIt<SharedPrefHelper>().saveData(
@@ -82,7 +81,7 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
         isLoadingGetOrders: true,
         orders: [],
         errorGetOrders: null,
-        isOrderSaved: false
+        isOrderSaved: false,
       ),
     );
     var result = await _getAllPendingOrdersUseCase.invoke();
