@@ -1,5 +1,6 @@
 import 'package:flowery_tracking_app/core/network/api_constants.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/logged_driver_data.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/response/profile_response_model.dart';
 import 'package:injectable/injectable.dart';
 import '../../features/main_layout/home_screen/data/models/get_pending_orders/get_pending_orders_dto.dart';
 import 'package:dio/dio.dart';
@@ -62,7 +63,7 @@ abstract class ApiServices {
   Future<ResetPasswordRespone> resetPassword(@Body() ResetPasswordBody body);
 
   @GET(ApiConstants.mainProfile)
-  Future<DriverDto> getProfile();
+  Future<ProfileResponseModel> getProfile();
 
   @GET("${ApiConstants.getVehicle}/{vehicle}")
   Future<VehicleDto> getVehicle(@Path("vehicle") String vehicleType);

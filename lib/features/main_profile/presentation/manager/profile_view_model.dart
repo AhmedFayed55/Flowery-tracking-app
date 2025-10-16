@@ -46,29 +46,36 @@ class ProfileCubit extends Cubit<ProfileState> {
     var driverResult = await profileUseCase.getProfile();
     switch (driverResult) {
       case ApiSuccessResult<DriverDtoEntity>():
-        final driverVehicleType = driverResult.data.vehicleType;
-        if (driverVehicleType == null || driverVehicleType.isEmpty) {
-          emit(state.copyWith(isLoading: false, isError: true));
+        final result = driverResult.data;
+        emit(
+          state.copyWith(
+            isLoading: false,
+            isSuccess: true,
+            driverDtoEntity: result,
+          ),
+        );
+        final vehicleType = driverResult.data.vehicleType;
+        if (vehicleType == null || vehicleType.isEmpty) {
+          emit(state.copyWith(isLoading: false,isSuccess: true, isError: true,showMessage: "vehicle not found"));
           return;
         }
-        var vehicleResult = await profileUseCase.getVehicle(driverVehicleType);
+        var vehicleResult = await profileUseCase.getVehicle(vehicleType);
         switch (vehicleResult) {
           case ApiSuccessResult<VehicleDtoEntity>():
             emit(
               state.copyWith(
                 isLoading: false,
                 isSuccess: true,
-                driverDtoEntity: driverResult.data,
                 vehicleDtoEntity: vehicleResult.data,
               ),
             );
             break;
           case ApiErrorResult<VehicleDtoEntity>():
-            emit(state.copyWith(isLoading: false, isError: true));
+            emit(state.copyWith(isLoading: false, isError: true,isSuccess: false));
         }
         break;
       case ApiErrorResult<DriverDtoEntity>():
-        emit(state.copyWith(isLoading: false, isError: true));
+        emit(state.copyWith(isLoading: false, isError: true,showMessage: driverResult.failure.errorMessage));
     }
   }
 }

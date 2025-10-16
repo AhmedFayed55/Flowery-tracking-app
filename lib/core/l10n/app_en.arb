@@ -143,7 +143,8 @@
   "select_image": "Select image",
   "update_successfully":"Updated Successfully",
   "car":"Car",
-  "select_car":"Select Car"
+  "select_car":"Select Car",
+  "vehicle_not_found":"Vehicle not Found"
 }
 
 

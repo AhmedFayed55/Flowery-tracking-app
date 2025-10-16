@@ -49,31 +49,73 @@ class _MainProfileState extends State<MainProfile> {
             children: [
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomInfoCard(
-                    leading: const CircleAvatar(
-                      radius: 30,
+                  if (state.isLoading) {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: context.height * 0.13,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 4,
+                            spreadRadius: 2,
+                            offset: const Offset(0, 0),
+                          ),
+                        ],
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                      child: const CircularProgressIndicator(),
+                    );
+                  } else {
+                    return CustomInfoCard(
+                      leading: const CircleAvatar(
+                        radius: 35,
 
-                      /// when add image to profile
-                      // backgroundImage: ,
-                      backgroundColor: AppColors.pink,
-                    ),
-                    horizontalSpacing: 16,
-                    firstText: state.driverDtoEntity?.firstName,
-                    middleText: state.driverDtoEntity?.email,
-                    lastText: state.driverDtoEntity?.phone,
-                    iconDataTrailing: Icons.arrow_forward_ios,
-                  );
+                        /// when add image to profile
+                        // backgroundImage: ,
+                        backgroundColor: AppColors.pink,
+                      ),
+
+                      horizontalSpacing: 16,
+                      firstText: state.driverDtoEntity?.firstName,
+                      middleText: state.driverDtoEntity?.email,
+                      lastText: state.driverDtoEntity?.phone,
+                      iconDataTrailing: Icons.arrow_forward_ios,
+                    );
+                  }
                 },
               ),
               verticalSpace(24),
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  return CustomInfoCard(
-                    firstText: context.localization.vehicle_info,
-                    middleText: state.vehicleDtoEntity?.type,
-                    lastText: state.driverDtoEntity?.vehicleNumber,
-                    iconDataTrailing: Icons.arrow_forward_ios,
-                  );
+                  if (state.isLoading) {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: context.height * 0.13,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 4,
+                            spreadRadius: 2,
+                            offset: const Offset(0, 0),
+                          ),
+                        ],
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                      child: const CircularProgressIndicator(),
+                    );
+                  } else {
+                    return CustomInfoCard(
+                      firstText: context.localization.vehicle_info,
+                      middleText: state.driverDtoEntity?.vehicleType
+                          ?? context.localization.vehicle_not_found,
+                      lastText: state.driverDtoEntity?.vehicleNumber,
+                      iconDataTrailing: Icons.arrow_forward_ios,
+                    );
+                  }
                 },
               ),
               verticalSpace(24),

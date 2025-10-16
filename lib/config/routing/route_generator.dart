@@ -35,9 +35,6 @@ class RouteGenerator {
           builder: (context) => ThanksPage(orderId: orderId),
         );
 
-      case AppRoutes.login:
-        return MaterialPageRoute(builder: (context) => const LoginScreen());
-
       case AppRoutes.changePassword:
         return MaterialPageRoute(
           builder: (context) => const ChangePasswordScreen(),
