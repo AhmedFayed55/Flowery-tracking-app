@@ -14,6 +14,8 @@ import 'package:flowery_tracking_app/features/main_profile/presentation/widgets/
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'loading_to_profile.dart';
+
 class MainProfile extends StatefulWidget {
   const MainProfile({super.key});
 
@@ -50,23 +52,7 @@ class _MainProfileState extends State<MainProfile> {
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
                   if (state.isLoading) {
-                    return Container(
-                      alignment: Alignment.center,
-                      height: context.height * 0.13,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            blurRadius: 4,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 0),
-                          ),
-                        ],
-                        borderRadius: BorderRadiusGeometry.circular(10),
-                      ),
-                      child: const CircularProgressIndicator(),
-                    );
+                    return const LoadingToProfile();
                   } else {
                     return CustomInfoCard(
                       leading: const CircleAvatar(
@@ -76,7 +62,6 @@ class _MainProfileState extends State<MainProfile> {
                         // backgroundImage: ,
                         backgroundColor: AppColors.pink,
                       ),
-
                       horizontalSpacing: 16,
                       firstText: state.driverDtoEntity?.firstName,
                       middleText: state.driverDtoEntity?.email,
@@ -90,28 +75,13 @@ class _MainProfileState extends State<MainProfile> {
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
                   if (state.isLoading) {
-                    return Container(
-                      alignment: Alignment.center,
-                      height: context.height * 0.13,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            blurRadius: 4,
-                            spreadRadius: 2,
-                            offset: const Offset(0, 0),
-                          ),
-                        ],
-                        borderRadius: BorderRadiusGeometry.circular(10),
-                      ),
-                      child: const CircularProgressIndicator(),
-                    );
+                    return const LoadingToProfile();
                   } else {
                     return CustomInfoCard(
                       firstText: context.localization.vehicle_info,
-                      middleText: state.driverDtoEntity?.vehicleType
-                          ?? context.localization.vehicle_not_found,
+                      middleText:
+                          state.driverDtoEntity?.vehicleType ??
+                          context.localization.vehicle_not_found,
                       lastText: state.driverDtoEntity?.vehicleNumber,
                       iconDataTrailing: Icons.arrow_forward_ios,
                     );
