@@ -21,11 +21,6 @@ class OrderStateWidget extends StatelessWidget {
     final screenWidth = context.width;
     final cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
     final ordersList = cubit?.ordersDtoEntity ?? [];
-
-    final orderStateApi = (index >= 0 && index < ordersList.length)
-        ? ordersList[index].orderDtoEntity?.state
-        : null;
-
     
     final totalSameState = ordersList
         .where((order) => order.orderDtoEntity?.state == orderState.state)

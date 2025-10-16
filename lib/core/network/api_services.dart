@@ -18,7 +18,6 @@ import '../../features/auth/forget_password/data/models/reset_password/reset_pas
 import '../../features/auth/forget_password/data/models/verify_code/verify_password_body.dart';
 import '../../features/auth/forget_password/data/models/verify_code/verify_password_respone.dart';
 import '../../features/auth/login_screen/data/models/login_response_model.dart';
-import '../../features/main_profile/data/models/driver_dto.dart';
 import '../../features/main_profile/data/models/logout/logout_response_dto.dart';
 import '../../features/main_profile/data/models/vehicle_dto.dart';
 import 'package:flowery_tracking_app/features/edit_profile/data/models/request/edit_profile_request_model.dart';
