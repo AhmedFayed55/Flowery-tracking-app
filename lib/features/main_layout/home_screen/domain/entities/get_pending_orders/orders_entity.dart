@@ -1,5 +1,5 @@
-import 'user_entity.dart';
 import 'order_items_entity.dart';
+import 'user_entity.dart';
 import 'store_entity.dart';
 
 class OrdersEntity {

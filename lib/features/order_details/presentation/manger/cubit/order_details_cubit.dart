@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:equatable/equatable.dart';
 import 'package:flowery_tracking_app/core/errors/firebase_result.dart';
 import 'package:flowery_tracking_app/core/utils/enums.dart';
 import 'package:flowery_tracking_app/core/utils/firebase_constant.dart';
@@ -13,7 +12,8 @@ import 'package:flowery_tracking_app/features/order_details/presentation/manger/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:location/location.dart';
-part 'order_details_state.dart';
+
+import 'order_details_state.dart';
 
 @injectable
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {

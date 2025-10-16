@@ -2,12 +2,12 @@ import 'package:flowery_tracking_app/core/utils/constants.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/order_items_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/driver_data_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/to_firebase/to_firebase_dto.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/order_items_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/product_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/store_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/to_firebase/to_firebase_entity.dart';
 
+import '../../domain/entities/get_pending_orders/order_items_entity.dart';
 import '../../domain/entities/get_pending_orders/user_entity.dart';
 import '../../domain/entities/logged_driver_data/driver_data_entity.dart';
 import '../models/get_pending_orders/orders_dto.dart';
@@ -17,9 +17,9 @@ import '../models/get_pending_orders/user_dto.dart';
 
 OrderItemsDto toOrderItemsDto(OrderItemsEntity entity) => OrderItemsDto(
   id: entity.id,
-  price: entity.price!.toInt(),
+  price: entity.price?.toInt(),
   product: entity.product != null ? toProductDto(entity.product!) : null,
-  quantity: entity.quantity!.toInt(),
+  quantity: entity.quantity?.toInt(),
 );
 
 OrdersDto toOrdersDto(OrdersEntity entity) => OrdersDto(
@@ -32,28 +32,28 @@ OrdersDto toOrdersDto(OrdersEntity entity) => OrdersDto(
   paymentType: entity.paymentType,
   state: entity.state,
   store: entity.store != null ? toStoreDto(entity.store!) : null,
-  totalPrice: entity.totalPrice!.toInt(),
+  totalPrice: entity.totalPrice?.toInt(),
   updatedAt: entity.updatedAt,
   user: entity.user != null ? toUserDto(entity.user!) : null,
-  v: entity.v!.toInt(),
+  v: entity.v?.toInt(),
 );
 
 ProductDto toProductDto(ProductEntity entity) => ProductDto(
-  v: entity.v!.toInt(),
+  v: entity.v?.toInt(),
   updatedAt: entity.updatedAt,
   createdAt: entity.createdAt,
   id: entity.id,
-  quantity: entity.quantity!.toInt(),
-  price: entity.price!.toInt(),
+  quantity: entity.quantity?.toInt(),
+  price: entity.price?.toInt(),
   category: entity.category,
   description: entity.description,
   images: entity.images,
   imgCover: entity.imgCover,
   isSuperAdmin: entity.isSuperAdmin,
   occasion: entity.occasion,
-  priceAfterDiscount: entity.priceAfterDiscount!.toInt(),
+  priceAfterDiscount: entity.priceAfterDiscount?.toInt(),
   slug: entity.slug,
-  sold: entity.sold!.toInt(),
+  sold: entity.sold?.toInt(),
   title: entity.title,
 );
 
