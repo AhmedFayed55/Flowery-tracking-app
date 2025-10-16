@@ -16,7 +16,6 @@ void main() async {
   await dotenv.load(fileName: "secret.env");
 
   await configureDependencies();
-  await dotenv.load(fileName: ".env");
 
   runApp(
     BlocProvider(

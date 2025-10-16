@@ -8,7 +8,7 @@ String? getInitialRoute() {
     key: AppConstants.isRemember,
   );
   if (isRemember == false || isRemember == null) {
-    return AppRoutes.mainProfile;
+    return AppRoutes.login;
   } else {
     return AppRoutes.mainLayout;
   }
