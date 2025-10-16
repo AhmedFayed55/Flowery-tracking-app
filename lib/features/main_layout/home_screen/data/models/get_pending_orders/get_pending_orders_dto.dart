@@ -19,7 +19,6 @@ class GetPendingOrdersDto {
     this.metadata,
     this.orders,
   });
-
   factory GetPendingOrdersDto.fromJson(Map<String, dynamic> json) {
     return _$GetPendingOrdersDtoFromJson(json);
   }
@@ -28,16 +27,3 @@ class GetPendingOrdersDto {
     return _$GetPendingOrdersDtoToJson(this);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
