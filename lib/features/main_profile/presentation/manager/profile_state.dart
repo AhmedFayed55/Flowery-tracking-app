@@ -5,6 +5,7 @@ class ProfileState {
   final bool isLoading;
   final bool isSuccess;
   final bool isError;
+  final String? showMessage;
   final DriverDtoEntity? driverDtoEntity;
   final VehicleDtoEntity? vehicleDtoEntity;
   final bool isSuccessLogout;
@@ -16,6 +17,7 @@ class ProfileState {
     this.isLoading = false,
     this.isSuccess = false,
     this.isError = false,
+    this.showMessage,
     this.driverDtoEntity,
     this.vehicleDtoEntity,
   });
@@ -24,6 +26,7 @@ class ProfileState {
     bool? isLoading,
     bool? isSuccess,
     bool? isError,
+    String? showMessage,
     DriverDtoEntity? driverDtoEntity,
     VehicleDtoEntity? vehicleDtoEntity,
     bool? isSuccessLogout,
@@ -33,6 +36,7 @@ class ProfileState {
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isError: isError ?? this.isError,
+      showMessage: showMessage ?? this.showMessage,
       driverDtoEntity: driverDtoEntity ?? this.driverDtoEntity,
       vehicleDtoEntity: vehicleDtoEntity ?? this.vehicleDtoEntity,
       isSuccessLogout: isSuccessLogout ?? this.isSuccessLogout,

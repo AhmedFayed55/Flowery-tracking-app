@@ -2,6 +2,7 @@ import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/datasources/remote/profile_remote_ds_impl.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/driver_dto.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/logout/logout_response_dto.dart';
+import 'package:flowery_tracking_app/features/main_profile/data/models/response/profile_response_model.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/vehicle_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -15,6 +16,7 @@ void main() {
   late ProfileRemoteDataSourceImpl profileRemoteDataSourceImpl;
   late DriverDto driverDto;
   late VehicleDto vehicleDto;
+  late ProfileResponseModel profileResponseModel;
   late LogoutResponseDto logoutResponseDto;
 
   setUpAll(() {
@@ -26,11 +28,18 @@ void main() {
     profileRemoteDataSourceImpl = ProfileRemoteDataSourceImpl(
       apiServices: mockApiServices,
     );
+
     driverDto = DriverDto(
       id: "1",
       email: "driver@example.com",
       phone: "0123456789",
     );
+
+    profileResponseModel = ProfileResponseModel(
+    message: "message",
+    driverDto:  driverDto,
+    );
+
     vehicleDto = VehicleDto(id: "1");
 
     logoutResponseDto = LogoutResponseDto(message: "Logout successful");
@@ -39,7 +48,7 @@ void main() {
   group("Test ProfileRemoteDataSourceImpl in Data_Layer", () {
     test("success case for getProfile returns DriverDto", () async {
       // Arrange
-      when(mockApiServices.getProfile()).thenAnswer((_) async => driverDto);
+      when(mockApiServices.getProfile()).thenAnswer((_) async => profileResponseModel);
 
       // // Act
       var result = await profileRemoteDataSourceImpl.getProfile();

@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
-import 'package:flowery_tracking_app/core/helpers/shared_pref.dart';
-import 'package:flowery_tracking_app/core/utils/constants.dart';
+import 'package:flowery_tracking_app/core/services/token_service.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/data/datasources/remote/login_remote_ds.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/data/models/login_response_model.dart';
 import 'package:flowery_tracking_app/features/auth/login_screen/data/repositories_impl/login_repo_impl.dart';
@@ -12,12 +11,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'login_repo_impl_test.mocks.dart';
 
-@GenerateMocks([LoginRemoteDataSource, SharedPrefHelper])
+@GenerateMocks([LoginRemoteDataSource, TokenService])
 void main() {
   late String email;
   late String password;
   late String value;
-  late MockSharedPrefHelper mockSharedPrefHelper;
+  late TokenService mockTokenService;
   late LoginResponseModel loginResponseModel;
   late LoginRepositoryImpl loginRepositoryImpl;
   late MockLoginRemoteDataSource mockLoginRemoteDataSource;
@@ -29,11 +28,11 @@ void main() {
     password = "Password";
     value = "token";
     loginResponseModel = LoginResponseModel(token: value);
-    mockSharedPrefHelper = MockSharedPrefHelper();
+    mockTokenService = MockTokenService();
     loginResponseEntity = LoginResponseEntity(token: value);
     loginRepositoryImpl = LoginRepositoryImpl(
       loginRemoteDataSource: mockLoginRemoteDataSource,
-      sharedPrefHelper: mockSharedPrefHelper,
+      secureStorage: mockTokenService,
     );
   });
 
@@ -50,9 +49,7 @@ void main() {
       when(
         mockLoginRemoteDataSource.login(email, password),
       ).thenAnswer((_) async => loginResponseModel);
-      when(
-        mockSharedPrefHelper.saveData(key: AppConstants.token, val: value),
-      ).thenAnswer((_) async => true);
+      when(mockTokenService.saveToken(value)).thenAnswer((_) async => true);
 
       // Act
       var result = await loginRepositoryImpl.login(email, password);
@@ -63,9 +60,7 @@ void main() {
       expect(successResult.data.token, equals(loginResponseEntity.token));
 
       verify(mockLoginRemoteDataSource.login(email, password)).called(1);
-      verify(
-        mockSharedPrefHelper.saveData(key: AppConstants.token, val: value),
-      ).called(1);
+      verify(mockTokenService.saveToken(value)).called(1);
     });
 
     test("Error case for login with DioException", () async {
@@ -87,12 +82,7 @@ void main() {
       expect(errorResult.failure, isA<ServerFailure>());
 
       verify(mockLoginRemoteDataSource.login(email, password)).called(1);
-      verifyNever(
-        mockSharedPrefHelper.saveData(
-          key: AppConstants.token,
-          val: anyNamed('val'),
-        ),
-      );
+      verifyNever(mockTokenService.saveToken('val'));
     });
 
     test("Error case for login with generic Exception", () async {
@@ -114,12 +104,7 @@ void main() {
       expect(errorResult.failure.errorMessage, contains(errorMessage));
 
       verify(mockLoginRemoteDataSource.login(email, password)).called(1);
-      verifyNever(
-        mockSharedPrefHelper.saveData(
-          key: AppConstants.token,
-          val: anyNamed('val'),
-        ),
-      );
+      verifyNever(mockTokenService.saveToken('val'));
     });
   });
 }

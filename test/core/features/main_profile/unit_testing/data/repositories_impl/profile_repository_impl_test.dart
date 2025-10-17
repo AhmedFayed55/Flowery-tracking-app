@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery_tracking_app/core/errors/api_results.dart';
 import 'package:flowery_tracking_app/core/errors/failures.dart';
-import 'package:flowery_tracking_app/features/main_profile/data/datasources/local/profile_local_ds.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/datasources/remote/profile_remote_ds.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/driver_dto.dart';
 import 'package:flowery_tracking_app/features/main_profile/data/models/logout/logout_response_dto.dart';
@@ -16,10 +15,9 @@ import 'package:mockito/mockito.dart';
 
 import 'profile_repository_impl_test.mocks.dart';
 
-@GenerateMocks([ProfileRemoteDataSource, ProfileLocalDataSource])
+@GenerateMocks([ProfileRemoteDataSource])
 void main() {
   late MockProfileRemoteDataSource mockProfileRemoteDataSource;
-  late MockProfileLocalDataSource mockProfileLocalDataSource;
   late ProfileRepositoryImpl profileRepositoryImpl;
   late DriverDto driverDto;
   late DriverDtoEntity driverDtoEntity;
@@ -30,10 +28,8 @@ void main() {
 
   setUpAll(() {
     mockProfileRemoteDataSource = MockProfileRemoteDataSource();
-    mockProfileLocalDataSource = MockProfileLocalDataSource();
     profileRepositoryImpl = ProfileRepositoryImpl(
       profileRemoteDataSource: mockProfileRemoteDataSource,
-      profileLocalDataSource: mockProfileLocalDataSource,
     );
 
     driverDto = DriverDto(firstName: "John", lastName: "Doe");

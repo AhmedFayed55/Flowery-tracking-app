@@ -7,6 +7,15 @@ abstract class AppConstants {
   static const String enKey = 'en';
   static const String authorization = 'Authorization';
   static const String bearer = "Bearer";
+  static const String orderId = 'orderId';
+  static const String ordersCollection = 'orders';
+  static const String inProgress = 'inProgress';
+  static const String orderState = 'state';
+  static const String mapUrlTemplate =
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  static const String noInternet = 'No Internet Connection';
+  static const String cancelled = "cancelled";
+  static const String completed = "completed";
   static const String vehicleLicenseKey = 'vehicleLicense';
   static const String nIDImgKey = 'NIDImg';
   static const String candidatesKey = 'candidates';
@@ -19,5 +28,15 @@ abstract class AppConstants {
   static const String instructionIdCard = 'Check if this is a valid ID Card';
   static const String instructionDriverLicense =
       'Check if this is a valid Driver License';
-  static const String noInternet = 'No Internet Connection';
+  static const String gender = 'gender';
+  static const String male = 'male';
+  static const String female = 'female';
+  static const String femaleValue = 'Female';
+  static const int mainDuration = 10;
+  static const int resendDuration = 3;
+  static const int pickerImageQuality = 100;
+  static const int imageQuality = 80;
+  static const String passwordCharacters = "★★★★★★";
+  static const String notificationCountExceeded = '9+';
+  static const String pending = 'pending';
 }
