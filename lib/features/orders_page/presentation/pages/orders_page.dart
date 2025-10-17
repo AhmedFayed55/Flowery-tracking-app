@@ -25,8 +25,8 @@ class OrdersPage extends StatelessWidget {
       create: (context) => getAllOrdersCubit..doIntent(GetAllOrdersEvent()),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(context.localization.my_orders),
-          leading: const Icon(Icons.arrow_back_ios),
         ),
         body: BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
           builder: (context, state) {

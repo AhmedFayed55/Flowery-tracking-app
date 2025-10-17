@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
@@ -54,19 +56,27 @@ class _MainProfileState extends State<MainProfile> {
                   if (state.isLoading) {
                     return const LoadingToProfile();
                   } else {
-                    return CustomInfoCard(
-                      leading: const CircleAvatar(
-                        radius: 35,
-
-                        /// when add image to profile
-                        // backgroundImage: ,
-                        backgroundColor: AppColors.pink,
+                    return GestureDetector(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.editProfile);
+                      },
+                      child: CustomInfoCard(
+                        leading: CircleAvatar(
+                          radius: 35,
+                          backgroundImage: NetworkImage(
+                            state.driverDtoEntity!.photo!.contains('http') ||
+                                    state.driverDtoEntity!.photo!.contains('https')
+                                ? state.driverDtoEntity!.photo!
+                                : 'https://flower.elevateegy.com/uploads/${state.driverDtoEntity!.photo!}',
+                          ),
+                          backgroundColor: AppColors.pink,
+                        ),
+                        horizontalSpacing: 16,
+                        firstText: "${state.driverDtoEntity?.firstName} ${state.driverDtoEntity?.lastName}",
+                        middleText: state.driverDtoEntity?.email,
+                        lastText: state.driverDtoEntity?.phone,
+                        iconDataTrailing: Icons.arrow_forward_ios,
                       ),
-                      horizontalSpacing: 16,
-                      firstText: state.driverDtoEntity?.firstName,
-                      middleText: state.driverDtoEntity?.email,
-                      lastText: state.driverDtoEntity?.phone,
-                      iconDataTrailing: Icons.arrow_forward_ios,
                     );
                   }
                 },
@@ -77,13 +87,18 @@ class _MainProfileState extends State<MainProfile> {
                   if (state.isLoading) {
                     return const LoadingToProfile();
                   } else {
-                    return CustomInfoCard(
-                      firstText: context.localization.vehicle_info,
-                      middleText:
-                          state.driverDtoEntity?.vehicleType ??
-                          context.localization.vehicle_not_found,
-                      lastText: state.driverDtoEntity?.vehicleNumber,
-                      iconDataTrailing: Icons.arrow_forward_ios,
+                    return GestureDetector(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.updateVehicle);
+                      },
+                      child: CustomInfoCard(
+                        firstText: context.localization.vehicle_info,
+                        middleText:
+                            state.driverDtoEntity?.vehicleType ??
+                            context.localization.vehicle_not_found,
+                        lastText: state.driverDtoEntity?.vehicleNumber,
+                        iconDataTrailing: Icons.arrow_forward_ios,
+                      ),
                     );
                   }
                 },
