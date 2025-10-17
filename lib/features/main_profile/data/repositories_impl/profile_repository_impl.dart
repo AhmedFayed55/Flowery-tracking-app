@@ -10,9 +10,7 @@ import 'package:injectable/injectable.dart';
 class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRemoteDataSource profileRemoteDataSource;
 
-  ProfileRepositoryImpl({
-    required this.profileRemoteDataSource,
-  });
+  ProfileRepositoryImpl({required this.profileRemoteDataSource});
 
   @override
   Future<ApiResult<DriverDtoEntity>> getProfile() async {

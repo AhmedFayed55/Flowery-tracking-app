@@ -72,7 +72,9 @@ class LogoutAlertDialogue extends StatelessWidget {
                   }
                   if (state.isSuccessLogout) {
                     context.pop();
-                    getIt<SharedPrefHelper>().removeData(key: AppConstants.token);
+                    getIt<SharedPrefHelper>().removeData(
+                      key: AppConstants.token,
+                    );
                     context.pushReplacementNamed(AppRoutes.login);
                     ToastMessage.toastMsg(localizations.logout_successfully);
                   }

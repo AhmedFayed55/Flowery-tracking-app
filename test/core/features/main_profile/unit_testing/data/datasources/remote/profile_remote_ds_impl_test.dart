@@ -36,8 +36,8 @@ void main() {
     );
 
     profileResponseModel = ProfileResponseModel(
-    message: "message",
-    driverDto:  driverDto,
+      message: "message",
+      driverDto: driverDto,
     );
 
     vehicleDto = VehicleDto(id: "1");
@@ -48,7 +48,9 @@ void main() {
   group("Test ProfileRemoteDataSourceImpl in Data_Layer", () {
     test("success case for getProfile returns DriverDto", () async {
       // Arrange
-      when(mockApiServices.getProfile()).thenAnswer((_) async => profileResponseModel);
+      when(
+        mockApiServices.getProfile(),
+      ).thenAnswer((_) async => profileResponseModel);
 
       // // Act
       var result = await profileRemoteDataSourceImpl.getProfile();

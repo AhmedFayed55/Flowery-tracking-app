@@ -127,10 +127,10 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
                   verticalSpace(size16height),
                   GestureDetector(
                     onTap: () {
-                      context.pushNamed(AppRoutes.pickupLocation , arguments: {
-                        "user": order.user,
-                        "store": order.store
-                      });
+                      context.pushNamed(
+                        AppRoutes.pickupLocation,
+                        arguments: {"user": order.user, "store": order.store},
+                      );
                     },
                     child: CallCard(
                       phoneNumber: order.store!.phoneNumber!,

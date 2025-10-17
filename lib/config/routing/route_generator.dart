@@ -27,7 +27,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const MainLayout());
       case AppRoutes.orderDetails:
         return MaterialPageRoute(builder: (context) => OrderDetailsScreen());
-      case AppRoutes.login : 
+      case AppRoutes.login:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
       case AppRoutes.thanksPage:
         final orderId = settings.arguments as String;
