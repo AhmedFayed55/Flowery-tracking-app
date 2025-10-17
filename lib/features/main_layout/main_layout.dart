@@ -23,7 +23,7 @@ class _MainLayoutState extends State<MainLayout> {
     final AppLocalizations localization = AppLocalizations.of(context)!;
     final List<Widget> pages = [
       const HomeTab(),
-       OrdersPage(),
+      OrdersPage(),
       const MainProfile(),
     ];
     return Scaffold(
