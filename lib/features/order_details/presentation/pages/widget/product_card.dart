@@ -68,7 +68,7 @@ class ProductCard extends StatelessWidget {
                   orderItems.product!.title!,
 
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontSize: size8height+4,
+                    fontSize: size8height + 4,
                     fontWeight: FontWeight.bold,
                     color: AppColors.black.withValues(alpha: 0.4),
                   ),

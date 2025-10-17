@@ -21,7 +21,7 @@ class OrderStateWidget extends StatelessWidget {
     final screenWidth = context.width;
     final cubit = context.read<GetAllOrdersCubit>().state.getAllOrdersEntity;
     final ordersList = cubit?.ordersDtoEntity ?? [];
-    
+
     final totalSameState = ordersList
         .where((order) => order.orderDtoEntity?.state == orderState.state)
         .length;
@@ -47,10 +47,9 @@ class OrderStateWidget extends StatelessWidget {
               horizontalSpace(5),
               Text(
                 orderState.state,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium
-                    ?.copyWith(fontSize: 16),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(fontSize: 16),
               ),
             ],
           ),

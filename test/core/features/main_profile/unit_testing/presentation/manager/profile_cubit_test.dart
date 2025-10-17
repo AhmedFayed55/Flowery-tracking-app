@@ -37,14 +37,22 @@ void main() {
 
   group("ProfileCubit doIntent -> GetProfileEvent", () {
     test("emit success for driver then success for vehicle", () async {
-      final driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverDtoEntity);
-      final vehicleSuccess = ApiSuccessResult<VehicleDtoEntity>(data: vehicleDtoEntity);
+      final driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+        data: driverDtoEntity,
+      );
+      final vehicleSuccess = ApiSuccessResult<VehicleDtoEntity>(
+        data: vehicleDtoEntity,
+      );
 
       provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
       provideDummy<ApiResult<VehicleDtoEntity>>(vehicleSuccess);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
-      when(mockProfileUseCase.getVehicle("car")).thenAnswer((_) async => vehicleSuccess);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverSuccess);
+      when(
+        mockProfileUseCase.getVehicle("car"),
+      ).thenAnswer((_) async => vehicleSuccess);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -64,7 +72,9 @@ void main() {
       final driverError = ApiErrorResult<DriverDtoEntity>(failure: failure);
       provideDummy<ApiResult<DriverDtoEntity>>(driverError);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverError);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverError);
 
       await profileCubit.doIntent(GetProfileEvent());
 
@@ -79,31 +89,39 @@ void main() {
       verifyNever(mockProfileUseCase.getVehicle(any));
     });
 
-    test("emit error with message 'vehicle not found' when vehicleType is null", () async {
-      final driverWithoutVehicle = DriverDtoEntity(vehicleType: null);
-      final driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverWithoutVehicle);
-      provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
+    test(
+      "emit error with message 'vehicle not found' when vehicleType is null",
+      () async {
+        final driverWithoutVehicle = DriverDtoEntity(vehicleType: null);
+        final driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+          data: driverWithoutVehicle,
+        );
+        provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
 
-      provideDummy<ApiResult<VehicleDtoEntity>>(
-        ApiSuccessResult<VehicleDtoEntity>(data: VehicleDtoEntity()),
-      );
+        provideDummy<ApiResult<VehicleDtoEntity>>(
+          ApiSuccessResult<VehicleDtoEntity>(data: VehicleDtoEntity()),
+        );
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
+        when(
+          mockProfileUseCase.getProfile(),
+        ).thenAnswer((_) async => driverSuccess);
 
-      await profileCubit.doIntent(GetProfileEvent());
+        await profileCubit.doIntent(GetProfileEvent());
 
-      expect(profileCubit.state.isLoading, false);
-      expect(profileCubit.state.isError, true);
-      expect(profileCubit.state.isSuccess, true);
-      expect(profileCubit.state.showMessage, equals("vehicle not found"));
+        expect(profileCubit.state.isLoading, false);
+        expect(profileCubit.state.isError, true);
+        expect(profileCubit.state.isSuccess, true);
+        expect(profileCubit.state.showMessage, equals("vehicle not found"));
 
-      verify(mockProfileUseCase.getProfile()).called(1);
-      verifyNever(mockProfileUseCase.getVehicle(any));
-    });
-
+        verify(mockProfileUseCase.getProfile()).called(1);
+        verifyNever(mockProfileUseCase.getVehicle(any));
+      },
+    );
 
     test("emit error state when vehicleResult is ApiErrorResult", () async {
-      final driverSuccess = ApiSuccessResult<DriverDtoEntity>(data: driverDtoEntity);
+      final driverSuccess = ApiSuccessResult<DriverDtoEntity>(
+        data: driverDtoEntity,
+      );
       final vehicleError = ApiErrorResult<VehicleDtoEntity>(
         failure: Failure(errorMessage: "Vehicle error"),
       );
@@ -111,8 +129,12 @@ void main() {
       provideDummy<ApiResult<DriverDtoEntity>>(driverSuccess);
       provideDummy<ApiResult<VehicleDtoEntity>>(vehicleError);
 
-      when(mockProfileUseCase.getProfile()).thenAnswer((_) async => driverSuccess);
-      when(mockProfileUseCase.getVehicle("car")).thenAnswer((_) async => vehicleError);
+      when(
+        mockProfileUseCase.getProfile(),
+      ).thenAnswer((_) async => driverSuccess);
+      when(
+        mockProfileUseCase.getVehicle("car"),
+      ).thenAnswer((_) async => vehicleError);
 
       await profileCubit.doIntent(GetProfileEvent());
 

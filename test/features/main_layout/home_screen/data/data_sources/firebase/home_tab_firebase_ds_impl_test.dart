@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../../order_details/data/sources/order_details_ds_impl_test.mocks.dart';
 
-
 @GenerateMocks([FirebaseService])
 void main() {
   late FirebaseService mockFirebaseService;
@@ -23,13 +22,11 @@ void main() {
 
   setUpAll(() {
     mockFirebaseService = MockFirebaseService();
-    homeTabFirebaseDataSourceImpl = HomeTabFirebaseDataSourceImpl(mockFirebaseService);
-
-    ordersDto = OrdersDto(
-      id: 'O1',
-      orderNumber: '12345',
-      totalPrice: 250,
+    homeTabFirebaseDataSourceImpl = HomeTabFirebaseDataSourceImpl(
+      mockFirebaseService,
     );
+
+    ordersDto = OrdersDto(id: 'O1', orderNumber: '12345', totalPrice: 250);
 
     driverDataDto = DriverDataDto(
       id: 'D1',

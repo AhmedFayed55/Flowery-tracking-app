@@ -56,7 +56,14 @@ class ProfileCubit extends Cubit<ProfileState> {
         );
         final vehicleType = driverResult.data.vehicleType;
         if (vehicleType == null || vehicleType.isEmpty) {
-          emit(state.copyWith(isLoading: false,isSuccess: true, isError: true,showMessage: "vehicle not found"));
+          emit(
+            state.copyWith(
+              isLoading: false,
+              isSuccess: true,
+              isError: true,
+              showMessage: "vehicle not found",
+            ),
+          );
           return;
         }
         var vehicleResult = await profileUseCase.getVehicle(vehicleType);
@@ -71,11 +78,19 @@ class ProfileCubit extends Cubit<ProfileState> {
             );
             break;
           case ApiErrorResult<VehicleDtoEntity>():
-            emit(state.copyWith(isLoading: false, isError: true,isSuccess: false));
+            emit(
+              state.copyWith(isLoading: false, isError: true, isSuccess: false),
+            );
         }
         break;
       case ApiErrorResult<DriverDtoEntity>():
-        emit(state.copyWith(isLoading: false, isError: true,showMessage: driverResult.failure.errorMessage));
+        emit(
+          state.copyWith(
+            isLoading: false,
+            isError: true,
+            showMessage: driverResult.failure.errorMessage,
+          ),
+        );
     }
   }
 }

@@ -35,7 +35,6 @@ class PriceAndOptionsWidget extends StatelessWidget {
             height: screenHeight * 0.04,
             // padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
             decoration: BoxDecoration(
-              
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(100),
               border: Border.all(color: context.colorScheme.primary),
@@ -51,10 +50,9 @@ class PriceAndOptionsWidget extends StatelessWidget {
           ),
         ),
         GestureDetector(
-
           onTap: acceptOnTap,
           child: Container(
-              width: screenWidth * 0.3,
+            width: screenWidth * 0.3,
             height: screenHeight * 0.04,
             // padding: const EdgeInsets.symmetric(horizontal: 34.5, vertical: 8),
             decoration: BoxDecoration(
