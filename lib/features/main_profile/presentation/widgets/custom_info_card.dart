@@ -9,6 +9,7 @@ class CustomInfoCard extends StatelessWidget {
   final IconData? iconDataTrailing;
   final Widget? leading;
   final double? horizontalSpacing;
+  final VoidCallback? onClick;
 
   const CustomInfoCard({
     super.key,
@@ -18,6 +19,7 @@ class CustomInfoCard extends StatelessWidget {
     this.leading,
     this.iconDataTrailing,
     this.horizontalSpacing,
+    this.onClick,
   });
 
   @override
@@ -77,7 +79,9 @@ class CustomInfoCard extends StatelessWidget {
               flex: 1,
               child: IconButton(
                 onPressed: () {
-                  /// button onPressed
+                if(onClick != null){
+                  onClick!();
+                }
                 },
                 icon: Icon(iconDataTrailing!, size: 24),
               ),

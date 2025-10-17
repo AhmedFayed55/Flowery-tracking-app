@@ -6,18 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mockito/annotations.dart';
 
-import 'image_picker_field_test.mocks.dart';
-
-
 @GenerateMocks([ImagePicker, File])
 void main() {
-  late MockImagePicker mockPicker;
-  late MockFile mockFile;
-
-  setUp(() {
-    mockPicker = MockImagePicker();
-    mockFile = MockFile();
-  });
 
   testWidgets('should display label and hint text', (tester) async {
     await tester.pumpWidget(

@@ -8,7 +8,7 @@ String? getInitialRoute() {
     key: AppConstants.isRemember,
   );
   if (isRemember == false || isRemember == null) {
-    return AppRoutes.login;
+    return AppRoutes.onBoarding;
   } else {
     return getIt<SharedPrefHelper>().getData(key: "orderId") == null || false
         ? AppRoutes.mainLayout
