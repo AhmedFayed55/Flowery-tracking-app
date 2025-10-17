@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/di/di.dart';
-import '../../../../../core/errors/firebase_results.dart';
+import '../../../../../core/errors/firebase_result.dart';
 import '../../../../../core/helpers/shared_pref.dart';
 import '../../../../../core/utils/constants.dart';
 

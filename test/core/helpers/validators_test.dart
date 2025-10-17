@@ -174,4 +174,112 @@ void main() {
       });
     });
   });
+
+  group("Login Password Validation Test", () {
+    testWidgets("when empty should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.loginValidatePassword(context, ""),
+          AppLocalizations.of(context)!.password_is_required,
+        );
+      });
+    });
+
+    testWidgets("when not empty should return null", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.loginValidatePassword(context, "123456"),
+          null,
+        );
+      });
+    });
+  });
+
+  group("Confirm Password (new password + confirm) Validation Test", () {
+    testWidgets("when new password empty should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.confirmPassword(context, ""),
+          AppLocalizations.of(context)!.password_is_required,
+        );
+      });
+    });
+
+    testWidgets("when new password too short should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.confirmPassword(context, "123"),
+          AppLocalizations.of(context)!.password_must_be_at_least_6_characters,
+        );
+      });
+    });
+
+    testWidgets("when passwords do not match should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.confirmPassword(context, "123456", "654321"),
+          AppLocalizations.of(context)!.passwords_do_not_match,
+        );
+      });
+    });
+
+    testWidgets("when valid should return null", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.confirmPassword(context, "123456", "123456"),
+          null,
+        );
+      });
+    });
+  });
+
+  group("Required Field Validation Test", () {
+    testWidgets("when empty should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.validateRequired(context, ""),
+          AppLocalizations.of(context)!.this_field_is_required,
+        );
+      });
+    });
+
+    testWidgets("when filled should return null", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.validateRequired(context, "Some value"),
+          null,
+        );
+      });
+    });
+  });
+
+  group("International Phone Number Validation Test", () {
+    testWidgets("when empty should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.validateInternationalPhoneNumber(context, ""),
+          AppLocalizations.of(context)!.phone_number_is_required,
+        );
+      });
+    });
+
+    testWidgets("when invalid format should return error", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.validateInternationalPhoneNumber(context, "01096640218"),
+          AppLocalizations.of(context)!.enter_phone_with_country_code,
+        );
+      });
+    });
+
+    testWidgets("when valid international format should return null", (tester) async {
+      await _pumpLocalizedWidget(tester, (context) {
+        expect(
+          Validations.validateInternationalPhoneNumber(context, "+201096640218"),
+          null,
+        );
+      });
+    });
+  });
+
 }

@@ -79,7 +79,7 @@ void main() {
     );
 
     await tester.pumpWidget(createWidgetUnderTest());
-    expect(find.text(RiderOrderStatus.pending.nextStatusButto), findsOneWidget);
+    expect(find.text(RiderOrderStatus.pending.nextStatusButton), findsOneWidget);
   });
 
   testWidgets('disables button when status is delivered', (tester) async {
