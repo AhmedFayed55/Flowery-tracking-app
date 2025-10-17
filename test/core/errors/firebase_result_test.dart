@@ -15,7 +15,7 @@ void main() {
 
     test(
       "returns FirebaseErrorResult with Failure when FirebaseException is thrown",
-          () async {
+      () async {
         Future<String> mockFirebaseCall() async {
           throw FirebaseException(
             plugin: 'cloud_firestore',
@@ -31,7 +31,7 @@ void main() {
 
     test(
       "returns FirebaseErrorResult with Failure when generic exception is thrown",
-          () async {
+      () async {
         Future<String> mockFirebaseCall() async {
           throw Exception("Unexpected Firestore error");
         }

@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 
 import 'apply_use_case_test.mocks.dart';
 
-
 @GenerateMocks([ApplyRepo])
 void main() {
   late ApplyRepo mockApplyRepo;
@@ -57,42 +56,40 @@ void main() {
     applyUseCase = ApplyUseCase(mockApplyRepo);
   });
 
-    test("success case for ApplyUseCase", () async {
-      final mockResult = ApiSuccessResult<DriverEntity>(data: driverEntity);
-      provideDummy<ApiResult<DriverEntity>>(mockResult);
+  test("success case for ApplyUseCase", () async {
+    final mockResult = ApiSuccessResult<DriverEntity>(data: driverEntity);
+    provideDummy<ApiResult<DriverEntity>>(mockResult);
 
-      when(
-        mockApplyRepo.apply(requestApplyEntity),
-      ).thenAnswer((_) async => mockResult);
+    when(
+      mockApplyRepo.apply(requestApplyEntity),
+    ).thenAnswer((_) async => mockResult);
 
-      final result = await applyUseCase.call(requestApplyEntity);
+    final result = await applyUseCase.call(requestApplyEntity);
 
-      verify(mockApplyRepo.apply(requestApplyEntity)).called(1);
+    verify(mockApplyRepo.apply(requestApplyEntity)).called(1);
 
-      expect(result, isA<ApiSuccessResult<DriverEntity>>());
-      final success = result as ApiSuccessResult<DriverEntity>;
-      expect(success.data.firstName, driverEntity.firstName);
-      expect(success.data.email, driverEntity.email);
-      expect(success.data.vehicleNumber, driverEntity.vehicleNumber);
+    expect(result, isA<ApiSuccessResult<DriverEntity>>());
+    final success = result as ApiSuccessResult<DriverEntity>;
+    expect(success.data.firstName, driverEntity.firstName);
+    expect(success.data.email, driverEntity.email);
+    expect(success.data.vehicleNumber, driverEntity.vehicleNumber);
+  });
 
-    });
+  test("error case for ApplyUseCase", () async {
+    final errorResult = ApiErrorResult<DriverEntity>(
+      failure: Failure(errorMessage: "Application failed"),
+    );
 
-    test("error case for ApplyUseCase", () async {
-      final errorResult = ApiErrorResult<DriverEntity>(
-        failure: Failure(errorMessage: "Application failed"),
-      );
+    when(
+      mockApplyRepo.apply(requestApplyEntity),
+    ).thenAnswer((_) async => errorResult);
 
-      when(
-        mockApplyRepo.apply(requestApplyEntity),
-      ).thenAnswer((_) async => errorResult);
+    final result = await applyUseCase.call(requestApplyEntity);
 
-      final result = await applyUseCase.call(requestApplyEntity);
+    verify(mockApplyRepo.apply(requestApplyEntity)).called(1);
 
-      verify(mockApplyRepo.apply(requestApplyEntity)).called(1);
-
-      expect(result, isA<ApiErrorResult<DriverEntity>>());
-      final error = result as ApiErrorResult<DriverEntity>;
-      expect(error.failure.errorMessage, contains("Application failed"));
-
-    });
+    expect(result, isA<ApiErrorResult<DriverEntity>>());
+    final error = result as ApiErrorResult<DriverEntity>;
+    expect(error.failure.errorMessage, contains("Application failed"));
+  });
 }

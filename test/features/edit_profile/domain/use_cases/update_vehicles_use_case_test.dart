@@ -11,7 +11,6 @@ import 'package:mockito/mockito.dart';
 
 import 'edit_profile_use_case_test.mocks.dart';
 
-
 @GenerateMocks([EditProfileRepo])
 void main() {
   late EditProfileRepo mockEditProfileRepo;
@@ -53,8 +52,9 @@ void main() {
       driver: driverEntity,
     );
 
-    updateVehiclesUseCase =
-        UpdateVehiclesUseCase(profileRepo: mockEditProfileRepo);
+    updateVehiclesUseCase = UpdateVehiclesUseCase(
+      profileRepo: mockEditProfileRepo,
+    );
   });
 
   group("UpdateVehiclesUseCase Tests", () {
@@ -68,16 +68,19 @@ void main() {
         mockEditProfileRepo.updateVehicle(editVehicleRequestEntity),
       ).thenAnswer((_) async => mockResult);
 
-      final result = await updateVehiclesUseCase.invoke(editVehicleRequestEntity);
+      final result = await updateVehiclesUseCase.invoke(
+        editVehicleRequestEntity,
+      );
 
-      verify(mockEditProfileRepo.updateVehicle(editVehicleRequestEntity)).called(1);
+      verify(
+        mockEditProfileRepo.updateVehicle(editVehicleRequestEntity),
+      ).called(1);
 
       expect(result, isA<ApiSuccessResult<EditProfileResponseEntity>>());
       final success = result as ApiSuccessResult<EditProfileResponseEntity>;
       expect(success.data.message, "Vehicle updated successfully");
       expect(success.data.driver.firstName, driverEntity.firstName);
       expect(success.data.driver.lastName, driverEntity.lastName);
-
     });
 
     test("error case for UpdateVehiclesUseCase", () async {
@@ -89,10 +92,13 @@ void main() {
         mockEditProfileRepo.updateVehicle(editVehicleRequestEntity),
       ).thenAnswer((_) async => errorResult);
 
-      final result = await updateVehiclesUseCase.invoke(editVehicleRequestEntity);
+      final result = await updateVehiclesUseCase.invoke(
+        editVehicleRequestEntity,
+      );
 
-      verify(mockEditProfileRepo.updateVehicle(editVehicleRequestEntity))
-          .called(1);
+      verify(
+        mockEditProfileRepo.updateVehicle(editVehicleRequestEntity),
+      ).called(1);
 
       expect(result, isA<ApiErrorResult<EditProfileResponseEntity>>());
       final error = result as ApiErrorResult<EditProfileResponseEntity>;

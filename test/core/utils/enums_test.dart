@@ -5,18 +5,36 @@ void main() {
   group("RiderOrderStatus Tests", () {
     test("statusText returns correct text", () {
       expect(RiderOrderStatus.pending.statusText, "Pending");
-      expect(RiderOrderStatus.arrivedAtPickup.statusText, "Arrived at Pickup point");
+      expect(
+        RiderOrderStatus.arrivedAtPickup.statusText,
+        "Arrived at Pickup point",
+      );
       expect(RiderOrderStatus.startDelivery.statusText, "Start Delivery");
       expect(RiderOrderStatus.arrivedToUser.statusText, "Arrived to User");
       expect(RiderOrderStatus.delivered.statusText, "Delivered");
     });
 
     test("nextStatus returns correct next value", () {
-      expect(RiderOrderStatus.pending.nextStatus(), RiderOrderStatus.arrivedAtPickup);
-      expect(RiderOrderStatus.arrivedAtPickup.nextStatus(), RiderOrderStatus.startDelivery);
-      expect(RiderOrderStatus.startDelivery.nextStatus(), RiderOrderStatus.arrivedToUser);
-      expect(RiderOrderStatus.arrivedToUser.nextStatus(), RiderOrderStatus.delivered);
-      expect(RiderOrderStatus.delivered.nextStatus(), RiderOrderStatus.delivered);
+      expect(
+        RiderOrderStatus.pending.nextStatus(),
+        RiderOrderStatus.arrivedAtPickup,
+      );
+      expect(
+        RiderOrderStatus.arrivedAtPickup.nextStatus(),
+        RiderOrderStatus.startDelivery,
+      );
+      expect(
+        RiderOrderStatus.startDelivery.nextStatus(),
+        RiderOrderStatus.arrivedToUser,
+      );
+      expect(
+        RiderOrderStatus.arrivedToUser.nextStatus(),
+        RiderOrderStatus.delivered,
+      );
+      expect(
+        RiderOrderStatus.delivered.nextStatus(),
+        RiderOrderStatus.delivered,
+      );
     });
 
     test("statusStep returns correct step number", () {
@@ -28,9 +46,18 @@ void main() {
     });
 
     test("nextStatusButton returns correct label", () {
-      expect(RiderOrderStatus.pending.nextStatusButton, "Arrived at Pickup point");
-      expect(RiderOrderStatus.arrivedAtPickup.nextStatusButton, "Start Delivery");
-      expect(RiderOrderStatus.startDelivery.nextStatusButton, "Arrived to User");
+      expect(
+        RiderOrderStatus.pending.nextStatusButton,
+        "Arrived at Pickup point",
+      );
+      expect(
+        RiderOrderStatus.arrivedAtPickup.nextStatusButton,
+        "Start Delivery",
+      );
+      expect(
+        RiderOrderStatus.startDelivery.nextStatusButton,
+        "Arrived to User",
+      );
       expect(RiderOrderStatus.arrivedToUser.nextStatusButton, "Delivered");
       expect(RiderOrderStatus.delivered.nextStatusButton, "Delivered");
     });

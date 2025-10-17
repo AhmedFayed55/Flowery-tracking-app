@@ -187,10 +187,7 @@ void main() {
 
     testWidgets("when not empty should return null", (tester) async {
       await _pumpLocalizedWidget(tester, (context) {
-        expect(
-          Validations.loginValidatePassword(context, "123456"),
-          null,
-        );
+        expect(Validations.loginValidatePassword(context, "123456"), null);
       });
     });
   });
@@ -205,7 +202,9 @@ void main() {
       });
     });
 
-    testWidgets("when new password too short should return error", (tester) async {
+    testWidgets("when new password too short should return error", (
+      tester,
+    ) async {
       await _pumpLocalizedWidget(tester, (context) {
         expect(
           Validations.confirmPassword(context, "123"),
@@ -214,7 +213,9 @@ void main() {
       });
     });
 
-    testWidgets("when passwords do not match should return error", (tester) async {
+    testWidgets("when passwords do not match should return error", (
+      tester,
+    ) async {
       await _pumpLocalizedWidget(tester, (context) {
         expect(
           Validations.confirmPassword(context, "123456", "654321"),
@@ -225,10 +226,7 @@ void main() {
 
     testWidgets("when valid should return null", (tester) async {
       await _pumpLocalizedWidget(tester, (context) {
-        expect(
-          Validations.confirmPassword(context, "123456", "123456"),
-          null,
-        );
+        expect(Validations.confirmPassword(context, "123456", "123456"), null);
       });
     });
   });
@@ -245,10 +243,7 @@ void main() {
 
     testWidgets("when filled should return null", (tester) async {
       await _pumpLocalizedWidget(tester, (context) {
-        expect(
-          Validations.validateRequired(context, "Some value"),
-          null,
-        );
+        expect(Validations.validateRequired(context, "Some value"), null);
       });
     });
   });
@@ -272,14 +267,18 @@ void main() {
       });
     });
 
-    testWidgets("when valid international format should return null", (tester) async {
+    testWidgets("when valid international format should return null", (
+      tester,
+    ) async {
       await _pumpLocalizedWidget(tester, (context) {
         expect(
-          Validations.validateInternationalPhoneNumber(context, "+201096640218"),
+          Validations.validateInternationalPhoneNumber(
+            context,
+            "+201096640218",
+          ),
           null,
         );
       });
     });
   });
-
 }
