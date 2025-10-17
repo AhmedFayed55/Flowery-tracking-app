@@ -50,7 +50,7 @@ enum RiderOrderStatus {
     }
   }
 
-  String get nextStatusButto {
+  String get nextStatusButton {
     switch (this) {
       case RiderOrderStatus.pending:
         return 'Arrived at Pickup point';

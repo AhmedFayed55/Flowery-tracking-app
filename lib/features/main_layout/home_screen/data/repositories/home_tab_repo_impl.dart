@@ -6,7 +6,7 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/to_firebase/to_firebase_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/repositories/home_tab_repo.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../../core/errors/firebase_results.dart';
+import '../../../../../core/errors/firebase_result.dart';
 import '../maper/to_dto_maper.dart';
 import '../maper/to_entity_maper.dart';
 

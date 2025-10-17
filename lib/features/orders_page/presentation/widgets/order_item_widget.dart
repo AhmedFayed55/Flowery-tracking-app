@@ -85,7 +85,6 @@ class OrderItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      overflow: TextOverflow.ellipsis,
                       "${cubit?.ordersDtoEntity?[index].storeDtoEntity?.name}",
                       style: Theme.of(
                         context,
@@ -96,7 +95,6 @@ class OrderItemWidget extends StatelessWidget {
                         const Icon(Icons.location_on_outlined),
                         horizontalSpace(4),
                         Text(
-                          
                           "${cubit?.ordersDtoEntity?[index].storeDtoEntity?.address}",
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(
@@ -128,38 +126,15 @@ class OrderItemWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundColor: AppColors.pink,
-                  foregroundImage: NetworkImage(
-                    cubit!
-                                .ordersDtoEntity![index]
-                                .orderDtoEntity!
-                                .userDtoEntity!
-                                .photo!
-                                .contains('http') ||
-                            cubit
-                                .ordersDtoEntity![index]
-                                .orderDtoEntity!
-                                .userDtoEntity!
-                                .photo!
-                                .contains('https')
-                        ? cubit
-                              .ordersDtoEntity![index]
-                              .orderDtoEntity!
-                              .userDtoEntity!
-                              .photo!
-                        : 'https://flower.elevateegy.com/uploads/${cubit.ordersDtoEntity![index].orderDtoEntity!.userDtoEntity!.photo!}',
-                  ),
-                ),
+                const CircleAvatar(radius: 25, backgroundColor: AppColors.pink),
                 horizontalSpace(8),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "${cubit.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.firstName}"
-                      " ${cubit.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.lastName}",
+                      "${cubit?.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.firstName}"
+                      " ${cubit?.ordersDtoEntity?[index].orderDtoEntity?.userDtoEntity?.lastName}",
                       style: Theme.of(
                         context,
                       ).textTheme.bodySmall?.copyWith(fontSize: 13),

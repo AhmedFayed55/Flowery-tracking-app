@@ -53,7 +53,7 @@ class CustomChangeOrderStatusBottom extends StatelessWidget {
           child: state.isUpdating || state.riderOrderStatus == null
               ? const CircularProgressIndicator(color: AppColors.white)
               : Text(
-                  state.riderOrderStatus!.nextStatusButto,
+                  state.riderOrderStatus!.nextStatusButton,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,

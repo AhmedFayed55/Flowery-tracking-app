@@ -42,9 +42,7 @@ class HomeTab extends StatelessWidget {
                   content: Text(context.localization.success_saved_order),
                 ),
               );
-              context.pushReplacementNamed(
-                AppRoutes.orderDetails,
-              );
+              context.pushReplacementNamed(AppRoutes.orderDetails);
             }
             if (state.errorSaveOrder != null) {
               ScaffoldMessenger.of(

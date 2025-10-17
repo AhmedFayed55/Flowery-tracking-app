@@ -65,7 +65,6 @@ void main() {
     await tester.pumpWidget(createWidgetUnderTest(orderState));
     await tester.pumpAndSettle();
 
-  
     expect(find.text('2'), findsOneWidget);
     expect(find.byIcon(Icons.check_circle_outline), findsOneWidget);
   });
@@ -81,7 +80,6 @@ void main() {
     await tester.pumpWidget(createWidgetUnderTest(orderState));
     await tester.pumpAndSettle();
 
-    
     expect(find.text('0'), findsOneWidget);
     expect(find.byIcon(Icons.cancel_outlined), findsOneWidget);
   });

@@ -9,7 +9,6 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../../../core/features/login/unit_testing/data/datasources/remote/login_remote_ds_impl_test.mocks.dart';
 
-
 @GenerateMocks([ApiServices])
 void main() {
   late ApiServices mockApiServices;
@@ -39,35 +38,44 @@ void main() {
   });
 
   group("Test HomeTabRemoteDataSourceImpl in Data_Layer", () {
-    test("success case for getAllPendingOrders returns GetPendingOrdersDto", () async {
-      when(mockApiServices.getAllPendingOrders())
-          .thenAnswer((_) async => getPendingOrdersDto);
+    test(
+      "success case for getAllPendingOrders returns GetPendingOrdersDto",
+      () async {
+        when(
+          mockApiServices.getAllPendingOrders(),
+        ).thenAnswer((_) async => getPendingOrdersDto);
 
-      var result = await homeTabRemoteDataSourceImpl.getAllPendingOrders();
+        var result = await homeTabRemoteDataSourceImpl.getAllPendingOrders();
 
-      verify(mockApiServices.getAllPendingOrders()).called(1);
+        verify(mockApiServices.getAllPendingOrders()).called(1);
 
-      expect(result, isA<GetPendingOrdersDto>());
-      expect(result.message, equals(getPendingOrdersDto.message));
-      expect(result.orders, equals(getPendingOrdersDto.orders));
-      expect(result.metadata, equals(getPendingOrdersDto.metadata));
+        expect(result, isA<GetPendingOrdersDto>());
+        expect(result.message, equals(getPendingOrdersDto.message));
+        expect(result.orders, equals(getPendingOrdersDto.orders));
+        expect(result.metadata, equals(getPendingOrdersDto.metadata));
+      },
+    );
 
-    });
+    test(
+      "success case for getLoggedDriverData returns LoggedDriverDto",
+      () async {
+        when(
+          mockApiServices.getDriverData(),
+        ).thenAnswer((_) async => loggedDriverDto);
 
-    test("success case for getLoggedDriverData returns LoggedDriverDto", () async {
-      when(mockApiServices.getDriverData())
-          .thenAnswer((_) async => loggedDriverDto);
+        var result = await homeTabRemoteDataSourceImpl.getLoggedDriverData();
 
-      var result = await homeTabRemoteDataSourceImpl.getLoggedDriverData();
+        verify(mockApiServices.getDriverData()).called(1);
 
-      verify(mockApiServices.getDriverData()).called(1);
-
-      expect(result, isA<LoggedDriverDto>());
-      expect(result.message, equals(loggedDriverDto.message));
-      expect(result.driver?.id, equals(loggedDriverDto.driver?.id));
-      expect(result.driver?.firstName, equals(loggedDriverDto.driver?.firstName));
-      expect(result.driver?.email, equals(loggedDriverDto.driver?.email));
-
-    });
+        expect(result, isA<LoggedDriverDto>());
+        expect(result.message, equals(loggedDriverDto.message));
+        expect(result.driver?.id, equals(loggedDriverDto.driver?.id));
+        expect(
+          result.driver?.firstName,
+          equals(loggedDriverDto.driver?.firstName),
+        );
+        expect(result.driver?.email, equals(loggedDriverDto.driver?.email));
+      },
+    );
   });
 }
