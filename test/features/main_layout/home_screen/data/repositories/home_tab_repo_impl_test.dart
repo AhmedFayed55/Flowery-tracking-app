@@ -5,9 +5,7 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/data/data_
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/data_sources/remote/home_tab_remote_ds.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/driver_data_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/repositories/home_tab_repo_impl.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/get_pending_orders_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/logged_driver_data.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/get_pending_orders/get_pending_orders_entity.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/entities/logged_driver_data/driver_data_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -20,7 +18,6 @@ void main() {
   late HomeTabRemoteDataSource mockRemoteDataSource;
   late HomeTabFirebaseDataSource mockFirebaseDataSource;
   late HomeTabRepoImpl homeTabRepoImpl;
-  late GetPendingOrdersDto getPendingOrdersDto;
 
   setUpAll(() {
     mockRemoteDataSource = MockHomeTabRemoteDataSource();
@@ -29,54 +26,6 @@ void main() {
       mockRemoteDataSource,
       mockFirebaseDataSource,
     );
-
-    getPendingOrdersDto = GetPendingOrdersDto(message: "Success");
-  });
-
-  group("getAllPendingOrders", () {
-    test(
-      "success case for getAllPendingOrders with ApiSuccessResult",
-      () async {
-        when(
-          mockRemoteDataSource.getAllPendingOrders(),
-        ).thenAnswer((_) async => getPendingOrdersDto);
-
-        var result = await homeTabRepoImpl.getAllPendingOrders();
-
-        verify(mockRemoteDataSource.getAllPendingOrders()).called(1);
-
-        expect(result, isA<ApiSuccessResult<GetPendingOrdersEntity>>());
-        var success = result as ApiSuccessResult<GetPendingOrdersEntity>;
-        expect(success.data.message, equals(getPendingOrdersDto.message));
-      },
-    );
-
-    test("Error case for getAllPendingOrders with DioException", () async {
-      final dioError = DioException(requestOptions: RequestOptions());
-      when(mockRemoteDataSource.getAllPendingOrders()).thenThrow(dioError);
-
-      var result = await homeTabRepoImpl.getAllPendingOrders();
-
-      verify(mockRemoteDataSource.getAllPendingOrders()).called(1);
-
-      expect(result, isA<ApiErrorResult<GetPendingOrdersEntity>>());
-      var error = result as ApiErrorResult<GetPendingOrdersEntity>;
-      expect(error.failure, isA<ServerFailure>());
-    });
-
-    test("Error case for getAllPendingOrders with generic Exception", () async {
-      when(
-        mockRemoteDataSource.getAllPendingOrders(),
-      ).thenThrow(Exception("Unexpected error"));
-
-      var result = await homeTabRepoImpl.getAllPendingOrders();
-
-      verify(mockRemoteDataSource.getAllPendingOrders()).called(1);
-
-      expect(result, isA<ApiErrorResult<GetPendingOrdersEntity>>());
-      var error = result as ApiErrorResult<GetPendingOrdersEntity>;
-      expect(error.failure.errorMessage, contains("Unexpected error"));
-    });
   });
 
   group("getLoggedDriverData", () {

@@ -37,7 +37,9 @@ class RouteGenerator {
         );
 
       case AppRoutes.onBoarding:
-        return MaterialPageRoute(builder: (context) => const OnBoardingScreen());
+        return MaterialPageRoute(
+          builder: (context) => const OnBoardingScreen(),
+        );
 
       case AppRoutes.changePassword:
         return MaterialPageRoute(

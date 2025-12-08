@@ -4,6 +4,7 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 
 class HomeTabState extends Equatable {
   final bool isLoadingGetOrders;
+  final bool isLoadingMore;
   final String? errorGetOrders;
   final List<OrdersEntity> orders;
   final bool isLoadingSaveOrder;
@@ -11,6 +12,9 @@ class HomeTabState extends Equatable {
   final bool isOrderSaved;
   final DriverDataEntity? driverData;
   final bool isOrderStateUpdated;
+  final int currentPage;
+  final int? totalPages;
+  final bool hasMoreData;
 
   const HomeTabState({
     this.isOrderStateUpdated = false,
@@ -19,12 +23,17 @@ class HomeTabState extends Equatable {
     this.errorSaveOrder,
     this.isOrderSaved = false,
     this.isLoadingGetOrders = false,
+    this.isLoadingMore = false,
     this.errorGetOrders,
     this.orders = const [],
+    this.currentPage = 1,
+    this.totalPages,
+    this.hasMoreData = true,
   });
 
   HomeTabState copyWith({
     bool? isLoadingGetOrders,
+    bool? isLoadingMore,
     String? errorGetOrders,
     List<OrdersEntity>? orders,
     bool? isLoadingSaveOrder,
@@ -32,22 +41,30 @@ class HomeTabState extends Equatable {
     bool? isOrderSaved,
     DriverDataEntity? driverData,
     bool? isOrderStateUpdated,
+    int? currentPage,
+    int? totalPages,
+    bool? hasMoreData,
   }) {
     return HomeTabState(
       isLoadingGetOrders: isLoadingGetOrders ?? this.isLoadingGetOrders,
-      errorGetOrders: errorGetOrders ?? this.errorGetOrders,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      errorGetOrders: errorGetOrders,
       orders: orders ?? this.orders,
       isLoadingSaveOrder: isLoadingSaveOrder ?? this.isLoadingSaveOrder,
-      errorSaveOrder: errorSaveOrder ?? this.errorSaveOrder,
+      errorSaveOrder: errorSaveOrder,
       isOrderSaved: isOrderSaved ?? this.isOrderSaved,
       driverData: driverData ?? this.driverData,
       isOrderStateUpdated: isOrderStateUpdated ?? this.isOrderStateUpdated,
+      currentPage: currentPage ?? this.currentPage,
+      totalPages: totalPages ?? this.totalPages,
+      hasMoreData: hasMoreData ?? this.hasMoreData,
     );
   }
 
   @override
   List<Object?> get props => [
     isLoadingGetOrders,
+    isLoadingMore,
     errorGetOrders,
     orders,
     isLoadingSaveOrder,
@@ -55,5 +72,8 @@ class HomeTabState extends Equatable {
     isOrderSaved,
     driverData,
     isOrderStateUpdated,
+    currentPage,
+    totalPages,
+    hasMoreData,
   ];
 }

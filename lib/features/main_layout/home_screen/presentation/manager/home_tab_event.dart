@@ -2,7 +2,12 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/domain/ent
 
 sealed class HomeTabEvent {}
 
-class GetAllPendingOrdersEvent extends HomeTabEvent {}
+class GetAllPendingOrdersEvent extends HomeTabEvent {
+  final int page;
+  final bool isLoadMore;
+
+  GetAllPendingOrdersEvent({this.page = 1, this.isLoadMore = false});
+}
 
 class SaveOrderEvent extends HomeTabEvent {
   OrdersEntity order;

@@ -2,6 +2,9 @@ import 'package:flowery_tracking_app/features/main_layout/home_screen/data/model
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/logged_driver_data.dart';
 
 abstract interface class HomeTabRemoteDataSource {
-  Future<GetPendingOrdersDto> getAllPendingOrders();
+  Future<GetPendingOrdersDto> getAllPendingOrders({
+    required int page,
+    int? limit,
+  });
   Future<LoggedDriverDto> getLoggedDriverData();
 }

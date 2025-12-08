@@ -31,8 +31,8 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
 
   doIntent(HomeTabEvent event) {
     switch (event) {
-      case GetAllPendingOrdersEvent():
-        _getAllPendingOrders();
+      case GetAllPendingOrdersEvent(:final page, :final isLoadMore):
+        _getAllPendingOrders(page: page, isLoadMore: isLoadMore);
       case RejectOrderEvent(:final orderId):
         _deleteOrder(orderId);
       case SaveOrderEvent(:final order):
@@ -75,25 +75,64 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
     }
   }
 
-  Future<void> _getAllPendingOrders() async {
-    emit(
-      state.copyWith(
-        isLoadingGetOrders: true,
-        orders: [],
-        errorGetOrders: null,
-        isOrderSaved: false,
-      ),
-    );
-    var result = await _getAllPendingOrdersUseCase.invoke();
+  Future<void> _getAllPendingOrders({
+    required int page,
+    required bool isLoadMore,
+  }) async {
+    // Don't load if already loading or no more data
+    if (state.isLoadingMore || (!state.hasMoreData && isLoadMore)) {
+      return;
+    }
+
+    if (isLoadMore) {
+      emit(state.copyWith(isLoadingMore: true, errorGetOrders: null));
+    } else {
+      emit(
+        state.copyWith(
+          isLoadingGetOrders: true,
+          orders: [],
+          errorGetOrders: null,
+          isOrderSaved: false,
+          currentPage: 1,
+          hasMoreData: true,
+        ),
+      );
+    }
+
+    var result = await _getAllPendingOrdersUseCase.invoke(page: page);
+
     switch (result) {
       case ApiSuccessResult():
-        emit(
-          state.copyWith(isLoadingGetOrders: false, orders: result.data.orders),
-        );
+        final newOrders = result.data.orders ?? [];
+        final totalPages = result.data.metadata?.totalPages?.toInt();
+        final hasMore = totalPages != null && page < totalPages;
+
+        if (isLoadMore) {
+          emit(
+            state.copyWith(
+              isLoadingMore: false,
+              orders: [...state.orders, ...newOrders],
+              currentPage: page,
+              totalPages: totalPages,
+              hasMoreData: hasMore,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              isLoadingGetOrders: false,
+              orders: newOrders,
+              currentPage: page,
+              totalPages: totalPages,
+              hasMoreData: hasMore,
+            ),
+          );
+        }
       case ApiErrorResult():
         emit(
           state.copyWith(
             isLoadingGetOrders: false,
+            isLoadingMore: false,
             errorGetOrders: result.failure.errorMessage,
           ),
         );
@@ -101,8 +140,8 @@ class HomeTabViewModel extends Cubit<HomeTabState> {
   }
 
   void _deleteOrder(String orderId) {
-    emit(state.copyWith(isLoadingGetOrders: true));
-    state.orders.removeWhere((order) => order.id == orderId);
-    emit(state.copyWith(isLoadingGetOrders: false));
+    final updatedOrders = List<OrdersEntity>.from(state.orders)
+      ..removeWhere((order) => order.id == orderId);
+    emit(state.copyWith(orders: updatedOrders));
   }
 }

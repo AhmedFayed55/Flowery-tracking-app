@@ -61,7 +61,9 @@ void main() {
   });
 
   group("Test MainProfile UI ", () {
-    testWidgets("test emit when isLoading --> true", (WidgetTester tester) async {
+    testWidgets("test emit when isLoading --> true", (
+      WidgetTester tester,
+    ) async {
       /// Arrange
       when(mockLocaleCubit.state).thenReturn(const Locale("en"));
       when(

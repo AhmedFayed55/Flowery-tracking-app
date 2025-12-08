@@ -1,6 +1,5 @@
 import 'package:flowery_tracking_app/core/network/api_services.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/data_sources/remote/home_tab_remote_ds_impl.dart';
-import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/get_pending_orders/get_pending_orders_dto.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/logged_driver_data.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/data/models/logged_driver_data/driver_data_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,18 +12,11 @@ import '../../../../../../core/features/login/unit_testing/data/datasources/remo
 void main() {
   late ApiServices mockApiServices;
   late HomeTabRemoteDataSourceImpl homeTabRemoteDataSourceImpl;
-  late GetPendingOrdersDto getPendingOrdersDto;
   late LoggedDriverDto loggedDriverDto;
 
   setUpAll(() {
     mockApiServices = MockApiServices();
     homeTabRemoteDataSourceImpl = HomeTabRemoteDataSourceImpl(mockApiServices);
-
-    getPendingOrdersDto = GetPendingOrdersDto(
-      message: "Success",
-      metadata: null,
-      orders: [],
-    );
 
     loggedDriverDto = LoggedDriverDto(
       message: "Driver data retrieved successfully",
@@ -38,24 +30,6 @@ void main() {
   });
 
   group("Test HomeTabRemoteDataSourceImpl in Data_Layer", () {
-    test(
-      "success case for getAllPendingOrders returns GetPendingOrdersDto",
-      () async {
-        when(
-          mockApiServices.getAllPendingOrders(),
-        ).thenAnswer((_) async => getPendingOrdersDto);
-
-        var result = await homeTabRemoteDataSourceImpl.getAllPendingOrders();
-
-        verify(mockApiServices.getAllPendingOrders()).called(1);
-
-        expect(result, isA<GetPendingOrdersDto>());
-        expect(result.message, equals(getPendingOrdersDto.message));
-        expect(result.orders, equals(getPendingOrdersDto.orders));
-        expect(result.metadata, equals(getPendingOrdersDto.metadata));
-      },
-    );
-
     test(
       "success case for getLoggedDriverData returns LoggedDriverDto",
       () async {

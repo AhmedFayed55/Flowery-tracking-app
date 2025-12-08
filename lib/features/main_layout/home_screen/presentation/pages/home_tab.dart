@@ -13,8 +13,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/pending_order_cart.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  late ScrollController _scrollController;
+  HomeTabViewModel? _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_isBottom && _viewModel != null) {
+      final state = _viewModel!.state;
+
+      if (!state.isLoadingMore && state.hasMoreData) {
+        _viewModel!.doIntent(
+          GetAllPendingOrdersEvent(
+            page: state.currentPage + 1,
+            isLoadMore: true,
+          ),
+        );
+      }
+    }
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,25 +94,25 @@ class HomeTab extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            final viewModel = context.read<HomeTabViewModel>();
+            // Store the viewModel reference for use in scroll listener
+            _viewModel = context.read<HomeTabViewModel>();
 
             return RefreshIndicator(
-              key: viewModel.refreshIndicatorKey,
+              key: _viewModel!.refreshIndicatorKey,
               onRefresh: () async {
-                context.read<HomeTabViewModel>().doIntent(
-                  GetAllPendingOrdersEvent(),
-                );
+                _viewModel!.doIntent(GetAllPendingOrdersEvent());
                 await Future.delayed(const Duration(milliseconds: 500));
               },
               child: Builder(
                 builder: (context) {
                   if (state.isLoadingGetOrders) {
                     return const HomeShimmerWidget();
-                  } else if (state.errorGetOrders != null) {
+                  } else if (state.errorGetOrders != null &&
+                      state.orders.isEmpty) {
                     return Center(
                       child: OutlinedButton(
                         onPressed: () =>
-                            viewModel.doIntent(GetAllPendingOrdersEvent()),
+                            _viewModel!.doIntent(GetAllPendingOrdersEvent()),
                         child: Text(context.localization.try_again),
                       ),
                     );
@@ -79,11 +122,29 @@ class HomeTab extends StatelessWidget {
                         verticalSpace(context.height * 0.03),
                         Expanded(
                           child: ListView.separated(
-                            itemBuilder: (context, index) =>
-                                PendingOrderCart(order: state.orders[index]),
+                            controller: _scrollController,
+                            itemBuilder: (context, index) {
+                              if (index < state.orders.length) {
+                                return PendingOrderCart(
+                                  order: state.orders[index],
+                                );
+                              } else {
+                                // Loading indicator at bottom
+                                return state.isLoadingMore
+                                    ? const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink();
+                              }
+                            },
                             separatorBuilder: (context, index) =>
                                 verticalSpace(16),
-                            itemCount: state.orders.length,
+                            itemCount:
+                                state.orders.length +
+                                (state.isLoadingMore ? 1 : 0),
                           ),
                         ),
                       ],
