@@ -2,12 +2,14 @@ import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/shimmer/home_shimmer.dart';
 import 'package:flowery_tracking_app/features/orders_page/domain/entities/order_state_model.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_view_model.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_event.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/manager/get_all_orders_state.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/widgets/order_item_widget.dart';
 import 'package:flowery_tracking_app/features/orders_page/presentation/widgets/order_state_widget.dart';
+import 'package:flowery_tracking_app/features/orders_page/presentation/widgets/shimmer/order_page_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +33,7 @@ class OrdersPage extends StatelessWidget {
         body: BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(
-                child: CircularProgressIndicator(color: AppColors.pink),
-              );
+              return const OrderPageShimmerWidget();
             }
 
             if (state.isError) {

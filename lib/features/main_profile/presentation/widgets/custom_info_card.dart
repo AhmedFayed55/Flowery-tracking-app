@@ -50,26 +50,32 @@ class CustomInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (firstText != null)
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    firstText!,
-                    style: Theme.of(context).textTheme.labelMedium,
+                  Expanded(
+                    child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      firstText!,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
                   ),
                 if (middleText != null)
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    middleText!,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(fontSize: 16),
+                  Expanded(
+                    child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      middleText!,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(fontSize: 16),
+                    ),
                   ),
                 if (lastText != null)
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    lastText!,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(fontSize: 16),
+                  Expanded(
+                    child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      lastText!,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(fontSize: 16),
+                    ),
                   ),
               ],
             ),
@@ -79,9 +85,9 @@ class CustomInfoCard extends StatelessWidget {
               flex: 1,
               child: IconButton(
                 onPressed: () {
-                if(onClick != null){
-                  onClick!();
-                }
+                  if (onClick != null) {
+                    onClick!();
+                  }
                 },
                 icon: Icon(iconDataTrailing!, size: 24),
               ),

@@ -1,7 +1,7 @@
 import 'package:flowery_tracking_app/config/routing/app_routes.dart';
 import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
-import 'package:flowery_tracking_app/core/components/shimmer.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/shimmer/home_shimmer.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
@@ -64,7 +64,7 @@ class HomeTab extends StatelessWidget {
               child: Builder(
                 builder: (context) {
                   if (state.isLoadingGetOrders) {
-                    return const Column(children: [CustomShimmerWidget()]);
+                    return const HomeShimmerWidget();
                   } else if (state.errorGetOrders != null) {
                     return Center(
                       child: OutlinedButton(
