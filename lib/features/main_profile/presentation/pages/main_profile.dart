@@ -1,3 +1,5 @@
+import 'package:flowery_tracking_app/config/routing/app_routes.dart';
+import 'package:flowery_tracking_app/config/routing/routing_extensions.dart';
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/extensions/extensions.dart';
@@ -55,18 +57,24 @@ class _MainProfileState extends State<MainProfile> {
                     return const LoadingToProfile();
                   } else {
                     return CustomInfoCard(
-                      leading: const CircleAvatar(
+                      leading: CircleAvatar(
                         radius: 35,
-
-                        /// when add image to profile
-                        // backgroundImage: ,
-                        backgroundColor: AppColors.pink,
+                        backgroundImage:
+                        NetworkImage(
+                          state.driverDtoEntity!.photo!.contains('http') ||
+                                  state.driverDtoEntity!.photo!.contains('https')
+                              ? state.driverDtoEntity!.photo!
+                              : 'https://flower.elevateegy.com/uploads/${state.driverDtoEntity!.photo!}',
+                        ),
                       ),
                       horizontalSpacing: 16,
-                      firstText: state.driverDtoEntity?.firstName,
+                      firstText: "${state.driverDtoEntity?.firstName} ${state.driverDtoEntity?.lastName}",
                       middleText: state.driverDtoEntity?.email,
                       lastText: state.driverDtoEntity?.phone,
                       iconDataTrailing: Icons.arrow_forward_ios,
+                      onClick: () {
+                        context.pushNamed(AppRoutes.editProfile);
+                      },
                     );
                   }
                 },
@@ -84,6 +92,7 @@ class _MainProfileState extends State<MainProfile> {
                           context.localization.vehicle_not_found,
                       lastText: state.driverDtoEntity?.vehicleNumber,
                       iconDataTrailing: Icons.arrow_forward_ios,
+                      onClick: () => context.pushNamed(AppRoutes.updateVehicle),
                     );
                   }
                 },
