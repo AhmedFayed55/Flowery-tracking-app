@@ -1,4 +1,4 @@
-import 'package:flowery_tracking_app/core/components/shimmer.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/shimmer/home_shimmer.dart';
 import 'package:flowery_tracking_app/core/di/di.dart';
 import 'package:flowery_tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/manager/home_tab_state.dart';
@@ -68,7 +68,7 @@ void main() {
     );
 
     await tester.pumpWidget(buildMaterialApp());
-    expect(find.byType(CustomShimmerWidget), findsOneWidget);
+    expect(find.byType(HomeShimmerWidget), findsOneWidget);
   });
 
   testWidgets('HomeTab triggers doIntent on  pull-to-refresh', (

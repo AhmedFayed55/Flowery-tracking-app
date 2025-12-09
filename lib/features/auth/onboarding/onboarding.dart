@@ -44,7 +44,7 @@ class OnBoardingScreen extends StatelessWidget {
                 side: const BorderSide(color: AppColors.darkGrey, width: 1),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.register,);
+                Navigator.pushNamed(context, AppRoutes.register);
               },
               child: Text(
                 AppLocalizations.of(context)!.apply_now,

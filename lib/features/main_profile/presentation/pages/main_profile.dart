@@ -59,16 +59,18 @@ class _MainProfileState extends State<MainProfile> {
                     return CustomInfoCard(
                       leading: CircleAvatar(
                         radius: 35,
-                        backgroundImage:
-                        NetworkImage(
+                        backgroundImage: NetworkImage(
                           state.driverDtoEntity!.photo!.contains('http') ||
-                                  state.driverDtoEntity!.photo!.contains('https')
+                                  state.driverDtoEntity!.photo!.contains(
+                                    'https',
+                                  )
                               ? state.driverDtoEntity!.photo!
                               : 'https://flower.elevateegy.com/uploads/${state.driverDtoEntity!.photo!}',
                         ),
                       ),
                       horizontalSpacing: 16,
-                      firstText: "${state.driverDtoEntity?.firstName} ${state.driverDtoEntity?.lastName}",
+                      firstText:
+                          "${state.driverDtoEntity?.firstName} ${state.driverDtoEntity?.lastName}",
                       middleText: state.driverDtoEntity?.email,
                       lastText: state.driverDtoEntity?.phone,
                       iconDataTrailing: Icons.arrow_forward_ios,

@@ -8,7 +8,6 @@ import 'package:mockito/annotations.dart';
 
 @GenerateMocks([ImagePicker, File])
 void main() {
-
   testWidgets('should display label and hint text', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -32,7 +31,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: ImageField(
             label: 'Profile Picture',
@@ -59,7 +58,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: ImageField(
             label: 'Profile Picture',
@@ -78,7 +77,6 @@ void main() {
     await tester.tap(find.text('Gallery'));
     await tester.pumpAndSettle();
 
-    
     isCalled = true;
 
     expect(isCalled, isTrue);

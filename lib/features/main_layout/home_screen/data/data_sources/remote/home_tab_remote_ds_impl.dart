@@ -10,8 +10,10 @@ class HomeTabRemoteDataSourceImpl implements HomeTabRemoteDataSource {
   HomeTabRemoteDataSourceImpl(this._apiServices);
 
   @override
-  Future<GetPendingOrdersDto> getAllPendingOrders() async =>
-      await _apiServices.getAllPendingOrders();
+  Future<GetPendingOrdersDto> getAllPendingOrders({
+    required int page,
+    int? limit,
+  }) async => await _apiServices.getAllPendingOrders(page, limit);
 
   @override
   Future<LoggedDriverDto> getLoggedDriverData() {

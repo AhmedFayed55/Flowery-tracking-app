@@ -108,12 +108,12 @@ void main() {
       provideDummy<ApiResult<GetPendingOrdersEntity>>(successResult);
 
       when(
-        mockGetAllPendingOrdersUseCase.invoke(),
+        mockGetAllPendingOrdersUseCase.invoke(page: 1),
       ).thenAnswer((_) async => successResult);
 
       await homeTabViewModel.doIntent(GetAllPendingOrdersEvent());
 
-      verify(mockGetAllPendingOrdersUseCase.invoke()).called(1);
+      verify(mockGetAllPendingOrdersUseCase.invoke(page: 1)).called(1);
 
       expect(homeTabViewModel.state.isLoadingGetOrders, false);
       expect(homeTabViewModel.state.errorGetOrders, isNull);
@@ -128,12 +128,12 @@ void main() {
       provideDummy<ApiResult<GetPendingOrdersEntity>>(errorResult);
 
       when(
-        mockGetAllPendingOrdersUseCase.invoke(),
+        mockGetAllPendingOrdersUseCase.invoke(page: 1),
       ).thenAnswer((_) async => errorResult);
 
       await homeTabViewModel.doIntent(GetAllPendingOrdersEvent());
 
-      verify(mockGetAllPendingOrdersUseCase.invoke()).called(1);
+      verify(mockGetAllPendingOrdersUseCase.invoke(page: 1)).called(1);
 
       expect(homeTabViewModel.state.isLoadingGetOrders, false);
       expect(homeTabViewModel.state.orders, isEmpty);

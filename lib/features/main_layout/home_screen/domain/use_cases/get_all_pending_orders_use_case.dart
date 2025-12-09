@@ -9,6 +9,8 @@ class GetAllPendingOrdersUseCase {
 
   GetAllPendingOrdersUseCase(this._repo);
 
-  Future<ApiResult<GetPendingOrdersEntity>> invoke() =>
-      _repo.getAllPendingOrders();
+  Future<ApiResult<GetPendingOrdersEntity>> invoke({
+    required int page,
+    int? limit,
+  }) => _repo.getAllPendingOrders(page: page, limit: limit);
 }

@@ -17,9 +17,15 @@ class HomeTabRepoImpl implements HomeTabRepo {
   HomeTabRepoImpl(this._remoteDataSource, this._firebaseDataSource);
 
   @override
-  Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders() async {
+  Future<ApiResult<GetPendingOrdersEntity>> getAllPendingOrders({
+    required int page,
+    int? limit,
+  }) async {
     return await safeApiCall(() async {
-      final response = await _remoteDataSource.getAllPendingOrders();
+      final response = await _remoteDataSource.getAllPendingOrders(
+        page: page,
+        limit: limit,
+      );
       return toGetPendingOrdersEntity(response);
     });
   }

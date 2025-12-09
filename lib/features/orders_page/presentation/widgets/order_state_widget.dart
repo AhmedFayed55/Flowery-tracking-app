@@ -37,21 +37,27 @@ class OrderStateWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "$totalSameState",
-            style: Theme.of(context).textTheme.labelMedium,
+          Expanded(
+            child: Text(
+              "$totalSameState",
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
           ),
-          Row(
-            children: [
-              orderState.icon,
-              horizontalSpace(5),
-              Text(
-                orderState.state,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium?.copyWith(fontSize: 16),
-              ),
-            ],
+          Expanded(
+            child: Row(
+              children: [
+                orderState.icon,
+                horizontalSpace(5),
+                Expanded(
+                  child: Text(
+                    orderState.state,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelMedium?.copyWith(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

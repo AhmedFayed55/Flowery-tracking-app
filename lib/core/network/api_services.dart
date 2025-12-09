@@ -36,7 +36,10 @@ abstract class ApiServices {
   factory ApiServices(Dio dio) = _ApiServices;
 
   @GET(ApiConstants.getAllPendingOrders)
-  Future<GetPendingOrdersDto> getAllPendingOrders();
+  Future<GetPendingOrdersDto> getAllPendingOrders(
+    @Query("page") int page,
+    @Query("limit") int? limit,
+  );
 
   @GET(ApiConstants.getDriverData)
   Future<LoggedDriverDto> getDriverData();

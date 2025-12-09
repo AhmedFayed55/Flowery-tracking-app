@@ -27,12 +27,12 @@ void main() {
       provideDummy<ApiResult<GetPendingOrdersEntity>>(mockResult);
 
       when(
-        mockHomeTabRepo.getAllPendingOrders(),
+        mockHomeTabRepo.getAllPendingOrders(page: 1),
       ).thenAnswer((_) async => mockResult);
 
-      var result = await getAllPendingOrdersUseCase.invoke();
+      var result = await getAllPendingOrdersUseCase.invoke(page: 1);
 
-      verify(mockHomeTabRepo.getAllPendingOrders()).called(1);
+      verify(mockHomeTabRepo.getAllPendingOrders(page: 1)).called(1);
 
       expect(result, isA<ApiSuccessResult<GetPendingOrdersEntity>>());
       var success = result as ApiSuccessResult<GetPendingOrdersEntity>;
@@ -46,12 +46,12 @@ void main() {
       provideDummy<ApiResult<GetPendingOrdersEntity>>(errorResult);
 
       when(
-        mockHomeTabRepo.getAllPendingOrders(),
+        mockHomeTabRepo.getAllPendingOrders(page: 1),
       ).thenAnswer((_) async => errorResult);
 
-      var result = await getAllPendingOrdersUseCase.invoke();
+      var result = await getAllPendingOrdersUseCase.invoke(page: 1);
 
-      verify(mockHomeTabRepo.getAllPendingOrders()).called(1);
+      verify(mockHomeTabRepo.getAllPendingOrders(page: 1)).called(1);
 
       expect(result, isA<ApiErrorResult<GetPendingOrdersEntity>>());
       var error = result as ApiErrorResult<GetPendingOrdersEntity>;
