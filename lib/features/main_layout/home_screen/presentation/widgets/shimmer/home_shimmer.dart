@@ -1,8 +1,6 @@
-import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
 import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/shimmer/shimmer_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeShimmerWidget extends StatelessWidget {
   final int itemCount;
@@ -10,14 +8,6 @@ class HomeShimmerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    final BoxDecoration shimmerItemDecoration = BoxDecoration(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(4),
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView.separated(
