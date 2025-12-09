@@ -1,5 +1,6 @@
 import 'package:flowery_tracking_app/config/theme/colors.dart';
 import 'package:flowery_tracking_app/core/helpers/spacing.dart';
+import 'package:flowery_tracking_app/features/main_layout/home_screen/presentation/widgets/shimmer/shimmer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -66,65 +67,32 @@ class OrderPageShimmerWidget extends StatelessWidget {
                       ),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 14,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: screenHeight * 0.018,
-                          width: screenWidth * 0.25,
-                          decoration: shimmerItemDecoration,
-                        ),
-
+                        const ShimmerContainer(height: 18, width: 100),
                         Row(
                           children: [
-                            Container(
+                            ShimmerContainer(
                               height: 24,
                               width: 24,
-                              decoration: shimmerItemDecoration.copyWith(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                              radius: BorderRadius.circular(12),
                             ),
                             horizontalSpace(8),
-                            Container(
-                              height: screenHeight * 0.018,
-                              width: screenWidth * 0.22,
-                              decoration: shimmerItemDecoration,
-                            ),
+                            const ShimmerContainer(height: 18, width: 90),
                             const Spacer(),
-                            Container(
-                              height: screenHeight * 0.018,
-                              width: screenWidth * 0.16,
-                              decoration: shimmerItemDecoration,
-                            ),
+                            const ShimmerContainer(height: 18, width: 70),
                           ],
                         ),
-
-                        Container(
-                          height: screenHeight * 0.013,
-                          width: screenWidth * 0.28,
-                          decoration: shimmerItemDecoration,
-                        ),
-
-                        Container(
-                          height: screenHeight * 0.073,
+                        const ShimmerContainer(height: 14, width: 100),
+                        const ShimmerContainer(
+                          height: 60,
                           width: double.infinity,
-                          decoration: shimmerItemDecoration.copyWith(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
                         ),
-
-                        Container(
-                          height: screenHeight * 0.013,
-                          width: screenWidth * 0.28,
-                          decoration: shimmerItemDecoration,
-                        ),
-
-                        Container(
-                          height: screenHeight * 0.073,
+                        const ShimmerContainer(height: 14, width: 100),
+                        const ShimmerContainer(
+                          height: 60,
                           width: double.infinity,
-                          decoration: shimmerItemDecoration.copyWith(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
                         ),
                       ],
                     ),
